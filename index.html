@@ -23,6 +23,13 @@
   <script src="js/topics.js"></script>
   <script src="js/tasks.js"></script>
   <script src="js/app.js"></script>
+  <script>
+    // Dark/Light Mode – apply before page renders to avoid flash
+    (function(){
+      var theme = window._theme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
 
@@ -55,6 +62,10 @@
     </button>
     <button class="formula-sheet-btn" onclick="app.openFormulaSheet()">
       <span class="btn-icon">∑</span> Formelzettel
+    </button>
+    <button id="theme-toggle" aria-label="Dark/Light Mode wechseln">
+      <span class="btn-icon" id="theme-icon">🌙</span>
+      <span id="theme-label">Dark Mode</span>
     </button>
     <div class="exam-countdown" id="exam-countdown"></div>
   </div>
@@ -226,6 +237,37 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') { closeLightbox
     <div class="modal-body" id="lernplan-modal-body"></div>
   </div>
 </div>
+
+<!-- ═══ THEME TOGGLE SCRIPT ═══ -->
+<script>
+(function(){
+  var html = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var icon = document.getElementById('theme-icon');
+  var label = document.getElementById('theme-label');
+
+  var theme = html.getAttribute('data-theme') || 'light';
+
+  function applyTheme(t) {
+    theme = t;
+    html.setAttribute('data-theme', t);
+    window._theme = t;
+    if (t === 'dark') {
+      icon.textContent = '☀️';
+      label.textContent = 'Light Mode';
+    } else {
+      icon.textContent = '🌙';
+      label.textContent = 'Dark Mode';
+    }
+  }
+
+  applyTheme(theme);
+
+  btn.addEventListener('click', function() {
+    applyTheme(theme === 'dark' ? 'light' : 'dark');
+  });
+})();
+</script>
 
 </body>
 </html>

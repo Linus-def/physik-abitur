@@ -1,6 +1,18 @@
 // ══ QUIZ-MODUL ══
 const quizModule = (() => {
   let state = { topicId: null, questions: [], idx: 0, score: 0, answered: false };
+  let eventsBound = false;
+
+  function bindEvents(container) {
+    if (eventsBound) return;
+    eventsBound = true;
+    container.addEventListener('click', e => {
+      const opt = e.target.closest('.quiz-opt');
+      if (opt) { answer(parseInt(opt.dataset.i, 10)); return; }
+      if (e.target.closest('#quiz-next')) { next(); return; }
+      if (e.target.closest('.quiz-result-btn')) { restart(); return; }
+    });
+  }
 
   function render(topicId) {
     state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx: 0, score: 0, answered: false };
@@ -31,7 +43,7 @@ const quizModule = (() => {
 
         <div class="quiz-options">
           ${q.options.map((opt, i) => `
-            <button class="quiz-opt" data-i="${i}" onclick="quizModule.answer(${i})">
+            <button class="quiz-opt" data-i="${i}">
               ${opt}
             </button>`).join('')}
         </div>
@@ -41,12 +53,12 @@ const quizModule = (() => {
           <div id="quiz-exp-text"></div>
         </div>
 
-        <button class="quiz-next-btn" id="quiz-next"
-          onclick="quizModule.next()">
+        <button class="quiz-next-btn" id="quiz-next">
           ${state.idx + 1 < total ? 'Weiter →' : 'Ergebnis anzeigen →'}
         </button>
       </div>`;
 
+    bindEvents(container);
     if (window.MathJax) MathJax.typesetPromise([container]);
   }
 
@@ -100,7 +112,7 @@ const quizModule = (() => {
         <div class="quiz-result-score">${score}/${total}</div>
         <div class="quiz-result-of">${pct}% richtig</div>
         <div class="quiz-result-msg">${msg}</div>
-        <button class="quiz-result-btn" onclick="quizModule.restart()">Nochmal starten</button>
+        <button class="quiz-result-btn">Nochmal starten</button>
       </div>`;
 
     progress.setQuiz(state.topicId, score, total);

@@ -20,6 +20,32 @@ const app = (() => {
       if (tab) switchTab(tab.dataset.tab);
     });
 
+    // Hamburger & Overlay
+    document.getElementById('hamburger')?.addEventListener('click', openSidebar);
+    document.getElementById('overlay')?.addEventListener('click', closeSidebar);
+
+    // Sidebar-Buttons
+    document.getElementById('btn-favorites')?.addEventListener('click', openFavorites);
+    document.getElementById('btn-lernplan')?.addEventListener('click', openLernplan);
+    document.getElementById('btn-formula')?.addEventListener('click', openFormulaSheet);
+
+    // Zurück-Button
+    document.getElementById('btn-back')?.addEventListener('click', navigateHome);
+
+    // Lightbox schließen
+    document.getElementById('lightbox')?.addEventListener('click', e => {
+      if (e.target === e.currentTarget || e.target.closest('#btn-lightbox-close')) closeLightbox();
+    });
+
+    // Modals schließen (X-Button + Klick auf Overlay-Hintergrund)
+    document.getElementById('btn-formula-close')?.addEventListener('click', closeFormulaSheet);
+    document.getElementById('formula-modal')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeFormulaSheet(); });
+
+    document.getElementById('btn-favorites-close')?.addEventListener('click', closeFavorites);
+
+    document.getElementById('btn-lernplan-close')?.addEventListener('click', closeLernplan);
+    document.getElementById('lernplan-modal')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeLernplan(); });
+
     // Theorie-Akkordeon (Event-Delegation, einmalig)
     document.getElementById('tab-theory')?.addEventListener('click', e => {
       const trigger = e.target.closest('.accordion-trigger');

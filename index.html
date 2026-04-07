@@ -14,6 +14,7 @@
   <script src="data/topics_data.js"></script>
   <script src="data/tasks_data.js"></script>
   <script src="js/progress.js"></script>
+  <script src="js/lightbox.js"></script>
   <script src="js/quiz.js"></script>
   <script src="js/topics.js"></script>
   <script src="js/tasks.js"></script>
@@ -49,13 +50,13 @@
   <nav id="topic-nav"></nav>
 
   <div class="sidebar-bottom">
-    <button class="sidebar-action-btn" onclick="app.openFavorites()">
+    <button class="sidebar-action-btn" id="btn-favorites">
       <span class="btn-icon">★</span> Favoriten
     </button>
-    <button class="sidebar-action-btn" onclick="app.openLernplan()">
+    <button class="sidebar-action-btn" id="btn-lernplan">
       <span class="btn-icon">📅</span> Lernplan
     </button>
-    <button class="formula-sheet-btn" onclick="app.openFormulaSheet()">
+    <button class="formula-sheet-btn" id="btn-formula">
       <span class="btn-icon">∑</span> Formelzettel
     </button>
     <button id="theme-toggle" aria-label="Dark/Light Mode wechseln">
@@ -67,10 +68,10 @@
 </aside>
 
 <!-- Overlay Mobile -->
-<div id="overlay" onclick="app.closeSidebar()"></div>
+<div id="overlay"></div>
 
 <!-- Hamburger -->
-<button id="hamburger" onclick="app.openSidebar()" aria-label="Menü">
+<button id="hamburger" aria-label="Menü">
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
     <rect y="3" width="20" height="2" rx="1" fill="currentColor"/>
     <rect y="9" width="20" height="2" rx="1" fill="currentColor"/>
@@ -149,7 +150,7 @@
   <!-- THEMA -->
   <div id="view-topic" class="view">
     <div id="topic-topbar">
-      <button class="back-btn" onclick="app.navigateHome()">
+      <button class="back-btn" id="btn-back">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Übersicht
       </button>
@@ -183,52 +184,39 @@
 </main>
 
 <!-- ═══ LIGHTBOX ═══ -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕ Schließen</button>
+<div id="lightbox" class="lightbox">
+  <button class="lightbox-close" id="btn-lightbox-close">✕ Schließen</button>
   <img id="lightbox-img" src="" alt="Aufgabe">
 </div>
-<script>
-function openLightbox(src) {
-  if (typeof src !== 'string' || !src.startsWith('img/') || src.includes('..')) return;
-  document.getElementById('lightbox-img').src = src;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => { if(e.key==='Escape') { closeLightbox(); } });
-</script>
 
 <!-- ═══ FORMELZETTEL MODAL ═══ -->
-<div id="formula-modal" class="modal-overlay" onclick="if(event.target===this)app.closeFormulaSheet()">
+<div id="formula-modal" class="modal-overlay">
   <div class="modal-box">
     <div class="modal-header">
       <h3>Formelzettel – Alle Formeln</h3>
-      <button class="modal-close" onclick="app.closeFormulaSheet()">✕</button>
+      <button class="modal-close" id="btn-formula-close">✕</button>
     </div>
     <div class="modal-body" id="formula-modal-body"></div>
   </div>
 </div>
 
 <!-- ═══ FAVORITEN MODAL ═══ -->
-<div id="favorites-modal" class="modal-overlay" onclick="if(event.target===this)app.closeFavorites()">
+<div id="favorites-modal" class="modal-overlay">
   <div class="modal-box">
     <div class="modal-header">
       <h3>★ Favoriten</h3>
-      <button class="modal-close" onclick="app.closeFavorites()">✕</button>
+      <button class="modal-close" id="btn-favorites-close">✕</button>
     </div>
     <div class="modal-body" id="favorites-modal-body"></div>
   </div>
 </div>
 
 <!-- ═══ LERNPLAN MODAL ═══ -->
-<div id="lernplan-modal" class="modal-overlay" onclick="if(event.target===this)app.closeLernplan()">
+<div id="lernplan-modal" class="modal-overlay">
   <div class="modal-box modal-box-wide">
     <div class="modal-header">
       <h3>📅 7-Tage Lernplan</h3>
-      <button class="modal-close" onclick="app.closeLernplan()">✕</button>
+      <button class="modal-close" id="btn-lernplan-close">✕</button>
     </div>
     <div class="modal-body" id="lernplan-modal-body"></div>
   </div>

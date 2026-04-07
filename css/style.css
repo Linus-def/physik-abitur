@@ -258,6 +258,10 @@ p + p { margin-top: 0.5em; }
   padding: 48px 48px 36px;
   border-bottom: 1px solid var(--border);
   background: linear-gradient(160deg, #fafafa 0%, #fff 60%);
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 .home-hero-top {
   display: flex;
@@ -267,6 +271,25 @@ p + p { margin-top: 0.5em; }
   margin-bottom: 32px;
 }
 .home-hero-text { flex: 1; min-width: 240px; }
+.progress-ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.progress-ring-label {
+  text-align: center;
+}
+.progress-ring-pct {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.progress-ring-sub {
+  font-size: 11px;
+  color: var(--text-3);
+}
 .home-title {
   font-size: 34px; font-weight: 800; line-height: 1.12;
   letter-spacing: -0.8px; margin-bottom: 10px;
@@ -1153,21 +1176,122 @@ p + p { margin-top: 0.5em; }
 /* ══════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════ */
+
+/* ── Tablet (≤ 900px) ── */
 @media (max-width: 900px) {
   #sidebar { transform: translateX(-100%); }
   #sidebar.open { transform: translateX(0); }
   #hamburger { display: flex; align-items: center; justify-content: center; }
   #main { margin-left: 0; }
-  .home-hero { padding: 56px 24px 28px; }
-  #topic-topbar, #topic-tabs { padding-left: 24px; padding-right: 24px; }
-  .tab-panel.active { padding: 24px 24px 48px; }
-  #topic-cards-grid { padding: 0 24px 40px; }
-  .home-section-label { padding: 24px 24px 12px; }
-  .home-stats { grid-template-columns: repeat(3, 1fr); }
+
+  .home-hero {
+    padding: 56px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .progress-ring-wrap { align-self: center; }
+
+  .home-stats {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px;
+    gap: 10px;
+  }
+  .home-section-label { padding: 20px 20px 12px; }
+  #topic-cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    padding: 0 20px 40px;
+    gap: 12px;
+  }
+
+  #topic-topbar { padding: 12px 20px; gap: 10px; }
+  #topic-tabs { padding: 10px 20px 0; }
+  .tab-panel.active { padding: 20px 20px 48px; }
+
+  .theory-section { padding: 20px; }
+  .formulas-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
 }
-@media (max-width: 600px) {
-  .home-stats { grid-template-columns: repeat(2, 1fr); }
-  .home-title { font-size: 26px; }
-  .tab { padding: 8px 12px; font-size: 12px; }
+
+/* ── Großes Handy (≤ 680px) ── */
+@media (max-width: 680px) {
+  .home-hero { padding: 52px 16px 20px; }
+
+  .home-stats {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 16px;
+    gap: 8px;
+  }
+  .stat-num { font-size: 22px; }
+  .stat-label { font-size: 10px; }
+
+  .home-section-label { padding: 16px 16px 10px; }
+  #topic-cards-grid { padding: 0 16px 32px; gap: 10px; }
+
+  #topic-topbar { padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
+  #topic-topbar-info { min-width: 0; flex: 1; }
+  #topic-name { font-size: 15px; }
+  #topic-topbar-progress { display: none; }
+
+  #topic-tabs { padding: 8px 16px 0; gap: 2px; }
+  .tab { padding: 8px 12px; font-size: 12.5px; }
   .tab-icon { display: none; }
+  .tab-panel.active { padding: 16px 16px 48px; }
+
+  .theory-section { padding: 16px; margin-bottom: 16px; }
+  .theory-section-title { font-size: 15px; }
+  .formulas-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .subtask-actions { flex-wrap: wrap; gap: 6px; }
+  .rating-row { flex-wrap: wrap; gap: 6px; }
+  .rating-btn { font-size: 11.5px; padding: 5px 10px; flex: 1; text-align: center; }
+
+  .pdf-page-img { max-width: 100%; width: 100%; }
+
+  .modal-box {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 92vh;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    margin-top: auto;
+  }
+  .modal-overlay { align-items: flex-end; }
+
+  .lernplan-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+}
+
+/* ── Kleines Handy (≤ 420px) ── */
+@media (max-width: 420px) {
+  .home-hero { padding: 48px 14px 16px; }
+  .home-title { font-size: 24px; }
+  .home-subtitle { font-size: 13px; }
+
+  .home-stats {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 12px 14px;
+  }
+  .stat-card.countdown-stat { grid-column: 1 / -1; }
+
+  .home-section-label { padding: 14px 14px 8px; }
+  #topic-cards-grid { padding: 0 14px 28px; }
+  .topic-card { padding: 16px; }
+
+  .back-btn span { display: none; }
+
+  .tab { padding: 7px 10px; font-size: 12px; }
+
+  .theory-section { padding: 14px; }
+  .formulas-grid { grid-template-columns: 1fr; }
+
+  .task-card-head {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .modal-body { padding: 16px; }
+  .modal-header { padding: 16px; }
+  .lernplan-grid { grid-template-columns: 1fr; }
+
+  .resources-grid { grid-template-columns: 1fr; }
+
+  .quiz-card { padding: 18px; }
 }

@@ -49,7 +49,7 @@ const topicsRenderer = (() => {
       if (sec.deeper) {
         const accId = `acc-${topicId}-${i}`;
         html += `<div class="accordion" id="${accId}">
-          <button class="accordion-trigger" onclick="topicsRenderer.toggleAcc('${accId}')">
+          <button class="accordion-trigger" data-acc-id="${accId}">
             🔍 Tiefere Erklärung
             <span class="accordion-arrow">▼</span>
           </button>

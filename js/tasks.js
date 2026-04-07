@@ -2,6 +2,31 @@
 const tasksRenderer = (() => {
   let currentTopic = null;
   let currentFilter = 'all';
+  let eventsBound = false;
+
+  function bindEvents(container) {
+    if (eventsBound) return;
+    eventsBound = true;
+    container.addEventListener('change', e => {
+      if (e.target.classList.contains('filter-select')) setFilter(e.target.value);
+    });
+    container.addEventListener('click', e => {
+      const pdfToggle = e.target.closest('.pdf-pages-toggle');
+      if (pdfToggle) { togglePdf(pdfToggle.dataset.pdfId); return; }
+
+      const pdfImg = e.target.closest('.pdf-page-img');
+      if (pdfImg) { openLightbox(pdfImg.dataset.src); return; }
+
+      const hintBtn = e.target.closest('[data-action="hint"]');
+      if (hintBtn) { toggleHint(hintBtn.dataset.domId); return; }
+
+      const solBtn = e.target.closest('[data-action="solution"]');
+      if (solBtn) { toggleSolution(solBtn.dataset.domId, solBtn.dataset.topicId, solBtn.dataset.key); return; }
+
+      const ratingBtn = e.target.closest('[data-action="rate"]');
+      if (ratingBtn) { rate(ratingBtn.dataset.topicId, ratingBtn.dataset.key, ratingBtn.dataset.r, ratingBtn.dataset.domId); return; }
+    });
+  }
 
   function render(topicId, filter) {
     currentTopic = topicId;
@@ -16,7 +41,7 @@ const tasksRenderer = (() => {
     container.innerHTML = `
       <div class="tasks-toolbar">
         <label>Jahr:</label>
-        <select class="filter-select" onchange="tasksRenderer.setFilter(this.value)">
+        <select class="filter-select">
           <option value="all"${currentFilter==='all'?' selected':''}>Alle Jahre</option>
           ${years.map(y => `<option value="${y}"${String(currentFilter)===String(y)?' selected':''}>${y}</option>`).join('')}
         </select>
@@ -24,6 +49,7 @@ const tasksRenderer = (() => {
       </div>
       ${tasks.length ? tasks.map(t => taskCardHtml(topicId, t)).join('') : '<p style="color:var(--text-3);font-size:14px;padding:8px 0">Keine Aufgaben für dieses Jahr.</p>'}
     `;
+    bindEvents(container);
     if (window.MathJax) MathJax.typesetPromise([container]);
   }
 
@@ -44,12 +70,11 @@ const tasksRenderer = (() => {
     if (!task.pdfImages || !task.pdfImages.length) return '';
     const id = `pdf-${task.id}`;
     const imgs = task.pdfImages.map((src, i) =>
-      `<img class="pdf-page-img" src="img/${src}" alt="Seite ${i+1}"
-        onclick="openLightbox('img/${src}')" loading="lazy">`
+      `<img class="pdf-page-img" src="img/${src}" data-src="img/${src}" alt="Seite ${i+1}" loading="lazy">`
     ).join('');
     return `
       <div style="padding: 0 20px 4px">
-        <button class="pdf-pages-toggle" onclick="tasksRenderer.togglePdf('${id}')">
+        <button class="pdf-pages-toggle" data-pdf-id="${id}">
           <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
             <rect x="1" y="1" width="11" height="11" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
             <path d="M4 4.5h5M4 6.5h5M4 8.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
@@ -80,11 +105,11 @@ const tasksRenderer = (() => {
         </div>
         <div class="subtask-text">${sub.text}</div>
         <div class="subtask-actions">
-          ${sub.hint ? `<button class="reveal-btn" id="hint-btn-${domId}" onclick="tasksRenderer.toggleHint('${domId}')">
+          ${sub.hint ? `<button class="reveal-btn" id="hint-btn-${domId}" data-action="hint" data-dom-id="${domId}">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M6.5 4v.5M6.5 6v3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
             Hinweis
           </button>` : ''}
-          <button class="reveal-btn" id="sol-btn-${domId}" onclick="tasksRenderer.toggleSolution('${domId}','${topicId}','${key}')">
+          <button class="reveal-btn" id="sol-btn-${domId}" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" stroke-width="1.2"/><path d="M4.5 6.5L6 8L8.5 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
             Lösung aufdecken
           </button>
@@ -105,7 +130,7 @@ const tasksRenderer = (() => {
           <span class="rating-label">Wie lief's?</span>
           ${['good','partial','bad'].map(r => `
             <button class="rating-btn${saved===r?' sel':''}" data-r="${r}"
-              onclick="tasksRenderer.rate('${topicId}','${key}','${r}','${domId}')">
+              data-action="rate" data-topic-id="${topicId}" data-key="${key}" data-r="${r}" data-dom-id="${domId}">
               ${r==='good'?'✓ Verstanden':r==='partial'?'~ Teilweise':'✗ Nochmal üben'}
             </button>`).join('')}
         </div>

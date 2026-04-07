@@ -20,6 +20,20 @@ const app = (() => {
       if (tab) switchTab(tab.dataset.tab);
     });
 
+    // Theorie-Akkordeon (Event-Delegation, einmalig)
+    document.getElementById('tab-theory')?.addEventListener('click', e => {
+      const trigger = e.target.closest('.accordion-trigger');
+      if (trigger) topicsRenderer.toggleAcc(trigger.dataset.accId);
+    });
+
+    // Favoriten-Modal Aktionen (Event-Delegation, einmalig)
+    document.getElementById('favorites-modal')?.addEventListener('click', e => {
+      const goBtn = e.target.closest('.fav-go-btn');
+      const removeBtn = e.target.closest('.fav-remove-btn');
+      if (goBtn) { closeFavorites(); navigateTopic(goBtn.dataset.topicId, 'tasks'); }
+      if (removeBtn) { progress.toggleFavorite(removeBtn.dataset.taskId); openFavorites(); }
+    });
+
     // Fortschritt-Events
     document.addEventListener('progressUpdated', () => {
       updateTotalProgress();
@@ -37,7 +51,9 @@ const app = (() => {
     const hash = location.hash.slice(1);
     if (!hash) { showHome(); return; }
     const [tid, tab] = hash.split('/');
-    if (TOPICS_DATA[tid]) navigateTopic(tid, tab || 'theory');
+    const validTabs = ['theory', 'tasks', 'quiz'];
+    const safeTab = validTabs.includes(tab) ? tab : 'theory';
+    if (TOPICS_DATA[tid]) navigateTopic(tid, safeTab);
     else showHome();
   }
 
@@ -114,8 +130,7 @@ const app = (() => {
       const pct = progress.topicPct(topic.id);
       const li = document.createElement('li');
       li.innerHTML = `
-        <button class="nav-item${currentTopicId === topic.id ? ' active' : ''}" data-id="${topic.id}"
-          onclick="app.navigateTopic('${topic.id}')">
+        <button class="nav-item${currentTopicId === topic.id ? ' active' : ''}" data-id="${topic.id}">
           <div class="nav-item-content">
             <div class="nav-item-name">${topic.title}</div>
             <div class="nav-item-meta">
@@ -126,6 +141,7 @@ const app = (() => {
             </div>
           </div>
         </button>`;
+      li.querySelector('button').addEventListener('click', () => navigateTopic(topic.id));
       nav.appendChild(li);
     });
   }
@@ -240,10 +256,10 @@ const app = (() => {
                   <div class="fav-item-meta">${task.year} · ${task.difficulty}</div>
                 </div>
                 <div class="fav-item-actions">
-                  <button class="fav-go-btn" onclick="app.closeFavorites();app.navigateTopic('${topicId}','tasks')">
+                  <button class="fav-go-btn" data-topic-id="${topicId}">
                     Öffnen →
                   </button>
-                  <button class="fav-remove-btn" onclick="progress.toggleFavorite('${task.id}');app.openFavorites()">
+                  <button class="fav-remove-btn" data-task-id="${task.id}">
                     ✕
                   </button>
                 </div>

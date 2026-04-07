@@ -1,0 +1,9 @@
+extract_images.py
+*.pyc
+__pycache__/
+.DS_Store
+.vscode/
+.idea/
+node_modules/
+*.env
+*.env.local

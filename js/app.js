@@ -316,6 +316,7 @@ const app = (() => {
     const dayNames = ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
     const today    = new Date().getDay(); // 0=So, 1=Mo ...
         const offset  = today === 0 ? 1 : (8 - today) % 7; // Fix #26: Sonntag (0) → Offset 1 (naechster Montag)
+    const offset   = today === 0 ? 1 : (8 - today) % 7; // nächster Montag
 
     let html = `
       <p class="lernplan-intro">Basierend auf deinem Fortschritt – schwächste Themen zuerst. Passe den Plan nach Bedarf an.</p>

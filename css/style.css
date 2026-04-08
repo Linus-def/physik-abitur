@@ -2045,4 +2045,18 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   border-color: var(--red) !important;
   color: var(--red) !important;
   opacity: 1 !important;
+/* ══ FIX #18: Lernplan-Themenname abgeschnitten ══ */
+/* Verhindert, dass lange Themennamen (z.B. "Elektrodynamik & Elektromagnetismus")
+   aus dem Container herauslaufen. Stattdessen werden sie mit ... abgekürzt. */
+.lernplan-topic {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  display: block;
+}
+
+.plan-day-topics .lernplan-topic {
+  font-size: 0.78rem;
+  line-height: 1.3;
 }

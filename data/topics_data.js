@@ -69,7 +69,7 @@ const TOPICS_DATA = {
         question: 'Ein Federpendel hat \\(m = 400\\,\\text{g}\\) und \\(k = 10\\,\\text{N/m}\\). Wie groß ist die Periodendauer?',
         options: ['\\(T \\approx 1{,}26\\,\\text{s}\\)', '\\(T \\approx 0{,}63\\,\\text{s}\\)', '\\(T \\approx 2{,}51\\,\\text{s}\\)', '\\(T \\approx 0{,}20\\,\\text{s}\\)'],
         correct: 0,
-        explanation: '\\(T = 2\\pi\\sqrt{m/k} = 2\\pi\\sqrt{0{,}4/10} \\approx 1{,}26\\,\\text{s}\\)'
+        explanation: '\\(T = 2\\pi\\sqrt{m/k} = 2\\pi\\sqrt{0{,}4/10} \\approx 1{,}26\\,\\text{s}\\)',
                 detailedExplanation: 'Häufiger Fehler: Die Masse m muss zuerst von Gramm in Kilogramm umgerechnet werden (400 g = 0,4 kg). Die Formel T = 2π√(m/k) gilt nur mit SI-Einheiten. Merke: Größere Masse → träger → längere Schwingungsdauer. Stärkere Feder (größeres k) → schnellere Rückstellung → kürzere Schwingungsdauer.',
         links: [
           { title: 'Simple Club – Federpendel & Periodendauer', url: 'https://www.youtube.com/results?search_query=simple+club+federpendel+periodendauer' },
@@ -86,11 +86,11 @@ const TOPICS_DATA = {
           'Die Schwingung muss mit Resonanz angeregt werden.'
         ],
         correct: 1,
-        explanation: 'Definitionsmerkmal: \\(F_{\\text{rück}} = -D \\cdot s\\). Daraus folgt die DGL \\(\\ddot{s} + \\omega^2 s = 0\\).'
+        explanation: 'Definitionsmerkmal: \\(F_{\\text{rück}} = -D \\cdot s\\). Daraus folgt die DGL \\(\\ddot{s} + \\omega^2 s = 0\\).',
                 detailedExplanation: 'Die Definition der harmonischen Schwingung ist die rücktreibende Kraft proportional zur Auslenkung: F_rück = -D·s. Daraus folgt die Differentialgleichung. Die Amplitude nimmt nur bei gedämpften Schwingungen ab - das ist kein definierendes Merkmal. Die Periodendauer ist gerade UNABHÄNGIG von der Amplitude (Isochronie)!',
         links: [
           { title: 'Simple Club – Harmonische Schwingung Erklärung', url: 'https://www.youtube.com/results?search_query=simple+club+harmonische+schwingung' },
-          { title: 'Leifiphysik: Definition harmonische Schwingung', url: 'https://www.leifiphysik.de/mechanik/mechanische-schwingungen/grundwissen/harmonische-schwingung' }
+          { title: 'Leifiphysik: Definition harmonische Schwingung', url: 'https://www.leifiphysik.de/mechanik/mechanische-schwingungen/grundwissen/harmonische-schwingung' },
         ],
       },
       {
@@ -1116,8 +1116,8 @@ const TOPICS_DATA = {
       {
         question: 'Zwei Platten (\\(A = 100\\,\\text{cm}^2\\), \\(d = 5\\,\\text{mm}\\), \\(\\varepsilon_0 = 8{,}85\\cdot10^{-12}\\,\\text{F/m}\\)). Kapazität C?',
         options: ['\\(C \\approx 177\\,\\text{pF}\\)', '\\(C \\approx 17{,}7\\,\\text{pF}\\)', '\\(C \\approx 1{,}77\\,\\text{nF}\\)', '\\(C \\approx 88{,}5\\,\\text{pF}\\)'],
-        correct: 0,
-        explanation: '\\(C = \\varepsilon_0 A/d = 8{,}85\\cdot10^{-12}\\cdot10^{-2}/(5\\cdot10^{-3}) = 1{,}77\\cdot10^{-11}\\,\\text{F} \\approx 17{,}7\\,\\text{pF}\\). (Rechenfehler korrigiert: \\(A = 0{,}01\\,\\text{m}^2\\)).'
+        correct: 1,
+        explanation: '\\(C = \\varepsilon_0 A/d = 8{,}85\\cdot10^{-12}\\cdot10^{-2}/(5\\cdot10^{-3}) = 1{,}77\\cdot10^{-11}\\,\\text{F} \\approx 17{,}7\\,\\text{pF}\\).'
       },
       {
         question: 'Warum weicht ein negativ geladenes Teilchen im E-Feld in die entgegengesetzte Richtung zur Feldstärke ab?',

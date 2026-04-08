@@ -1856,3 +1856,172 @@ p + p { margin-top: 0.5em; }
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+
+/* ════════════════════════════════════════════
+FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
+════════════════════════════════════════════ */
+
+/* Abi-Screenshots Seitenleiste */
+.task-images-side {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 12px;
+  flex-shrink: 0;
+}
+
+.images-side-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+
+.task-images-side .pdf-page-img {
+  width: 100%;
+  max-width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+  cursor: zoom-in;
+  transition: box-shadow var(--transition), transform var(--transition);
+  display: block;
+}
+
+.task-images-side .pdf-page-img:hover {
+  box-shadow: var(--shadow);
+  transform: scale(1.015);
+}
+
+/* deeper-box: zunächst versteckt, erst nach Toggle sichtbar */
+.deeper-box {
+  background: var(--accent-bg);
+  border: 1px solid #c7d2fe;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #3730a3;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, padding 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.deeper-box.open {
+  max-height: 1200px;
+  opacity: 1;
+  padding: 14px 16px;
+}
+
+[data-theme="dark"] .deeper-box {
+  background: rgba(99,102,241,.08);
+  border-color: rgba(99,102,241,.3);
+  color: #a5b4fc;
+}
+
+.deeper-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.deeper-content {
+  font-size: 13.5px;
+  line-height: 1.8;
+}
+
+/* 🧠 Tiefer-verstehen-Button */
+.deeper-toggle-btn {
+  display: none; /* erst nach Lösung aufdecken sichtbar */
+  align-items: center;
+  gap: 7px;
+  margin: 8px 0 0;
+  padding: 8px 14px;
+  background: var(--accent-bg);
+  border: 1.5px solid #c7d2fe;
+  border-radius: var(--radius-sm);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent);
+  transition: background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+  cursor: pointer;
+}
+
+.deeper-toggle-btn:hover {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-accent);
+}
+
+.deeper-toggle-btn.revealed {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: white;
+}
+
+[data-theme="dark"] .deeper-toggle-btn {
+  background: rgba(99,102,241,.1);
+  border-color: rgba(99,102,241,.3);
+  color: #a5b4fc;
+}
+
+[data-theme="dark"] .deeper-toggle-btn:hover,
+[data-theme="dark"] .deeper-toggle-btn.revealed {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: white;
+}
+
+/* solution-box und hint-box: animate in */
+.solution-box, .hint-box {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.solution-box.open, .hint-box.open {
+  max-height: 1200px;
+  opacity: 1;
+  padding: 10px 14px;
+}
+
+/* rating-row: zunächst verborgen */
+.rating-row {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  padding-top: 0;
+}
+
+.rating-row.open {
+  max-height: 200px;
+  opacity: 1;
+  padding-top: 12px;
+}
+
+/* Responsive: Bilder unter Aufgaben auf Mobil */
+@media (max-width: 680px) {
+  .task-card-layout {
+    flex-direction: column !important;
+  }
+  .task-images-side {
+    max-width: 100% !important;
+    width: 100%;
+  }
+}

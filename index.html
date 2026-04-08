@@ -49,22 +49,11 @@
     </div>
   </div>
 
-  <div class="sidebar-progress-section">
-    <div class="sidebar-progress-label">
-      <span>Gesamtfortschritt</span>
-      <span id="total-pct">0%</span>
-    </div>
-    <div class="progress-track"><div id="total-bar" class="progress-fill"></div></div>
-  </div>
-
   <nav id="topic-nav"></nav>
 
   <div class="sidebar-bottom">
     <button class="sidebar-action-btn" id="btn-favorites">
       <span class="btn-icon">★</span> Favoriten
-    </button>
-    <button class="sidebar-action-btn" id="btn-lernplan">
-      <span class="btn-icon">📅</span> Lernplan
     </button>
     <button class="formula-sheet-btn" id="btn-formula">
       <span class="btn-icon">∑</span> Formelzettel
@@ -98,7 +87,7 @@
     <div class="home-hero">
       <div class="home-hero-text">
         <h1 class="home-title">Physik Abitur<br><span class="home-title-year">Baden-Württemberg 2026</span></h1>
-        <p class="home-subtitle">Alle Prüfungsthemen – Theorie, echte Abituraufgaben und Quickchecks.</p>
+        <p class="home-subtitle">Nachschlagewerk und Übungsseite für alle wichtigen Physik-Abiturthemen in Baden-Württemberg.</p>
         <div class="home-chips">
           <span class="chip">23. April 2026</span>
           <span class="chip">300 Minuten</span>
@@ -106,51 +95,26 @@
           <span class="chip">IQB-Formelsammlung erlaubt</span>
         </div>
       </div>
-
-      <!-- Fortschrittsring -->
-      <div class="progress-ring-wrap">
-        <svg class="progress-ring-svg" width="140" height="140" viewBox="0 0 140 140">
-          <defs>
-            <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#6366f1"/>
-              <stop offset="100%" stop-color="#8b5cf6"/>
-            </linearGradient>
-          </defs>
-          <circle cx="70" cy="70" r="54" fill="none" stroke="#1f1f23" stroke-width="10"/>
-          <circle id="ring-fg" cx="70" cy="70" r="54" fill="none"
-            stroke="url(#ring-grad)" stroke-width="10"
-            stroke-linecap="round"
-            stroke-dasharray="339.3"
-            stroke-dashoffset="339.3"
-            transform="rotate(-90 70 70)"/>
-        </svg>
-        <div class="progress-ring-label">
-          <div class="progress-ring-pct" id="ring-pct">0%</div>
-          <div class="progress-ring-sub">gesamt</div>
-        </div>
-      </div>
     </div><!-- /.home-hero -->
 
-    <div class="home-stats">
-      <div class="stat-card" topics-stat>
-        <div class="stat-num" id="stat-topics-done">0</div>
-        <div class="stat-label">Themen<br>abgeschlossen</div>
+    <div class="home-reference-panel">
+      <div class="reference-card">
+        <div class="reference-card-title">So bringt dir die Seite am meisten</div>
+        <div class="reference-card-copy">Nutze Theorie für Überblick und Formeln, arbeite dann mit Quickchecks und den strukturierten Abi-Aufgaben. Die Seite ist jetzt bewusst eher Nachschlagewerk als Fortschritts-Tracker.</div>
       </div>
-            <div class="stat-card tasks-stat">
-        <div class="stat-num" id="stat-tasks-done">0</div>
-        <div class="stat-label">Aufgaben<br>bewertet</div>
+      <div class="reference-card">
+        <div class="reference-card-title">Schnellzugriff</div>
+        <div class="reference-card-list">
+          <span>1. Thema öffnen</span>
+          <span>2. Formeln sichern</span>
+          <span>3. Quickcheck starten</span>
+          <span>4. Abi-Aufgaben gezielt üben</span>
+        </div>
       </div>
-            <div class="stat-card quiz-stat">
-        <div class="stat-num" id="stat-quiz-done">0</div>
-        <div class="stat-label">Quickchecks<br>absolviert</div>
-      </div>
-      <div class="stat-card streak-card">
-        <div class="stat-num" id="stat-streak">0</div>
-        <div class="stat-label">Tage<br>Streak 🔥</div>
-      </div>
-      <div class="stat-card countdown-stat">
+      <div class="reference-card countdown-card">
+        <div class="reference-card-title">Countdown</div>
         <div class="stat-num" id="stat-countdown">–</div>
-        <div class="stat-label">Tage bis<br>zum Abi</div>
+        <div class="stat-label">Tage bis zum Abi</div>
       </div>
     </div>
 
@@ -168,10 +132,6 @@
       <div id="topic-topbar-info">
         <h2 id="topic-name"></h2>
         <div id="topic-topbar-meta"></div>
-      </div>
-      <div id="topic-topbar-progress">
-        <span id="topic-pct">0%</span>
-        <div class="progress-track" style="width:80px"><div id="topic-bar" class="progress-fill"></div></div>
       </div>
     </div>
 
@@ -221,18 +181,6 @@
     <div class="modal-body" id="favorites-modal-body"></div>
   </div>
 </div>
-
-<!-- ═══ LERNPLAN MODAL ═══ -->
-<div id="lernplan-modal" class="modal-overlay">
-  <div class="modal-box modal-box-wide">
-    <div class="modal-header">
-      <h3>📅 7-Tage Lernplan</h3>
-      <button class="modal-close" id="btn-lernplan-close">✕</button>
-    </div>
-    <div class="modal-body" id="lernplan-modal-body"></div>
-  </div>
-</div>
-
 
   <!-- Scroll-to-Top Button -->
   <button id="scroll-top-btn" aria-label="Nach oben scrollen">↑</button>

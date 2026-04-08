@@ -21,6 +21,10 @@ const topicsRenderer = (() => {
       .filter(sec => sec.note)
       .map(sec => ({ title: sec.title, note: sec.note }));
     const mustKnow = sectionGoals.slice(0, 6);
+    const taskExamples = (TASKS_DATA[topicId] || []).slice(0, 4);
+    const taskPatterns = taskExamples.flatMap(task =>
+      task.subtasks.slice(0, 2).map(sub => `${task.year}: ${sub.text}`)
+    ).slice(0, 4);
 
     let html = '';
 
@@ -64,6 +68,30 @@ const topicsRenderer = (() => {
                 <div class="theory-note-item">
                   <strong>${item.title}:</strong> ${item.note}
                 </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+        ${taskExamples.length ? `
+          <div class="theory-overview-card">
+            <div class="theory-overview-label">Abi-Fokus</div>
+            <div class="theory-overview-title">Damit musst du in Aufgaben rechnen und argumentieren</div>
+            <div class="theory-note-list">
+              ${taskExamples.map(task => `
+                <div class="theory-note-item">
+                  <strong>Abi ${task.year}:</strong> ${task.title}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+        ${taskPatterns.length ? `
+          <div class="theory-overview-card">
+            <div class="theory-overview-label">Typische Prüfungsaufträge</div>
+            <div class="theory-overview-title">So werden Themen im Abi wirklich abgefragt</div>
+            <div class="theory-note-list">
+              ${taskPatterns.map(pattern => `
+                <div class="theory-note-item">${pattern}</div>
               `).join('')}
             </div>
           </div>
@@ -168,7 +196,6 @@ const topicsRenderer = (() => {
 
       // Karten der Gruppe
       groups[prio].forEach(topic => {
-        const pct = progress.topicPct(topic.id);
         const div = document.createElement('div');
         div.className = 'topic-card';
         div.dataset.priority = prio;
@@ -180,10 +207,9 @@ const topicsRenderer = (() => {
           </div>
           <div><span class="card-badge">${topic.badge}</span></div>
           <div class="card-footer">
-            <span class="card-pct">${pct}%</span>
-            <div class="card-progress progress-track">
-              <div class="progress-fill${pct >= 80 ? ' green' : ''}" style="width:${pct}%"></div>
-            </div>
+            <span class="card-link-hint">Theorie</span>
+            <span class="card-link-hint">Abi-Aufgaben</span>
+            <span class="card-link-hint">Quickcheck</span>
           </div>`;
         grid.appendChild(div);
       });
@@ -193,22 +219,30 @@ const topicsRenderer = (() => {
   function buildFormulaSheet() {
     const body = document.getElementById('formula-modal-body');
     if (!body) return;
-    let html = '';
+    let html = `
+      <div class="formula-sheet-intro">
+        <div class="formula-sheet-intro-title">Formelzettel zum schnellen Nachschlagen</div>
+        <div class="formula-sheet-intro-copy">Nicht alles auf einmal lesen: erst Thema wählen, dann nur die 3 bis 6 Kernformeln sichern, die du wirklich für Aufgaben brauchst.</div>
+      </div>
+    `;
     Object.values(TOPICS_DATA).forEach(topic => {
       const formulas = [];
       topic.sections.forEach(sec => {
-        if (sec.formulas) sec.formulas.forEach(f => formulas.push(f));
+        if (sec.formulas) sec.formulas.forEach(f => formulas.push({ ...f, sectionTitle: sec.title }));
       });
       if (!formulas.length) return;
       html += `<div class="modal-topic-section">
         <div class="modal-topic-title">
           <span>${starsHtml(topic.priority)}</span> ${topic.title}
         </div>
+        <div class="formula-topic-summary">${topic.badge}</div>
         <div class="modal-formulas">`;
       formulas.forEach(f => {
         html += `<div class="modal-formula">
+          <div class="modal-formula-section">${f.sectionTitle}</div>
           <div class="modal-formula-label">${f.label}</div>
           <div class="modal-formula-math">\\(${f.latex}\\)</div>
+          ${f.note ? `<div class="modal-formula-note">${f.note}</div>` : ''}
         </div>`;
       });
       html += `</div></div>`;

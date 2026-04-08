@@ -19,8 +19,6 @@ const app = (() => {
   function init() {
     buildSidebar();
     topicsRenderer.renderCards();
-    updateStats();
-    updateTotalProgress();
     updateCountdown();
     setInterval(updateCountdown, 60000);
 
@@ -36,7 +34,6 @@ const app = (() => {
 
     // Sidebar-Buttons
     document.getElementById('btn-favorites')?.addEventListener('click', openFavorites);
-    document.getElementById('btn-lernplan')?.addEventListener('click', openLernplan);
     document.getElementById('btn-formula')?.addEventListener('click', openFormulaSheet);
 
     // Zurück-Button
@@ -52,9 +49,6 @@ const app = (() => {
     document.getElementById('formula-modal')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeFormulaSheet(); });
 
     document.getElementById('btn-favorites-close')?.addEventListener('click', closeFavorites);
-
-    document.getElementById('btn-lernplan-close')?.addEventListener('click', closeLernplan);
-    document.getElementById('lernplan-modal')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeLernplan(); });
 
     // Theorie-Akkordeon (Event-Delegation, einmalig)
     document.getElementById('tab-theory')?.addEventListener('click', e => {
@@ -78,8 +72,6 @@ const app = (() => {
 
     // Fortschritt-Events
     document.addEventListener('progressUpdated', () => {
-      updateTotalProgress();
-      updateStats();
       buildSidebar();
       topicsRenderer.renderCards();
     });
@@ -127,7 +119,7 @@ const app = (() => {
     document.getElementById('topic-name').textContent = topic.title;
     document.getElementById('topic-topbar-meta').innerHTML =
       `${topicsRenderer.starsHtml(topic.priority)} &nbsp;${topic.badge}`;
-    refreshTopicProgress(topicId);
+    buildSidebar();
 
     document.querySelectorAll('.nav-item').forEach(el => {
       el.classList.toggle('active', el.dataset.id === topicId);
@@ -169,7 +161,6 @@ const app = (() => {
     if (!nav) return;
     nav.innerHTML = '';
     Object.values(TOPICS_DATA).forEach(topic => {
-      const pct = progress.topicPct(topic.id);
       const li = document.createElement('li');
       li.innerHTML = `
         <button class="nav-item${currentTopicId === topic.id ? ' active' : ''}" data-id="${topic.id}">
@@ -177,9 +168,7 @@ const app = (() => {
             <div class="nav-item-name">${topic.title}</div>
             <div class="nav-item-meta">
               <span class="nav-stars">${topicsRenderer.starsHtml(topic.priority)}</span>
-              <div class="nav-progress progress-track">
-                <div class="progress-fill${pct>=80?' green':''}" style="width:${pct}%"></div>
-              </div>
+              <span class="nav-topic-kind">Theorie · Aufgaben · Quiz</span>
             </div>
           </div>
         </button>`;
@@ -197,44 +186,8 @@ const app = (() => {
     document.getElementById('overlay').classList.remove('active');
   }
 
-  // ── PROGRESS ──
   function refreshTopicProgress(topicId) {
-    const pct = progress.topicPct(topicId);
-    const pctEl = document.getElementById('topic-pct');
-    const barEl = document.getElementById('topic-bar');
-    if (pctEl) pctEl.textContent = pct + '%';
-    if (barEl) {
-      barEl.style.width = pct + '%';
-      barEl.classList.toggle('green', pct >= 80);
-    }
     buildSidebar();
-  }
-
-  function updateTotalProgress() {
-    const pct = progress.totalPct();
-    const pctEl = document.getElementById('total-pct');
-    const barEl = document.getElementById('total-bar');
-    if (pctEl) pctEl.textContent = pct + '%';
-    if (barEl) barEl.style.width = pct + '%';
-    updateProgressRing(pct);
-  }
-
-  function updateProgressRing(pct) {
-    const ring  = document.getElementById('ring-fg');
-    const label = document.getElementById('ring-pct');
-    if (!ring) return;
-    const circ  = 2 * Math.PI * 54; // r=54 → ≈339.3
-    ring.style.strokeDashoffset = circ * (1 - pct / 100);
-    if (label) label.textContent = pct + '%';
-  }
-
-  function updateStats() {
-    const { topicsDone, tasksDone, quizDone, streak } = progress.getStats();
-    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-    set('stat-topics-done', topicsDone);
-    set('stat-tasks-done',  tasksDone);
-    set('stat-quiz-done',   quizDone);
-    set('stat-streak',      streak);
   }
 
   // ── COUNTDOWN ──
@@ -320,87 +273,12 @@ const app = (() => {
     document.getElementById('favorites-modal')?.classList.remove('open');
   }
 
-  // ── LERNPLAN ──
-  function openLernplan() {
-    const modal = document.getElementById('lernplan-modal');
-    const body  = document.getElementById('lernplan-modal-body');
-    if (!modal || !body) return;
-
-    const weakest = progress.getWeakestTopics(); // sortiert: schwächste zuerst
-    const days    = generateLernplan(weakest);
-
-    const dayNames = ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
-    const today    = new Date().getDay(); // 0=So, 1=Mo ...
-    const offset   = today === 0 ? 1 : (8 - today) % 7; // nächster Montag
-
-    let html = `
-      <p class="lernplan-intro">Basierend auf deinem Fortschritt – schwächste Themen zuerst. Passe den Plan nach Bedarf an.</p>
-      <div class="lernplan-grid">`;
-
-    days.forEach((day, i) => {
-      const date = new Date();
-      date.setDate(date.getDate() + offset + i);
-      const dateStr = date.toLocaleDateString('de-DE', { day:'numeric', month:'short' });
-      const isToday = (i === 0 && offset === 0) ||
-                      (date.toDateString() === new Date().toDateString());
-
-      html += `
-        <div class="lernplan-day${isToday ? ' lernplan-today' : ''}">
-          <div class="lernplan-day-header">
-            <span class="lernplan-day-name">${dayNames[i % 7]}</span>
-            <span class="lernplan-day-date">${dateStr}</span>
-          </div>
-          <div class="lernplan-topic">${day.topicName}</div>
-          <ul class="lernplan-tasks">
-            ${day.activities.map(a => `<li>${a}</li>`).join('')}
-          </ul>
-          <div class="lernplan-pct-bar">
-            <div class="lernplan-pct-fill" style="width:${day.pct}%"></div>
-          </div>
-          <div class="lernplan-pct-label">${day.pct}% erreicht</div>
-        </div>`;
-    });
-
-    html += '</div>';
-    body.innerHTML = html;
-    modal.classList.add('open');
-  }
-
-  function generateLernplan(weakest) {
-    const plan = [];
-    const activitySets = [
-      ['📖 Theorie durchlesen', '✏️ 2 Aufgaben bearbeiten'],
-      ['✏️ Aufgaben üben', '⚡ Quickcheck starten'],
-      ['📖 Theorie wiederholen', '✏️ 3 Aufgaben bearbeiten', '⚡ Quickcheck'],
-      ['✏️ Aufgaben unter Zeitdruck', '📝 Fehler analysieren'],
-      ['🔁 Wiederholung', '⚡ Quickcheck wiederholen'],
-      ['📖 Formeln auswendig', '✏️ 2 Aufgaben bearbeiten'],
-      ['🏁 Generalprobe: Alle Themen', '⏱️ Zeitmanagement üben'],
-    ];
-
-    for (let i = 0; i < 7; i++) {
-      const entry  = weakest[i % weakest.length];
-      plan.push({
-        topicName:  entry.topic.title,
-        activities: activitySets[i],
-        pct:        entry.pct,
-        topicId:    entry.id
-      });
-    }
-    return plan;
-  }
-
-  function closeLernplan() {
-    document.getElementById('lernplan-modal')?.classList.remove('open');
-  }
-
   document.addEventListener('DOMContentLoaded', init);
 
   return {
     navigateHome, navigateTopic, refreshTopicProgress,
     openSidebar, closeSidebar,
     openFormulaSheet, closeFormulaSheet,
-    openFavorites, closeFavorites,
-    openLernplan, closeLernplan
+    openFavorites, closeFavorites
   };
 })();

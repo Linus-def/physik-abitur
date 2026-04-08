@@ -1116,8 +1116,8 @@ const TOPICS_DATA = {
       {
         question: 'Zwei Platten (\\(A = 100\\,\\text{cm}^2\\), \\(d = 5\\,\\text{mm}\\), \\(\\varepsilon_0 = 8{,}85\\cdot10^{-12}\\,\\text{F/m}\\)). Kapazität C?',
         options: ['\\(C \\approx 177\\,\\text{pF}\\)', '\\(C \\approx 17{,}7\\,\\text{pF}\\)', '\\(C \\approx 1{,}77\\,\\text{nF}\\)', '\\(C \\approx 88{,}5\\,\\text{pF}\\)'],
-        correct: 0,
-        explanation: '\\(C = \\varepsilon_0 A/d = 8{,}85\\cdot10^{-12}\\cdot10^{-2}/(5\\cdot10^{-3}) = 1{,}77\\cdot10^{-11}\\,\\text{F} \\approx 17{,}7\\,\\text{pF}\\). (Rechenfehler korrigiert: \\(A = 0{,}01\\,\\text{m}^2\\)).'
+        correct: 1,
+        explanation: '\\(C = \\varepsilon_0 A/d = 8{,}85\\cdot10^{-12}\\cdot10^{-2}/(5\\cdot10^{-3}) = 1{,}77\\cdot10^{-11}\\,\\text{F} \\approx 17{,}7\\,\\text{pF}\\).'
       },
       {
         question: 'Warum weicht ein negativ geladenes Teilchen im E-Feld in die entgegengesetzte Richtung zur Feldstärke ab?',

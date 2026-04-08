@@ -8,16 +8,16 @@ const tasksRenderer = (() => {
     if (eventsBound) return;
     eventsBound = true;
 
-    // Jahr-Filter Pills
     container.addEventListener('click', e => {
       const pill = e.target.closest('.year-pill');
-      if (pill) {
-        setFilter(pill.dataset.year);
-        return;
-      }
+      if (pill) { setFilter(pill.dataset.year); return; }
 
       const pdfImg = e.target.closest('.pdf-page-img');
       if (pdfImg) { openLightbox(pdfImg.dataset.src); return; }
+
+      // PDF-Panel ein-/ausklappen
+      const pdfHeader = e.target.closest('[data-action="toggle-pdf"]');
+      if (pdfHeader) { togglePdfPanel(pdfHeader.dataset.domId); return; }
 
       const hintBtn = e.target.closest('[data-action="hint"]');
       if (hintBtn) { toggleHint(hintBtn.dataset.domId); return; }
@@ -67,36 +67,39 @@ const tasksRenderer = (() => {
     return 'be-high';
   }
 
-  // PDF-Bilder direkt sichtbar (keine Toggle-Taste mehr)
-  function pdfImagesHtml(task) {
-    if (!task.pdfImages || !task.pdfImages.length) return '';
-    const imgs = task.pdfImages.map((src, i) =>
-      `<img class="pdf-page-img" src="img/${src}" data-src="img/${src}" alt="Seite ${i+1}" loading="lazy" style="width:100%;border-radius:8px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer;">`
-    ).join('');
-    return `
-      <div class="task-images-side">
-        <div class="images-side-label"> 📄 Original-Abituraufgabe</div>
-        ${task.pdfHint ? `<div style="font-size:11px;color:var(--text-3);margin-bottom:6px;">${task.pdfHint}</div>` : ''}
-        ${imgs}
-      </div>
-    `;
-  }
-
   function taskCardHtml(topicId, task) {
-    const imgHtml = pdfImagesHtml(task);
+    const taskDomId = `${topicId}_${task.id}`;
+    const totalPts = task.subtasks.reduce((sum, s) => sum + (parseInt(s.points) || 0), 0);
     const hasImages = task.pdfImages && task.pdfImages.length > 0;
+
+    const pdfPanelHtml = hasImages ? `
+      <div class="task-pdf-panel">
+        <button class="task-pdf-header" data-action="toggle-pdf" data-dom-id="${taskDomId}">
+          <span>📄 Original-Abituraufgabe</span>
+          <span class="task-pdf-chevron" id="pdf-chevron-${taskDomId}">▲</span>
+        </button>
+        <div class="task-pdf-body open" id="pdf-body-${taskDomId}">
+          ${task.pdfHint ? `<p class="task-pdf-hint">${task.pdfHint}</p>` : ''}
+          <div class="task-pdf-images">
+            ${task.pdfImages.map((src, i) =>
+              `<img class="pdf-page-img" src="img/${src}" data-src="img/${src}" alt="Seite ${i+1}" loading="lazy">`
+            ).join('')}
+          </div>
+        </div>
+      </div>
+    ` : '';
+
     return `
       <div class="task-card">
-        <div class="task-card-layout" style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
-          <div style="flex:2;min-width:280px;">
-            <div class="task-card-header">
-              <span class="task-card-title">${task.title}</span>
-              <span class="task-year-tag">Abi ${task.year}</span>
-            </div>
-            ${task.context ? `<div class="task-context">${task.context}</div>` : ''}
-            ${task.subtasks.map((sub, si) => subtaskHtml(topicId, task.id, sub, si)).join('')}
-          </div>
-          ${hasImages ? `<div style="flex:1;min-width:260px;max-width:400px;position:sticky;top:80px;">${imgHtml}</div>` : ''}
+        <div class="task-card-header">
+          <span class="task-year-badge">Abi ${task.year}</span>
+          <span class="task-card-title">${task.title}</span>
+          ${totalPts > 0 ? `<span class="task-card-pts">${totalPts}&thinsp;BE</span>` : ''}
+        </div>
+        ${pdfPanelHtml}
+        ${task.context ? `<div class="task-context">${task.context}</div>` : ''}
+        <div class="task-subtasks">
+          ${task.subtasks.map((sub, si) => subtaskHtml(topicId, task.id, sub, si)).join('')}
         </div>
       </div>
     `;
@@ -109,40 +112,44 @@ const tasksRenderer = (() => {
     const ratingLabels = { good: '✓ Verstanden', partial: '~ Teilweise', bad: '✗ Nochmal' };
     const beClass = bePtsClass(sub.points);
     const hasDeeper = !!sub.deeperExplanation;
+
     return `
-      <div class="subtask">
-        <div class="subtask-header">
+      <div class="subtask-item">
+        <div class="subtask-question-header">
           <span class="subtask-label">${sub.label}</span>
-          ${sub.points ? `<span class="subtask-pts ${beClass}">${sub.points} BE</span>` : ''}
-          <span class="subtask-text-preview" style="flex:1;padding:0 8px">${sub.text ? sub.text.substring(0,80) + (sub.text.length > 80 ? '…' : '') : ''}</span>
+          ${sub.points ? `<span class="subtask-pts ${beClass}">${sub.points}&thinsp;BE</span>` : ''}
           <span id="done-badge-${domId}" class="subtask-done-badge ${saved || ''}">${saved ? ratingLabels[saved] : ''}</span>
         </div>
-        <div class="subtask-body" id="body-${domId}">
-          <div class="subtask-inner">
-            <div class="theory-text">${sub.text}</div>
-            ${sub.hint ? `<button class="pdf-toggle-btn" data-action="hint" data-dom-id="${domId}" id="hint-btn-${domId}">💡 Hinweis</button>` : ''}
-            <button class="pdf-toggle-btn" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}" id="sol-btn-${domId}">Ø Lösung aufdecken</button>
-            ${sub.hint ? `<div class="hint-box" id="hint-box-${domId}"><div class="hint-label">💡 Hinweis</div>${sub.hint}</div>` : ''}
-            <div class="solution-box" id="sol-box-${domId}"><div class="solution-label">✓ Lösung</div>${sub.solution}</div>
-            ${hasDeeper ? `
-              <div class="deeper-box" id="deeper-box-${domId}">
-                <div class="deeper-label">🔍 Tiefere Erklärung</div>
-                <div class="deeper-content">${sub.deeperExplanation}</div>
-              </div>
-              <button class="deeper-toggle-btn" data-action="deeper" data-dom-id="${domId}" id="deeper-btn-${domId}">
-                🧠 Tiefer verstehen
-              </button>
-            ` : ''}
-            <div class="rating-row" id="rating-${domId}">
-              <span class="rating-row-label">Wie lief's?</span>
-              ${['good','partial','bad'].map(r =>
-                `<button class="rating-btn ${r === 'good' ? 'easy' : r === 'partial' ? 'medium' : 'hard'}${saved === r ? ' active sel' : ''}" data-action="rate" data-topic-id="${topicId}" data-key="${key}" data-r="${r}" data-dom-id="${domId}">${r==='good'?'✓ Verstanden':r==='partial'?'~ Teilweise':'✗ Nochmal üben'}</button>`
-              ).join('')}
-            </div>
+        <div class="subtask-question-text theory-text">${sub.text}</div>
+        <div class="subtask-tools">
+          ${sub.hint ? `<button class="subtask-action-btn" data-action="hint" data-dom-id="${domId}" id="hint-btn-${domId}">💡 Hinweis</button>` : ''}
+          <button class="subtask-action-btn sol-btn" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}" id="sol-btn-${domId}">→ Lösung zeigen</button>
+        </div>
+        ${sub.hint ? `<div class="hint-box" id="hint-box-${domId}"><div class="hint-label">💡 Hinweis</div>${sub.hint}</div>` : ''}
+        <div class="solution-box" id="sol-box-${domId}"><div class="solution-label">✓ Lösung</div>${sub.solution}</div>
+        ${hasDeeper ? `
+          <button class="deeper-toggle-btn" style="display:none" data-action="deeper" data-dom-id="${domId}" id="deeper-btn-${domId}">🧠 Tiefer verstehen</button>
+          <div class="deeper-box" id="deeper-box-${domId}">
+            <div class="deeper-label">🔍 Tiefere Erklärung</div>
+            <div class="deeper-content">${sub.deeperExplanation}</div>
           </div>
+        ` : ''}
+        <div class="rating-row" id="rating-${domId}">
+          <span class="rating-row-label">Wie lief's?</span>
+          ${['good','partial','bad'].map(r =>
+            `<button class="rating-btn ${r === 'good' ? 'easy' : r === 'partial' ? 'medium' : 'hard'}${saved === r ? ' active sel' : ''}" data-action="rate" data-topic-id="${topicId}" data-key="${key}" data-r="${r}" data-dom-id="${domId}">${r==='good'?'✓ Verstanden':r==='partial'?'~ Teilweise':'✗ Nochmal üben'}</button>`
+          ).join('')}
         </div>
       </div>
     `;
+  }
+
+  function togglePdfPanel(taskDomId) {
+    const body = document.getElementById(`pdf-body-${taskDomId}`);
+    const chevron = document.getElementById(`pdf-chevron-${taskDomId}`);
+    if (!body) return;
+    const isOpen = body.classList.toggle('open');
+    if (chevron) chevron.textContent = isOpen ? '▲' : '▼';
   }
 
   function toggleHint(domId) {
@@ -150,7 +157,7 @@ const tasksRenderer = (() => {
     const btn = document.getElementById(`hint-btn-${domId}`);
     if (!box) return;
     const isOpen = box.classList.toggle('open');
-    if (btn) btn.classList.toggle('revealed', isOpen);
+    if (btn) btn.classList.toggle('active', isOpen);
     if (isOpen) mathjaxTypeset([box]);
   }
 
@@ -160,7 +167,7 @@ const tasksRenderer = (() => {
     if (!box) return;
     const isOpen = box.classList.toggle('open');
     if (btn) {
-      btn.classList.toggle('revealed', isOpen);
+      btn.classList.toggle('active', isOpen);
       btn.textContent = isOpen ? '🧠 Weniger anzeigen' : '🧠 Tiefer verstehen';
     }
     if (isOpen) mathjaxTypeset([box]);
@@ -195,5 +202,5 @@ const tasksRenderer = (() => {
     if (currentTopic) render(currentTopic, val);
   }
 
-  return { render, toggleHint, toggleDeeper, toggleSolution, rate, setFilter };
+  return { render, toggleHint, toggleDeeper, toggleSolution, togglePdfPanel, rate, setFilter };
 })();

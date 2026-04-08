@@ -1,0 +1,33 @@
+{
+  "name": "Physik Abitur 2026 – Baden-Württemberg",
+  "short_name": "PhysikAbi",
+  "description": "Alle Prüfungsthemen für das Physik-Abitur 2026 in Baden-Württemberg – Theorie, Aufgaben & Quickchecks.",
+  "start_url": "/physik-abitur/",
+  "scope": "/physik-abitur/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#6366f1",
+  "background_color": "#09090b",
+  "lang": "de",
+  "categories": ["education"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Schwingungen",
+      "url": "/physik-abitur/#schwingungen/theory",
+      "description": "Mechanische Schwingungen"
+    },
+    {
+      "name": "Quickcheck",
+      "url": "/physik-abitur/#schwingungen/quiz",
+      "description": "Quiz starten"
+    }
+  ]
+}

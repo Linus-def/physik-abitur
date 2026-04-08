@@ -1458,3 +1458,292 @@ p + p { margin-top: 0.5em; }
 
   .quiz-card { padding: 18px; }
 }
+
+
+/* ══════════════════════════════════════════════
+   DESIGN UPGRADE – Issue #7
+══════════════════════════════════════════════ */
+
+/* 1. Tab-Wechsel Fade-Animation */
+.tab-panel.active {
+  animation: tabFadeIn 0.2s ease;
+}
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. Prioritäts-Farbstreifen auf Themenkarten */
+.topic-card[data-priority="3"] {
+  border-top: 3px solid var(--red);
+}
+.topic-card[data-priority="2"] {
+  border-top: 3px solid var(--amber);
+}
+.topic-card[data-priority="1"] {
+  border-top: 3px solid var(--border-2);
+}
+
+/* 3. Sidebar: Active-State deutlicher */
+.nav-item.active {
+  border-left: 3px solid var(--accent);
+  padding-left: 9px;
+  background: rgba(99,102,241,.15);
+}
+.nav-item.active .nav-item-name {
+  color: #a5b4fc;
+}
+
+/* 4. Sidebar: Darkmode-Toggle als echten Toggle-Switch */
+#theme-toggle {
+  justify-content: space-between;
+}
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.theme-switch-track {
+  position: absolute;
+  inset: 0;
+  background: var(--sb-border);
+  border-radius: 99px;
+  transition: background 0.2s;
+}
+.theme-switch-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+[data-theme="dark"] .theme-switch-track {
+  background: var(--accent);
+}
+[data-theme="dark"] .theme-switch-thumb {
+  transform: translateX(14px);
+}
+
+/* 5. Statistik-Kacheln: Individuelle Farb-Akzente */
+.stat-card.topics-stat::before    { background: linear-gradient(90deg,#6366f1,#8b5cf6); opacity: 1; }
+.stat-card.tasks-stat::before     { background: linear-gradient(90deg,#0ea5e9,#38bdf8); opacity: 1; }
+.stat-card.quiz-stat::before      { background: linear-gradient(90deg,#f59e0b,#fbbf24); opacity: 1; }
+.stat-card.streak-stat::before    { background: linear-gradient(90deg,#eab308,#f59e0b); opacity: 1; }
+.stat-card.countdown-stat::before { background: linear-gradient(90deg,#dc2626,#f87171); opacity: 1; }
+
+.stat-card.tasks-stat .stat-num {
+  background: linear-gradient(135deg,#0ea5e9,#38bdf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-card.quiz-stat .stat-num {
+  background: linear-gradient(135deg,#f59e0b,#fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-card.countdown-stat .stat-num {
+  background: linear-gradient(135deg,#dc2626,#f87171);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 6. BE-Punkte in Aufgaben farbig */
+.subtask-pts {
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 99px;
+  padding: 2px 9px;
+  flex-shrink: 0;
+}
+.subtask-pts.be-low  { background: var(--green-bg); color: var(--green); }
+.subtask-pts.be-mid  { background: var(--amber-bg); color: var(--amber); }
+.subtask-pts.be-high { background: var(--red-bg);   color: var(--red);   }
+
+/* 7. Jahr-Filter als Pills */
+.year-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.year-pills label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-right: 4px;
+}
+.year-pill {
+  padding: 4px 13px;
+  border: 1.5px solid var(--border-2);
+  border-radius: 99px;
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.year-pill:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.year-pill.active {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: white;
+  box-shadow: var(--shadow-accent);
+}
+
+/* 8. PDF-Button auffälliger */
+.pdf-toggle-btn {
+  background: var(--accent-bg);
+  border-color: #c7d2fe;
+  color: var(--accent);
+  font-weight: 600;
+}
+.pdf-toggle-btn:hover {
+  background: var(--accent-grad);
+  border-color: transparent;
+  color: white;
+}
+
+/* 9. Wie lief's? – visuell abgetrennt */
+.rating-row {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.rating-row-label {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 10. Quickcheck Start-Card: mehr Inhalt, weniger Leerraum */
+.quiz-intro {
+  padding: 40px 32px;
+  max-width: 560px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  margin: 32px auto;
+}
+.quiz-intro-stats {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  margin: 16px 0 24px;
+  flex-wrap: wrap;
+}
+.quiz-intro-stat {
+  text-align: center;
+}
+.quiz-intro-stat-num {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: var(--accent-grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.quiz-intro-stat-label {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 500;
+}
+.quiz-start-btn {
+  padding: 14px 44px;
+  font-size: 15.5px;
+  border-radius: var(--radius-lg);
+}
+
+/* 11. Scroll-to-Top Button */
+#scroll-top-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 42px;
+  height: 42px;
+  background: var(--accent-grad);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: var(--shadow-accent);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#scroll-top-btn.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#scroll-top-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+/* 12. Hamburger: Mindestgröße 44x44px (Accessibility) */
+#hamburger {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 10px;
+}
+
+/* 13. Formelkachel Hauptformel hervorheben */
+.formula-box.primary {
+  background: rgba(99,102,241,.1);
+  border-color: rgba(99,102,241,.4);
+}
+.formula-box.primary .formula-label {
+  color: var(--accent);
+}
+[data-theme="dark"] .formula-box.primary {
+  background: rgba(99,102,241,.15);
+  border-color: rgba(99,102,241,.5);
+}
+
+/* 14. Theorie Akkordeon: Pfeil-Animation (bereits vorhanden, hier verbessert) */
+.accordion-trigger {
+  gap: 10px;
+}
+.accordion-trigger::before {
+  content: '🔍';
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.accordion-arrow {
+  margin-left: auto;
+}
+
+/* 15. Merksatz (note-box) leicht animiert beim Erscheinen */
+.note-box {
+  animation: notePop 0.3s ease;
+}
+@keyframes notePop {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}

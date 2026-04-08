@@ -55,7 +55,6 @@ const quizModule = (() => {
     state.answered = false;
     const total = state.questions.length;
     const pct = Math.round((state.idx / total) * 100);
-
     container.innerHTML = `
       <div class="quiz-header">
         <button class="quiz-exit-btn" id="quiz-exit-btn">← Beenden</button>
@@ -64,27 +63,22 @@ const quizModule = (() => {
           <div class="progress-fill" style="width:${pct}%"></div>
         </div>
       </div>
-
       <div class="quiz-card">
         <div class="quiz-question">${q.question}</div>
-
         <div class="quiz-options">
           ${q.options.map((opt, i) => `
             <button class="quiz-option" data-i="${i}">
               ${opt}
             </button>`).join('')}
         </div>
-
         <div class="quiz-explanation" id="quiz-exp">
-          <div class="quiz-explanation-label">Erklärung</div>
+          <div class="quiz-explanation-label" id="quiz-exp-label">Erklärung</div>
           <div id="quiz-exp-text"></div>
         </div>
-
         <button class="quiz-next-btn" id="quiz-next">
           ${state.idx + 1 < total ? 'Weiter →' : 'Ergebnis anzeigen →'}
         </button>
       </div>`;
-
     bindEvents(container);
     if (window.MathJax) MathJax.typesetPromise([container]);
   }
@@ -106,9 +100,59 @@ const quizModule = (() => {
     if (q.explanation) {
       const exp = document.getElementById('quiz-exp');
       const expText = document.getElementById('quiz-exp-text');
+      const expLabel = document.getElementById('quiz-exp-label');
       if (exp && expText) {
-        expText.innerHTML = q.explanation;
+        // Basis-Erklärung
+        let html = `<div class="quiz-exp-basic">${q.explanation}</div>`;
+
+        // Bei falscher Antwort: detaillierte Erklärung + Links
+        if (!correct) {
+          if (expLabel) {
+            expLabel.textContent = '❌ Falsch – Ausführliche Erklärung';
+            expLabel.style.color = '#f87171';
+          }
+
+          if (q.detailedExplanation) {
+            html += `
+              <div class="quiz-exp-detailed">
+                <div class="quiz-exp-detailed-title">🔍 Wo liegt der Denkfehler?</div>
+                <div class="quiz-exp-detailed-text">${q.detailedExplanation}</div>
+              </div>`;
+          }
+
+          if (q.links && q.links.length > 0) {
+            html += `
+              <div class="quiz-exp-links">
+                <div class="quiz-exp-links-title">📚 Zum Nachlesen & Nachschauen</div>
+                <ul class="quiz-exp-links-list">
+                  ${q.links.map(l => {
+                    const isYT = l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('simpleclub');
+                    const icon = isYT ? '📺' : '📖';
+                    return `<li><a href="${l.url}" target="_blank" rel="noopener noreferrer" class="quiz-exp-link">${icon} ${l.title}</a></li>`;
+                  }).join('')}
+                </ul>
+              </div>`;
+          } else if (TOPICS_DATA[state.topicId]?.resources?.length) {
+            // Fallback: Ressourcen des Themas anzeigen
+            const res = TOPICS_DATA[state.topicId].resources.slice(0, 3);
+            html += `
+              <div class="quiz-exp-links">
+                <div class="quiz-exp-links-title">📚 Thema nochmal nachschlagen</div>
+                <ul class="quiz-exp-links-list">
+                  ${res.map(r => `<li><a href="${r.url}" target="_blank" rel="noopener noreferrer" class="quiz-exp-link">${r.icon} ${r.name}</a></li>`).join('')}
+                </ul>
+              </div>`;
+          }
+        } else {
+          if (expLabel) {
+            expLabel.textContent = '✅ Richtig!';
+            expLabel.style.color = '#4ade80';
+          }
+        }
+
+        expText.innerHTML = html;
         exp.classList.add('open');
+        if (!correct) exp.classList.add('wrong-answer');
         if (window.MathJax) MathJax.typesetPromise([exp]);
       }
     }
@@ -132,7 +176,6 @@ const quizModule = (() => {
       : pct >= 60 ? 'Gut! Ein paar Lücken schließen.'
       : pct >= 40 ? 'Theorie nochmal lesen und wiederholen.'
       : 'Dieses Thema braucht mehr Übung.';
-
     container.innerHTML = `
       <div class="quiz-result">
         <div class="quiz-result-emoji">${emoji}</div>
@@ -143,7 +186,6 @@ const quizModule = (() => {
           <button class="quiz-restart-btn">Nochmal starten</button>
         </div>
       </div>`;
-
     progress.setQuiz(state.topicId, score, total);
     app.refreshTopicProgress(state.topicId);
   }

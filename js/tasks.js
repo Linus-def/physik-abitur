@@ -19,6 +19,18 @@ const tasksRenderer = (() => {
       const pdfImg = e.target.closest('.pdf-page-img');
       if (pdfImg) { openLightbox(pdfImg.dataset.src); return; }
 
+      const stepBtn = e.target.closest('.task-step-btn');
+      if (stepBtn) {
+        jumpToSubtask(stepBtn.dataset.domId);
+        return;
+      }
+
+      const subtaskToggle = e.target.closest('[data-action="toggle-subtask"]');
+      if (subtaskToggle) {
+        toggleSubtask(subtaskToggle.dataset.domId);
+        return;
+      }
+
       const hintBtn = e.target.closest('[data-action="hint"]');
       if (hintBtn) { toggleHint(hintBtn.dataset.domId); return; }
 
@@ -85,8 +97,34 @@ const tasksRenderer = (() => {
   function taskCardHtml(topicId, task) {
     const imgHtml = pdfImagesHtml(task);
     const hasImages = task.pdfImages && task.pdfImages.length > 0;
+    const stepsHtml = task.subtasks.map((sub, si) => {
+      const key = `${task.id}_${si}`;
+      const domId = `${topicId}_${key}`;
+      const saved = progress.getTaskRating(topicId, key);
+      const ratingLabels = { good: 'Verstanden', partial: 'Teilweise', bad: 'Nochmal' };
+      return `
+        <button class="task-step-btn" data-dom-id="${domId}">
+          <span class="task-step-label">${sub.label}</span>
+          <span class="task-step-title">${sub.text ? sub.text.substring(0, 70) + (sub.text.length > 70 ? '…' : '') : 'Teilaufgabe'}</span>
+          <span class="task-step-state ${saved || ''}">${saved ? ratingLabels[saved] : 'Offen'}</span>
+        </button>
+      `;
+    }).join('');
+
     return `
       <div class="task-card">
+        <div class="task-learning-guide">
+          <div class="task-learning-guide-title">So übst du diese Aufgabe sinnvoll</div>
+          <div class="task-learning-guide-steps">
+            <span>1. Original lesen</span>
+            <span>2. Teilaufgabe auswählen</span>
+            <span>3. Erst selbst rechnen</span>
+            <span>4. Lösung prüfen und bewerten</span>
+          </div>
+        </div>
+        <div class="task-steps-overview">
+          ${stepsHtml}
+        </div>
         <div class="task-card-layout" style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
           <div style="flex:2;min-width:280px;">
             <div class="task-card-header">
@@ -109,19 +147,23 @@ const tasksRenderer = (() => {
     const ratingLabels = { good: '✓ Verstanden', partial: '~ Teilweise', bad: '✗ Nochmal' };
     const beClass = bePtsClass(sub.points);
     const hasDeeper = !!sub.deeperExplanation;
+    const isOpen = si === 0;
     return `
-      <div class="subtask">
+      <div class="subtask" id="subtask-${domId}">
         <div class="subtask-header">
           <span class="subtask-label">${sub.label}</span>
           ${sub.points ? `<span class="subtask-pts ${beClass}">${sub.points} BE</span>` : ''}
           <span class="subtask-text-preview" style="flex:1;padding:0 8px">${sub.text ? sub.text.substring(0,80) + (sub.text.length > 80 ? '…' : '') : ''}</span>
           <span id="done-badge-${domId}" class="subtask-done-badge ${saved || ''}">${saved ? ratingLabels[saved] : ''}</span>
+          <button class="subtask-toggle-btn" data-action="toggle-subtask" data-dom-id="${domId}" id="toggle-btn-${domId}">
+            ${isOpen ? 'Einklappen' : 'Öffnen'}
+          </button>
         </div>
-        <div class="subtask-body" id="body-${domId}">
+        <div class="subtask-body${isOpen ? ' open' : ''}" id="body-${domId}">
           <div class="subtask-inner">
             <div class="theory-text">${sub.text}</div>
             ${sub.hint ? `<button class="pdf-toggle-btn" data-action="hint" data-dom-id="${domId}" id="hint-btn-${domId}">💡 Hinweis</button>` : ''}
-            <button class="pdf-toggle-btn" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}" id="sol-btn-${domId}">Ø Lösung aufdecken</button>
+            <button class="pdf-toggle-btn" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}" id="sol-btn-${domId}">Lösung aufdecken</button>
             ${sub.hint ? `<div class="hint-box" id="hint-box-${domId}"><div class="hint-label">💡 Hinweis</div>${sub.hint}</div>` : ''}
             <div class="solution-box" id="sol-box-${domId}"><div class="solution-label">✓ Lösung</div>${sub.solution}</div>
             ${hasDeeper ? `
@@ -152,6 +194,22 @@ const tasksRenderer = (() => {
     const isOpen = box.classList.toggle('open');
     if (btn) btn.classList.toggle('revealed', isOpen);
     if (isOpen) mathjaxTypeset([box]);
+  }
+
+  function toggleSubtask(domId, forceOpen) {
+    const body = document.getElementById(`body-${domId}`);
+    const btn = document.getElementById(`toggle-btn-${domId}`);
+    if (!body) return;
+    const open = typeof forceOpen === 'boolean'
+      ? forceOpen
+      : !body.classList.contains('open');
+    body.classList.toggle('open', open);
+    if (btn) btn.textContent = open ? 'Einklappen' : 'Öffnen';
+  }
+
+  function jumpToSubtask(domId) {
+    toggleSubtask(domId, true);
+    document.getElementById(`subtask-${domId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function toggleDeeper(domId) {

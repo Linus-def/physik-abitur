@@ -60,6 +60,12 @@ const app = (() => {
     document.getElementById('tab-theory')?.addEventListener('click', e => {
       const trigger = e.target.closest('.accordion-trigger');
       if (trigger) topicsRenderer.toggleAcc(trigger.dataset.accId);
+
+      const jumpBtn = e.target.closest('.theory-jump-btn');
+      if (jumpBtn) {
+        const target = document.getElementById(jumpBtn.dataset.targetId);
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
 
     // Favoriten-Modal Aktionen (Event-Delegation, einmalig)

@@ -11,6 +11,17 @@ const topicsRenderer = (() => {
     const topic = TOPICS_DATA[topicId];
     if (!topic) return '<p>Thema nicht gefunden.</p>';
 
+    const sectionGoals = topic.sections.map((sec, i) => ({
+      id: `theory-sec-${topicId}-${i}`,
+      num: i + 1,
+      title: sec.title
+    }));
+    const formulaList = topic.sections.flatMap(sec => sec.formulas || []);
+    const noteList = topic.sections
+      .filter(sec => sec.note)
+      .map(sec => ({ title: sec.title, note: sec.note }));
+    const mustKnow = sectionGoals.slice(0, 6);
+
     let html = '';
 
     // Fun Fact Banner
@@ -18,8 +29,50 @@ const topicsRenderer = (() => {
       html += `<div class="fun-fact-banner">${topic.funFact}</div>`;
     }
 
+    html += `
+      <div class="theory-overview">
+        <div class="theory-overview-card">
+          <div class="theory-overview-label">Was du fürs Abi können musst</div>
+          <div class="theory-overview-title">${topic.title} in Lernschritten</div>
+          <div class="theory-goals-list">
+            ${mustKnow.map(goal => `
+              <button class="theory-jump-btn" data-target-id="${goal.id}">
+                <span class="theory-jump-num">${goal.num}</span>
+                <span>${goal.title}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+        <div class="theory-overview-card">
+          <div class="theory-overview-label">Formeln zuerst</div>
+          <div class="theory-overview-title">Die wichtigsten Beziehungen auf einen Blick</div>
+          <div class="theory-formula-list">
+            ${formulaList.slice(0, 6).map(f => `
+              <div class="theory-formula-chip">
+                <div class="theory-formula-chip-label">${f.label}</div>
+                <div class="theory-formula-chip-math">\\(${f.latex}\\)</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        ${noteList.length ? `
+          <div class="theory-overview-card">
+            <div class="theory-overview-label">Typische Merksätze</div>
+            <div class="theory-overview-title">Das solltest du sicher im Kopf haben</div>
+            <div class="theory-note-list">
+              ${noteList.slice(0, 4).map(item => `
+                <div class="theory-note-item">
+                  <strong>${item.title}:</strong> ${item.note}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+
     topic.sections.forEach((sec, i) => {
-      html += `<div class="theory-section">
+      html += `<div class="theory-section" id="theory-sec-${topicId}-${i}">
         <h3 class="theory-section-title">
           <span class="theory-section-num">${i + 1}</span>
           ${sec.title}

@@ -69,7 +69,7 @@ const progress = (() => {
   function setQuiz(topicId, correct, total) {
     const s = load();
     if (!s[topicId]) s[topicId] = { theoryRead: false, tasksDone: {}, quizScore: null };
-    s[topicId].quizScore = { correct, total };
+    const prev = s[topicId].quizScore;     if (!prev || correct / total >= prev.correct / prev.total) {       s[topicId].quizScore = { correct, total };     }
     save(s); touchStreak(); fire();
   }
 
@@ -99,7 +99,7 @@ const progress = (() => {
 
     if (topicDef.quickcheck?.length > 0) {
       max += 30;
-      if (t.quizScore) pts += Math.round(30 * (t.quizScore.correct / t.quizScore.total));
+      if (t.quizScore && t.quizScore.total > 0) pts += Math.round(30 * (t.quizScore.correct / t.quizScore.total));
     }
 
     return max > 0 ? Math.round((pts / max) * 100) : 0;

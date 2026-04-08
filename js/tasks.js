@@ -4,6 +4,28 @@ const tasksRenderer = (() => {
   let currentFilter = 'all';
   let eventsBound = false;
 
+  function detectOperator(text = '') {
+    const normalized = text.toLowerCase();
+    if (/(vergleiche|vergleich)/.test(normalized)) return { key: 'compare', label: 'Vergleichen' };
+    if (/(begründe|warum|nimm stellung|beurteile)/.test(normalized)) return { key: 'justify', label: 'Begründen' };
+    if (/(erkläre|erläutere|deute|interpretiere|skizziere)/.test(normalized)) return { key: 'explain', label: 'Erklären' };
+    if (/(berechne|bestimme|weise nach|zeige|wie groß|wieviel)/.test(normalized)) return { key: 'calculate', label: 'Berechnen' };
+    return { key: 'analyze', label: 'Anwenden' };
+  }
+
+  function summarizeOperators(subtasks) {
+    const seen = new Set();
+    const summary = [];
+    subtasks.forEach(sub => {
+      const operator = detectOperator(sub.text);
+      if (!seen.has(operator.key)) {
+        seen.add(operator.key);
+        summary.push(operator);
+      }
+    });
+    return summary;
+  }
+
   function bindEvents(container) {
     if (eventsBound) return;
     eventsBound = true;
@@ -97,14 +119,17 @@ const tasksRenderer = (() => {
   function taskCardHtml(topicId, task) {
     const imgHtml = pdfImagesHtml(task);
     const hasImages = task.pdfImages && task.pdfImages.length > 0;
+    const operators = summarizeOperators(task.subtasks);
     const stepsHtml = task.subtasks.map((sub, si) => {
       const key = `${task.id}_${si}`;
       const domId = `${topicId}_${key}`;
       const saved = progress.getTaskRating(topicId, key);
+      const operator = detectOperator(sub.text);
       const ratingLabels = { good: 'Verstanden', partial: 'Teilweise', bad: 'Nochmal' };
       return `
         <button class="task-step-btn" data-dom-id="${domId}">
           <span class="task-step-label">${sub.label}</span>
+          <span class="task-step-operator ${operator.key}">${operator.label}</span>
           <span class="task-step-title">${sub.text ? sub.text.substring(0, 70) + (sub.text.length > 70 ? '…' : '') : 'Teilaufgabe'}</span>
           <span class="task-step-state ${saved || ''}">${saved ? ratingLabels[saved] : 'Offen'}</span>
         </button>
@@ -114,12 +139,15 @@ const tasksRenderer = (() => {
     return `
       <div class="task-card">
         <div class="task-learning-guide">
-          <div class="task-learning-guide-title">So übst du diese Aufgabe sinnvoll</div>
+          <div class="task-learning-guide-title">Abi-Fokus dieser Aufgabe</div>
+          <div class="task-operator-row">
+            ${operators.map(operator => `<span class="task-operator-pill ${operator.key}">${operator.label}</span>`).join('')}
+          </div>
           <div class="task-learning-guide-steps">
-            <span>1. Original lesen</span>
-            <span>2. Teilaufgabe auswählen</span>
-            <span>3. Erst selbst rechnen</span>
-            <span>4. Lösung prüfen und bewerten</span>
+            <span>1. Operator erkennen</span>
+            <span>2. Gegebenes markieren</span>
+            <span>3. Rechnen oder begründen</span>
+            <span>4. Lösung mit Erwartungshorizont prüfen</span>
           </div>
         </div>
         <div class="task-steps-overview">
@@ -144,6 +172,7 @@ const tasksRenderer = (() => {
     const key = `${taskId}_${si}`;
     const domId = `${topicId}_${key}`;
     const saved = progress.getTaskRating(topicId, key);
+    const operator = detectOperator(sub.text);
     const ratingLabels = { good: '✓ Verstanden', partial: '~ Teilweise', bad: '✗ Nochmal' };
     const beClass = bePtsClass(sub.points);
     const hasDeeper = !!sub.deeperExplanation;
@@ -152,6 +181,7 @@ const tasksRenderer = (() => {
       <div class="subtask" id="subtask-${domId}">
         <div class="subtask-header">
           <span class="subtask-label">${sub.label}</span>
+          <span class="subtask-operator ${operator.key}">${operator.label}</span>
           ${sub.points ? `<span class="subtask-pts ${beClass}">${sub.points} BE</span>` : ''}
           <span class="subtask-text-preview" style="flex:1;padding:0 8px">${sub.text ? sub.text.substring(0,80) + (sub.text.length > 80 ? '…' : '') : ''}</span>
           <span id="done-badge-${domId}" class="subtask-done-badge ${saved || ''}">${saved ? ratingLabels[saved] : ''}</span>

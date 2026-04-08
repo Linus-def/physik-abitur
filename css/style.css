@@ -836,6 +836,54 @@ p + p { margin-top: 0.5em; }
   color: var(--text);
   margin-bottom: 10px;
 }
+.task-operator-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.task-operator-pill,
+.task-step-operator,
+.subtask-operator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 9px;
+  white-space: nowrap;
+}
+.task-operator-pill.calculate,
+.task-step-operator.calculate,
+.subtask-operator.calculate {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.task-operator-pill.explain,
+.task-step-operator.explain,
+.subtask-operator.explain {
+  background: rgba(8,145,178,.12);
+  color: #0f766e;
+}
+.task-operator-pill.justify,
+.task-step-operator.justify,
+.subtask-operator.justify {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+.task-operator-pill.compare,
+.task-step-operator.compare,
+.subtask-operator.compare {
+  background: rgba(99,102,241,.12);
+  color: #4f46e5;
+}
+.task-operator-pill.analyze,
+.task-step-operator.analyze,
+.subtask-operator.analyze {
+  background: var(--surface);
+  color: var(--text-2);
+}
 .task-learning-guide-steps {
   display: flex;
   flex-wrap: wrap;
@@ -859,7 +907,7 @@ p + p { margin-top: 0.5em; }
 }
 .task-step-btn {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto auto 1fr auto;
   gap: 10px;
   align-items: center;
   width: 100%;
@@ -888,6 +936,9 @@ p + p { margin-top: 0.5em; }
   color: white;
   font-size: 12px;
   font-weight: 700;
+}
+.task-step-operator {
+  justify-self: start;
 }
 .task-step-title {
   font-size: 13px;
@@ -954,6 +1005,9 @@ p + p { margin-top: 0.5em; }
   width: 28px; height: 28px;
   border-radius: 7px;
   display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.subtask-operator {
   flex-shrink: 0;
 }
 .subtask-text-preview { flex: 1; font-size: 13px; color: var(--text); line-height: 1.4; }
@@ -1050,6 +1104,7 @@ p + p { margin-top: 0.5em; }
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
+  color: var(--text);
   font-size: 14px; text-align: left;
   cursor: pointer;
   transition: all var(--transition);
@@ -1260,6 +1315,13 @@ p + p { margin-top: 0.5em; }
   transform: translateY(-1px);
   border-color: var(--accent);
 }
+.quiz-question mjx-container,
+.quiz-option mjx-container,
+.quiz-explanation mjx-container,
+.modal-formula-math mjx-container,
+.formula-core-card mjx-container {
+  color: currentColor !important;
+}
 
 /* ══════════════════════════════════════════════
    LIGHTBOX
@@ -1335,6 +1397,85 @@ p + p { margin-top: 0.5em; }
 }
 .formula-sheet-intro-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
 .formula-sheet-intro-copy { font-size: 13px; line-height: 1.6; color: var(--text-2); }
+.formula-topic-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+.formula-topic-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+.formula-topic-nav-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.modal-topic-section {
+  margin-bottom: 26px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--bg), var(--surface));
+}
+.modal-topic-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.formula-topic-layout {
+  display: grid;
+  gap: 16px;
+}
+.formula-block-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  margin-bottom: 10px;
+}
+.formula-core-list,
+.modal-formulas,
+.formula-section-list {
+  display: grid;
+  gap: 10px;
+}
+.formula-core-list {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.formula-core-card,
+.modal-formula,
+.formula-section-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.formula-core-card,
+.modal-formula {
+  padding: 14px;
+}
+.formula-section-card {
+  padding: 14px;
+}
+.modal-formula-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.modal-formula-math {
+  font-size: 15px;
+  color: var(--text);
+}
 .formula-topic-summary { font-size: 12px; color: var(--text-3); margin: 2px 0 12px; }
 .modal-formula-section {
   font-size: 10.5px;
@@ -1665,6 +1806,10 @@ p + p { margin-top: 0.5em; }
   }
   .task-step-btn {
     grid-template-columns: auto 1fr;
+  }
+  .task-step-operator {
+    grid-column: 2;
+    justify-self: start;
   }
   .task-step-state {
     grid-column: 2;
@@ -2258,4 +2403,27 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   border-color: var(--red) !important;
   color: var(--red) !important;
   opacity: 1 !important;
+}
+[data-theme="dark"] .quiz-option,
+[data-theme="dark"] .quiz-question,
+[data-theme="dark"] .quiz-explanation,
+[data-theme="dark"] .quiz-exp-link {
+  color: var(--text);
+}
+[data-theme="dark"] .task-operator-pill.explain,
+[data-theme="dark"] .task-step-operator.explain,
+[data-theme="dark"] .subtask-operator.explain {
+  color: #67e8f9;
+}
+[data-theme="dark"] .task-operator-pill.compare,
+[data-theme="dark"] .task-step-operator.compare,
+[data-theme="dark"] .subtask-operator.compare {
+  color: #a5b4fc;
+}
+[data-theme="dark"] .formula-topic-nav-link,
+[data-theme="dark"] .modal-topic-section,
+[data-theme="dark"] .formula-core-card,
+[data-theme="dark"] .modal-formula,
+[data-theme="dark"] .formula-section-card {
+  background: var(--surface);
 }

@@ -219,33 +219,61 @@ const topicsRenderer = (() => {
   function buildFormulaSheet() {
     const body = document.getElementById('formula-modal-body');
     if (!body) return;
+    const topics = Object.values(TOPICS_DATA).sort((a, b) => (b.priority || 0) - (a.priority || 0));
     let html = `
       <div class="formula-sheet-intro">
         <div class="formula-sheet-intro-title">Formelzettel zum schnellen Nachschlagen</div>
-        <div class="formula-sheet-intro-copy">Nicht alles auf einmal lesen: erst Thema wählen, dann nur die 3 bis 6 Kernformeln sichern, die du wirklich für Aufgaben brauchst.</div>
+        <div class="formula-sheet-intro-copy">Nicht alles auf einmal lesen: erst Thema wählen, dann nur die Kernformeln sichern, die du wirklich für Aufgaben brauchst. Innerhalb jedes Themas sind die Formeln jetzt nach Teilbereichen sortiert.</div>
+      </div>
+      <div class="formula-topic-nav">
+        ${topics.map(topic => `<a class="formula-topic-nav-link" href="#formula-topic-${topic.id}">${topic.title}</a>`).join('')}
       </div>
     `;
-    Object.values(TOPICS_DATA).forEach(topic => {
-      const formulas = [];
-      topic.sections.forEach(sec => {
-        if (sec.formulas) sec.formulas.forEach(f => formulas.push({ ...f, sectionTitle: sec.title }));
-      });
+    topics.forEach(topic => {
+      const sectionGroups = topic.sections
+        .filter(sec => sec.formulas?.length)
+        .map(sec => ({ title: sec.title, formulas: sec.formulas }));
+      const formulas = sectionGroups.flatMap(group =>
+        group.formulas.map(f => ({ ...f, sectionTitle: group.title }))
+      );
       if (!formulas.length) return;
-      html += `<div class="modal-topic-section">
+      const essentials = formulas.slice(0, Math.min(4, formulas.length));
+      html += `<section class="modal-topic-section" id="formula-topic-${topic.id}">
         <div class="modal-topic-title">
           <span>${starsHtml(topic.priority)}</span> ${topic.title}
         </div>
         <div class="formula-topic-summary">${topic.badge}</div>
-        <div class="modal-formulas">`;
-      formulas.forEach(f => {
-        html += `<div class="modal-formula">
-          <div class="modal-formula-section">${f.sectionTitle}</div>
-          <div class="modal-formula-label">${f.label}</div>
-          <div class="modal-formula-math">\\(${f.latex}\\)</div>
-          ${f.note ? `<div class="modal-formula-note">${f.note}</div>` : ''}
-        </div>`;
-      });
-      html += `</div></div>`;
+        <div class="formula-topic-layout">
+          <div class="formula-topic-core">
+            <div class="formula-block-title">Kernformeln</div>
+            <div class="formula-core-list">
+              ${essentials.map(f => `
+                <div class="formula-core-card">
+                  <div class="modal-formula-label">${f.label}</div>
+                  <div class="modal-formula-math">\\(${f.latex}\\)</div>
+                  <div class="modal-formula-section">${f.sectionTitle}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="formula-section-list">
+            ${sectionGroups.map(group => `
+              <div class="formula-section-card">
+                <div class="formula-block-title">${group.title}</div>
+                <div class="modal-formulas">
+                  ${group.formulas.map(f => `
+                    <div class="modal-formula">
+                      <div class="modal-formula-label">${f.label}</div>
+                      <div class="modal-formula-math">\\(${f.latex}\\)</div>
+                      ${f.note ? `<div class="modal-formula-note">${f.note}</div>` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>`;
     });
     body.innerHTML = html;
     mathjaxTypeset([body]);

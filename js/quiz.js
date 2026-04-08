@@ -2,19 +2,19 @@
 const quizModule = (() => {
   const MODE_META = {
     basics: {
-      title: 'Basis',
+      title: 'Grundlagen',
       icon: '🧠',
-      desc: 'Grundlagen, Definitionen und Standardrechnungen zum Warmwerden.'
+      desc: 'Definitionen, Kerngedanken und leichte Einstiegsfragen zum Thema.'
     },
     advanced: {
-      title: 'Anspruchsvoll',
+      title: 'Rechnen & Anwenden',
       icon: '🔥',
-      desc: 'Vernetzte Aufgaben mit mehr Transfer und mehreren Rechenschritten.'
+      desc: 'Rechenwege, Formelanwendung und mehrstufige Standardaufgaben.'
     },
     exam: {
-      title: 'Abi-Kontext',
+      title: 'Erklären & Begründen',
       icon: '🎯',
-      desc: 'Prüfungsnahe Fragen mit Kontext, Interpretation und Anwendung.'
+      desc: 'Prüfungsnahe Fragen mit Deutung, Begründung und Einordnung.'
     }
   };
 
@@ -87,6 +87,22 @@ const quizModule = (() => {
       return explicitModes.filter(mode => mode.questions.length > 0);
     }
 
+    const categorized = {
+      basics: [],
+      advanced: [],
+      exam: []
+    };
+
+    questions.forEach(question => {
+      categorized[classifyQuestionMode(question)].push(question);
+    });
+
+    if (categorized.basics.length >= 3 && categorized.advanced.length >= 3 && categorized.exam.length >= 3) {
+      return Object.keys(MODE_META)
+        .map(modeId => ({ id: modeId, ...MODE_META[modeId], questions: categorized[modeId] }))
+        .filter(mode => mode.questions.length > 0);
+    }
+
     const total = questions.length;
     const basicsEnd = Math.max(6, Math.ceil(total * 0.4));
     const advancedEnd = Math.max(basicsEnd + 5, Math.ceil(total * 0.75));
@@ -96,6 +112,16 @@ const quizModule = (() => {
       { id: 'advanced', ...MODE_META.advanced, questions: questions.slice(basicsEnd, advancedEnd) },
       { id: 'exam', ...MODE_META.exam, questions: questions.slice(advancedEnd) }
     ].filter(mode => mode.questions.length > 0);
+  }
+
+  function classifyQuestionMode(question) {
+    const text = `${question.question || ''} ${question.explanation || ''}`.toLowerCase();
+    const explainPattern = /(warum|erklär|begründe|beurteile|nimm stellung|was folgt|welche aussage|beobachtet man|passiert|vergleich|vergleiche|deute|interpretiere)/;
+    const calcPattern = /(berechne|bestimme|wie groß|wieviel|wellenlänge|frequenz|strom|spannung|kraft|energie|periode|geschwindigkeit|\d)/;
+
+    if (explainPattern.test(text)) return 'exam';
+    if (calcPattern.test(text)) return 'advanced';
+    return 'basics';
   }
 
   function shuffleQuestions(questions) {
@@ -132,7 +158,7 @@ const quizModule = (() => {
         <h3 class="quiz-intro-title">Quickcheck</h3>
         <p class="quiz-intro-sub">${topicTitle}</p>
         <div class="quiz-intro-meta">${state.orderedQuestions.length} Fragen gesamt · jedes Mal neu gemischt</div>
-        <p class="quiz-intro-desc">Wähle einen Modus aus. Beim Neustart werden die Fragen in diesem Modus neu gemischt, damit sich das Quiz nicht jedes Mal gleich anfühlt.</p>
+        <p class="quiz-intro-desc">Wähle einen Modus aus. Beim Neustart werden die Fragen in diesem Modus neu gemischt. Die Modi sind stärker daran orientiert, ob du Grundlagen sichern, rechnen oder typische Abi-Begründungen trainieren willst.</p>
         <div class="quiz-mode-list">${modeCards}</div>
       </div>`;
     bindEvents(container);

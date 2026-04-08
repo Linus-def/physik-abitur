@@ -260,20 +260,21 @@ const TOPICS_DATA = {
     sections: [
       {
         title: 'Lorentzkraft',
-        text: `<p>Auf eine bewegte Ladung oder einen stromdurchflossenen Leiter in einem Magnetfeld wirkt die <strong>Lorentzkraft</strong>. Die Richtung bestimmt man mit der <strong>Rechte-Hand-Regel</strong>:</p>
-<p><em>Daumen: Stromrichtung → Zeigefinger: B-Feldrichtung → Mittelfinger: Kraftrichtung</em></p>`,
+        text: `<p>Auf eine <strong>bewegte Ladung</strong> oder einen <strong>stromdurchflossenen Leiter</strong> in einem Magnetfeld wirkt die <strong>Lorentzkraft</strong>. Sie ist immer dann besonders wichtig, wenn Teilchenbahnen abgelenkt oder Leiter mechanisch bewegt werden. Für das Abi musst du nicht nur die Formel kennen, sondern auch die <strong>Richtung sicher bestimmen</strong> und erklären können, warum die Kraft nur dann wirkt, wenn Bewegungsrichtung und Feld nicht parallel sind.</p>
+<p>Die Richtung bestimmt man mit der <strong>Drei-Finger-Regel</strong> für positive Ladungen beziehungsweise technische Stromrichtung: Daumen = Strom- oder Bewegungsrichtung, Zeigefinger = Magnetfeldrichtung, Mittelfinger = Kraftrichtung. Für Elektronen als negative Ladungen ist die Kraftrichtung umgekehrt.</p>`,
         formulas: [
           { label: 'Lorentzkraft (Ladung)', latex: 'F_L = q \\cdot v \\cdot B \\cdot \\sin\\alpha', note: 'α = Winkel v zu B' },
           { label: 'Kraft auf Leiter', latex: 'F = B \\cdot I \\cdot \\ell \\cdot \\sin\\alpha', note: 'ℓ = Leiterlänge im Feld' },
           { label: 'Kreisbahn (Lorentz)', latex: 'r = \\frac{m \\cdot v}{q \\cdot B}', note: 'Lorentzkraft = Zentripetalkraft' },
+          { label: 'Umlaufdauer im B-Feld', latex: 'T = \\frac{2\\pi m}{qB}', note: 'unabhängig von v' },
         ],
-        deeper: `<p><strong>Rechte-Hand-Regel merken:</strong> Strom = Daumen, B-Feld = Zeigefinger, Kraft = Mittelfinger. Bei negativen Ladungen (Elektronen) Richtung umkehren!</p>
-<p><strong>Kreisbahn:</strong> Die Lorentzkraft steht immer senkrecht zur Bewegungsrichtung → Sie verrichtet keine Arbeit → kinetische Energie bleibt konstant → Kreisbahn mit konstantem Radius.</p>`
+        deeper: `<p><strong>Abi-Kernidee:</strong> Die Lorentzkraft steht immer senkrecht auf \\(\\vec{v}\\) und \\(\\vec{B}\\). Deshalb ändert sie die <strong>Richtung</strong> der Bewegung, aber nicht den Betrag der Geschwindigkeit. Genau darum bewegt sich ein Teilchen im homogenen Magnetfeld auf einer Kreisbahn oder Schraubenbahn, ohne im Magnetfeld selbst Energie zu gewinnen.</p>
+<p><strong>Typische Prüfungsfrage:</strong> Erkläre, warum ein Elektron trotz Kraft keine Arbeit aufnimmt. Antwort: \\(W = \\vec{F} \\cdot \\vec{s}\\); da \\(\\vec{F}_L \\perp \\vec{v}\\), ist das Skalarprodukt null. Das ist die Verbindung zwischen Magnetfeld und Mechanik.</p>`
       },
       {
         title: 'Elektromagnetische Induktion',
-        text: `<p>Eine Spannung wird induziert, wenn sich der <strong>magnetische Fluss</strong> \\(\\Phi\\) durch eine Leiterschleife ändert (Faradaysches Induktionsgesetz).</p>
-<p><strong>Lenz\'sche Regel:</strong> Die induzierte Spannung ist stets so gerichtet, dass der Strom der Ursache entgegenwirkt.</p>`,
+        text: `<p>Eine Spannung entsteht immer dann, wenn sich der <strong>magnetische Fluss</strong> \\(\\Phi\\) durch eine Leiterschleife ändert. Das ist der eigentliche Kern der Induktion. Im Abi musst du unterscheiden können, <strong>wodurch</strong> sich der Fluss ändert: durch Änderung der Feldstärke \\(B\\), der wirksamen Fläche \\(A\\) oder des Winkels zwischen Feld und Fläche.</p>
+<p>Das <strong>Faraday'sche Induktionsgesetz</strong> beschreibt die Größe der induzierten Spannung, die <strong>Lenz'sche Regel</strong> ihre Richtung. Das Minuszeichen bedeutet nicht „negative Spannung", sondern: Das induzierte System reagiert immer so, dass es der Flussänderung entgegenwirkt. Das ist letztlich eine Folge der Energieerhaltung.</p>`,
         formulas: [
           { label: 'Magnetischer Fluss', latex: '\\Phi = B \\cdot A \\cdot \\cos\\alpha' },
           { label: 'Induktionsgesetz', latex: 'U_{\\text{ind}} = -n \\cdot \\frac{\\Delta\\Phi}{\\Delta t}', note: 'n = Windungszahl' },
@@ -281,30 +282,47 @@ const TOPICS_DATA = {
           { label: 'Selbstinduktion', latex: 'U_{\\text{ind}} = -L \\cdot \\frac{\\Delta I}{\\Delta t}', note: 'L = Induktivität [H]' },
         ],
         note: 'Das Minuszeichen im Induktionsgesetz drückt die Lenz\'sche Regel aus: induzierte Spannung wirkt ihrer Ursache entgegen.',
-        deeper: `<p><strong>Wann wird etwas induziert?</strong> Immer wenn sich Φ ändert: durch Bewegung, Drehung, Feldänderung oder Stromänderung in einer anderen Spule.</p>
-<p><strong>Vollständig im Feld:</strong> Wenn der Rahmen vollständig im homogenen Feld ist, ändert sich Φ nicht → keine Induktion, kein Strom.</p>`
+        deeper: `<p><strong>Wichtig für Aufgaben:</strong> Eine Spule kann sich bewegen und trotzdem <em>keine</em> Spannung liefern, wenn der Fluss konstant bleibt. Ein vollständig in einem homogenen Feld bewegter Rahmen ohne Winkeländerung liefert daher keine Induktion. Viele Aufgaben testen genau dieses Verständnis und nicht nur das Einsetzen in Formeln.</p>
+<p><strong>Graphen lesen:</strong> Wenn \\(\\Phi(t)\\) linear steigt, ist \\(U_{\\text{ind}}\\) konstant. Wenn \\(\\Phi(t)\\) konstant ist, ist \\(U_{\\text{ind}} = 0\\). Wenn \\(\\Phi(t)\\) sinusförmig verläuft, ist die induzierte Spannung phasenverschoben. Solche Diagrammdeutungen sind typisch abiturrelevant.</p>`
       },
       {
         title: 'Generator und Transformator',
-        text: `<p>Der <strong>Generator</strong> wandelt mechanische Energie in elektrische Energie um. Der <strong>Transformator</strong> übersetzt Wechselspannungen.</p>`,
+        text: `<p>Der <strong>Generator</strong> nutzt eine periodische Flussänderung und wandelt mechanische in elektrische Energie um. Im rotierenden Leiterrahmen entsteht dadurch eine sinusförmige Wechselspannung. Der <strong>Transformator</strong> basiert ebenfalls auf Induktion, funktioniert aber nur mit veränderlichem Strom und damit mit einem veränderlichen Magnetfeld.</p>
+<p>Für das Abi reicht es nicht, nur die Trafo-Gleichung hinzuschreiben. Du solltest erklären können, warum ein idealer Transformator Spannung und Strom gegensinnig verändert und warum hohe Spannung in Stromnetzen die Leitungsverluste reduziert.</p>`,
         formulas: [
           { label: 'Generator', latex: 'U(t) = n \\cdot B \\cdot A \\cdot \\omega \\cdot \\sin(\\omega t)' },
           { label: 'Max. Spannung', latex: 'U_0 = n \\cdot B \\cdot A \\cdot \\omega' },
           { label: 'Transformator', latex: '\\frac{U_1}{U_2} = \\frac{n_1}{n_2}', note: 'idealer Trafo' },
           { label: 'Leistungserhaltung', latex: 'U_1 I_1 = U_2 I_2', note: 'beim idealen Trafo' },
+          { label: 'Effektivspannung', latex: 'U_{\\text{eff}} = \\frac{U_0}{\\sqrt{2}}', note: 'sinusförmige Wechselspannung' },
         ],
-        deeper: `<p>Die Generatorspannung ist maximal, wenn der Rahmen <em>parallel</em> zu den Feldlinien steht (Fluss = 0, aber Änderungsrate maximal). Sie ist null, wenn der Rahmen <em>senkrecht</em> steht.</p>
-<p><strong>Hochspannungsübertragung:</strong> Höhere Spannung → kleinerer Strom → \\(P_{\\text{Verlust}} = I^2 R\\) drastisch reduziert. Deshalb 110–380 kV in Fernleitungen.</p>`
+        deeper: `<p>Die Generatorspannung ist maximal, wenn sich der Fluss gerade am schnellsten ändert. Deshalb ist \\(U\\) maximal, wenn der Rahmen <em>parallel</em> zu den Feldlinien steht, obwohl der Fluss dort selbst null ist. Genau dieser Unterschied zwischen <strong>Fluss</strong> und <strong>Flussänderung</strong> ist eine häufige Fehlerquelle.</p>
+<p><strong>Stromversorgung verstehen:</strong> Bei gleicher Leistung führt größere Spannung zu kleinerem Strom. Da Leitungsverluste mit \\(I^2R\\) wachsen, ist Hochspannung technisch sinnvoll. Das ist ein klassischer Transfer zwischen Physik und realer Anwendung.</p>`
       },
       {
-        title: 'Kondensator und elektrisches Feld',
-        text: `<p>Ein <strong>Kondensator</strong> speichert elektrische Energie im Feld zwischen seinen Platten.</p>`,
+        title: 'Spule, Selbstinduktion und Wirbelströme',
+        text: `<p>Eine <strong>Spule</strong> speichert Energie im Magnetfeld. Beim Ein- und Ausschalten eines Stromkreises reagiert sie träge: Eine schnelle Stromänderung erzeugt eine große Selbstinduktionsspannung, die der Änderung entgegenwirkt. Deshalb springt der Strom durch eine Spule nicht sofort auf seinen Endwert.</p>
+<p><strong>Wirbelströme</strong> entstehen in massiven leitenden Körpern, wenn sich der magnetische Fluss im Material ändert. Sie sind kein Randthema, sondern ausdrücklich abi-relevant, weil man damit Induktionskochfelder, Wirbelstrombremsen oder metallische Erwärmung erklären kann.</p>`,
         formulas: [
-          { label: 'Kapazität', latex: 'C = \\frac{Q}{U}', note: 'Einheit: Farad [F]' },
-          { label: 'Elektrische Feldstärke', latex: 'E = \\frac{U}{d}', note: 'Plattenkondensator' },
-          { label: 'Gespeicherte Energie', latex: 'E_{\\text{el}} = \\frac{1}{2} C U^2 = \\frac{Q^2}{2C}' },
-          { label: 'Kraft auf Ladung', latex: 'F = q \\cdot E' },
-        ]
+          { label: 'Selbstinduktion', latex: 'U_{\\text{ind}} = -L \\cdot \\frac{\\Delta I}{\\Delta t}' },
+          { label: 'Induktivität Spule', latex: 'L = \\mu_0 \\mu_r n^2 \\frac{A}{l}' },
+          { label: 'Magnetische Energie', latex: 'E_{\\text{Spule}} = \\frac{1}{2} L I^2' },
+        ],
+        deeper: `<p><strong>Schaltvorgänge:</strong> Beim Ausschalten will die Spule die Stromänderung „verhindern" und erzeugt deshalb oft eine hohe Gegenspannung. Das erklärt Funken an Schaltern oder Schutzdioden in technischen Schaltungen.</p>
+<p><strong>Wirbelströme bewerten:</strong> Manchmal sind sie nützlich (Bremsen, Erwärmung), manchmal störend (Energieverluste in Eisenkernen). Genau dieses Unterscheiden von technischer Chance und Nachteil passt sehr gut zu Abiturfragen mit Anwendungsbezug.</p>`
+      },
+      {
+        title: 'Maxwell-Überblick und elektromagnetische Felder',
+        text: `<p>Im Leistungsfach sollst du die <strong>Ursache und Struktur elektromagnetischer Felder</strong> im Überblick mit den Aussagen der Maxwell-Gleichungen verbinden. Dafür brauchst du keine vollständige Hochschulmathematik, aber die Kernaussagen müssen sitzen: Elektrische Felder entstehen an Ladungen, magnetische Felder an bewegten Ladungen beziehungsweise Strömen, und zeitliche Änderungen von E- und B-Feldern können sich gegenseitig erzeugen.</p>
+<p>Genau daraus folgt die Idee elektromagnetischer Wellen: Ein veränderliches elektrisches Feld erzeugt ein magnetisches Feld und umgekehrt. Elektrodynamik endet also nicht bei Generator und Trafo, sondern verbindet Induktion mit dem allgemeinen Feldbegriff.</p>`,
+        formulas: [
+          { label: 'Maxwell-Idee 1', latex: '\\text{Ladungen} \\rightarrow \\text{elektrische Felder}' },
+          { label: 'Maxwell-Idee 2', latex: '\\text{Ströme und } \\dot{E} \\rightarrow \\text{magnetische Felder}' },
+          { label: 'Maxwell-Idee 3', latex: '\\dot{B} \\rightarrow \\text{elektrische Wirbelfelder}' },
+        ],
+        note: 'Fürs Abi geht es hier vor allem um das physikalische Verständnis, nicht um den vollständigen Differentialgleichungs-Formalismus.',
+        deeper: `<p><strong>Gute mündliche Erklärung:</strong> Ein statisches Feld allein „steht". Erst zeitliche Änderungen koppeln E- und B-Feld dynamisch aneinander. Darum ist die Induktion der Einstieg in die Elektrodynamik und nicht nur ein einzelnes Spezialgesetz.</p>
+<p><strong>Prüfungsniveau:</strong> Wenn du Generator, Transformator, Induktion, Wirbelströme und elektromagnetische Felder als zusammenhängendes System erklären kannst, bist du deutlich näher am offiziellen Erwartungshorizont als mit vier isolierten Formeln.</p>`
       }
     ],
     quickcheck: [
@@ -1170,37 +1188,47 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     funFact: '💡 Im Massenspektrometer werden Isotope desselben Elements getrennt – Technik, die heute in der Medizin (z.B. C-14-Datierung), Materialforschung und Pharmakologie eingesetzt wird.',
     sections: [
       {
-        title: 'Das elektrische Feld',
-        text: `<p>Das <strong>elektrische Feld</strong> beschreibt die Kraft pro Ladung. Feldlinien verlaufen von + nach −.</p>
-<p>Im <strong>homogenen Feld</strong> (Plattenkondensator) sind Feldlinien parallel und gleichmäßig verteilt.</p>`,
+        title: 'Elektrisches Feld: Struktur, Kraftwirkung und Superposition',
+        text: `<p>Das <strong>elektrische Feld</strong> beschreibt, wie stark auf eine Probeladung an jedem Ort eine Kraft wirkt. Im Abi geht es dabei nicht nur um den Plattenkondensator, sondern auch um die <strong>Struktur verschiedener Feldtypen</strong>: homogenes Feld, radiales Feld einer Punktladung, Dipolfeld und die Überlagerung mehrerer Felder.</p>
+<p>Feldlinien verlaufen definitionsgemäß von <strong>positiv nach negativ</strong> und zeigen die Richtung der Kraft auf eine positive Probeladung. Du solltest Feldbilder nicht nur wiedererkennen, sondern aus ihnen auch qualitative Aussagen über Feldstärke, Symmetrie und Bewegungsrichtung von Teilchen ableiten können.</p>`,
         formulas: [
+          { label: 'Coulomb-Gesetz', latex: 'F = \\frac{1}{4\\pi\\varepsilon_0} \\cdot \\frac{Q_1 Q_2}{r^2}', note: 'Punktladungen im Vakuum' },
           { label: 'Elektrische Feldstärke', latex: 'E = \\frac{F}{q} = \\frac{U}{d}', note: 'd = Plattenabstand' },
           { label: 'Kraft auf Ladung', latex: 'F_{\\text{el}} = q \\cdot E' },
           { label: 'Arbeit im E-Feld', latex: 'W = q \\cdot U = q \\cdot E \\cdot d' },
+          { label: 'Feld einer Punktladung', latex: 'E = \\frac{1}{4\\pi\\varepsilon_0} \\cdot \\frac{Q}{r^2}' },
         ],
-        deeper: `<p><strong>Elektronenablenkung:</strong> Im E-Feld gilt konstante Kraft in Feldrichtung + konstante Geschwindigkeit senkrecht dazu → Parabelbahn (analog zum schiefen Wurf).</p>
-<p><strong>Beschleunigungsspannung:</strong> Energie \\(E_{\\text{kin}} = qU_B\\) → \\(v = \\sqrt{2qU_B/m}\\).</p>`
+        deeper: `<p><strong>Offiziell relevant:</strong> Im Leistungsfach kommt auch die <strong>Superposition</strong> elektrischer Felder vor. Das bedeutet: Felder addieren sich vektoriell. Bei parallelen oder senkrechten Feldern kann man das rechnerisch auswerten, sonst meist zeichnerisch. Genau dieses Zusammendenken fehlt oft in einfachen Zusammenfassungen.</p>
+<p><strong>Bahnvorstellung:</strong> Tritt ein Elektron mit Anfangsgeschwindigkeit quer in ein homogenes E-Feld ein, entsteht wegen konstanter Kraft in Feldrichtung eine Parabelbahn. Das ist der direkte Mechanik-Transfer zum schiefen Wurf und ein typischer Abi-Klassiker.</p>`
       },
       {
-        title: 'Das magnetische Feld',
-        text: `<p>Das <strong>magnetische Feld</strong> übt Kräfte auf bewegte Ladungen aus (Lorentzkraft).</p>`,
+        title: 'Magnetisches Feld: Leiter, Spule und Feldstruktur',
+        text: `<p>Das <strong>magnetische Feld</strong> wirkt auf bewegte Ladungen und auf stromdurchflossene Leiter. Im Unterschied zum elektrischen Feld gibt es keine isolierten magnetischen Monopole; Feldlinien verlaufen immer in <strong>geschlossenen Linien</strong>. Für das Abi solltest du Feldbilder um gerade Leiter, in Spulen und in homogenen Feldern sicher deuten können.</p>
+<p>Wichtig ist auch die Entstehung des Magnetfelds: Es wird durch <strong>bewegte Ladungen beziehungsweise Ströme</strong> erzeugt. Deshalb gehört die schlanke Spule ausdrücklich zum Pflichtstoff und nicht nur als technische Anwendung an den Rand.</p>`,
         formulas: [
           { label: 'Magnetischer Fluss', latex: '\\Phi = B \\cdot A \\cdot \\cos\\alpha' },
+          { label: 'Kraft auf Leiter', latex: 'F = B \\cdot I \\cdot s', note: 'bei 90° zwischen I und B' },
+          { label: 'Spule', latex: 'B = \\mu_0 \\mu_r \\frac{n}{l} I', note: 'schlanke Spule' },
           { label: 'Kreisbahn im B-Feld', latex: 'r = \\frac{m v}{q B}' },
           { label: 'Periode Kreisbahn', latex: 'T = \\frac{2\\pi m}{q B}', note: 'unabh. von v!' },
         ],
         note: 'Die Kreisbahnperiode im B-Feld ist unabhängig von der Geschwindigkeit – Grundlage des Massenspektrometers!',
-        deeper: `<p><strong>Massenspektrometer:</strong> Ionen werden mit \\(E_{\\text{kin}} = qU_B\\) beschleunigt, dann in B-Feld geleitet. Kreisradius: \\(r = mv/(qB)\\). Da v aus \\(U_B\\) bekannt: \\(m = qBr/v\\).</p>
-<p><strong>Warum kein Energiegewinn?</strong> Lorentzkraft steht immer senkrecht zur Geschwindigkeit → keine Arbeit → v = const.</p>`
+        deeper: `<p><strong>Vergleiche beherrschen:</strong> Das Bildungsplan-Niveau verlangt auch Gemeinsamkeiten und Unterschiede zwischen elektrischem, magnetischem und Gravitationsfeld. Elektrische und Gravitationsfelder können bereits auf ruhende Körper wirken; ein Magnetfeld dagegen nur auf bewegte Ladungen oder Ströme. Dafür verrichtet das Magnetfeld bei senkrechtem Eintritt keine Arbeit.</p>
+<p><strong>Massenspektrometer und Spule:</strong> Die Kreisbahnen von Ionen verbinden Mechanik und Magnetismus, die Spulenformel verbindet Stromstärke mit Feldstärke. Beides sind klassische Stellen, an denen das Niveau schnell über „nur Feldlinien anschauen" hinausgeht.</p>`
       },
       {
-        title: 'Geladene Teilchen in kombinierten Feldern',
-        text: `<p>In kombinierten E- und B-Feldern können Teilchen auf definierte Bahnen gelenkt werden.</p>`,
+        title: 'Materie, Kondensator und gekreuzte Felder',
+        text: `<p>Zum elektrischen Feld gehört im Bildungsplan nicht nur die Kraft auf freie Ladungen, sondern auch das <strong>Verhalten von Materie</strong> im Feld: <strong>Influenz</strong> bei Leitern und <strong>Polarisation</strong> bei Nichtleitern. Damit wird erklärt, warum Körper ohne Nettoladung trotzdem angezogen oder im Feld ausgerichtet werden können.</p>
+<p>Außerdem musst du den <strong>Plattenkondensator</strong> als Modell eines homogenen Feldes sicher beherrschen und geladene Teilchen in <strong>gekreuzten E- und B-Feldern</strong> analysieren können. Das ist der Stoff hinter Geschwindigkeitsselektor und Wien-Filter.</p>`,
         formulas: [
+          { label: 'Kapazität', latex: 'C = \\frac{Q}{U}', note: 'Einheit Farad' },
+          { label: 'Plattenkondensator', latex: 'C = \\varepsilon_0 \\frac{A}{d}', note: 'im Vakuum' },
           { label: 'Gleichgewicht (Selektor)', latex: 'q E = q v B \\implies v = \\frac{E}{B}', note: 'Geschwindigkeitsselektor' },
           { label: 'Energie aus Beschl.-Spannung', latex: 'E_{\\text{kin}} = q U_B = \\frac{1}{2}m v^2' },
           { label: 'Geschwindigkeit', latex: 'v = \\sqrt{\\frac{2qU_B}{m}}' },
-        ]
+        ],
+        deeper: `<p><strong>Influenz und Polarisation:</strong> In Leitern verschieben sich freie Ladungen, in Isolatoren nur die Ladungsschwerpunkte. Das klingt erstmal theoretisch, taucht aber in Erklärfragen gerne auf, wenn begründet werden soll, warum ungeladene Körper im Feld reagieren.</p>
+<p><strong>Wien-Filter:</strong> Nur Teilchen mit \\(v = E/B\\) passieren unabgelenkt. Alle anderen werden nach oben oder unten abgelenkt. Das ist ein typischer Aufgabentyp, weil dabei Feldrichtung, Ladungsvorzeichen und Kräftebilanz sauber zusammengebracht werden müssen.</p>`
       }
     ],
     quickcheck: [

@@ -357,7 +357,7 @@ const TOPICS_DATA = {
           'Verluste steigen um Faktor 10'
         ],
         correct: 0,
-                detailedExplanation: 'Der typische Denkfehler: Man denkt, 10-fache Spannung = 10-fach weniger Verlust. Aber der Verlust ist proportional zu I², nicht I! Bei 10-facher Spannung fließt 1/10 des Stroms. Verlust: (1/10)² = 1/100 = 1%. Das ist der Grund für Hochspannungsleitungen: Verluste werden von 100% auf 1% reduziert!',,
+                detailedExplanation: 'Der typische Denkfehler: Man denkt, 10-fache Spannung = 10-fach weniger Verlust. Aber der Verlust ist proportional zu I², nicht I! Bei 10-facher Spannung fließt 1/10 des Stroms. Verlust: (1/10)² = 1/100 = 1%. Das ist der Grund für Hochspannungsleitungen: Verluste werden von 100% auf 1% reduziert!',
         links: [
           { title: 'Simple Club – Transformator & Hochspannung', url: 'https://www.youtube.com/results?search_query=simple+club+transformator+hochspannung+physik' },
           { title: 'Leifiphysik: Übertragungsverluste', url: 'https://www.leifiphysik.de/elektrizitaetslehre/elektromagnetische-induktion/grundwissen/transformator' }

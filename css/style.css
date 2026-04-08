@@ -457,6 +457,20 @@ p + p { margin-top: 0.5em; }
   padding: 0 48px 48px;
 }
 
+/* Prioritäts-Gruppen-Header innerhalb des Karten-Grids */
+.priority-group-header {
+  grid-column: 1 / -1;
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--text-3);
+  padding-top: 16px;
+  padding-bottom: 4px;
+  display: flex; align-items: center; gap: 12px;
+}
+.priority-group-header::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.priority-group-header:first-child { padding-top: 0; }
+
 /* Topic Cards */
 .topic-card {
   background: var(--bg);

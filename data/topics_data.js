@@ -15,7 +15,7 @@ const TOPICS_DATA = {
     sections: [
       {
         title: 'Was ist eine harmonische Schwingung?',
-        text: `<p>Eine <strong>harmonische Schwingung</strong> liegt vor, wenn die rücktreibende Kraft proportional zur Auslenkung ist:</p>
+        text: `<p>Eine <strong>harmonische Schwingung</strong> liegt vor, wenn die rücktreibende Kraft proportional zur Auslenkung ist und ihr entgegenwirkt. Das <strong>Minuszeichen</strong> drückt aus: Die Kraft wirkt <em>stets entgegengesetzt</em> zur Auslenkung. Aus Newtons 2. Gesetz (F=ma) folgt direkt: \(m\ddot{s} = -D \cdot s\) bzw. \(\ddot{s} + \omega_0^2 s = 0\) mit \(\omega_0 = \sqrt{D/m}\). Die Lösung dieser DGL ist eine Sinusfunktion – deshalb heisst es harmonisch und warum Schwingungen mit sin/cos beschrieben werden.</p>
 <p>\\(F_{\\text{rück}} = -D \\cdot s\\) &nbsp; (bei Federpendel, Fadenpendel im kleinen Winkel)</p>
 <p>Typische Beispiele: Federpendel, Fadenpendel (kleine Winkel ≲ 5°), schwimmende Boje, LC-Schwingkreis.</p>`,
         formulas: [
@@ -25,42 +25,42 @@ const TOPICS_DATA = {
           { label: 'Periodendauer Faden', latex: 'T = 2\\pi\\sqrt{\\frac{L}{g}}', note: 'L = Länge, g = 9{,}81 m/s²' },
         ],
         note: 'Bei der harmonischen Schwingung ist T unabhängig von der Amplitude (Isochronie)!',
-        deeper: `<p><strong>Nachweis harmonische Schwingung:</strong> Im F-s-Diagramm liegt ein linearer Zusammenhang durch den Ursprung vor. Im a-s-Diagramm: Gerade mit negativer Steigung (da \\(a = -\\omega^2 s\\)).</p>
+        deeper: `<p><strong>Nachweis harmonische Schwingung:</strong> Im F-s-Diagramm liegt ein linearer Zusammenhang durch den Ursprung vor. Im a-s-Diagramm: Gerade mit negativer Steigung (da \\(a = -\\omega^2 s\\)). <strong>Warum ist das Nachweis für Harmonizität?</strong> Das lineare F-s-Diagramm zeigt, dass die Rückkraft proportional zur Auslenkung ist. Das a-s-Diagramm mit negativer Steigung bestätigt \\(a = -\\omega^2 s\\), was die DGL der harmonischen Schwingung erfüllt. <strong>Isochronie erklärt:</strong> Warum ist T unabhängig von der Amplitude? Weil mit größerer Amplitude auch größere Rückkraft und damit größere Geschwindigkeit auftreten – größerer Weg und höhere Geschwindigkeit heben sich exakt auf.</p>
 <p><strong>Wichtige Grenze:</strong> Das Fadenpendel ist nur für Auslenkungswinkel ≲ 5° harmonisch. Bei größeren Winkeln wächst T mit der Amplitude an.</p>`
       },
       {
         title: 'Beschreibung der Bewegung',
-        text: `<p>Die Auslenkung, Geschwindigkeit und Beschleunigung sind Sinusfunktionen der Zeit.</p>`,
+        text: `<p>Die Auslenkung, Geschwindigkeit und Beschleunigung sind Sinusfunktionen der Zeit – das folgt direkt aus der Lösung der DGL \(\ddot{s} + \omega_0^2 s = 0\). <strong>Auslenkung:</strong> \(s(t) = \hat{s}\sin(\omega_0 t + \varphi_0)\). <strong>Geschwindigkeit:</strong> \(v(t) = \hat{s}\omega_0\cos(\omega_0 t + \varphi_0)\). <strong>Beschleunigung:</strong> \(a(t) = -\hat{s}\omega_0^2\sin(\omega_0 t + \varphi_0)\). Wichtig: Die Ableitung von s(t) ergibt v(t) (Kettenregel!), die Ableitung von v(t) ergibt a(t). Die Beschleunigung ist stets \(a = -\omega_0^2 s\) – das ist genau die Definitionseigenschaft der harmonischen Schwingung.</p>`,
         formulas: [
           { label: 'Auslenkung', latex: 's(t) = \\hat{s}\\cdot\\sin(\\omega_0 t + \\varphi_0)' },
           { label: 'Geschwindigkeit', latex: 'v(t) = \\hat{s}\\cdot\\omega_0\\cdot\\cos(\\omega_0 t + \\varphi_0)' },
           { label: 'Beschleunigung', latex: 'a(t) = -\\hat{s}\\cdot\\omega_0^2\\cdot\\sin(\\omega_0 t + \\varphi_0)' },
           { label: 'Max. Geschwindigkeit', latex: 'v_{\\max} = \\hat{s}\\cdot\\omega_0 = \\hat{s}\\cdot 2\\pi f' },
         ],
-        deeper: `<p><strong>Phasenlage:</strong> Auslenkung und Beschleunigung sind stets <em>gegenphasig</em> (180° Phasenverschiebung). Die Geschwindigkeit eilt der Auslenkung um 90° vor.</p>
+        deeper: `<p><strong>Phasenlage:</strong> Auslenkung und Beschleunigung sind stets <em>gegenphasig</em> (180° Phasenverschiebung). Die Geschwindigkeit eilt der Auslenkung um 90° vor.</p> <p><strong>Warum sind Auslenkung und Beschleunigung genau 180° phasenverschoben?</strong> Weil \\(a = -\\omega^2 s\\): Ist s maximal positiv, so ist a maximal negativ – das ist genau die rücktreibende Kraft am Umkehrpunkt. Das Minuszeichen erzwingt die Gegenphasigkeit. <strong>Warum eilt v der Auslenkung 90° vor?</strong> \\(v(t) = \\dot{s}(t) = \\hat{s}\\omega_0\\cos(\\omega_0 t)\\): Kosinus und Sinus sind 90° verschoben. In der Gleichgewichtslage (s = 0, sin = 0) ist der Kosinus = 1 – also v maximal.</p>
 <p><strong>Merksatz:</strong> In der Gleichgewichtslage (s = 0): v maximal, a = 0. An den Umkehrpunkten (s = ±ŝ): v = 0, a maximal.</p>`
       },
       {
         title: 'Energie bei harmonischen Schwingungen',
-        text: `<p>Die Gesamtenergie bleibt bei ungedämpfter Schwingung konstant und pendelt zwischen kinetischer und potentieller Energie.</p>`,
+        text: `<p>Die Gesamtenergie bleibt bei ungedämpfter Schwingung konstant und pendelt zwischen kinetischer und potentieller Energie – das ist <strong>Energieerhaltung</strong> in Aktion. <strong>Warum?</strong> Die Gesamtenergie \(E_{\text{ges}} = \frac{1}{2}k\hat{s}^2\) ist konstant. An den <em>Umkehrpunkten</em> (s = ±ś): Alles ist Federenergie (\(E_{\text{pot}} = \frac{1}{2}ks^2\)), die kinetische Energie ist null (v = 0). In der <em>Gleichgewichtslage</em> (s = 0): Die Federenergie ist null, alles ist kinetische Energie (\(E_{\text{kin}} = \frac{1}{2}mv^2\)), v ist maximal. <strong>Merke:</strong> \(E_{\text{kin}} + E_{\text{pot}} = \text{const}\) gilt immer bei ungedämpfter Schwingung.</p>`,
         formulas: [
           { label: 'Kinetische Energie', latex: 'E_{\\text{kin}} = \\frac{1}{2}m v^2' },
           { label: 'Pot. Energie (Feder)', latex: 'E_{\\text{pot}} = \\frac{1}{2}k s^2' },
           { label: 'Gesamtenergie', latex: 'E_{\\text{ges}} = \\frac{1}{2}k\\hat{s}^2 = \\frac{1}{2}m v_{\\max}^2', note: 'konstant!' },
         ],
         note: 'Im Gleichgewicht: Ekin maximal, Epot = 0. An Umkehrpunkten: Ekin = 0, Epot maximal.',
-        deeper: `<p><strong>Gedämpfte Schwingung:</strong> Amplitude klingt exponentiell ab (\\(\\hat{s}(t) = \\hat{s}_0 e^{-\\delta t}\\)), Energie nimmt quadratisch dazu ab. Frequenz bleibt bei schwacher Dämpfung nahezu konstant.</p>
+        deeper: `<p><strong>Gedämpfte Schwingung:</strong> Amplitude klingt exponentiell ab (\\(\\hat{s}(t) = \\hat{s}_0 e^{-\\delta t}\\)), Energie nimmt quadratisch dazu ab (\\(E \\propto \\hat{s}^2\\)). <strong>Warum nimmt die Energie quadratisch ab, wenn die Amplitude nur linear ablängt?</strong> Weil \\(E_{\\text{ges}} = \\frac{1}{2}k\\hat{s}^2\\). Wenn \\(\\hat{s}\\) auf 50% sinkt, geht E auf 25%. <strong>Frequenz bleibt bei schwacher Dämpfung nahezu konstant.</p>
 <p><strong>Energiediagramm:</strong> \\(E_{\\text{kin}}\\) und \\(E_{\\text{pot}}\\) schwingen gegeneinander. Ihr zeitlicher Mittelwert beträgt jeweils \\(E_{\\text{ges}}/2\\).</p>`
       },
       {
         title: 'Erzwungene Schwingungen & Resonanz',
-        text: `<p>Wird ein Schwinger von außen mit der Erregerfrequenz \\(f_E\\) angetrieben, spricht man von einer <strong>erzwungenen Schwingung</strong>.</p>
+        text: `<p>Wird ein Schwinger von außen mit der Erregerfrequenz \\(f_E\\) angetrieben, spricht man von einer <strong>erzwungenen Schwingung</strong>. <strong>Was passiert dabei?</strong> Das System nimmt die Erregerfrequenz an (nicht die Eigenfrequenz!) und die Amplitude hängt davon ab, wie nah \(f_E\) an \(f_0\) liegt. <strong>Resonanz</strong> (\(f_E = f_0\)) ist der Extremfall: Die Amplitude wird maximal, weil das System optimal mit dem Erreger zusammenarbeitet. Mit mehr Dämpfung bleibt die Resonanzamplitude kleiner und das Resonanzmaximum verbreitert sich. Ohne jede Dämpfung würde die Amplitude bei Resonanz theoretisch unbegrenzt anwachsen.</p></p>
 <p>Bei <strong>Resonanz</strong> gilt \\(f_E = f_0\\): Die Amplitude wird maximal.</p>`,
         formulas: [
           { label: 'Resonanzbedingung', latex: 'f_E = f_0', note: 'Erreger = Eigenfrequenz' },
         ],
         note: 'Resonanz kann gefährlich sein (Brücken, Gebäude, Bojen). Starke Dämpfung senkt die Resonanzamplitude.',
-        deeper: `<p>Im Resonanzfall ist die Phasenverschiebung zwischen Erreger und Schwinger genau 90°. Das System nimmt dann maximal Energie auf.</p>
+        deeper: `<p>Im Resonanzfall ist die Phasenverschiebung zwischen Erreger und Schwinger genau 90°. Das System nimmt dann maximal Energie auf. <strong>Warum gerade 90° Phasenverschiebung bei Resonanz?</strong> Die Energieübertragung vom Erreger auf den Schwinger ist maximal, wenn Erreger und Schwingungsgeschwindigkeit phasengleich sind – das tritt auf, wenn Auslenkung und Erreger 90° verschoben sind. <strong>Resonanz in der Praxis:</strong> Schaukeln (bei jeder Periode passend anschubsen), Radioempfang (LC-Kreis auf Senderfrequenz einstellen), MRT-Geräte (Kernspinresonanz). <strong>Gefahr:</strong> Tacoma-Narrows-Brücke (1940) kollabierte durch Windresonanz. Bei Gebäuden und Brücken müssen Dämpfer eingebaut werden.</p>
 <p><strong>Historisches Beispiel:</strong> Die Tacoma-Narrows-Brücke (1940) kollabierte durch Resonanz mit Windwirbeln – ein klassisches Resonanz-Desaster.</p>`
       }
     ],

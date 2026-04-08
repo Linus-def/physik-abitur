@@ -476,53 +476,193 @@ const TOPICS_DATA = {
     sections: [
       {
         title: 'Grundlagen: Wellen und Interferenz',
-        text: `<p>Licht verhält sich wie eine Welle. Treffen zwei kohärente Wellen aufeinander, überlagern sie sich (<strong>Superposition</strong>). Es entstehen Maxima (konstruktive) und Minima (destruktive Interferenz).</p>
-<ul style="margin:8px 0 8px 20px;font-size:14px;line-height:1.8">
-<li><strong>Konstruktiv (Maximum):</strong> Gangunterschied = ganzzahliges Vielfaches der Wellenlänge</li>
-<li><strong>Destruktiv (Minimum):</strong> Gangunterschied = halbzahliges Vielfaches der Wellenlänge</li>
-</ul>`,
+        text: `
+
+**Licht als Welle** – Das Wellenmodell des Lichts erklärt Phänomene wie Interferenz, Beugung und Polarisation, die mit dem Teilchenmodell nicht erklärbar sind.
+
+Wenn zwei Wellen am gleichen Ort zusammentreffen, überlagern sie sich nach dem **Superpositionsprinzip**: Die Gesamtauslenkung ist die **Summe** der Einzelauslenkungen. Das Ergebnis hängt vom **Gangunterschied** \\(\\Delta s\\) ab – also dem Unterschied in den zurückgelegten Weglängen.
+
+**Konstruktive Interferenz (Maxima, helle Stellen):**
+Die Wellen treffen in Phase aufeinander – Wellenberg trifft auf Wellenberg. Bedingung: Der Gangunterschied ist ein **ganzzahliges Vielfaches** der Wellenlänge. Die Amplituden addieren sich, die Intensität ist maximal.
+
+**Destruktive Interferenz (Minima, dunkle Stellen):**
+Die Wellen treffen gegenphasig aufeinander – Wellenberg trifft auf Wellental. Bedingung: Der Gangunterschied ist ein **halbzahliges Vielfaches** der Wellenlänge. Die Amplituden löschen sich aus.
+
+**Wichtig:** Interferenz funktioniert nur bei **kohärentem Licht** – Licht, dessen Wellen eine feste, konstante Phasenbeziehung haben (z.B. Laser). Gewöhnliches Licht (Glühbirne) ist inkohärent und erzeugt kein stabiles Muster.
+
+`
         formulas: [
           { label: 'Konstruktiv (Max.)', latex: '\\Delta s = m \\cdot \\lambda \\quad (m = 0,\\pm1,\\pm2,\\ldots)' },
           { label: 'Destruktiv (Min.)', latex: '\\Delta s = \\left(m + \\frac{1}{2}\\right) \\cdot \\lambda' },
           { label: 'Wellengleichung', latex: 'c = \\lambda \\cdot f', note: 'c = Lichtgeschwindigkeit' },
         ],
-        deeper: `<p><strong>Kohärenz ist entscheidend:</strong> Nur Wellen mit fester Phasenbeziehung können dauerhaftes Interferenzmuster erzeugen. Normales Licht ist inkohärent – nur Laser und gleich angetriebene Quellen sind kohärent.</p>`
+        deeper: `
+
+**Was ist Kohärenz genau?**
+Kohärentes Licht bedeutet: Alle Wellenzüge haben eine **konstante Phasendifferenz** zueinander. Praktisch erreicht man das mit einem Laser (alle Photonen gleicher Frequenz und Phase) oder indem man Licht durch eine einzige Quelle auf zwei Spalte lenkt (wie beim Youngschen Doppelspaltexperiment).
+
+**Warum funktioniert Interferenz bei normaler Glühbirne nicht stabil?**
+Glühbirnenlicht besteht aus vielen kurzen, zufällig einsetzenden Wellenzügen. Die Phasenbeziehung wechselt ständig. Das entstehende Muster mittelt sich zeitlich weg – man sieht nur gleichmäßige Helligkeit.
+
+**Energie bleibt erhalten!**
+Bei destruktiver Interferenz verschwindet die Energie nicht. Sie verteilt sich nur anders im Raum: Wo es dunkel wird (Minima), wird es woanders heller (Maxima). Die Gesamtenergie bleibt konstant.
+
+**Phasenunterschied und Gangunterschied zusammengefasst:**
+- Gangunterschied \\(\\Delta s = 0, \\lambda, 2\\lambda, \\ldots\\) → Phasenunterschied 0°, 360°, 720°, … → konstruktiv
+- Gangunterschied \\(\\Delta s = \\frac{\\lambda}{2}, \\frac{3\\lambda}{2}, \\ldots\\) → Phasenunterschied 180°, 540°, … → destruktiv
+
+`
       },
       {
         title: 'Doppelspalt und optisches Gitter',
-        text: `<p>Beim <strong>Doppelspalt</strong> interferieren Wellen aus zwei schmalen Spalten. Beim <strong>optischen Gitter</strong> werden die Maxima durch viele Spalte schärfer.</p>`,
+        text: `
+
+**Das Youngs'sche Doppelspaltexperiment (1801)**
+Thomas Young bewies durch dieses Experiment erstmals, dass Licht Wellencharakter hat. Licht fällt durch zwei eng benachbarte Spalte (Abstand g = Gitterkonstante). Jeder Spalt wird nach dem **Huygensschen Prinzip** zur Quelle einer neuen Kugelwelle. Diese beiden Wellen überlagern sich und erzeugen auf einem Schirm ein **Interferenzmuster** aus hellen und dunklen Streifen.
+
+**Warum funktioniert das?**
+Die beiden Spalte werden von derselben Lichtquelle beleuchtet → sie schwingen kohärent (gleiche Phase). Je nach Winkel \\(\\vartheta\\) ist der Gangunterschied \\(\\Delta s = g \\cdot \\sin\\vartheta\\) unterschiedlich groß.
+
+**Maxima (helle Streifen):** \\(g \\cdot \\sin\\vartheta_m = m \\cdot \\lambda\\), wobei m = 0, \u00b11, \u00b12, …
+- m = 0: **Zentralmaximum** (geradeaus, beide Wellen legen gleichlange Wege zurück)
+- m = 1: **1. Nebenmaximum** links und rechts, Gangunterschied = 1\u03bb
+- m = 2: **2. Nebenmaximum**, Gangunterschied = 2\u03bb
+
+**Optisches Gitter – die Verbesserung:**
+Statt zwei Spalten hat ein Gitter Hunderte oder Tausende von Spalten pro Millimeter. Die Wirkung: Die Maxima werden **viel schärfer und heller**. Warum? Weil nur in den exakten Winkeln alle Wellen konstruktiv interferieren – bereits kleinste Abweichungen führen zur Auslöschung durch die vielen anderen Spalte.
+
+**Näherung für kleine Winkel:**
+Für \\(\\vartheta < 5\u00b0\\) gilt \\(\\sin\\vartheta \\approx \\tan\\vartheta = y/L\\). Damit ergibt sich direkt die Position der Maxima auf dem Schirm.
+
+`
         formulas: [
           { label: 'Gangunterschied', latex: '\\Delta s = g \\cdot \\sin\\vartheta', note: 'g = Gitterkonstante / Spaltabstand' },
           { label: 'Maxima (Gitter)', latex: 'g \\cdot \\sin\\vartheta_m = m \\cdot \\lambda' },
           { label: 'Näherung (kleine Winkel)', latex: 'y_m = \\frac{m \\cdot \\lambda \\cdot L}{g}', note: 'y = Abstand vom 0. Maximum, L = Schirmabstand' },
         ],
-        deeper: `<p><strong>Gitterkonstante bestimmen:</strong> \\(g = m\\lambda/\\sin\\vartheta_m\\)</p>
-<p><strong>Wellenlänge bestimmen:</strong> \\(\\lambda = g \\cdot \\sin\\vartheta_m / m\\)</p>
-<p><strong>Weißes Licht:</strong> Wird in Spektralfarben aufgefächert, da die Ablenkwinkel von λ abhängen. Violett (kleines λ) erscheint nah am Zentrum, Rot (großes λ) weit außen.</p>`
+        deeper: `
+
+**Gitterkonstante g berechnen und messen:**
+Die Gitterkonstante g ist der Abstand zwischen zwei benachbarten Spalten. Bei einem Gitter mit N Strichen pro Millimeter gilt: \\(g = 1/N\\) mm. Beispiel: 500 Linien/mm → g = 0,002 mm = 2 μm.
+
+Aus einem Experiment lässt sich g bestimmen: \\(g = m \\cdot \\lambda / \\sin\\vartheta_m\\)
+
+Und umgekehrt die Wellenlänge: \\(\\lambda = g \\cdot \\sin\\vartheta_m / m\\)
+
+**Wie zählt man die Ordnungen?**
+- m = 0: Zentralmaximum (direkt gerade durch)
+- m = \u00b11: erstes Nebenmaximum links und rechts
+- m = \u00b12: zweites Nebenmaximum links und rechts
+- Höchste sichtbare Ordnung: \\(m_{max} = g / \\lambda\\) (da \\(\\sin\\vartheta \\leq 1\\))
+
+**Weißes Licht am Gitter:**
+Weißes Licht besteht aus allen Wellenlängen \\(\\approx\\) 380–780 nm. Jede Wellenlänge wird unter einem anderen Winkel gebeugt (\\(\\sin\\vartheta = m\\lambda/g\\)). Das Ergebnis: Das Zentralmaximum (m = 0) bleibt **weiß**, weil alle Wellenlängen denselben Gangunterschied 0 haben. Alle Nebenmaxima (m \u2260 0) werden in **Spektralfarben aufgefächert**: Violett (kleinste \u03bb) liegt näher am Zentrum, Rot (größte \u03bb) am weitesten außen.
+
+**Warum ist das Gitter besser als der Doppelspalt?**
+Beim Gitter überlagern sich nicht 2, sondern Tausende von Spalten. Die Maxima werden dadurch extrem **schmal und intensiv**. Zwischen zwei Maxima hösher Ordnung liegen viele Minima. Das ermöglicht eine sehr genaue Wellenlängenbestimmung (Spektroskopie).
+
+`
       },
       {
         title: 'Einzelspalt',
-        text: `<p>Beim <strong>Einzelspalt</strong> der Breite b entstehen Minima durch destruktive Interferenz. Das zentrale Maximum ist besonders breit und hell.</p>`,
+        text: `
+
+**Warum entsteht beim Einzelspalt ein Muster?**
+Man sollte meinen, dass ein Einzelspalt nur einen hellen Streifen direkt dahinter erzeugt. Tatsächlich entsteht aber ein ausgedehntes Beugungsmuster mit einem breiten Zentralmaximum und schmäleren Nebenmaxima. Der Grund liegt im **Huygensschen Prinzip**: Jeder Punkt innerhalb des Spalts sendet eine neue Elementarwelle aus. Diese Wellen aus verschiedenen Bereichen des Spalts können miteinander interferieren.
+
+**Entstehung der Minima (dunkle Stellen):**
+Für die Minima teilt man den Spalt gedanklich in **zwei Hälften**. Wenn Wellen von der oberen Hälfte mit Wellen der unteren Hälfte einen Gangunterschied von \\(\\lambda/2\\) haben, löschen sie sich paarweise aus. Das passiert, wenn:
+\\[ b \\cdot \\sin\\vartheta = m \\cdot \\lambda \\quad (m = \u00b11, \u00b12, \u00b13, \\ldots) \\]
+Achtung: Beim Einzelspalt bezeichnen diese Gleichungen **Minima** (dunkle Stellen) – anders als beim Gitter, wo dieselbe Form Maxima beschreibt!
+
+**Das Zentralmaximum ist besonders:**
+- Es ist **doppelt so breit** wie alle Nebenmaxima
+- Es ist viel **heller** als die Nebenmaxima
+- Seine Breite: \\(\\Delta y = 2\\lambda L / b\\) (von Minimum zu Minimum)
+
+**Einfluss der Spaltbreite b:**
+- Enger Spalt (kleines b) → stärkere Beugung → **breiteres** Zentralmaximum
+- Breiter Spalt (großes b) → schwache Beugung → **schmales** Maximum (fast wie geometrische Optik)
+- Wenn b ≈ λ ist die Beugung am stärksten
+
+**Anwendung: Haardicke messen mit Licht**
+Nach dem Babinet-Prinzip erzeugt ein dünner Draht (z.B. ein Haar) dasselbe Beugungsmuster wie ein Spalt gleicher Breite. Man misst b über \\(b = m \\lambda L / y_m\\).
+
+`
         formulas: [
           { label: 'Minima (Einzelspalt)', latex: 'b \\cdot \\sin\\vartheta = m \\cdot \\lambda \\quad (m = \\pm1, \\pm2, \\ldots)' },
           { label: 'Breite zentrales Max.', latex: '\\Delta y = \\frac{2 \\lambda L}{b}', note: 'nimmt zu wenn b kleiner wird' },
         ],
         note: 'Kleinere Spaltbreite b → breiteres zentrales Maximum (stärkere Beugung).',
-        deeper: `<p><strong>Babinet-Prinzip:</strong> Ein dünner Draht oder Haar erzeugt dasselbe Beugungsmuster wie ein Spalt gleicher Breite. So kann man Haardicken mit Licht messen!</p>
-<p><strong>Faustformel:</strong> Das zentrale Maximum ist doppelt so breit wie alle anderen Maxima.</p>`
+        deeper: `
+
+**Babinet-Prinzip (Abitur-relevant!):**
+Ein dünner Draht oder Haar erzeugt dasselbe Beugungsmuster wie ein Spalt gleicher Breite. Das ist das Babinet-Prinzip. Praktische Anwendung: Mit einem Laser kann man die Dicke eines Haares messen!
+
+**Rechenweg zur Haardickenbestimmung:**
+1. Laser durch das Haar scheinen lassen → Muster auf Schirm
+2. Abstand der Minima von der Mitte messen: \\(y_m\\)
+3. Schirmabstand L messen
+4. Breite des Haares: \\(b = m \\cdot \\lambda \\cdot L / y_m\\)
+
+**Vergleich Einzelspalt vs. Doppelspalt vs. Gitter:**
+| | Einzelspalt | Doppelspalt | Gitter |
+|---|---|---|---|
+| Maxima | Breites Zentralmax., schmale Nebenmaxima | Gleichmäßig breite Maxima | Sehr scharfe Maxima |
+| Minima-Bed. | \\(b\\sin\\vartheta = m\\lambda\\) | \\(\\Delta s = (m+\\tfrac{1}{2})\\lambda\\) | kein scharfes Min. |
+| Maxima-Bed. | Nur näherungsweise | \\(\\Delta s = m\\lambda\\) | \\(g\\sin\\vartheta = m\\lambda\\) |
+
+**Faustformel:**
+Das zentrale Maximum des Einzelspalts ist genau **doppelt so breit** wie alle anderen Nebenmaxima.
+
+`
       },
       {
         title: 'Weitere Wellenphänomene',
-        text: `<p>Licht zeigt alle typischen Wellenphänomene:</p>
-<ul style="margin:8px 0 8px 20px;font-size:14px;line-height:1.8">
-<li><strong>Reflexion:</strong> Einfallswinkel = Ausfallswinkel</li>
-<li><strong>Brechung:</strong> Snellius-Gesetz</li>
-<li><strong>Beugung:</strong> Huygens'sches Prinzip</li>
-<li><strong>Polarisation:</strong> Querwellen können polarisiert werden</li>
-</ul>`,
+        text: `
+
+Licht zeigt alle klassischen Wellenphänomene. Diese sind neben Interferenz und Beugung für das Abitur wichtig:
+
+**1. Reflexion:**
+An einer Grenzfläche wird Licht zurückgeworfen. Das Reflexionsgesetz gilt immer: **Einfallswinkel = Ausfallswinkel** (beide gegenüber dem Lot gemessen). Dies gilt für ebene Spiegel, aber auch für Grenzflächen zwischen zwei Medien.
+
+**2. Brechung (Snellius-Gesetz):**
+Beim Übergang zwischen zwei Medien ändert Licht seine Richtung. Der Grund: Die Lichtgeschwindigkeit ändert sich (\\(c_n = c_0 / n\\)). Das Snellius-Gesetz:
+\\[ n_1 \\cdot \\sin\\alpha_1 = n_2 \\cdot \\sin\\alpha_2 \\]
+Brechungsindex n = Verhältnis der Lichtgeschwindigkeiten. Luft: n ≈ 1, Wasser: n ≈ 1,33, Glas: n ≈ 1,5.
+
+**3. Totale Reflexion:**
+Beim Übergang vom optisch dichteren ins dünnere Medium (n1 > n2) kann ab einem kritischen Einfallswinkel α_grenz kein Licht mehr hindurch. Der Grenzwinkel: \\(\\sin\\alpha_{\\text{grenz}} = n_2 / n_1\\). Anwendung: Glasfaserkabel funktionieren durch totale Reflexion!
+
+**4. Beugung (Huygenssches Prinzip):**
+Jeder Punkt einer Wellenfront wird zur Quelle einer neuen Kugelwelle (Elementarwelle). Dadurch biegt sich Licht um Hindernisse und durch enge Öffnungen. Beugung ist umso stärker, je kleiner die Öffnung (je näher an \\(\\lambda\\)).
+
+**5. Polarisation:**
+Licht als Transversalwelle kann polarisiert werden – die Schwingungsrichtung wird auf eine Richtung beschränkt. Bei Polarisationsfiltern: Intensität nach Filter folgt \\(I = I_0 \\cdot \\cos^2\\varphi\\) (Malus-Gesetz).
+
+`
         formulas: [
           { label: 'Snellius', latex: 'n_1 \\cdot \\sin\\alpha_1 = n_2 \\cdot \\sin\\alpha_2' },
-        ]
+        ],
+            deeper: `
+
+**Brechungsindex n – was steckt dahinter?**
+Der Brechungsindex n eines Mediums gibt an, um welchen Faktor die Lichtgeschwindigkeit in diesem Medium kleiner ist als im Vakuum:
+\\[ n = \\frac{c_0}{c_n} \\]
+Mit \\(c_0 = 3 \\cdot 10^8\\) m/s. In Glas (n = 1,5): \\(c_{\\text{Glas}} = 2 \\cdot 10^8\\) m/s. Die Frequenz des Lichts bleibt beim Übergang **unverandert** – nur die Wellenlänge ändert sich: \\(\\lambda_{\\text{Medium}} = \\lambda_{\\text{Luft}} / n\\).
+
+**Totale Reflexion – Rechenbeispiel:**
+Glas (n = 1,5) zu Luft (n = 1,0). Grenzwinkel:
+\\[\\sin\\alpha_{\\text{grenz}} = \\frac{n_2}{n_1} = \\frac{1{,}0}{1{,}5} = 0{,}667 \\implies \\alpha_{\\text{grenz}} \\approx 41{,}8\u00b0\\]
+Ab 41,8° Einfallswinkel wird Licht vollständig reflektiert. Glasfaserkabel nutzen dies: Licht bleibt durch totale Reflexion im Kern und kann über km transportiert werden.
+
+**Dispersion:**
+Verschiedene Wellenlängen haben leicht verschiedene Brechungsindizes \\(n(\\lambda)\\). Violettes Licht wird stärker gebrochen als rotes. Das ist der Grund für das Prismenspektrum und den Regenbogen!
+
+**Huygenssches Prinzip – tieferes Verständnis:**
+Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarwellen aus. Diese superponieren sich. In Vorwärtsrichtung verstärken sie sich (konstruktiv), seitlich und nach hinten löschen sie sich überwiegend aus. Nur an bestimmten Winkeln entsteht wieder konstruktive Interferenz (Beugungsmaxima).
+
+`
       }
     ],
     quickcheck: [

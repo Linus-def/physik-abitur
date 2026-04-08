@@ -17,7 +17,7 @@ const TOPICS_DATA = {
         title: 'Was ist eine harmonische Schwingung?',
         text: `<p>Eine <strong>harmonische Schwingung</strong> liegt vor, wenn die rücktreibende Kraft proportional zur Auslenkung ist und ihr entgegenwirkt. Das <strong>Minuszeichen</strong> drückt aus: Die Kraft wirkt <em>stets entgegengesetzt</em> zur Auslenkung. Aus Newtons 2. Gesetz (F=ma) folgt direkt: \(m\ddot{s} = -D \cdot s\) bzw. \(\ddot{s} + \omega_0^2 s = 0\) mit \(\omega_0 = \sqrt{D/m}\). Die Lösung dieser DGL ist eine Sinusfunktion – deshalb heisst es harmonisch und warum Schwingungen mit sin/cos beschrieben werden.</p>
 <p>\\(F_{\\text{rück}} = -D \\cdot s\\) &nbsp; (bei Federpendel, Fadenpendel im kleinen Winkel)</p>
-<p>Typische Beispiele: Federpendel, Fadenpendel (kleine Winkel ≲ 5°), schwimmende Boje, LC-Schwingkreis.</p>`,
+<p>Typische Beispiele: Federpendel, Fadenpendel (kleine Winkel ≲ 5°), schwimmende Boje, LC-Schwingkreis. Fürs Abi ist wichtig, dass du die gemeinsame Struktur hinter diesen Beispielen erkennst und nicht nur einzelne Sonderfälle auswendig lernst.</p>`,
         formulas: [
           { label: 'Differentialgleichung', latex: '\\ddot{s} + \\omega_0^2 \\cdot s = 0', note: 'Kennzeichen harm. Schwingung' },
           { label: 'Kreisfrequenz', latex: '\\omega_0 = 2\\pi f = \\frac{2\\pi}{T}' },
@@ -62,6 +62,18 @@ const TOPICS_DATA = {
         note: 'Resonanz kann gefährlich sein (Brücken, Gebäude, Bojen). Starke Dämpfung senkt die Resonanzamplitude.',
         deeper: `<p>Im Resonanzfall ist die Phasenverschiebung zwischen Erreger und Schwinger genau 90°. Das System nimmt dann maximal Energie auf. <strong>Warum gerade 90° Phasenverschiebung bei Resonanz?</strong> Die Energieübertragung vom Erreger auf den Schwinger ist maximal, wenn Erreger und Schwingungsgeschwindigkeit phasengleich sind – das tritt auf, wenn Auslenkung und Erreger 90° verschoben sind. <strong>Resonanz in der Praxis:</strong> Schaukeln (bei jeder Periode passend anschubsen), Radioempfang (LC-Kreis auf Senderfrequenz einstellen), MRT-Geräte (Kernspinresonanz). <strong>Gefahr:</strong> Tacoma-Narrows-Brücke (1940) kollabierte durch Windresonanz. Bei Gebäuden und Brücken müssen Dämpfer eingebaut werden.</p>
 <p><strong>Historisches Beispiel:</strong> Die Tacoma-Narrows-Brücke (1940) kollabierte durch Resonanz mit Windwirbeln – ein klassisches Resonanz-Desaster.</p>`
+      },
+      {
+        title: 'Mechanische und elektromagnetische Schwingungen vergleichen',
+        text: `<p>Im Leistungsfach geht es nicht nur um das Federpendel, sondern um die <strong>gemeinsame Struktur von Oszillatoren</strong>. Beim mechanischen Schwinger pendelt die Energie zwischen Bewegungsenergie und Lage- oder Federenergie. Beim LC-Kreis pendelt sie zwischen elektrischem Feld des Kondensators und magnetischem Feld der Spule.</p>
+<p>Diese Analogie ist abi-relevant, weil dadurch klar wird: Schwingungen sind kein Einzelsachverhalt, sondern ein allgemeines Modell. Wer das versteht, kommt später auch bei Wellen und Elektrodynamik leichter mit.</p>`,
+        formulas: [
+          { label: 'Schwingungsdauer LC-Kreis', latex: 'T = 2\\pi\\sqrt{LC}' },
+          { label: 'Elektrische Energie', latex: 'E_{\\text{el}} = \\frac{1}{2} C U^2' },
+          { label: 'Magnetische Energie', latex: 'E_{\\text{mag}} = \\frac{1}{2} L I^2' },
+        ],
+        deeper: `<p><strong>Transfergedanke:</strong> In beiden Fällen gibt es eine rückstellende Wirkung, eine träge Größe und einen periodischen Energieaustausch. Genau diese Gemeinsamkeit ist fachlich wichtiger als der Unterschied zwischen Feder, Pendel und Stromkreis.</p>
+<p><strong>Prüfungsnutzen:</strong> Wenn du mechanische und elektromagnetische Schwingungen sauber vergleichen kannst, bist du in Erklär- und Transferaufgaben deutlich sicherer als mit reinen Formelantworten.</p>`
       }
     ],
     quickcheck: [
@@ -580,6 +592,9 @@ Bei destruktiver Interferenz verschwindet die Energie nicht. Sie verteilt sich n
 - Gangunterschied \\(\\Delta s = 0, \\lambda, 2\\lambda, \\ldots\\) → Phasenunterschied 0°, 360°, 720°, … → konstruktiv
 - Gangunterschied \\(\\Delta s = \\frac{\\lambda}{2}, \\frac{3\\lambda}{2}, \\ldots\\) → Phasenunterschied 180°, 540°, … → destruktiv
 
+**Modellvergleich im Abi:**
+Das Strahlenmodell erklärt Reflexion und Brechung gut, das Wellenmodell aber zusätzlich Interferenz, Beugung und Polarisation. Genau dieser Vergleich wird im Leistungsfach erwartet.
+
 `
       },
       {
@@ -712,6 +727,7 @@ Licht als Transversalwelle kann polarisiert werden – die Schwingungsrichtung w
 `,
         formulas: [
           { label: 'Snellius', latex: 'n_1 \\cdot \\sin\\alpha_1 = n_2 \\cdot \\sin\\alpha_2' },
+          { label: 'Malus', latex: 'I = I_0 \\cdot \\cos^2\\varphi', note: 'Polarisationsfilter' },
         ],
             deeper: `
 
@@ -727,6 +743,9 @@ Ab 41,8° Einfallswinkel wird Licht vollständig reflektiert. Glasfaserkabel nut
 
 **Dispersion:**
 Verschiedene Wellenlängen haben leicht verschiedene Brechungsindizes \\(n(\\lambda)\\). Violettes Licht wird stärker gebrochen als rotes. Das ist der Grund für das Prismenspektrum und den Regenbogen!
+
+**Michelson-Interferometer:**
+Im Leistungsfach gehört auch das Michelson-Interferometer zum Überblick. Ein Strahlteiler erzeugt zwei Teilstrahlen mit unterschiedlichem Weg, die anschließend wieder interferieren. Schon winzige Wegdifferenzen verschieben das Muster – deshalb ist das Verfahren extrem empfindlich.
 
 **Huygenssches Prinzip – tieferes Verständnis:**
 Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarwellen aus. Diese superponieren sich. In Vorwärtsrichtung verstärken sie sich (konstruktiv), seitlich und nach hinten löschen sie sich überwiegend aus. Nur an bestimmten Winkeln entsteht wieder konstruktive Interferenz (Beugungsmaxima).
@@ -1451,7 +1470,7 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
       {
         title: 'Der lichtelektrische Effekt (Photoeffekt)',
         text: `<p>Licht kann Elektronen aus einer Metalloberfläche herauslösen – aber <strong>nur wenn die Frequenz groß genug ist</strong>. Intensität allein reicht nicht aus. Das erklärt nur das <strong>Photonenmodell</strong> (Einstein, 1905).</p>
-<p>Ein Photon überträgt seine gesamte Energie auf ein Elektron. Ist diese größer als die <strong>Austrittsarbeit</strong> \\(W_A\\), verlässt das Elektron das Metall.</p>`,
+<p>Ein Photon überträgt seine gesamte Energie auf ein Elektron. Ist diese größer als die <strong>Austrittsarbeit</strong> \\(W_A\\), verlässt das Elektron das Metall. Im Unterricht taucht dazu oft der <strong>Hallwachs-Versuch</strong> auf: Eine negativ geladene Zinkplatte entlädt sich unter UV-Licht, bei rotem Licht aber nicht.</p>`,
         formulas: [
           { label: 'Photonenenergie', latex: 'E_{\\text{Ph}} = h \\cdot f = \\frac{hc}{\\lambda}', note: 'h = 6,626·10⁻³⁴ J·s' },
           { label: 'Einstein-Gleichung', latex: 'E_{\\text{kin}} = h f - W_A', note: 'kinetische Energie der Elektronen' },
@@ -1460,18 +1479,20 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         ],
         note: 'Einsteinsche Lichtquantenhypothese: Licht besteht aus Photonen. Für den Photoeffekt ist nur f entscheidend, nicht die Intensität.',
         deeper: `<p><strong>Intensität vs. Frequenz:</strong> Höhere Intensität = mehr Photonen = größerer Fotostrom. Höhere Frequenz = mehr Energie pro Photon = schnellere Elektronen (größere kin. Energie). Diese beiden Effekte sind unabhängig voneinander.</p>
+<p><strong>Typischer Abiturpunkt:</strong> Man muss zwischen ausgelösten Elektronen, maximaler kinetischer Energie und Fotostrom sauber unterscheiden. Intensität verändert vor allem die Anzahl der Elektronen, die Frequenz vor allem deren Energie.</p>
 <p><strong>Umrechnung eV ↔ J:</strong> \\(1\\,\\text{eV} = 1{,}6 \\cdot 10^{-19}\\,\\text{J}\\). Austrittsarbeit wird oft in eV angegeben (typisch: 2–5 eV).</p>
 <p><strong>Grenzwellenlänge:</strong> \\(\\lambda_{\\max} = hc/W_A\\). Nur Licht mit \\(\\lambda < \\lambda_{\\max}\\) löst den Photoeffekt aus.</p>`
       },
       {
         title: 'Welle-Teilchen-Dualismus',
-        text: `<p>Licht verhält sich manchmal wie eine Welle (Interferenz, Beugung) und manchmal wie ein Teilchen (Photoeffekt). Diesen Widerspruch nennt man <strong>Welle-Teilchen-Dualismus</strong>.</p>
-<p>Auch Elektronen und andere Teilchen zeigen Wellenverhalten (de Broglie):</p>`,
+        text: `<p>Licht verhält sich manchmal wie eine Welle (Interferenz, Beugung) und manchmal wie ein Teilchen (Photoeffekt). Diesen scheinbaren Widerspruch nennt man <strong>Welle-Teilchen-Dualismus</strong>.</p>
+<p>Auch Elektronen und andere Materieteilchen zeigen Wellenverhalten (de Broglie). Für Quantenobjekte reicht also weder ein reines Teilchenbild noch ein reines Wellenbild vollständig aus.</p>`,
         formulas: [
           { label: 'De-Broglie-Wellenlänge', latex: '\\lambda = \\frac{h}{p} = \\frac{h}{mv}', note: 'p = Impuls' },
         ],
-        deeper: `<p><strong>Doppelspalt mit Elektronen:</strong> Einzelne Elektronen erzeugen zusammen ein Interferenzmuster – obwohl sie einzeln durch den Apparat geschickt werden. Das Elektron „interferiert mit sich selbst". Es gibt keinen definierten Weg durch einen Spalt.</p>
-<p><strong>Heisenbergsche Unschärferelation (Ausblick):</strong> Ort und Impuls können nicht gleichzeitig beliebig genau gemessen werden: \\(\\Delta x \\cdot \\Delta p \\geq h/(4\\pi)\\).</p>`
+        deeper: `<p><strong>Doppelspalt mit Elektronen:</strong> Einzelne Elektronen erzeugen zusammen ein Interferenzmuster – obwohl sie einzeln durch den Apparat geschickt werden. Das Elektron „interferiert mit sich selbst". Es gibt keinen klassisch definierbaren Weg durch genau einen Spalt.</p>
+<p><strong>Moderne Deutung:</strong> Die Quantenphysik macht Aussagen über Wahrscheinlichkeiten von Messwerten. Vor der Messung beschreibt man kein Teilchen auf einer festen Bahn, sondern einen Zustand mit Wahrscheinlichkeitsverteilung.</p>
+<p><strong>Heisenbergsche Unschärferelation:</strong> Ort und Impuls können nicht gleichzeitig beliebig genau bestimmt werden: \\(\\Delta x \\cdot \\Delta p \\geq h/(4\\pi)\\). Das ist keine schlechte Messung, sondern eine fundamentale Grenze der Naturbeschreibung.</p>`
       },
       {
         title: 'Energieniveaus und Spektren',
@@ -1481,7 +1502,9 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
           { label: 'Absorbiertes Photon', latex: 'h f = E_n - E_m \\quad (E_n > E_m)' },
         ],
         note: 'Linienspektren sind der Fingerabdruck eines Elements. Nur Photonen mit genau der richtigen Energie werden absorbiert.',
-        deeper: `<p><strong>Anwendung: Spektralanalyse</strong> – Sterne werden durch ihr Lichtspektrum analysiert. Absorptionslinien im Sonnenspektrum verraten die chemische Zusammensetzung der Sonnenatmosphäre.</p>`
+        deeper: `<p><strong>Emission und Absorption:</strong> Fällt ein Elektron auf ein niedrigeres Energieniveau, wird ein Photon mit \\(hf = \\Delta E\\) emittiert. Für einen Übergang nach oben muss ein Atom genau ein Photon dieser Energiedifferenz absorbieren.</p>
+<p><strong>Linienspektren als Beweis:</strong> Weil nur bestimmte Energiedifferenzen erlaubt sind, entstehen keine kontinuierlichen Farben, sondern scharfe Spektrallinien. Daraus schließt man direkt auf gequantelte Energieniveaus.</p>
+<p><strong>Anwendung: Spektralanalyse</strong> – Sterne werden durch ihr Lichtspektrum analysiert. Absorptionslinien im Sonnenspektrum verraten die chemische Zusammensetzung der Sonnenatmosphäre.</p>`
       }
     ],
     quickcheck: [
@@ -1724,7 +1747,7 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     sections: [
       {
         title: 'Grundbegriffe der Wellenlehre',
-        text: `<p>Eine <strong>mechanische Welle</strong> transportiert Energie, aber keine Materie. Jeder Punkt des Mediums schwingt um seine Ruhelage.</p>
+        text: `<p>Eine <strong>mechanische Welle</strong> transportiert Energie, aber keine Materie. Jeder Punkt des Mediums schwingt um seine Ruhelage. Im Abi sollst du dieses Grundmodell auch auf <strong>elektromagnetische Wellen</strong> übertragen können.</p>
 <p><strong>Transversalwellen:</strong> Schwingungsrichtung ⊥ Ausbreitungsrichtung (Seilwelle, Lichtwelle)</p>
 <p><strong>Longitudinalwellen:</strong> Schwingungsrichtung ∥ Ausbreitungsrichtung (Schallwelle)</p>`,
         formulas: [
@@ -1733,6 +1756,7 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
           { label: 'Frequenz', latex: 'f = \\frac{1}{T} = \\frac{c}{\\lambda}' },
         ],
         deeper: `<p><strong>Merkhilfe:</strong> \\(c = \\lambda \\cdot f\\) – die einzige Formel, die man sich wirklich merken muss. Alle anderen folgen daraus.</p>
+<p><strong>Zusätzlich wichtig:</strong> Zur Wellenbeschreibung gehören auch <strong>Wellenfront</strong> und <strong>Wellennormale</strong>. Eine Wellenfront verbindet Punkte gleicher Phase; die Wellennormale steht senkrecht darauf und zeigt die Ausbreitungsrichtung.</p>
 <p><strong>Licht in Materie:</strong> Die Lichtgeschwindigkeit sinkt beim Übergang in dichtere Medien (\\(c_n = c_0/n\\)), aber die Frequenz bleibt konstant. Die Wellenlänge ändert sich.</p>`
       },
       {
@@ -1763,7 +1787,20 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
           { label: 'Verstärkung', latex: '\\Delta s = m \\cdot \\lambda \\quad (m = 0,\\pm1,\\pm2,\\ldots)' },
           { label: 'Auslöschung', latex: '\\Delta s = (m + \\tfrac{1}{2}) \\cdot \\lambda' },
           { label: 'Gangunterschied', latex: '\\Delta s = |r_1 - r_2|' },
-        ]
+        ],
+        deeper: `<p><strong>Huygens-Prinzip:</strong> Viele Wellenphänomene werden dadurch erklärt, dass jeder Punkt einer Wellenfront als Ausgangspunkt neuer Elementarwellen aufgefasst wird. So lassen sich Interferenz, Brechung und Beugung in einem gemeinsamen Modell verstehen.</p>
+<p><strong>Technischer Bezug:</strong> Gegenschall ist ein klassisches Beispiel für destruktive Interferenz. Das zeigt, dass Wellenphysik nicht nur Theorie ist, sondern direkt in Kopfhörern und Lärmschutz steckt.</p>`
+      },
+      {
+        title: 'Brechung, Beugung und elektromagnetische Wellen',
+        text: `<p>Bei der <strong>Brechung</strong> ändert eine Welle an der Grenzfläche ihre Richtung, weil sich ihre Ausbreitungsgeschwindigkeit ändert. Bei der <strong>Beugung</strong> dringt sie in den geometrischen Schattenraum ein. Beide Phänomene zeigen die Grenzen des reinen Strahlenbildes.</p>
+<p>Auf dieser Grundlage wird das Wellenmodell auch auf <strong>elektromagnetische Wellen</strong> übertragen. Licht ist also nicht nur ein Sonderfall, sondern eine Welle ohne materielles Trägermedium.</p>`,
+        formulas: [
+          { label: 'Brechungsindex', latex: 'n = \\frac{c_0}{c}' },
+          { label: 'Snellius', latex: 'n_1 \\sin\\alpha_1 = n_2 \\sin\\alpha_2' },
+        ],
+        deeper: `<p><strong>Grenze des Strahlenmodells:</strong> Sind Öffnungen und Hindernisse viel größer als die Wellenlänge, funktioniert das Strahlenmodell gut. In der Größenordnung von \\(\\lambda\\) wird Beugung wichtig und das Wellenmodell wird unverzichtbar.</p>
+<p><strong>Polarisation als Hinweis:</strong> Dass Licht polarisiert werden kann, zeigt seinen Transversalcharakter. Dieser Gedanke verbindet Wellen allgemein direkt mit der Wellenoptik.</p>`
       }
     ],
     quickcheck: [

@@ -16,8 +16,7 @@
 
 ## Warum das wichtig ist
 
-Mehrere Agenten arbeiten gleichzeitig an diesem Repo. Direkte Commits auf `main`
-führen zu überschriebenen Änderungen ohne Warnung. PRs verhindern das.
+Mehrere Agenten arbeiten gleichzeitig an diesem Repo. Direkte Commits auf `main` führen zu überschriebenen Änderungen ohne Warnung. PRs verhindern das.
 
 ## Bevor du anfängst
 
@@ -32,12 +31,23 @@ führen zu überschriebenen Änderungen ohne Warnung. PRs verhindern das.
 ```
 physik-abitur/
 ├── data/
-│   ├── topics_data.js   ← Theorie, Quickcheck-Fragen, Erklärungen
-│   └── tasks_data.js    ← Abitur-Aufgaben
-├── js/                  ← App-Logik
-├── css/                 ← Styles
-├── index.html           ← Einstiegspunkt
-└── AGENTS.md            ← Diese Datei
+│   ├── topics_data.js    ← Theorie-Inhalte, Quickcheck-Fragen, Erklärungen pro Thema
+│   └── tasks_data.js     ← Abituraufgaben (Bilder-Referenzen, Lösungen, Bewertung)
+├── js/
+│   ├── app.js            ← Haupt-App-Logik, Event-Handler, MathJax-Rendering
+│   ├── topics.js         ← Themen-Rendering, Karten-Logik
+│   ├── tasks.js          ← Aufgaben-Ansicht, PDF-Handling
+│   ├── quiz.js           ← Quiz-Logik, Auswertung
+│   ├── theme.js          ← Dark/Light-Mode, Scroll-to-Top
+│   ├── lightbox.js       ← Bild-Lightbox für Aufgaben-PNGs
+│   ├── progress.js       ← Lernfortschritt-Tracking
+│   └── mathjax-config.js ← MathJax-Konfiguration (lädt vor app.js)
+├── css/                  ← Alle Styles, keine Logik
+├── img/                  ← PNG-Bilder der Abituraufgaben (generiert via scripts/)
+├── scripts/              ← Lokale Entwickler-Tools, NICHT Teil der Webapp
+│   └── extract_images.py ← Rendert PDF-Seiten als PNGs für img/
+├── index.html            ← Einstiegspunkt, CSP, Meta-Tags, MathJax-Einbindung
+└── AGENTS.md             ← Diese Datei
 ```
 
 ## Branch-Namenskonvention

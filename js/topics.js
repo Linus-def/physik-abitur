@@ -87,7 +87,7 @@ const topicsRenderer = (() => {
     if (!el) return;
     const wasOpen = el.classList.contains('open');
     el.classList.toggle('open');
-    if (!wasOpen && window.MathJax) MathJax.typesetPromise([el]);
+    if (!wasOpen) mathjaxTypeset([el]);
   }
 
   function renderCards() {
@@ -140,7 +140,7 @@ const topicsRenderer = (() => {
       html += `</div></div>`;
     });
     body.innerHTML = html;
-    if (window.MathJax) MathJax.typesetPromise([body]);
+    mathjaxTypeset([body]);
   }
 
   return { renderTheory, toggleAcc, renderCards, buildFormulaSheet, starsHtml };

@@ -81,7 +81,7 @@ state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx
         </button>
       </div>`;
     bindEvents(container);
-    if (window.MathJax) MathJax.typesetPromise([container]);
+    mathjaxTypeset([container]);
   }
 
   function answer(i) {
@@ -154,7 +154,7 @@ state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx
         expText.innerHTML = html;
         exp.classList.add('open');
         if (!correct) exp.classList.add('wrong-answer');
-        if (window.MathJax) MathJax.typesetPromise([exp]);
+        mathjaxTypeset([exp]);
       }
     }
 

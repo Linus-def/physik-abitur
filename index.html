@@ -72,6 +72,7 @@
     <button id="theme-toggle" aria-label="Dark/Light Mode wechseln">
       <span class="btn-icon" id="theme-icon">🌙</span>
       <span id="theme-label">Dark Mode</span>
+                <span class="theme-switch" aria-hidden="true"><span class="theme-switch-track"></span><span class="theme-switch-thumb"></span></span>
     </button>
     <div class="exam-countdown" id="exam-countdown"></div>
   </div>
@@ -131,15 +132,15 @@
     </div><!-- /.home-hero -->
 
     <div class="home-stats">
-      <div class="stat-card">
+      <div class="stat-card" topics-stat>
         <div class="stat-num" id="stat-topics-done">0</div>
         <div class="stat-label">Themen<br>abgeschlossen</div>
       </div>
-      <div class="stat-card">
+            <div class="stat-card tasks-stat">
         <div class="stat-num" id="stat-tasks-done">0</div>
         <div class="stat-label">Aufgaben<br>bewertet</div>
       </div>
-      <div class="stat-card">
+            <div class="stat-card quiz-stat">
         <div class="stat-num" id="stat-quiz-done">0</div>
         <div class="stat-label">Quickchecks<br>absolviert</div>
       </div>
@@ -232,6 +233,9 @@
   </div>
 </div>
 
+
+  <!-- Scroll-to-Top Button -->
+  <button id="scroll-top-btn" aria-label="Nach oben scrollen">↑</button>
 
 </body>
 </html>

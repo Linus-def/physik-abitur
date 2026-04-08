@@ -98,6 +98,7 @@ const topicsRenderer = (() => {
       const pct = progress.topicPct(topic.id);
       const div = document.createElement('div');
       div.className = 'topic-card';
+            div.dataset.priority = topic.priority || 1;
       div.onclick = () => app.navigateTopic(topic.id);
       div.innerHTML = `
         <div class="card-header">

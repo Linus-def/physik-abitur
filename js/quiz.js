@@ -17,7 +17,8 @@ const quizModule = (() => {
   }
 
   function render(topicId) {
-    state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx: 0, score: 0, answered: false };
+      eventsBound = false; // Fix #23: Events nach Tab-Wechsel neu binden
+state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx: 0, score: 0, answered: false };
     showStart();
   }
 

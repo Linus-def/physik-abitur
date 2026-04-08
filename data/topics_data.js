@@ -70,6 +70,12 @@ const TOPICS_DATA = {
         options: ['\\(T \\approx 1{,}26\\,\\text{s}\\)', '\\(T \\approx 0{,}63\\,\\text{s}\\)', '\\(T \\approx 2{,}51\\,\\text{s}\\)', '\\(T \\approx 0{,}20\\,\\text{s}\\)'],
         correct: 0,
         explanation: '\\(T = 2\\pi\\sqrt{m/k} = 2\\pi\\sqrt{0{,}4/10} \\approx 1{,}26\\,\\text{s}\\)'
+                detailedExplanation: 'Häufiger Fehler: Die Masse m muss zuerst von Gramm in Kilogramm umgerechnet werden (400 g = 0,4 kg). Die Formel T = 2π√(m/k) gilt nur mit SI-Einheiten. Merke: Größere Masse → träger → längere Schwingungsdauer. Stärkere Feder (größeres k) → schnellere Rückstellung → kürzere Schwingungsdauer.',
+        links: [
+          { title: 'Simple Club – Federpendel & Periodendauer', url: 'https://www.youtube.com/results?search_query=simple+club+federpendel+periodendauer' },
+          { title: 'Leifiphysik: Federpendel Grundlagen', url: 'https://www.leifiphysik.de/mechanik/mechanische-schwingungen/grundwissen/federpendel' },
+          { title: 'PhET Simulation: Massen und Federn', url: 'https://phet.colorado.edu/de/simulations/masses-and-springs' }
+        ],
       },
       {
         question: 'Welches Merkmal kennzeichnet eine harmonische Schwingung?',
@@ -81,6 +87,11 @@ const TOPICS_DATA = {
         ],
         correct: 1,
         explanation: 'Definitionsmerkmal: \\(F_{\\text{rück}} = -D \\cdot s\\). Daraus folgt die DGL \\(\\ddot{s} + \\omega^2 s = 0\\).'
+                detailedExplanation: 'Die Definition der harmonischen Schwingung ist die rücktreibende Kraft proportional zur Auslenkung: F_rück = -D·s. Daraus folgt die Differentialgleichung. Die Amplitude nimmt nur bei gedämpften Schwingungen ab - das ist kein definierendes Merkmal. Die Periodendauer ist gerade UNABHÄNGIG von der Amplitude (Isochronie)!',
+        links: [
+          { title: 'Simple Club – Harmonische Schwingung Erklärung', url: 'https://www.youtube.com/results?search_query=simple+club+harmonische+schwingung' },
+          { title: 'Leifiphysik: Definition harmonische Schwingung', url: 'https://www.leifiphysik.de/mechanik/mechanische-schwingungen/grundwissen/harmonische-schwingung' }
+        ],
       },
       {
         question: 'Ein Fadenpendel schwingt mit \\(T = 2\\,\\text{s}\\). Die Fadenlänge wird vervierfacht. Wie ändert sich T?',
@@ -346,6 +357,11 @@ const TOPICS_DATA = {
           'Verluste steigen um Faktor 10'
         ],
         correct: 0,
+                detailedExplanation: 'Der typische Denkfehler: Man denkt, 10-fache Spannung = 10-fach weniger Verlust. Aber der Verlust ist proportional zu I², nicht I! Bei 10-facher Spannung fließt 1/10 des Stroms. Verlust: (1/10)² = 1/100 = 1%. Das ist der Grund für Hochspannungsleitungen: Verluste werden von 100% auf 1% reduziert!',
+        links: [
+          { title: 'Simple Club – Transformator & Hochspannung', url: 'https://www.youtube.com/results?search_query=simple+club+transformator+hochspannung+physik' },
+          { title: 'Leifiphysik: Übertragungsverluste', url: 'https://www.leifiphysik.de/elektrizitaetslehre/elektromagnetische-induktion/grundwissen/transformator' }
+        ],
         explanation: '\\(P_{\\text{Verl}} = I^2 R\\). Bei 10-facher Spannung und gleicher Leistung fließt 1/10 Strom. \\(P_{\\text{Verl}} \\propto I^2\\): Verluste sinken auf \\((1/10)^2 = 1/100\\) = 1%.'
       },
       {

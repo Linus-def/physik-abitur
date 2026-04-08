@@ -215,6 +215,29 @@ const TOPICS_DATA = {
         options: ['In der Gleichgewichtslage (\\(s = 0\\))', 'An den Umkehrpunkten', 'Bei \\(s = \\hat{s}/2\\)', 'Die Maximalgeschwindigkeit tritt nicht bei einer bestimmten Position auf.'],
         correct: 0,
         explanation: '\\(v_{\\max} = \\hat{s}\\cdot\\omega\\) wird in \\(s = 0\\) erreicht. Dort ist \\(E_{\\text{pot}} = 0\\), die gesamte Energie steckt in der Bewegungsenergie.'
+      },
+      {
+        question: 'Bei einer harmonischen Schwingung gilt \\(f = 5\\,\\text{Hz}\\). Wie groß ist die Periodendauer?',
+        options: ['\\(T = 0{,}20\\,\\text{s}\\)', '\\(T = 5\\,\\text{s}\\)', '\\(T = 2{,}5\\,\\text{s}\\)', '\\(T = 31{,}4\\,\\text{s}\\)'],
+        correct: 0,
+        explanation: '\\(T = 1/f = 1/5\\,\\text{s} = 0{,}20\\,\\text{s}\\). Frequenz und Periodendauer sind Kehrwerte.'
+      },
+      {
+        question: 'Ein Federpendel hat \\(\\hat{s} = 6\\,\\text{cm}\\) und \\(\\omega = 4\\,\\text{rad/s}\\). Wie groß ist die Maximalgeschwindigkeit?',
+        options: ['\\(v_{\\max} = 0{,}24\\,\\text{m/s}\\)', '\\(v_{\\max} = 0{,}67\\,\\text{m/s}\\)', '\\(v_{\\max} = 24\\,\\text{m/s}\\)', '\\(v_{\\max} = 1{,}5\\,\\text{m/s}\\)'],
+        correct: 0,
+        explanation: '\\(v_{\\max} = \\hat{s}\\cdot\\omega = 0{,}06\\cdot4 = 0{,}24\\,\\text{m/s}\\).'
+      },
+      {
+        question: 'Was passiert bei stärkerer Dämpfung mit der Resonanzkurve eines erzwungenen Schwingers?',
+        options: [
+          'Das Maximum wird niedriger und breiter.',
+          'Das Maximum wird höher und schmaler.',
+          'Die Resonanz verschwindet vollständig.',
+          'Nur die Eigenfrequenz verdoppelt sich.'
+        ],
+        correct: 0,
+        explanation: 'Stärkere Dämpfung reduziert die maximale Resonanzamplitude und verbreitert die Resonanzkurve. Das System reagiert also weniger stark auf die Anregung.'
       }
     ],
     resources: [
@@ -454,6 +477,34 @@ const TOPICS_DATA = {
         options: ['\\(U_0 \\approx 628\\,\\text{V}\\)', '\\(U_0 \\approx 63\\,\\text{V}\\)', '\\(U_0 \\approx 6280\\,\\text{V}\\)', '\\(U_0 \\approx 2\\,\\text{V}\\)'],
         correct: 0,
         explanation: '\\(U_0 = n\\cdot B\\cdot A\\cdot\\omega = 100\\cdot 0{,}2\\cdot 0{,}02\\cdot 50\\pi \\approx 628\\,\\text{V}\\).'
+      },
+      {
+        question: 'Eine Leiterschleife befindet sich ruhig in einem konstanten Magnetfeld. Wann entsteht eine Induktionsspannung?',
+        options: [
+          'Wenn sich der magnetische Fluss durch die Schleife ändert.',
+          'Immer, solange ein Magnet in der Nähe ist.',
+          'Nur bei supraleitenden Leitern.',
+          'Nur wenn die Schleife geladen ist.'
+        ],
+        correct: 0,
+        explanation: 'Nach Faraday gilt: Nur eine Änderung des magnetischen Flusses \\(\\Phi\\) erzeugt eine Induktionsspannung. Ein konstantes Feld allein reicht nicht.'
+      },
+      {
+        question: 'Ein Elektron fliegt senkrecht zu \\(B\\) auf einer Kreisbahn. Was bleibt dabei konstant?',
+        options: [
+          'Der Betrag der Geschwindigkeit und damit die kinetische Energie.',
+          'Die Richtung der Geschwindigkeit.',
+          'Der Kreisradius wird ständig größer.',
+          'Die Lorentzkraft ist null.'
+        ],
+        correct: 0,
+        explanation: 'Die Lorentzkraft steht senkrecht zur Bewegung und verrichtet keine Arbeit. Deshalb bleibt der Betrag der Geschwindigkeit konstant; nur die Richtung ändert sich.'
+      },
+      {
+        question: 'Bei einem Transformator hat die Primärspule 200 Windungen und die Sekundärspule 50 Windungen. Wenn \\(U_1 = 230\\,\\text{V}\\), wie groß ist idealerweise \\(U_2\\)?',
+        options: ['\\(U_2 = 57{,}5\\,\\text{V}\\)', '\\(U_2 = 920\\,\\text{V}\\)', '\\(U_2 = 115\\,\\text{V}\\)', '\\(U_2 = 230\\,\\text{V}\\)'],
+        correct: 0,
+        explanation: 'Für den idealen Trafo gilt \\(U_2/U_1 = n_2/n_1\\). Also \\(U_2 = 230\\cdot 50/200 = 57{,}5\\,\\text{V}\\).'
       }
     ],
     resources: [
@@ -835,6 +886,34 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         options: ['ca. 500 Linien/mm', 'ca. 250 Linien/mm', 'ca. 1000 Linien/mm', 'ca. 100 Linien/mm'],
         correct: 0,
         explanation: '\\(g = \\lambda/\\sin\\vartheta_1 = 633\\cdot10^{-9}/\\sin18{,}4° \\approx 633\\cdot10^{-9}/0{,}316 \\approx 2\\,\\mu\\text{m}\\). Linien/mm = \\(1/g = 1/(2\\cdot10^{-3}\\,\\text{mm}) = 500\\,\\text{mm}^{-1}\\).'
+      },
+      {
+        question: 'Beim Doppelspalt wird die Wellenlänge verdoppelt, Spaltabstand und Schirmabstand bleiben gleich. Was passiert mit dem Streifenabstand?',
+        options: [
+          'Er verdoppelt sich.',
+          'Er halbiert sich.',
+          'Er bleibt gleich.',
+          'Er vervierfacht sich.'
+        ],
+        correct: 0,
+        explanation: 'Der Streifenabstand ist proportional zur Wellenlänge: \\(\\Delta y \\propto \\lambda\\). Größere Wellenlänge bedeutet also größere Abstände der Interferenzmaxima.'
+      },
+      {
+        question: 'Welcher Zusammenhang gilt bei einem optischen Gitter für das 3. Maximum?',
+        options: ['\\(g\\sin\\vartheta = 3\\lambda\\)', '\\(g\\sin\\vartheta = \\lambda/3\\)', '\\(b\\sin\\vartheta = 3\\lambda\\)', '\\(\\Delta s = 3g\\)'],
+        correct: 0,
+        explanation: 'Allgemein gilt beim Gitter: \\(g\\sin\\vartheta = m\\lambda\\). Für das 3. Maximum ist also \\(m = 3\\).'
+      },
+      {
+        question: 'Warum ist das Zentralmaximum am Einzelspalt breiter als die Nebenmaxima?',
+        options: [
+          'Weil die ersten Minima symmetrisch links und rechts bei \\(\\pm \\lambda L/b\\) liegen.',
+          'Weil dort keine Interferenz stattfindet.',
+          'Weil das Licht im Zentrum schneller ist.',
+          'Weil das Zentralmaximum immer nur von einem Spalt stammt.'
+        ],
+        correct: 0,
+        explanation: 'Das Zentralmaximum reicht vom ersten Minimum links bis zum ersten Minimum rechts und hat daher die doppelte Breite eines einzelnen Nebenmaximums.'
       }
     ],
     resources: [
@@ -1567,6 +1646,34 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         ],
         correct: 0,
         explanation: '\\(p = h/\\lambda = 6{,}63\\cdot10^{-34}/(10^{-10}) = 6{,}63\\cdot10^{-24}\\,\\text{kg}\\cdot\\text{m/s}\\). Photonen haben zwar keine Ruhemasse, aber Impuls und Energie. Der Compton-Effekt beweist diesen Impuls direkt.'
+      },
+      {
+        question: 'Die Austrittsarbeit eines Metalls beträgt \\(W_A = 2{,}0\\,\\text{eV}\\). Ein Photon hat \\(E = 3{,}5\\,\\text{eV}\\). Wie groß ist die maximale kinetische Energie des ausgelösten Elektrons?',
+        options: ['\\(1{,}5\\,\\text{eV}\\)', '\\(5{,}5\\,\\text{eV}\\)', '\\(2{,}0\\,\\text{eV}\\)', '\\(3{,}5\\,\\text{eV}\\)'],
+        correct: 0,
+        explanation: 'Nach Einstein gilt \\(E_{\\text{kin,max}} = E_{\\text{Ph}} - W_A = 3{,}5 - 2{,}0 = 1{,}5\\,\\text{eV}\\).'
+      },
+      {
+        question: 'Was erhöht beim Photoeffekt den Fotostrom am stärksten, solange die Frequenz über der Grenzfrequenz liegt?',
+        options: [
+          'Eine höhere Lichtintensität.',
+          'Eine größere Austrittsarbeit.',
+          'Eine kleinere Gegenspannung allein.',
+          'Eine längere Wellenlänge unterhalb der Grenzfrequenz.'
+        ],
+        correct: 0,
+        explanation: 'Höhere Intensität bedeutet mehr Photonen pro Zeit und damit mehr ausgelöste Elektronen pro Zeit. Dadurch wächst der Fotostrom.'
+      },
+      {
+        question: 'Warum zeigt ein Elektron im Doppelspaltexperiment ein Interferenzmuster, obwohl es einzeln ausgesendet wird?',
+        options: [
+          'Weil Elektronen Welleneigenschaften besitzen und ihre Wahrscheinlichkeitsamplitude interferiert.',
+          'Weil zwei Elektronen immer gemeinsam ausgesendet werden.',
+          'Weil das Magnetfeld zwischen den Spalten oszilliert.',
+          'Weil Elektronen im Flug zu Photonen werden.'
+        ],
+        correct: 0,
+        explanation: 'Der Welle-Teilchen-Dualismus beschreibt genau dieses Verhalten: Einzelne Elektronen werden punktförmig nachgewiesen, aber ihre Wahrscheinlichkeitswelle interferiert mit sich selbst.'
       }
     ],
     resources: [
@@ -1816,6 +1923,29 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         options: ['\\(c = 4\\,\\text{m/s}\\)', '\\(c = 0{,}25\\,\\text{m/s}\\)', '\\(c = 1\\,\\text{m/s}\\)', '\\(c = 2{,}5\\,\\text{m/s}\\)'],
         correct: 0,
         explanation: '\\(c = \\lambda/T = 2/0{,}5 = 4\\,\\text{m/s}\\). Die Wellengeschwindigkeit ist das Produkt aus Wellenlänge und Frequenz: \\(c = \\lambda\\cdot f = \\lambda/T\\).'
+      },
+      {
+        question: 'Eine Welle hat \\(\\lambda = 0{,}80\\,\\text{m}\\) und \\(f = 5\\,\\text{Hz}\\). Wie groß ist die Ausbreitungsgeschwindigkeit?',
+        options: ['\\(c = 4{,}0\\,\\text{m/s}\\)', '\\(c = 6{,}25\\,\\text{m/s}\\)', '\\(c = 0{,}16\\,\\text{m/s}\\)', '\\(c = 40\\,\\text{m/s}\\)'],
+        correct: 0,
+        explanation: '\\(c = \\lambda f = 0{,}80\\cdot5 = 4{,}0\\,\\text{m/s}\\).'
+      },
+      {
+        question: 'Bei einer stehenden Welle auf einer Saite: Was befindet sich an einem Knoten?',
+        options: [
+          'Ein Punkt mit dauerhaft null Auslenkung.',
+          'Ein Punkt maximaler Amplitude.',
+          'Ein Bereich mit doppelter Frequenz.',
+          'Der Ort maximaler Wellengeschwindigkeit.'
+        ],
+        correct: 0,
+        explanation: 'Knoten sind Punkte, die sich bei der stehenden Welle gar nicht bewegen. Dort ist die Auslenkung jederzeit null.'
+      },
+      {
+        question: 'Zwei kohärente Quellen erzeugen am Punkt P konstruktive Interferenz. Welcher Gangunterschied ist dafür möglich?',
+        options: ['\\(\\Delta s = 2\\lambda\\)', '\\(\\Delta s = 1{,}5\\lambda\\)', '\\(\\Delta s = 0{,}5\\lambda\\)', '\\(\\Delta s = 2{,}5\\lambda\\)'],
+        correct: 0,
+        explanation: 'Konstruktive Interferenz liegt vor, wenn \\(\\Delta s = m\\lambda\\) mit ganzzahligem \\(m\\). \\(2\\lambda\\) erfüllt diese Bedingung.'
       }
     ],
     resources: [

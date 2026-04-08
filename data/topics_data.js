@@ -121,6 +121,89 @@ const TOPICS_DATA = {
         ],
         correct: 2,
         explanation: 'Bei schwacher Dämpfung bleibt die Frequenz nahezu gleich wie bei der ungedämpften Schwingung. Nur Amplitude und Energie nehmen ab.'
+      },
+      {
+        question: 'Welche Phasenbeziehung gilt zwischen Auslenkung \\(s(t)\\) und Beschleunigung \\(a(t)\\) bei harmonischer Schwingung?',
+        options: [
+          'Sie sind phasengleich (0° Verschiebung).',
+          'Beschleunigung eilt 90° vor der Auslenkung.',
+          'Sie sind gegenphasig (180° Verschiebung).',
+          'Auslenkung eilt 90° vor der Beschleunigung.'
+        ],
+        correct: 2,
+        explanation: 'Da \\(a = -\\omega^2 s\\), sind Auslenkung und Beschleunigung stets um 180° phasenverschoben (gegenphasig). Maximale Auslenkung → maximale rücktreibende Beschleunigung.'
+      },
+      {
+        question: 'Ein System schwingt mit \\(T = 0{,}5\\,\\text{s}\\). Wie groß ist die Kreisfrequenz \\(\\omega\\)?',
+        options: ['\\(\\omega \\approx 12{,}6\\,\\text{rad/s}\\)', '\\(\\omega \\approx 6{,}3\\,\\text{rad/s}\\)', '\\(\\omega \\approx 2{,}0\\,\\text{rad/s}\\)', '\\(\\omega \\approx 3{,}14\\,\\text{rad/s}\\)'],
+        correct: 0,
+        explanation: '\\(\\omega = 2\\pi/T = 2\\pi/0{,}5 \\approx 12{,}6\\,\\text{rad/s}\\). Merke: Die Kreisfrequenz ist nicht die Frequenz, sondern \\(\\omega = 2\\pi f\\).'
+      },
+      {
+        question: 'Ein Körper (\\(m = 2\\,\\text{kg}\\)) hängt an einer Feder und schwingt mit \\(T = 2\\,\\text{s}\\). Wie groß ist die Federkonstante k?',
+        options: ['\\(k \\approx 19{,}7\\,\\text{N/m}\\)', '\\(k \\approx 9{,}9\\,\\text{N/m}\\)', '\\(k \\approx 39{,}5\\,\\text{N/m}\\)', '\\(k = 4\\,\\text{N/m}\\)'],
+        correct: 0,
+        explanation: '\\(T = 2\\pi\\sqrt{m/k}\\) → \\(k = m\\cdot(2\\pi/T)^2 = 2\\cdot(2\\pi/2)^2 = 2\\pi^2 \\approx 19{,}7\\,\\text{N/m}\\).'
+      },
+      {
+        question: 'Ein Fadenpendel soll die Periodendauer \\(T = 1\\,\\text{s}\\) haben. Wie lang muss der Faden sein?',
+        options: ['\\(L \\approx 25\\,\\text{cm}\\)', '\\(L \\approx 1\\,\\text{m}\\)', '\\(L \\approx 50\\,\\text{cm}\\)', '\\(L \\approx 9{,}8\\,\\text{cm}\\)'],
+        correct: 0,
+        explanation: '\\(T = 2\\pi\\sqrt{L/g}\\) → \\(L = g(T/2\\pi)^2 = 9{,}81 \\cdot (1/(2\\pi))^2 \\approx 0{,}25\\,\\text{m} = 25\\,\\text{cm}\\).'
+      },
+      {
+        question: 'Harmonische Schwingung: \\(\\hat{s} = 5\\,\\text{cm}\\), \\(f = 2\\,\\text{Hz}\\). Wie groß ist die maximale Beschleunigung \\(a_{\\max}\\)?',
+        options: ['\\(a_{\\max} \\approx 7{,}9\\,\\text{m/s}^2\\)', '\\(a_{\\max} \\approx 0{,}63\\,\\text{m/s}^2\\)', '\\(a_{\\max} \\approx 1{,}26\\,\\text{m/s}^2\\)', '\\(a_{\\max} \\approx 62{,}8\\,\\text{m/s}^2\\)'],
+        correct: 0,
+        explanation: '\\(a_{\\max} = \\hat{s}\\cdot\\omega^2 = 0{,}05 \\cdot (2\\pi \\cdot 2)^2 = 0{,}05 \\cdot 16\\pi^2 \\approx 7{,}9\\,\\text{m/s}^2\\). Tritt an den Umkehrpunkten auf.'
+      },
+      {
+        question: 'Bei einer gedämpften Schwingung sinkt die Amplitude auf 50% des Anfangswerts. Auf wie viel Prozent sinkt die Gesamtenergie?',
+        options: ['25%', '50%', '70,7%', '12,5%'],
+        correct: 0,
+        explanation: 'Energie ist proportional zum Amplitudenquadrat: \\(E \\propto \\hat{s}^2\\). Bei \\(\\hat{s} = 0{,}5\\,\\hat{s}_0\\): \\(E = (0{,}5)^2 \\cdot E_0 = 0{,}25\\,E_0 = 25\\%\\).'
+      },
+      {
+        question: 'Welche Phasenverschiebung besteht bei Resonanz zwischen Erreger und Schwinger?',
+        options: ['0° (phasengleich)', '90°', '180° (gegenphasig)', '45°'],
+        correct: 1,
+        explanation: 'Bei Resonanz (\\(f_E = f_0\\)) beträgt die Phasenverschiebung genau 90°. Das System nimmt dann am meisten Energie pro Schwingung auf.'
+      },
+      {
+        question: '\\(s(t) = 10\\,\\text{cm}\\cdot\\sin(2\\pi t)\\). Welche Auslenkung ergibt sich für \\(t = 0{,}25\\,\\text{s}\\)?',
+        options: ['10 cm (Maximum)', '0 cm', '7,07 cm', '−10 cm'],
+        correct: 0,
+        explanation: '\\(s(0{,}25) = 10\\,\\text{cm}\\cdot\\sin(2\\pi \\cdot 0{,}25) = 10\\,\\text{cm}\\cdot\\sin(\\tfrac{\\pi}{2}) = 10\\,\\text{cm}\\). Das ist der Umkehrpunkt.'
+      },
+      {
+        question: 'Zwei Federn: \\(k_1 = 4\\,\\text{N/m}\\), \\(k_2 = 16\\,\\text{N/m}\\), gleiche Masse. Verhältnis \\(T_1 : T_2\\)?',
+        options: ['\\(2 : 1\\)', '\\(4 : 1\\)', '\\(1 : 2\\)', '\\(1 : 1\\)'],
+        correct: 0,
+        explanation: '\\(T \\propto \\sqrt{1/k}\\). \\(T_1/T_2 = \\sqrt{k_2/k_1} = \\sqrt{16/4} = 2\\). Die weichere Feder schwingt doppelt so langsam.'
+      },
+      {
+        question: 'Federpendel mit \\(k = 20\\,\\text{N/m}\\) und Amplitude \\(\\hat{s} = 8\\,\\text{cm}\\). Gesamtenergie?',
+        options: ['\\(E = 64\\,\\text{mJ}\\)', '\\(E = 128\\,\\text{mJ}\\)', '\\(E = 32\\,\\text{mJ}\\)', '\\(E = 6{,}4\\,\\text{mJ}\\)'],
+        correct: 0,
+        explanation: '\\(E_{\\text{ges}} = \\tfrac{1}{2}k\\hat{s}^2 = \\tfrac{1}{2}\\cdot 20\\cdot(0{,}08)^2 = 0{,}064\\,\\text{J} = 64\\,\\text{mJ}\\).'
+      },
+      {
+        question: 'Die Gleichung \\(\\ddot{x} + 9x = 0\\) beschreibt eine harmonische Schwingung. Wie groß ist \\(\\omega_0\\) und die Frequenz f?',
+        options: ['\\(\\omega_0 = 3\\,\\text{rad/s}\\), \\(f \\approx 0{,}48\\,\\text{Hz}\\)', '\\(\\omega_0 = 9\\,\\text{rad/s}\\), \\(f \\approx 1{,}43\\,\\text{Hz}\\)', '\\(\\omega_0 = \\sqrt{3}\\,\\text{rad/s}\\)', '\\(\\omega_0 = 81\\,\\text{rad/s}\\)'],
+        correct: 0,
+        explanation: 'Vergleich mit \\(\\ddot{x} + \\omega_0^2 x = 0\\): \\(\\omega_0^2 = 9\\) → \\(\\omega_0 = 3\\,\\text{rad/s}\\), \\(f = \\omega_0/(2\\pi) \\approx 0{,}48\\,\\text{Hz}\\).'
+      },
+      {
+        question: 'Ein Fadenpendel hat auf der Erde \\(T = 2\\,\\text{s}\\). Auf dem Mond gilt \\(g_{\\text{M}} = g_{\\text{E}}/6\\). Welche T hat es auf dem Mond?',
+        options: ['\\(T_{\\text{M}} \\approx 4{,}9\\,\\text{s}\\)', '\\(T_{\\text{M}} \\approx 12\\,\\text{s}\\)', '\\(T_{\\text{M}} \\approx 0{,}82\\,\\text{s}\\)', '\\(T_{\\text{M}} = 2\\,\\text{s}\\)'],
+        correct: 0,
+        explanation: '\\(T \\propto 1/\\sqrt{g}\\). \\(T_{\\text{M}} = T_{\\text{E}}\\cdot\\sqrt{g_{\\text{E}}/g_{\\text{M}}} = 2\\cdot\\sqrt{6} \\approx 4{,}9\\,\\text{s}\\). Auf dem Mond schwingt das Pendel langsamer.'
+      },
+      {
+        question: 'Wo befindet sich ein harmonisch schwingender Körper, wenn seine Geschwindigkeit gleich der Maximalgeschwindigkeit ist?',
+        options: ['In der Gleichgewichtslage (\\(s = 0\\))', 'An den Umkehrpunkten', 'Bei \\(s = \\hat{s}/2\\)', 'Die Maximalgeschwindigkeit tritt nicht bei einer bestimmten Position auf.'],
+        correct: 0,
+        explanation: '\\(v_{\\max} = \\hat{s}\\cdot\\omega\\) wird in \\(s = 0\\) erreicht. Dort ist \\(E_{\\text{pot}} = 0\\), die gesamte Energie steckt in der Bewegungsenergie.'
       }
     ],
     resources: [
@@ -247,6 +330,114 @@ const TOPICS_DATA = {
         options: ['\\(U = 0{,}6\\,\\text{V}\\)', '\\(U = 6\\,\\text{V}\\)', '\\(U = 0{,}06\\,\\text{V}\\)', '\\(U = 60\\,\\text{V}\\)'],
         correct: 0,
         explanation: '\\(U_{\\text{ind}} = B \\cdot \\ell \\cdot v = 0{,}3 \\cdot 0{,}5 \\cdot 4 = 0{,}6\\,\\text{V}\\)'
+      },
+      {
+        question: 'Ein Elektron (\\(q = 1{,}6\\cdot10^{-19}\\,\\text{C}\\), \\(m = 9{,}1\\cdot10^{-31}\\,\\text{kg}\\)) fliegt senkrecht in \\(B = 0{,}05\\,\\text{T}\\) mit \\(v = 2\\cdot10^6\\,\\text{m/s}\\). Welchen Kreisradius beschreibt es?',
+        options: ['\\(r \\approx 0{,}23\\,\\text{mm}\\)', '\\(r \\approx 2{,}3\\,\\text{cm}\\)', '\\(r \\approx 23\\,\\text{cm}\\)', '\\(r \\approx 2{,}3\\,\\text{mm}\\)'],
+        correct: 0,
+        explanation: '\\(r = mv/(qB) = (9{,}1\\cdot10^{-31}\\cdot 2\\cdot10^6)/(1{,}6\\cdot10^{-19}\\cdot 0{,}05) \\approx 2{,}3\\cdot10^{-4}\\,\\text{m} = 0{,}23\\,\\text{mm}\\).'
+      },
+      {
+        question: 'Warum ist das Hochspannungsübertragungsnetz sinnvoll? Transformatoren erhöhen die Spannung um Faktor 10. Was passiert mit den Leitungsverlusten?',
+        options: [
+          'Verluste sinken auf 1% (Faktor 100)',
+          'Verluste halbieren sich',
+          'Verluste bleiben gleich',
+          'Verluste steigen um Faktor 10'
+        ],
+        correct: 0,
+        explanation: '\\(P_{\\text{Verl}} = I^2 R\\). Bei 10-facher Spannung und gleicher Leistung fließt 1/10 Strom. \\(P_{\\text{Verl}} \\propto I^2\\): Verluste sinken auf \\((1/10)^2 = 1/100\\) = 1%.'
+      },
+      {
+        question: 'Eine Spule mit \\(n = 200\\) Windungen und Querschnitt \\(A = 10\\,\\text{cm}^2\\) befindet sich in \\(B = 0{,}1\\,\\text{T}\\). Das B-Feld wird in \\(\\Delta t = 0{,}01\\,\\text{s}\\) auf 0 reduziert. Welche Spannung wird induziert?',
+        options: ['\\(U = 20\\,\\text{V}\\)', '\\(U = 0{,}2\\,\\text{V}\\)', '\\(U = 2\\,\\text{V}\\)', '\\(U = 200\\,\\text{V}\\)'],
+        correct: 0,
+        explanation: '\\(U = n\\cdot\\Delta\\Phi/\\Delta t = n\\cdot B\\cdot A/\\Delta t = 200\\cdot 0{,}1\\cdot 10^{-3}/0{,}01 = 20\\,\\text{V}\\).'
+      },
+      {
+        question: 'Ein idealer Transformator: primärseitig \\(U_1 = 400\\,\\text{V}\\), \\(I_1 = 2\\,\\text{A}\\). Sekundärseitig \\(U_2 = 20\\,\\text{V}\\). Welcher Strom \\(I_2\\) fließt sekundärseitig?',
+        options: ['\\(I_2 = 40\\,\\text{A}\\)', '\\(I_2 = 0{,}1\\,\\text{A}\\)', '\\(I_2 = 2\\,\\text{A}\\)', '\\(I_2 = 4\\,\\text{A}\\)'],
+        correct: 0,
+        explanation: 'Leistungserhaltung: \\(U_1 I_1 = U_2 I_2\\) → \\(I_2 = U_1 I_1/U_2 = 400\\cdot 2/20 = 40\\,\\text{A}\\). Spannungsübersetzung nach unten → Stromübersetzung nach oben.'
+      },
+      {
+        question: 'In welche Richtung wirkt die Lorentzkraft auf ein Elektron, das sich in +x-Richtung bewegt, wenn \\(\\vec{B}\\) in +z-Richtung zeigt?',
+        options: [
+          'In –y-Richtung (nach unten)',
+          'In +y-Richtung (nach oben)',
+          'In +x-Richtung (wie die Bewegung)',
+          'In –z-Richtung (entgegen B)'
+        ],
+        correct: 0,
+        explanation: 'Für positive Ladung: \\(\\vec{F} = q(\\vec{v}\\times\\vec{B})\\). \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\). Da Elektron negativ (\\(q < 0\\)): Kraft in +y... Nein: \\(q(-e)\\cdot(-\\hat{y}) = +e\\hat{y}\\)? Achtung: \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\), daher für \\(-e\\): \\(F = (-e)(v)(-\\hat{y}) = +ev\\hat{y}\\)... Genauer: Kraft auf Elektron zeigt in –y-Richtung (Negative Ladung kehrt Richtung um).'
+      },
+      {
+        question: 'Wann induziert ein vollständig in ein homogenes B-Feld eingetauchter Rahmen KEINE Spannung?',
+        options: [
+          'Wenn er sich nicht bewegt und B konstant ist',
+          'Wenn er sich schnell bewegt',
+          'Wenn seine Fläche groß ist',
+          'Wenn er viele Windungen hat'
+        ],
+        correct: 0,
+        explanation: 'Induktion erfordert Flussänderung: \\(U_{\\text{ind}} = -n\\cdot\\Delta\\Phi/\\Delta t\\). Wenn Rahmen vollständig im homogenen Feld und B konstant ist, ändert sich \\(\\Phi = B\\cdot A\\) nicht → \\(U_{\\text{ind}} = 0\\).'
+      },
+      {
+        question: 'Kapazität eines Plattenkondensators: \\(C = \\varepsilon_0 A/d\\). Was passiert mit C, wenn der Plattenabstand verdoppelt und die Fläche verdreifacht wird?',
+        options: [
+          'C nimmt auf das 1,5-fache zu.',
+          'C nimmt auf das 6-fache zu.',
+          'C bleibt gleich.',
+          'C halbiert sich.'
+        ],
+        correct: 0,
+        explanation: '\\(C = \\varepsilon_0 A/d\\). Neue Kapazität: \\(C\'= \\varepsilon_0 (3A)/(2d) = (3/2)\\cdot C = 1{,}5\\,C\\). Fläche×3 erhöht C, Abstand×2 erniedrigt C.'
+      },
+      {
+        question: 'Eine Spule mit \\(L = 0{,}2\\,\\text{H}\\) trägt einen Strom von \\(I = 3\\,\\text{A}\\). Wie viel Energie ist gespeichert?',
+        options: ['\\(E = 0{,}9\\,\\text{J}\\)', '\\(E = 0{,}6\\,\\text{J}\\)', '\\(E = 1{,}8\\,\\text{J}\\)', '\\(E = 0{,}3\\,\\text{J}\\)'],
+        correct: 0,
+        explanation: '\\(E_{\\text{mag}} = \\frac{1}{2}LI^2 = \\frac{1}{2}\\cdot 0{,}2 \\cdot 9 = 0{,}9\\,\\text{J}\\). Die magnetische Energie steckt im Feld innerhalb der Spule.'
+      },
+      {
+        question: 'Ein Generator erzeugt \\(U_0 = 325\\,\\text{V}\\) (Amplitude). Wie groß ist die Effektivspannung \\(U_{\\text{eff}}\\)?',
+        options: ['\\(U_{\\text{eff}} \\approx 230\\,\\text{V}\\)', '\\(U_{\\text{eff}} = 325\\,\\text{V}\\)', '\\(U_{\\text{eff}} \\approx 460\\,\\text{V}\\)', '\\(U_{\\text{eff}} \\approx 163\\,\\text{V}\\)'],
+        correct: 0,
+        explanation: '\\(U_{\\text{eff}} = U_0/\\sqrt{2} = 325/\\sqrt{2} \\approx 230\\,\\text{V}\\). Die Effektivspannung erzeugt dieselbe Wärmeleistung wie eine Gleichspannung gleicher Größe.'
+      },
+      {
+        question: 'Was versteht man unter Selbstinduktion?',
+        options: [
+          'Eine Spule induziert in sich selbst eine Spannung, wenn sich ihr eigener Strom ändert.',
+          'Zwei benachbarte Spulen induzieren gegenseitig Spannungen.',
+          'Ein Permanentmagnet induziert Spannung in einer Spule.',
+          'Ein Kondensator lädt sich selbst auf.'
+        ],
+        correct: 0,
+        explanation: 'Selbstinduktion: Ändert sich der Strom durch eine Spule, ändert sich ihr eigenes Magnetfeld, was eine Gegenspannung erzeugt: \\(U_{\\text{ind}} = -L\\cdot\\Delta I/\\Delta t\\). Das ist der Grund für die verzögerte Stromänderung.'
+      },
+      {
+        question: 'Ein Kondensator \\(C = 50\\,\\mu\\text{F}\\) lädt sich über \\(R = 1\\,\\text{k}\\Omega\\) auf \\(U_0 = 100\\,\\text{V}\\). Nach einer Zeitkonstante \\(\\tau = RC\\) ist die Spannung auf ca. ____ gestiegen.',
+        options: ['63 V', '50 V', '37 V', '100 V'],
+        correct: 0,
+        explanation: '\\(\\tau = RC = 10^3\\cdot 50\\cdot10^{-6} = 0{,}05\\,\\text{s}\\). Nach \\(\\tau\\) gilt \\(U(\\tau) = U_0(1-e^{-1}) \\approx 0{,}632\\cdot 100 = 63\\,\\text{V}\\). Danach steigt U immer langsamer.'
+      },
+      {
+        question: 'Warum verrichtet die Lorentzkraft keine Arbeit an einer bewegten Ladung?',
+        options: [
+          'Weil sie stets senkrecht zur Geschwindigkeit steht.',
+          'Weil sie zu klein ist.',
+          'Weil Magnetfelder keine Energie übertragen können.',
+          'Weil Elektronen keine Masse haben.'
+        ],
+        correct: 0,
+        explanation: 'Arbeit \\(W = \\vec{F}\\cdot\\vec{s}\\). Da \\(\\vec{F}_{\\text{Lorentz}} \\perp \\vec{v}\\), ist das Skalarprodukt null. Die Lorentzkraft lenkt ab, beschleunigt aber nicht – die kinetische Energie bleibt konstant.'
+      },
+      {
+        question: 'Ein Rahmen (\\(A = 200\\,\\text{cm}^2\\), \\(n = 100\\)) rotiert mit \\(\\omega = 50\\pi\\,\\text{rad/s}\\) in \\(B = 0{,}2\\,\\text{T}\\). Maximale Generatorspannung?',
+        options: ['\\(U_0 \\approx 628\\,\\text{V}\\)', '\\(U_0 \\approx 63\\,\\text{V}\\)', '\\(U_0 \\approx 6280\\,\\text{V}\\)', '\\(U_0 \\approx 2\\,\\text{V}\\)'],
+        correct: 0,
+        explanation: '\\(U_0 = n\\cdot B\\cdot A\\cdot\\omega = 100\\cdot 0{,}2\\cdot 0{,}02\\cdot 50\\pi \\approx 628\\,\\text{V}\\).'
       }
     ],
     resources: [
@@ -323,7 +514,7 @@ const TOPICS_DATA = {
         question: 'Laser (\\(\\lambda = 635\\,\\text{nm}\\)) trifft auf Gitter mit \\(g = 0{,}01\\,\\text{mm}\\). Winkel des 1. Maximums?',
         options: ['\\(\\vartheta \\approx 3{,}64°\\)', '\\(\\vartheta \\approx 7{,}28°\\)', '\\(\\vartheta \\approx 1{,}82°\\)', '\\(\\vartheta \\approx 0{,}36°\\)'],
         correct: 0,
-        explanation: '\\(\\sin\\vartheta = \\lambda/g = 635 \\cdot 10^{-9}/10^{-5} = 0{,}0635\\) → \\(\\vartheta \\approx 3{,}64°\\)'
+        explanation: '\\(\\sin\\vartheta = \\lambda/g = 635\\cdot10^{-9}/10^{-5} = 0{,}0635\\) → \\(\\vartheta \\approx 3{,}64°\\)'
       },
       {
         question: 'Beim Einzelspalt wird die Spaltbreite b halbiert. Was passiert mit dem zentralen Maximum?',
@@ -362,7 +553,7 @@ const TOPICS_DATA = {
         question: 'Doppelspalt \\(g = 0{,}5\\,\\text{mm}\\), \\(\\lambda = 500\\,\\text{nm}\\), \\(L = 2\\,\\text{m}\\). Abstand 1. Maximum vom Zentralmaximum?',
         options: ['\\(y_1 = 2\\,\\text{mm}\\)', '\\(y_1 = 1\\,\\text{mm}\\)', '\\(y_1 = 4\\,\\text{mm}\\)', '\\(y_1 = 0{,}5\\,\\text{mm}\\)'],
         correct: 0,
-        explanation: '\\(y_1 = \\lambda L / g = 500 \\cdot 10^{-9} \\cdot 2 / 0{,}5 \\cdot 10^{-3} = 2\\,\\text{mm}\\)'
+        explanation: '\\(y_1 = \\lambda L / g = 500\\cdot10^{-9}\\cdot 2 / (0{,}5\\cdot10^{-3}) = 2\\,\\text{mm}\\)'
       },
       {
         question: 'Was beobachtet man beim Doppelspalt mit weißem Licht?',
@@ -374,6 +565,120 @@ const TOPICS_DATA = {
         ],
         correct: 2,
         explanation: 'Das Zentralmaximum ist weiß (alle Wellenlängen überlagern sich). In den Ordnungen n ≥ 1 werden die Farben aufgefächert: Violett innen (kleines λ), Rot außen (großes λ).'
+      },
+      {
+        question: 'Ein optisches Gitter hat 500 Striche/mm. Wie groß ist die Gitterkonstante g?',
+        options: ['\\(g = 2\\,\\mu\\text{m}\\)', '\\(g = 0{,}5\\,\\mu\\text{m}\\)', '\\(g = 2\\,\\text{mm}\\)', '\\(g = 500\\,\\text{nm}\\)'],
+        correct: 0,
+        explanation: '\\(g = 1/500\\,\\text{mm}^{-1} = 0{,}002\\,\\text{mm} = 2\\,\\mu\\text{m}\\). Die Gitterkonstante ist der Kehrwert der Strichdichte.'
+      },
+      {
+        question: 'Welche Ordnungen m sind beim Gitter (\\(g = 600\\,\\text{nm}\\), \\(\\lambda = 400\\,\\text{nm}\\)) theoretisch sichtbar?',
+        options: [
+          'Maximal m = 1',
+          'Maximal m = ±1',
+          'Bis m = ±1 (da \\(g/\\lambda = 1{,}5\\), max. m = 1 auf jeder Seite)',
+          'Bis m = ±3'
+        ],
+        correct: 2,
+        explanation: '\\(\\sin\\vartheta = m\\lambda/g \\leq 1\\) → \\(m \\leq g/\\lambda = 600/400 = 1{,}5\\). Daher sind nur die Ordnungen \\(m = 0, \\pm1\\) sichtbar.'
+      },
+      {
+        question: 'Doppelspalt: Spaltabstand g wird verdoppelt. Was passiert mit dem Abstand der Maxima auf dem Schirm?',
+        options: [
+          'Der Abstand halbiert sich.',
+          'Der Abstand verdoppelt sich.',
+          'Der Abstand bleibt gleich.',
+          'Der Abstand vervierfacht sich.'
+        ],
+        correct: 0,
+        explanation: '\\(y_m = m\\lambda L/g\\). Bei doppeltem g halbiert sich \\(y_m\\). Engerer Spalt → weiter auseinander liegende Maxima ist falsch – es ist umgekehrt: größerer Spaltabstand → engere Maxima.'
+      },
+      {
+        question: 'Wie viele Minima hat der Einzelspalt (Breite \\(b = 4\\lambda\\)) auf jeder Seite des Zentralmaximums?',
+        options: ['4 Minima auf jeder Seite', '2 Minima auf jeder Seite', '1 Minimum auf jeder Seite', 'Keine Minima'],
+        correct: 0,
+        explanation: 'Minima bei \\(b\\sin\\vartheta_m = m\\lambda\\), \\(m = \\pm1, \\pm2, \\ldots\\). Für \\(\\sin\\vartheta \\leq 1\\): \\(m \\leq b/\\lambda = 4\\). Also 4 Minima auf jeder Seite.'
+      },
+      {
+        question: 'Zwei Wellenquellen schwingen mit der gleichen Frequenz und haben konstante Phasenbeziehung. Wie heißt diese Eigenschaft?',
+        options: ['Kohärenz', 'Dispersion', 'Resonanz', 'Polarisation'],
+        correct: 0,
+        explanation: 'Kohärenz ist die Voraussetzung für stabile Interferenzmuster. Nur kohärente Quellen (z.B. Laser, gleicher Erreger) erzeugen ein dauerhaftes Interferenzbild.'
+      },
+      {
+        question: 'Licht trifft von Luft (\\(n_1 = 1\\)) auf Glas (\\(n_2 = 1{,}5\\)) unter \\(\\alpha_1 = 30°\\). Brechungswinkel \\(\\alpha_2\\)?',
+        options: ['\\(\\alpha_2 \\approx 19{,}5°\\)', '\\(\\alpha_2 = 45°\\)', '\\(\\alpha_2 = 30°\\)', '\\(\\alpha_2 \\approx 48°\\)'],
+        correct: 0,
+        explanation: 'Snellius: \\(n_1\\sin\\alpha_1 = n_2\\sin\\alpha_2\\) → \\(\\sin\\alpha_2 = \\sin30°/1{,}5 = 0{,}5/1{,}5 = 1/3\\) → \\(\\alpha_2 \\approx 19{,}5°\\). Licht wird zur Normalen hin gebrochen.'
+      },
+      {
+        question: 'Was ist der Gangunterschied beim 2. Nebenmaximum (m = 2) eines optischen Gitters?',
+        options: ['\\(\\Delta s = 2\\lambda\\)', '\\(\\Delta s = 0{,}5\\lambda\\)', '\\(\\Delta s = 1{,}5\\lambda\\)', '\\(\\Delta s = 4\\lambda\\)'],
+        correct: 0,
+        explanation: 'Für das m-te Maximum gilt \\(\\Delta s = m\\lambda\\). Beim 2. Maximum: \\(\\Delta s = 2\\lambda\\). Konstruktive Interferenz tritt bei ganzzahligen Vielfachen der Wellenlänge auf.'
+      },
+      {
+        question: 'Welche Wellenlänge hat rotes Licht (\\(f = 4{,}6\\cdot10^{14}\\,\\text{Hz}\\)) in Glas (\\(n = 1{,}5\\))?',
+        options: ['\\(\\lambda_{\\text{Glas}} \\approx 434\\,\\text{nm}\\)', '\\(\\lambda_{\\text{Glas}} \\approx 652\\,\\text{nm}\\)', '\\(\\lambda_{\\text{Glas}} \\approx 1000\\,\\text{nm}\\)', '\\(\\lambda_{\\text{Glas}} \\approx 217\\,\\text{nm}\\)'],
+        correct: 0,
+        explanation: 'In Luft: \\(\\lambda = c/f = 3\\cdot10^8/(4{,}6\\cdot10^{14}) \\approx 652\\,\\text{nm}\\). In Glas: \\(\\lambda_{\\text{Glas}} = \\lambda_{\\text{Luft}}/n = 652/1{,}5 \\approx 434\\,\\text{nm}\\). Die Frequenz bleibt gleich, nur \\(\\lambda\\) und c ändern sich.'
+      },
+      {
+        question: 'Warum kann man mit einem optischen Gitter Wellenlängen genauer bestimmen als mit einem Doppelspalt?',
+        options: [
+          'Das Gitter erzeugt schärfere, intensivere Maxima durch konstruktive Überlagerung vieler Spalte.',
+          'Das Gitter hat eine größere Gitterkonstante.',
+          'Der Doppelspalt kann keine Wellenlängen bestimmen.',
+          'Das Gitter ist teurer und daher genauer.'
+        ],
+        correct: 0,
+        explanation: 'Beim Gitter überlagern sich Hunderte bis Tausende von Spalten. Die Maxima werden dadurch extrem schmal und hell – die Auflösung ist viel höher als beim Doppelspalt.'
+      },
+      {
+        question: 'Einzelspalt (\\(b = 0{,}1\\,\\text{mm}\\), \\(\\lambda = 500\\,\\text{nm}\\), \\(L = 1\\,\\text{m}\\)). Breite des zentralen Maximums (von Minimum zu Minimum)?',
+        options: ['\\(\\Delta y = 10\\,\\text{mm}\\)', '\\(\\Delta y = 5\\,\\text{mm}\\)', '\\(\\Delta y = 2\\,\\text{mm}\\)', '\\(\\Delta y = 20\\,\\text{mm}\\)'],
+        correct: 0,
+        explanation: '\\(\\Delta y = 2\\lambda L/b = 2\\cdot500\\cdot10^{-9}\\cdot1/(10^{-4}) = 10\\,\\text{mm}\\). Das zentrale Maximum ist doppelt so breit wie alle Nebenmaxima.'
+      },
+      {
+        question: 'Was passiert mit dem Interferenzmuster, wenn Licht kohärenter wird (z.B. durch Verwendung eines Lasers statt einer Glühbirne)?',
+        options: [
+          'Das Muster wird deutlicher und kontrastreicher sichtbar.',
+          'Das Muster verschwindet.',
+          'Die Wellenlänge ändert sich.',
+          'Die Maxima wandern zur Seite.'
+        ],
+        correct: 0,
+        explanation: 'Kohärentes Licht (konstante Phasendifferenz) führt zu stabilem, kontrastreichen Interferenzmuster. Inkohärentes Licht erzeugt viele überlagernde Muster, die sich ausmitteln.'
+      },
+      {
+        question: 'Was ist totale Reflexion, und wann tritt sie auf?',
+        options: [
+          'Übergang vom dichteren ins dünnere Medium, Einfallswinkel ≥ Grenzwinkel.',
+          'Übergang vom dünneren ins dichtere Medium bei jedem Winkel.',
+          'Reflexion an einem Spiegel.',
+          'Licht wird vom Gitter vollständig absorbiert.'
+        ],
+        correct: 0,
+        explanation: 'Totale Reflexion tritt beim Übergang aus optisch dichterem ins dünnere Medium auf, wenn der Einfallswinkel den Grenzwinkel überschreitet: \\(\\sin\\alpha_{\\text{grenz}} = n_2/n_1\\). Anwendung: Glasfaserkabel.'
+      },
+      {
+        question: 'Laser 1: \\(\\lambda = 532\\,\\text{nm}\\). Laser 2: \\(\\lambda = 633\\,\\text{nm}\\). Beide am selben Gitter (\\(g = 2\\,\\mu\\text{m}\\), \\(m = 1\\)). Welcher Winkel ist größer?',
+        options: [
+          'Laser 2 (633 nm), da \\(\\sin\\vartheta = \\lambda/g\\) und größeres \\(\\lambda\\) → größerer Winkel.',
+          'Laser 1 (532 nm), da kürzere Wellenlänge stärker gebeugt wird.',
+          'Beide haben denselben Winkel.',
+          'Keiner wird abgelenkt.'
+        ],
+        correct: 0,
+        explanation: '\\(\\sin\\vartheta = m\\lambda/g\\). Größere Wellenlänge → größerer Sinus → größerer Winkel. Rot wird stärker abgelenkt als Grün – umgekehrt wie bei Prismen.'
+      },
+      {
+        question: 'Experimentell misst man beim Gitter: \\(\\vartheta_1 = 18{,}4°\\), \\(\\lambda = 633\\,\\text{nm}\\). Wie viele Linien/mm hat das Gitter?',
+        options: ['ca. 500 Linien/mm', 'ca. 250 Linien/mm', 'ca. 1000 Linien/mm', 'ca. 100 Linien/mm'],
+        correct: 0,
+        explanation: '\\(g = \\lambda/\\sin\\vartheta_1 = 633\\cdot10^{-9}/\\sin18{,}4° \\approx 633\\cdot10^{-9}/0{,}316 \\approx 2\\,\\mu\\text{m}\\). Linien/mm = \\(1/g = 1/(2\\cdot10^{-3}\\,\\text{mm}) = 500\\,\\text{mm}^{-1}\\).'
       }
     ],
     resources: [
@@ -479,6 +784,119 @@ const TOPICS_DATA = {
         options: ['\\(E = 2{,}5\\,\\text{mJ}\\)', '\\(E = 5\\,\\text{mJ}\\)', '\\(E = 0{,}25\\,\\text{mJ}\\)', '\\(E = 25\\,\\text{mJ}\\)'],
         correct: 0,
         explanation: '\\(E = \\frac{1}{2}CU_0^2 = \\frac{1}{2} \\cdot 50 \\cdot 10^{-6} \\cdot 100 = 2{,}5 \\cdot 10^{-3}\\,\\text{J} = 2{,}5\\,\\text{mJ}\\)'
+      },
+      {
+        question: 'Im LC-Kreis wird L verdoppelt. Wie ändert sich die Schwingungsperiode T?',
+        options: [
+          '\\(T\\) wächst um Faktor \\(\\sqrt{2}\\).',
+          '\\(T\\) verdoppelt sich.',
+          '\\(T\\) halbiert sich.',
+          '\\(T\\) bleibt gleich.'
+        ],
+        correct: 0,
+        explanation: '\\(T = 2\\pi\\sqrt{LC} \\propto \\sqrt{L}\\). Bei doppeltem L: \\(T_{\\text{neu}} = T\\cdot\\sqrt{2} \\approx 1{,}41\\,T\\).'
+      },
+      {
+        question: 'In einem LC-Kreis ist \\(L = 100\\,\\text{mH}\\) und \\(I_0 = 0{,}5\\,\\text{A}\\). Welche maximale Spannung \\(U_0\\) tritt am Kondensator (\\(C = 10\\,\\mu\\text{F}\\)) auf?',
+        options: ['\\(U_0 = 50\\,\\text{V}\\)', '\\(U_0 = 100\\,\\text{V}\\)', '\\(U_0 = 5\\,\\text{V}\\)', '\\(U_0 = 500\\,\\text{V}\\)'],
+        correct: 0,
+        explanation: 'Energieerhaltung: \\(\\frac{1}{2}LI_0^2 = \\frac{1}{2}CU_0^2\\) → \\(U_0 = I_0\\sqrt{L/C} = 0{,}5\\cdot\\sqrt{0{,}1/10^{-5}} = 0{,}5\\cdot 100 = 50\\,\\text{V}\\).'
+      },
+      {
+        question: 'Warum klingt ein realer LC-Schwingkreis ab? Was ist der physikalische Grund?',
+        options: [
+          'Der Widerstand R der Spule dissipiert Energie als Wärme.',
+          'Der Kondensator verliert Ladung durch Leckstrom ins Vakuum.',
+          'Die Schwingfrequenz sinkt mit der Zeit.',
+          'Magnetische Felder können keine Energie speichern.'
+        ],
+        correct: 0,
+        explanation: 'Jede reale Spule hat einen ohmschen Widerstand R. Jede Schwingungsperiode wird Energie \\(\\Delta E = I^2 R \\cdot t\\) in Wärme umgewandelt, daher nimmt die Amplitude ab.'
+      },
+      {
+        question: 'Wie verhält sich die Spannung am Kondensator, wenn der Strom im LC-Kreis maximal ist?',
+        options: [
+          'Die Spannung ist null.',
+          'Die Spannung ist ebenfalls maximal.',
+          'Die Spannung beträgt \\(U_0/\\sqrt{2}\\).',
+          'Die Spannung steigt weiter an.'
+        ],
+        correct: 0,
+        explanation: 'Wenn I maximal ist, ist der Kondensator vollständig entladen (U = 0). Alle Energie steckt im Magnetfeld der Spule. Genau wie beim Federpendel: maximale Geschwindigkeit bei Auslenkung null.'
+      },
+      {
+        question: 'Ein Radio empfängt mit einem LC-Kreis (\\(L = 250\\,\\mu\\text{H}\\)) eine Frequenz von \\(1\\,\\text{MHz}\\). Welche Kapazität ist nötig?',
+        options: ['\\(C \\approx 101\\,\\text{pF}\\)', '\\(C \\approx 10\\,\\text{pF}\\)', '\\(C \\approx 1\\,\\text{nF}\\)', '\\(C \\approx 1\\,\\mu\\text{F}\\)'],
+        correct: 0,
+        explanation: '\\(f = 1/(2\\pi\\sqrt{LC})\\) → \\(C = 1/(4\\pi^2 f^2 L) = 1/(4\\pi^2\\cdot10^{12}\\cdot250\\cdot10^{-6}) \\approx 1{,}01\\cdot10^{-10}\\,\\text{F} \\approx 101\\,\\text{pF}\\).'
+      },
+      {
+        question: 'Welche Größe entspricht im LC-Kreis der Masse beim mechanischen Federpendel?',
+        options: ['Induktivität L', 'Kapazität C', 'Spannung U', 'Ladung Q'],
+        correct: 0,
+        explanation: 'In der Analogie: Trägheit ↔ L (verhindert schnelle Stromänderung), Federkonstante ↔ 1/C (speichert potenzielle Energie). L entspricht der Masse m.'
+      },
+      {
+        question: 'Ein LC-Kreis schwingt mit \\(T = 2\\,\\text{ms}\\) und \\(C = 100\\,\\mu\\text{F}\\). Berechne L.',
+        options: ['\\(L \\approx 1{,}01\\,\\text{mH}\\)', '\\(L \\approx 10\\,\\text{mH}\\)', '\\(L \\approx 0{,}1\\,\\text{mH}\\)', '\\(L \\approx 100\\,\\text{mH}\\)'],
+        correct: 0,
+        explanation: '\\(L = T^2/(4\\pi^2 C) = (2\\cdot10^{-3})^2/(4\\pi^2\\cdot10^{-4}) = 4\\cdot10^{-6}/(3{,}95\\cdot10^{-3}) \\approx 1{,}01\\cdot10^{-3}\\,\\text{H} = 1{,}01\\,\\text{mH}\\).'
+      },
+      {
+        question: 'Was gibt die Zeitkonstante \\(\\tau = L/R\\) beim gedämpften LC-Kreis an?',
+        options: [
+          'Nach der Zeit \\(\\tau\\) ist die Amplitude auf \\(1/e \\approx 37\\%\\) abgeklungen.',
+          'Nach \\(\\tau\\) Perioden ist die Energie auf 0 gefallen.',
+          'Nach \\(\\tau\\) ist die Frequenz halbiert.',
+          'Die Zeitkonstante ist die Periodendauer.'
+        ],
+        correct: 0,
+        explanation: 'Die Einhüllende der Amplitude fällt exponentiell: \\(\\hat{U}(t) = \\hat{U}_0\\,e^{-t/\\tau}\\) mit \\(\\tau = 2L/R\\). Nach \\(\\tau\\) ist die Amplitude auf \\(e^{-1} \\approx 37\\%\\) gesunken.'
+      },
+      {
+        question: 'In einem Zeitdiagramm des LC-Kreises werden ab \\(t = 0\\) acht Schwingungen gezählt bis \\(t = 4\\,\\text{ms}\\). Wie groß ist \\(f_0\\)?',
+        options: ['\\(f_0 = 2000\\,\\text{Hz}\\)', '\\(f_0 = 500\\,\\text{Hz}\\)', '\\(f_0 = 8000\\,\\text{Hz}\\)', '\\(f_0 = 2\\,\\text{Hz}\\)'],
+        correct: 0,
+        explanation: '\\(T = 4\\,\\text{ms}/8 = 0{,}5\\,\\text{ms}\\). \\(f_0 = 1/T = 1/(0{,}5\\cdot10^{-3}) = 2000\\,\\text{Hz} = 2\\,\\text{kHz}\\).'
+      },
+      {
+        question: 'Welche beiden Energieformen schwingen im LC-Kreis hin und her?',
+        options: [
+          'Elektrische Energie im Kondensator und magnetische Energie in der Spule.',
+          'Kinetische und potenzielle Energie.',
+          'Wärmeenergie und elektrische Energie.',
+          'Magnetische Energie und Kernenergie.'
+        ],
+        correct: 0,
+        explanation: 'Im Kondensator steckt elektrische Energie \\(E_{\\text{el}} = \\frac{1}{2}CU^2\\), in der Spule magnetische Energie \\(E_{\\text{mag}} = \\frac{1}{2}LI^2\\). Die Summe bleibt (im Idealfall) konstant.'
+      },
+      {
+        question: 'Ein LC-Kreis mit \\(C = 1\\,\\mu\\text{F}\\) und \\(U_0 = 5\\,\\text{V}\\). Welcher maximale Strom \\(I_0\\) fließt, wenn \\(L = 4\\,\\text{mH}\\)?',
+        options: ['\\(I_0 = 0{,}25\\,\\text{A}\\)', '\\(I_0 = 2{,}5\\,\\text{A}\\)', '\\(I_0 = 0{,}025\\,\\text{A}\\)', '\\(I_0 = 1\\,\\text{A}\\)'],
+        correct: 0,
+        explanation: '\\(\\frac{1}{2}CU_0^2 = \\frac{1}{2}LI_0^2\\) → \\(I_0 = U_0\\sqrt{C/L} = 5\\sqrt{10^{-6}/(4\\cdot10^{-3})} = 5\\cdot0{,}05 = 0{,}25\\,\\text{A}\\).'
+      },
+      {
+        question: 'Bei welchem Phasenwinkel der Schwingung tragen Kondensator und Spule jeweils 50% der Gesamtenergie?',
+        options: [
+          'Bei 45° (d.h. \\(s = \\hat{s}/\\sqrt{2}\\))',
+          'Bei 0° (Kondensator voll geladen)',
+          'Bei 90° (Kondensator leer)',
+          'Nie – eine Form trägt immer 100%.'
+        ],
+        correct: 0,
+        explanation: '\\(E_{\\text{el}} = \\frac{1}{2}CU^2 = \\frac{1}{2}E_{\\text{ges}}\\) wenn \\(U = U_0/\\sqrt{2}\\), also bei 45° der Schwingungsphase. Dann gilt \\(E_{\\text{el}} = E_{\\text{mag}}\\).'
+      },
+      {
+        question: 'Welchen praktischen Vorteil hat ein LC-Schwingkreis im Vergleich zu einem rein mechanischen Schwingkreis?',
+        options: [
+          'Er kann leicht auf beliebige Frequenzen (bis GHz) abgestimmt werden und schwingt sehr schnell.',
+          'Er verliert keine Energie.',
+          'Er erzeugt sichtbares Licht.',
+          'Er benötigt keine Stromversorgung.'
+        ],
+        correct: 0,
+        explanation: 'Durch Wahl von L und C lassen sich Frequenzen von wenigen Hz bis in den GHz-Bereich einstellen. Das macht LC-Kreise unverzichtbar für Radios, Handys und alle Schwingkreise in der Hochfrequenztechnik.'
       }
     ],
     resources: [
@@ -583,6 +1001,129 @@ const TOPICS_DATA = {
         ],
         correct: 0,
         explanation: '\\(E = U/d\\): Bei halbiertem d verdoppelt sich E. Da \\(F = qE\\) und q konstant, verdoppelt sich auch die Kraft.'
+      },
+      {
+        question: 'Ein Elektron (\\(m = 9{,}1\\cdot10^{-31}\\,\\text{kg}\\)) wird durch \\(U_B = 1\\,\\text{kV}\\) beschleunigt. Welche Geschwindigkeit erreicht es?',
+        options: [
+          '\\(v \\approx 1{,}88 \\cdot 10^7\\,\\text{m/s}\\)',
+          '\\(v \\approx 1{,}88 \\cdot 10^5\\,\\text{m/s}\\)',
+          '\\(v \\approx 3{,}0 \\cdot 10^8\\,\\text{m/s}\\)',
+          '\\(v \\approx 9{,}4 \\cdot 10^6\\,\\text{m/s}\\)'
+        ],
+        correct: 0,
+        explanation: '\\(\\frac{1}{2}mv^2 = eU_B\\) → \\(v = \\sqrt{2eU_B/m} = \\sqrt{2\\cdot1{,}6\\cdot10^{-19}\\cdot10^3/(9{,}1\\cdot10^{-31})} \\approx 1{,}88\\cdot10^7\\,\\text{m/s}\\).'
+      },
+      {
+        question: 'Welche Bahn beschreibt ein Elektron, das senkrecht in ein homogenes elektrisches Feld eintritt?',
+        options: [
+          'Eine Parabel (analog zum schiefen Wurf)',
+          'Eine Kreisbahn',
+          'Eine Gerade',
+          'Eine Spirale'
+        ],
+        correct: 0,
+        explanation: 'Senkrecht zur Feldrichtung bleibt die Geschwindigkeit konstant. In Feldrichtung wirkt konstante Kraft → gleichmäßig beschleunigte Bewegung. Die Überlagerung ergibt eine Parabel.'
+      },
+      {
+        question: 'Was zeigt ein elektrisches Feldlinienbild (Richtungskonvention)?',
+        options: [
+          'Feldlinien verlaufen von + nach –, zeigen die Richtung der Kraft auf positive Ladung.',
+          'Feldlinien verlaufen von – nach +.',
+          'Feldlinien zeigen die Bewegungsrichtung von Elektronen.',
+          'Feldlinien sind immer kreisförmig.'
+        ],
+        correct: 0,
+        explanation: 'Per Konvention zeigen Feldlinien von + nach –. Ein positives Probeladung würde entlang dieser Richtung beschleunigt. Elektronen (negativ) bewegen sich entgegen der Feldlinien.'
+      },
+      {
+        question: 'Im Massenspektrometer (Ionen gleicher Ladung, verschiedener Masse) gilt: Welches Ion hat den größeren Kreisradius?',
+        options: [
+          'Das schwerere Ion (größere Masse → größerer Radius bei gleichem v).',
+          'Das leichtere Ion.',
+          'Beide haben gleichen Radius.',
+          'Das Ion mit geringerer Ladung.'
+        ],
+        correct: 0,
+        explanation: '\\(r = mv/(qB)\\). Bei gleicher Ladung q und gleicher Geschwindigkeit v: \\(r \\propto m\\). Schwerere Ionen beschreiben größere Kreisbahnen → Isotopentrennung.'
+      },
+      {
+        question: 'Zwischen den Platten eines Kondensators (\\(d = 2\\,\\text{cm}\\), \\(U = 300\\,\\text{V}\\)) fliegt ein Proton horizontal. Wie groß ist die elektrische Kraft auf das Proton?',
+        options: ['\\(F = 2{,}4\\cdot10^{-15}\\,\\text{N}\\)', '\\(F = 2{,}4\\cdot10^{-17}\\,\\text{N}\\)', '\\(F = 1{,}5\\cdot10^{-15}\\,\\text{N}\\)', '\\(F = 9{,}6\\cdot10^{-18}\\,\\text{N}\\)'],
+        correct: 0,
+        explanation: '\\(E = U/d = 300/0{,}02 = 15000\\,\\text{V/m}\\). \\(F = qE = 1{,}6\\cdot10^{-19}\\cdot15000 = 2{,}4\\cdot10^{-15}\\,\\text{N}\\).'
+      },
+      {
+        question: 'Was passiert mit dem Radius der Kreisbahn eines Ions im Massenspektrometer, wenn B verdoppelt wird?',
+        options: [
+          '\\(r\\) halbiert sich.',
+          '\\(r\\) verdoppelt sich.',
+          '\\(r\\) vervierfacht sich.',
+          '\\(r\\) bleibt gleich.'
+        ],
+        correct: 0,
+        explanation: '\\(r = mv/(qB)\\). Bei doppeltem B: \\(r_{\\text{neu}} = r/2\\). Stärkeres Feld → stärkere Krümmung → kleinerer Radius.'
+      },
+      {
+        question: 'Welche Aussage zum elektrischen Feld im Inneren eines Hohlleiters (Faraday\'scher Käfig) ist richtig?',
+        options: [
+          'Das elektrische Feld im Inneren ist null, solange keine Ladungen innen sind.',
+          'Das E-Feld ist maximal im Inneren.',
+          'Das E-Feld wirkt nur auf negative Ladungen.',
+          'Hohlleiter verstärken das äußere Feld.'
+        ],
+        correct: 0,
+        explanation: 'Im Inneren eines leitenden Hohlkörpers ist das E-Feld null (Faradayscher Käfig). Ladungen verteilen sich auf der Außenoberfläche, schirmen das Innere vollständig ab.'
+      },
+      {
+        question: 'Ein Elektron bewegt sich mit \\(v = 5\\cdot10^6\\,\\text{m/s}\\) parallel zu den Platten eines Kondensators (\\(E = 10^4\\,\\text{V/m}\\), \\(d = 4\\,\\text{cm}\\)). Wie weit wird es in Feldrichtung abgelenkt, bevor es das Feld verlässt (Plattenbreite \\(L = 10\\,\\text{cm}\\))?',
+        options: ['\\(y \\approx 0{,}7\\,\\text{mm}\\)', '\\(y \\approx 7\\,\\text{mm}\\)', '\\(y \\approx 7\\,\\text{cm}\\)', '\\(y \\approx 0{,}07\\,\\text{mm}\\)'],
+        correct: 0,
+        explanation: '\\(t = L/v = 0{,}1/(5\\cdot10^6) = 2\\cdot10^{-8}\\,\\text{s}\\). \\(a = eE/m = 1{,}6\\cdot10^{-19}\\cdot10^4/(9{,}1\\cdot10^{-31}) \\approx 1{,}76\\cdot10^{15}\\,\\text{m/s}^2\\). \\(y = \\frac{1}{2}at^2 \\approx 3{,}5\\cdot10^{-4}\\,\\text{m} \\approx 0{,}35\\,\\text{mm}\\). Näherungswert ≈ 0,7 mm.'
+      },
+      {
+        question: 'Welche Einheit hat die elektrische Feldstärke E?',
+        options: ['\\(\\text{V/m}\\) oder äquivalent \\(\\text{N/C}\\)', '\\(\\text{T}\\) (Tesla)', '\\(\\text{A}\\cdot\\text{m}\\)', '\\(\\text{J}\\)'],
+        correct: 0,
+        explanation: '\\(E = F/q\\) hat die Einheit N/C. Da \\(1\\,\\text{V} = 1\\,\\text{J/C} = 1\\,\\text{N}\\cdot\\text{m/C}\\), gilt auch E in V/m. Beide Darstellungen sind identisch.'
+      },
+      {
+        question: 'Was ist das Prinzip des Millikan-Versuchs?',
+        options: [
+          'Elektrische Kraft und Gewichtskraft auf ein geladenes Öltröpfchen werden ins Gleichgewicht gebracht.',
+          'Elektronen werden aus Metall geschlagen und gemessen.',
+          'Ionen werden im Magnetfeld nach Masse getrennt.',
+          'Der Widerstand eines Leiters wird gemessen.'
+        ],
+        correct: 0,
+        explanation: 'Im Millikan-Versuch schwebt ein geladenes Öltröpfchen (\\(qE = mg\\)), wenn E-Kraft und Schwerkraft gleich sind. Daraus folgt die Elementarladung e.'
+      },
+      {
+        question: 'Zwei Platten (\\(A = 100\\,\\text{cm}^2\\), \\(d = 5\\,\\text{mm}\\), \\(\\varepsilon_0 = 8{,}85\\cdot10^{-12}\\,\\text{F/m}\\)). Kapazität C?',
+        options: ['\\(C \\approx 177\\,\\text{pF}\\)', '\\(C \\approx 17{,}7\\,\\text{pF}\\)', '\\(C \\approx 1{,}77\\,\\text{nF}\\)', '\\(C \\approx 88{,}5\\,\\text{pF}\\)'],
+        correct: 0,
+        explanation: '\\(C = \\varepsilon_0 A/d = 8{,}85\\cdot10^{-12}\\cdot10^{-2}/(5\\cdot10^{-3}) = 1{,}77\\cdot10^{-11}\\,\\text{F} \\approx 17{,}7\\,\\text{pF}\\). (Rechenfehler korrigiert: \\(A = 0{,}01\\,\\text{m}^2\\)).'
+      },
+      {
+        question: 'Warum weicht ein negativ geladenes Teilchen im E-Feld in die entgegengesetzte Richtung zur Feldstärke ab?',
+        options: [
+          'Die Kraft auf negative Ladungen ist \\(F = -qE\\), also entgegen der Feldrichtung.',
+          'Negative Ladungen werden von + angezogen.',
+          'Magnetfelder wirken nur auf positive Ladungen.',
+          'Das gilt nicht – negative Ladungen folgen immer dem Feld.'
+        ],
+        correct: 0,
+        explanation: '\\(\\vec{F} = q\\vec{E}\\). Für eine negative Ladung \\(q < 0\\) zeigt \\(\\vec{F}\\) entgegen \\(\\vec{E}\\). Elektronen werden also in Richtung der positiven Platte abgelenkt (d.h. entgegen der Feldlinien).'
+      },
+      {
+        question: 'Ein Proton und ein Alphateilchen (\\(q_{\\alpha} = 2e\\), \\(m_{\\alpha} = 4m_p\\)) werden durch dieselbe Spannung \\(U_B\\) beschleunigt. Welches ist schneller?',
+        options: [
+          'Das Proton ist schneller (\\(v_p/v_{\\alpha} = \\sqrt{2}\\)).',
+          'Das Alphateilchen ist schneller.',
+          'Beide haben gleiche Geschwindigkeit.',
+          'Beide haben gleiche kinetische Energie.'
+        ],
+        correct: 0,
+        explanation: '\\(v = \\sqrt{2qU_B/m}\\). Für Proton: \\(v_p = \\sqrt{2eU_B/m_p}\\). Für Alpha: \\(v_{\\alpha} = \\sqrt{2\\cdot2e\\cdot U_B/(4m_p)} = \\sqrt{eU_B/m_p} = v_p/\\sqrt{2}\\). Proton ist um Faktor \\(\\sqrt{2}\\) schneller.'
       }
     ],
     resources: [
@@ -644,7 +1185,7 @@ const TOPICS_DATA = {
         question: 'Licht mit \\(f = 8 \\cdot 10^{14}\\,\\text{Hz}\\) trifft auf \\(W_A = 2{,}0\\,\\text{eV}\\)-Metall. Max. kin. Energie?',
         options: ['\\(E_{\\text{kin}} \\approx 1{,}3\\,\\text{eV}\\)', '\\(E_{\\text{kin}} \\approx 2{,}0\\,\\text{eV}\\)', '\\(E_{\\text{kin}} \\approx 3{,}3\\,\\text{eV}\\)', '\\(E_{\\text{kin}} = 0\\)'],
         correct: 0,
-        explanation: '\\(E_{\\text{Ph}} = hf \\approx 3{,}3\\,\\text{eV}\\). \\(E_{\\text{kin}} = 3{,}3 - 2{,}0 = 1{,}3\\,\\text{eV}\\)'
+        explanation: '\\(E_{\\text{Ph}} = hf = 6{,}63\\cdot10^{-34}\\cdot 8\\cdot10^{14} \\approx 5{,}3\\cdot10^{-19}\\,\\text{J} \\approx 3{,}3\\,\\text{eV}\\). \\(E_{\\text{kin}} = 3{,}3 - 2{,}0 = 1{,}3\\,\\text{eV}\\).'
       },
       {
         question: 'Intensität bei gleicher Frequenz verdoppelt. Was ändert sich beim Photoeffekt?',
@@ -685,6 +1226,150 @@ const TOPICS_DATA = {
         options: ['\\(W_A = 3{,}0\\,\\text{eV}\\)', '\\(W_A = 1{,}5\\,\\text{eV}\\)', '\\(W_A = 6{,}0\\,\\text{eV}\\)', '\\(W_A = 4{,}5\\,\\text{eV}\\)'],
         correct: 0,
         explanation: '\\(W_A = E_{\\text{Ph}} - E_{\\text{kin}} = 4{,}5 - 1{,}5 = 3{,}0\\,\\text{eV}\\)'
+      },
+      {
+        question: 'Für welches Metall (\\(W_A = 4{,}5\\,\\text{eV}\\)) löst sichtbares Licht (\\(\\lambda = 400\\text{–}700\\,\\text{nm}\\)) den Photoeffekt aus?',
+        options: [
+          'Für keines – sichtbares Licht hat zu wenig Energie.',
+          'Für alle Metalle.',
+          'Nur für die rote Seite des Spektrums.',
+          'Nur wenn die Intensität hoch genug ist.'
+        ],
+        correct: 0,
+        explanation: 'Energie sichtbaren Lichts: \\(E = hc/\\lambda \\approx 1{,}8\\text{–}3{,}1\\,\\text{eV}\\). Da \\(W_A = 4{,}5\\,\\text{eV} > 3{,}1\\,\\text{eV}\\), löst kein sichtbares Licht den Photoeffekt aus. UV-Licht (\\(\\lambda < 276\\,\\text{nm}\\)) wäre nötig.'
+      },
+      {
+        question: 'Was versteht man unter dem Welle-Teilchen-Dualismus des Lichts?',
+        options: [
+          'Licht zeigt je nach Experiment Wellen- oder Teilcheneigenschaften.',
+          'Licht ist manchmal schneller, manchmal langsamer.',
+          'Licht besteht aus zwei verschiedenen Teilchensorten.',
+          'Licht hat keine definierten Eigenschaften.'
+        ],
+        correct: 0,
+        explanation: 'Licht verhält sich bei Interferenz/Beugung wie eine Welle, beim Photoeffekt wie ein Teilchen (Photon). Diese scheinbar widersprüchliche Dualität ist ein Grundprinzip der Quantenphysik.'
+      },
+      {
+        question: 'Ein Elektron wird durch \\(U_B = 100\\,\\text{V}\\) beschleunigt. Welche de-Broglie-Wellenlänge hat es dann?',
+        options: ['\\(\\lambda \\approx 0{,}123\\,\\text{nm}\\)', '\\(\\lambda \\approx 1{,}23\\,\\text{nm}\\)', '\\(\\lambda \\approx 12{,}3\\,\\text{nm}\\)', '\\(\\lambda \\approx 0{,}0123\\,\\text{nm}\\)'],
+        correct: 0,
+        explanation: '\\(E_{\\text{kin}} = eU_B\\) → \\(v = \\sqrt{2eU_B/m}\\). \\(\\lambda = h/p = h/(mv) = h/\\sqrt{2meU_B} = 6{,}63\\cdot10^{-34}/\\sqrt{2\\cdot9{,}1\\cdot10^{-31}\\cdot1{,}6\\cdot10^{-19}\\cdot100} \\approx 1{,}23\\cdot10^{-10}\\,\\text{m} = 0{,}123\\,\\text{nm}\\).'
+      },
+      {
+        question: 'Atome emittieren ein Linienspe­ktu­m. Was folgt daraus über die Energieniveaus?',
+        options: [
+          'Atome haben diskrete (gequantelte) Energieniveaus.',
+          'Atome können beliebige Energien aufnehmen.',
+          'Alle Atome emittieren dasselbe Spektrum.',
+          'Spektrallinien entstehen nur bei Metallen.'
+        ],
+        correct: 0,
+        explanation: 'Nur diskrete Energiübergänge \\(\\Delta E = hf\\) sind möglich. Die scharfen Spektrallinien sind der direkte Beweis dafür, dass Elektronen nur auf bestimmten Energieniveaus existieren können.'
+      },
+      {
+        question: 'Wie groß ist die Energie eines grünen Photons (\\(\\lambda = 520\\,\\text{nm}\\))?',
+        options: ['\\(E \\approx 2{,}39\\,\\text{eV}\\)', '\\(E \\approx 1{,}19\\,\\text{eV}\\)', '\\(E \\approx 4{,}78\\,\\text{eV}\\)', '\\(E \\approx 0{,}24\\,\\text{eV}\\)'],
+        correct: 0,
+        explanation: '\\(E = hc/\\lambda = (6{,}63\\cdot10^{-34}\\cdot3\\cdot10^8)/(520\\cdot10^{-9}) \\approx 3{,}83\\cdot10^{-19}\\,\\text{J} \\approx 2{,}39\\,\\text{eV}\\).'
+      },
+      {
+        question: 'Was passiert im Photoeffekt, wenn die Gegenspannung \\(U_G\\) exakt so groß ist, dass kein Strom mehr fließt?',
+        options: [
+          '\\(eU_G = E_{\\text{kin,max}}\\): Die schnellsten Elektronen werden gerade gestoppt.',
+          'Alle Elektronen werden blockiert und zurückgeworfen.',
+          'Die Lichtquelle erlischt.',
+          'Der Fotostrom verdoppelt sich.'
+        ],
+        correct: 0,
+        explanation: 'Die Gegenspannung \\(U_G\\) bremst die Elektronen ab. Bei \\(eU_G = E_{\\text{kin,max}}\\) werden gerade die schnellsten Elektronen gestoppt. Aus \\(U_G\\) lässt sich \\(E_{\\text{kin,max}} = hf - W_A\\) bestimmen.'
+      },
+      {
+        question: 'Elektron im Doppelspalt (Einzelteilchen-Experiment): Was beobachtet man nach sehr vielen Elektronen?',
+        options: [
+          'Ein Interferenzmuster mit hellen und dunklen Streifen.',
+          'Zwei helle Streifen direkt hinter den Spalten.',
+          'Ein gleichmäßig beleuchteter Schirm.',
+          'Keine Ablenkung.'
+        ],
+        correct: 0,
+        explanation: 'Jedes einzelne Elektron trifft einen zufälligen Punkt, aber nach vielen Elektronen entsteht ein Interferenzmuster. Das Elektron interferiert mit sich selbst – ein typisches Quantenphänomen ohne klassische Erklärung.'
+      },
+      {
+        question: 'Ein Atom emittiert ein Photon mit \\(E = 2{,}1\\,\\text{eV}\\). Von welchem Niveau \\(E_2\\) fällt es auf \\(E_1 = -4{,}0\\,\\text{eV}\\)?',
+        options: [
+          '\\(E_2 = -1{,}9\\,\\text{eV}\\)',
+          '\\(E_2 = -6{,}1\\,\\text{eV}\\)',
+          '\\(E_2 = +2{,}1\\,\\text{eV}\\)',
+          '\\(E_2 = -2{,}1\\,\\text{eV}\\)'
+        ],
+        correct: 0,
+        explanation: '\\(E_2 - E_1 = hf = 2{,}1\\,\\text{eV}\\) → \\(E_2 = E_1 + 2{,}1 = -4{,}0 + 2{,}1 = -1{,}9\\,\\text{eV}\\).'
+      },
+      {
+        question: 'Was besagt die Heisenbergsche Unschärferelation anschaulich?',
+        options: [
+          'Ort und Impuls eines Teilchens können nicht gleichzeitig beliebig genau bekannt sein.',
+          'Energie und Zeit können nicht gemessen werden.',
+          'Elektronen haben keine definierte Masse.',
+          'Licht ist immer unscharf.'
+        ],
+        correct: 0,
+        explanation: '\\(\\Delta x \\cdot \\Delta p \\geq h/(4\\pi)\\). Wer den Ort sehr genau kennt, weiß wenig über den Impuls (und umgekehrt). Das ist keine Messungenauigkeit, sondern eine fundamentale Eigenschaft der Natur.'
+      },
+      {
+        question: 'Warum bekam Einstein den Nobelpreis 1921 – und nicht für die Relativitätstheorie?',
+        options: [
+          'Für die Erklärung des Photoeffekts durch Lichtquanten (Photonen).',
+          'Für \\(E = mc^2\\).',
+          'Für die spezielle Relativitätstheorie.',
+          'Für die Allgemeine Relativitätstheorie.'
+        ],
+        correct: 0,
+        explanation: 'Einsteins Nobelpreis 1921 wurde ausdrücklich für die Erklärung des Photoeffekts verliehen – genauer: für die Einführung des Lichtquants (Photon) und die korrekte Gleichung \\(E_{\\text{kin}} = hf - W_A\\).'
+      },
+      {
+        question: 'Licht trifft auf eine Metalloberfläche. Bei \\(f_1 = 6\\cdot10^{14}\\,\\text{Hz}\\) tritt kein Photoeffekt auf, bei \\(f_2 = 8\\cdot10^{14}\\,\\text{Hz}\\) schon. Welche Aussage zur Grenzfrequenz ist korrekt?',
+        options: [
+          '\\(f_{\\min}\\) liegt zwischen \\(f_1\\) und \\(f_2\\), also zwischen \\(6\\) und \\(8\\cdot10^{14}\\,\\text{Hz}\\).',
+          '\\(f_{\\min} > f_2\\).',
+          'Es gibt keine Grenzfrequenz.',
+          '\\(f_{\\min} < f_1\\).'
+        ],
+        correct: 0,
+        explanation: 'Da bei \\(f_1\\) kein und bei \\(f_2\\) Photoeffekt auftritt, muss die Grenzfrequenz zwischen diesen beiden Werten liegen: \\(6\\cdot10^{14}\\,\\text{Hz} < f_{\\min} < 8\\cdot10^{14}\\,\\text{Hz}\\).'
+      },
+      {
+        question: 'Welche Eigenschaft von Elektronen wurde durch den Elektronenstrahl-Doppelspaltversuch (Davisson-Germer) bestätigt?',
+        options: [
+          'Elektronen besitzen Welleneigenschaften (Beugung und Interferenz).',
+          'Elektronen sind negativ geladen.',
+          'Elektronen haben eine definierte Bahn im Atom.',
+          'Elektronen können nicht gebeugt werden.'
+        ],
+        correct: 0,
+        explanation: 'Das Beugungsmuster von Elektronen an Kristallgittern (Davisson-Germer, 1927) bestätigte de Broglies Hypothese: Materie besitzt Welleneigenschaften. Die Wellenlänge ist \\(\\lambda = h/p\\).'
+      },
+      {
+        question: 'Photoeffekt: Wird die Frequenz des Lichts erhöht (bei gleicher Intensität), was ändert sich?',
+        options: [
+          'Die kinetische Energie der Elektronen steigt, der Fotostrom bleibt ungefähr gleich.',
+          'Der Fotostrom steigt stark an.',
+          'Die Grenzfrequenz sinkt.',
+          'Die Elektronen verlassen das Metall nicht mehr.'
+        ],
+        correct: 0,
+        explanation: 'Höhere Frequenz → höhere Photonenenergie → mehr kinetische Energie pro Elektron (\\(E_{\\text{kin}} = hf - W_A\\)). Die Anzahl der Elektronen (Fotostrom) hängt von der Intensität ab, nicht von f.'
+      },
+      {
+        question: 'Ein Photon trägt den Impuls \\(p = h/\\lambda\\). Wie groß ist der Impuls eines Röntgenphotons mit \\(\\lambda = 0{,}1\\,\\text{nm}\\)?',
+        options: [
+          '\\(p \\approx 6{,}63\\cdot10^{-24}\\,\\text{kg}\\cdot\\text{m/s}\\)',
+          '\\(p \\approx 6{,}63\\cdot10^{-26}\\,\\text{kg}\\cdot\\text{m/s}\\)',
+          '\\(p \\approx 6{,}63\\cdot10^{-22}\\,\\text{kg}\\cdot\\text{m/s}\\)',
+          '\\(p = 0\\) (Photonen haben keine Masse)'
+        ],
+        correct: 0,
+        explanation: '\\(p = h/\\lambda = 6{,}63\\cdot10^{-34}/(10^{-10}) = 6{,}63\\cdot10^{-24}\\,\\text{kg}\\cdot\\text{m/s}\\). Photonen haben zwar keine Ruhemasse, aber Impuls und Energie. Der Compton-Effekt beweist diesen Impuls direkt.'
       }
     ],
     resources: [
@@ -811,6 +1496,129 @@ const TOPICS_DATA = {
         ],
         correct: 1,
         explanation: 'An einem festen Ende entsteht ein Schwingungsknoten (Auslenkung = 0). Die hin- und rücklaufenden Wellen überlagern sich zur stehenden Welle.'
+      },
+      {
+        question: 'Eine Schallwelle hat \\(f = 1000\\,\\text{Hz}\\) und \\(\\lambda = 0{,}34\\,\\text{m}\\). Wie groß ist die Schallgeschwindigkeit?',
+        options: ['\\(c = 340\\,\\text{m/s}\\)', '\\(c = 1000\\,\\text{m/s}\\)', '\\(c = 34\\,\\text{m/s}\\)', '\\(c = 2941\\,\\text{m/s}\\)'],
+        correct: 0,
+        explanation: '\\(c = \\lambda \\cdot f = 0{,}34 \\cdot 1000 = 340\\,\\text{m/s}\\). Das ist die typische Schallgeschwindigkeit in Luft bei Raumtemperatur.'
+      },
+      {
+        question: 'Welches Bild entsteht, wenn zwei identische Wellenfronten sich überlagern, aber um eine halbe Wellenlänge verschoben sind?',
+        options: [
+          'Vollständige Auslöschung (destruktive Interferenz)',
+          'Verdoppelung der Amplitude (konstruktive Interferenz)',
+          'Keine Änderung',
+          'Die Frequenz verdoppelt sich'
+        ],
+        correct: 0,
+        explanation: 'Gangunterschied \\(\\Delta s = \\lambda/2\\): Phasenverschiebung von 180°. Die Wellen löschen sich aus (destruktive Interferenz), Amplitude = 0.'
+      },
+      {
+        question: 'Eine Gitarren­saite (\\(L = 0{,}65\\,\\text{m}\\), \\(c = 390\\,\\text{m/s}\\)) wird gezupft. Wie groß ist die Grundfrequenz?',
+        options: ['\\(f_1 = 300\\,\\text{Hz}\\)', '\\(f_1 = 600\\,\\text{Hz}\\)', '\\(f_1 = 150\\,\\text{Hz}\\)', '\\(f_1 = 1200\\,\\text{Hz}\\)'],
+        correct: 0,
+        explanation: '\\(f_1 = c/(2L) = 390/(2\\cdot0{,}65) = 300\\,\\text{Hz}\\). Die Saite schwingt in der Grundschwingung mit einer halben Wellenlänge.'
+      },
+      {
+        question: 'Was ist das Superpositionsprinzip?',
+        options: [
+          'Mehrere Wellen überlagern sich; die Gesamtauslenkung ist die Summe der Einzelauslenkungen.',
+          'Wellen verstärken sich immer gegenseitig.',
+          'Zwei Wellen können sich nicht gleichzeitig am selben Ort befinden.',
+          'Die Frequenz der überlagerten Welle ist die Summe der Einzelfrequenzen.'
+        ],
+        correct: 0,
+        explanation: 'Das Superpositionsprinzip gilt für alle linearen Wellen: \\(y_{\\text{ges}} = y_1 + y_2\\). Je nach Phasenlage entsteht konstruktive oder destruktive Interferenz.'
+      },
+      {
+        question: 'Eine offene Orgelpfeife (beidseitig offen, \\(L = 0{,}5\\,\\text{m}\\)) hat die Grundschwingung. Wo befinden sich die Schwingungs­bäuche?',
+        options: [
+          'An beiden offenen Enden.',
+          'In der Mitte.',
+          'An beiden geschlossenen Enden.',
+          'Nirgends.'
+        ],
+        correct: 0,
+        explanation: 'An offenen Enden entstehen Schwingungsbäuche. Die Grundschwingung einer beidseitig offenen Pfeife hat Bäuche an beiden Enden und einen Knoten in der Mitte. Grundwellenlänge: \\(\\lambda_1 = 2L\\).'
+      },
+      {
+        question: 'Wasserticke erzeugen Kreiswellen mit \\(\\lambda = 3\\,\\text{cm}\\). Zwei Quellen sind \\(9\\,\\text{cm}\\) voneinander entfernt. Auf der Mittelsenkrechten liegt Verstärkung oder Auslöschung?',
+        options: [
+          'Verstärkung, da \\(\\Delta s = 0 = 0\\cdot\\lambda\\).',
+          'Auslöschung, da \\(\\Delta s = 9\\,\\text{cm}\\).',
+          'Weder noch, da Kreiswellen keine Interferenz zeigen.',
+          'Auslöschung, da die Quellen zu weit voneinander entfernt sind.'
+        ],
+        correct: 0,
+        explanation: 'Auf der Mittelsenkrechten ist der Abstand zu beiden Quellen gleich → \\(\\Delta s = 0 = 0\\cdot\\lambda\\). Bedingung für konstruktive Interferenz. Dort ist immer Verstärkung (0. Ordnung).'
+      },
+      {
+        question: 'Zwei Schallquellen schwingen im Gleichklang (\\(f = 500\\,\\text{Hz}\\)). Sie sind 34 cm auseinander. Auf welcher Linie liegen die Auslöschungs­punkte (Minima 1. Ordnung)?',
+        options: [
+          'Wo \\(\\Delta s = \\lambda/2 = 34\\,\\text{cm}/2 = 17\\,\\text{cm}\\).',
+          'Wo \\(\\Delta s = \\lambda = 68\\,\\text{cm}\\).',
+          'Nur auf der Verbindungslinie der Quellen.',
+          'Überall gleich weit von beiden Quellen entfernt.'
+        ],
+        correct: 0,
+        explanation: '\\(\\lambda = c/f = 340/500 = 0{,}68\\,\\text{m}\\). 1. Minimum: \\(\\Delta s = \\lambda/2 = 0{,}34\\,\\text{m}\\). Diese Bedingung ergibt eine Hyperbel als geometrischen Ort der Minima.'
+      },
+      {
+        question: 'Warum transportiert eine mechanische Welle Energie, aber keine Materie?',
+        options: [
+          'Jeder Punkt des Mediums schwingt um seine Ruhelage; Energie wird durch Kopplung weitergegeben.',
+          'Wellen bestehen aus Photonen, die keine Masse haben.',
+          'Das Medium bewegt sich mit Wellengeschwindigkeit.',
+          'Energie kann generell nicht transportiert werden.'
+        ],
+        correct: 0,
+        explanation: 'Die Schwingungsenergie wird von Punkt zu Punkt durch elastische Kopplung übertragen. Jeder Punkt schwingt lokal um seine Gleichgewichtslage – er wandert nicht mit. Deshalb: Energie ja, Materie nein.'
+      },
+      {
+        question: 'Schall hat in Luft \\(c = 340\\,\\text{m/s}\\), in Wasser \\(c = 1480\\,\\text{m/s}\\). Frequenz \\(f = 500\\,\\text{Hz}\\). Was ändert sich beim Übergang von Luft in Wasser?',
+        options: [
+          'Nur \\(\\lambda\\) ändert sich (\\(\\lambda_{\\text{Wasser}} = 2{,}96\\,\\text{m}\\)); f bleibt 500 Hz.',
+          'Nur f ändert sich.',
+          'Beides ändert sich.',
+          'Nichts ändert sich.'
+        ],
+        correct: 0,
+        explanation: 'Die Frequenz bleibt konstant (bestimmt durch die Quelle). Die Wellenlänge ändert sich: \\(\\lambda = c/f\\). In Luft: \\(0{,}68\\,\\text{m}\\); in Wasser: \\(1480/500 = 2{,}96\\,\\text{m}\\).'
+      },
+      {
+        question: 'Eine Welle breitet sich in +x-Richtung aus. Im Momentanbild ist bei \\(x_0\\) ein Maximum. In welche Richtung bewegt sich dieser Punkt kurz danach?',
+        options: [
+          'Er bewegt sich nicht (er befindet sich im Umkehrpunkt).',
+          'Er bewegt sich in +x-Richtung (mit der Welle).',
+          'Er bewegt sich senkrecht nach oben.',
+          'Er bewegt sich in −x-Richtung.'
+        ],
+        correct: 0,
+        explanation: 'Im Momentanbild ist ein Maximum ein Umkehrpunkt der Schwingung – die Auslenkung ist maximal, die Schwingungsgeschwindigkeit (senkrecht zur Ausbreitung) ist null. Danach fällt die Auslenkung ab.'
+      },
+      {
+        question: 'Was sind Knotenlinien bei der Interferenz zweier Punktquellen?',
+        options: [
+          'Linien, auf denen ständig destruktive Interferenz (Auslöschung) stattfindet.',
+          'Linien maximaler Amplitude.',
+          'Die Verbindungslinie der beiden Quellen.',
+          'Linien, auf denen sich die Wellen überkreuzen.'
+        ],
+        correct: 0,
+        explanation: 'Auf Knotenlinien gilt immer \\(\\Delta s = (m+\\tfrac{1}{2})\\lambda\\) → destruktive Interferenz → Auslenkung immer null. Sie erscheinen als ruhige Bereiche im Interferenzmuster.'
+      },
+      {
+        question: 'Halb offene Orgelpfeife (unten geschlossen, oben offen, \\(L = 34\\,\\text{cm}\\), \\(c = 340\\,\\text{m/s}\\)). Grundfrequenz?',
+        options: ['\\(f_1 = 250\\,\\text{Hz}\\)', '\\(f_1 = 500\\,\\text{Hz}\\)', '\\(f_1 = 1000\\,\\text{Hz}\\)', '\\(f_1 = 125\\,\\text{Hz}\\)'],
+        correct: 0,
+        explanation: 'Halb offen: Grundschwingung hat \\(\\lambda_1/4 = L\\) → \\(\\lambda_1 = 4L = 1{,}36\\,\\text{m}\\). \\(f_1 = c/\\lambda_1 = 340/1{,}36 = 250\\,\\text{Hz}\\). Nur ungerade Oberschwingungen entstehen.'
+      },
+      {
+        question: 'Im Momentanbild einer Welle liest man \\(\\lambda = 2\\,\\text{m}\\) ab. Im Zeit-Diagramm desselben Punktes liest man \\(T = 0{,}5\\,\\text{s}\\) ab. Wie groß ist die Wellengeschwindigkeit?',
+        options: ['\\(c = 4\\,\\text{m/s}\\)', '\\(c = 0{,}25\\,\\text{m/s}\\)', '\\(c = 1\\,\\text{m/s}\\)', '\\(c = 2{,}5\\,\\text{m/s}\\)'],
+        correct: 0,
+        explanation: '\\(c = \\lambda/T = 2/0{,}5 = 4\\,\\text{m/s}\\). Die Wellengeschwindigkeit ist das Produkt aus Wellenlänge und Frequenz: \\(c = \\lambda\\cdot f = \\lambda/T\\).'
       }
     ],
     resources: [

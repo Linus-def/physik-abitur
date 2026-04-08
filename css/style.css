@@ -143,13 +143,9 @@ p + p { margin-top: 0.5em; }
   display: flex;
   flex-direction: column;
   z-index: 200;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   transition: transform var(--transition);
 }
-#sidebar::-webkit-scrollbar { width: 4px; }
-#sidebar::-webkit-scrollbar-track { background: transparent; }
-#sidebar::-webkit-scrollbar-thumb { background: var(--sb-border); border-radius: 99px; }
 
 /* Brand */
 .sidebar-brand {
@@ -198,7 +194,17 @@ p + p { margin-top: 0.5em; }
 .progress-fill.green { background: linear-gradient(90deg, #16a34a, #22c55e); }
 
 /* Nav */
-#topic-nav { flex: 1; padding: 8px 0; }
+#topic-nav {
+  flex: 1;
+  min-height: 0;
+  padding: 8px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+#topic-nav::-webkit-scrollbar { width: 4px; }
+#topic-nav::-webkit-scrollbar-track { background: transparent; }
+#topic-nav::-webkit-scrollbar-thumb { background: var(--sb-border); border-radius: 99px; }
 
 .nav-section-label {
   font-size: 10px; font-weight: 600;
@@ -899,6 +905,97 @@ p + p { margin-top: 0.5em; }
   transition: opacity var(--transition), transform var(--transition);
 }
 .quiz-restart-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Quiz – intro screen */
+.quiz-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+  animation: fadeUp 0.25s ease;
+}
+.quiz-intro-icon { font-size: 52px; margin-bottom: 16px; }
+.quiz-intro-title { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.quiz-intro-sub { font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+.quiz-intro-meta {
+  display: inline-block;
+  background: var(--accent-bg);
+  color: var(--accent);
+  padding: 5px 14px;
+  border-radius: 99px;
+  font-size: 13px; font-weight: 600;
+  margin-bottom: 16px;
+}
+.quiz-intro-desc { font-size: 13.5px; color: var(--text-3); line-height: 1.6; margin-bottom: 28px; max-width: 340px; }
+.quiz-start-btn {
+  padding: 13px 36px;
+  background: var(--accent-grad);
+  color: white; border: none;
+  border-radius: var(--radius);
+  font-size: 15px; font-weight: 600;
+  box-shadow: var(--shadow-accent);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.quiz-start-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Quiz – question header */
+.quiz-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.quiz-exit-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: background var(--transition), color var(--transition);
+}
+.quiz-exit-btn:hover { background: var(--surface); color: var(--text); }
+.quiz-step {
+  font-size: 12px; font-weight: 600; color: var(--text-3);
+  white-space: nowrap; flex-shrink: 0;
+}
+.quiz-bar-wrap { flex: 1; }
+
+/* Quiz – explanation (hidden until answered) */
+.quiz-explanation { display: none; }
+.quiz-explanation.open { display: block; }
+.quiz-explanation-label {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--accent); margin-bottom: 6px;
+}
+
+/* Quiz – next button (hidden until answered) */
+.quiz-next-btn {
+  display: none;
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: var(--accent-grad);
+  color: white; border: none;
+  border-radius: var(--radius);
+  font-size: 14px; font-weight: 600;
+  box-shadow: var(--shadow-accent);
+  transition: opacity var(--transition), transform var(--transition);
+}
+.quiz-next-btn.show { display: block; }
+.quiz-next-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* Quiz – result extras */
+.quiz-result-of { font-size: 15px; color: var(--text-2); margin-bottom: 4px; }
+.quiz-result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
 
 /* ══════════════════════════════════════════════
    LIGHTBOX

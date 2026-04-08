@@ -1,18 +1,17 @@
-# CLAUDE.md – Anweisungen für Claude (AI Agent)
+# CLAUDE.md – Anweisungen für Claude
 
-> Diese Datei ist speziell für Claude und andere KI-Assistenten.
-> Lies sie zuerst, bevor du Code änderst oder Fragen stellst.
+> Lies diese Datei zuerst. Sie gilt für jede Session.
 
 ---
 
 ## Was ist dieses Projekt?
 
 Eine **interaktive Lernplattform für das Physik-Abitur 2026 in Baden-Württemberg**.
-Schüler können damit Theorie lernen, Aufgaben üben und sich auf die Prüfung vorbereiten.
+Schüler können damit Theorie lernen, Aufgaben üben und Quickchecks machen.
 
 - **Live-URL:** https://linus-def.github.io/physik-abitur/
 - **Prüfungsdatum:** 23. April 2026
-- **Zielgruppe:** Gymnasiasten in BW, die Physik-Abitur machen
+- **Zielgruppe:** Gymnasiasten in BW, Physik-Abitur
 - **Entwickler:** Linus
 
 ---
@@ -21,44 +20,37 @@ Schüler können damit Theorie lernen, Aufgaben üben und sich auf die Prüfung 
 
 - **Reines Vanilla HTML/CSS/JavaScript** – KEIN Framework, KEIN npm, KEIN Build-Step
 - Deployed via **GitHub Pages** (direkt aus dem Root-Verzeichnis)
-- **Keine Abhängigkeiten** – alles läuft ohne Installation im Browser
-- State wird über `localStorage` persistiert (kein Backend, kein Server)
-- **CSP-konform:** Keine Inline-Scripts erlaubt (alles in externen .js-Dateien)
+- Kein Backend, kein Server – State über `localStorage`
+- **CSP-konform:** Keine Inline-Scripts (alles in externen .js-Dateien)
 - MathJax für Formel-Rendering
 
 ---
 
-## Architektur – Dateistruktur
+## Architektur
 
 ```
 physik-abitur/
-├── index.html           # Einziger HTML-Einstiegspunkt (SPA-ähnlich)
-├── css/
-│   └── style.css        # Gesamtes Design System (CSS Custom Properties, Dark Mode)
+├── index.html           # Einziger HTML-Einstiegspunkt
+├── css/style.css        # Gesamtes Design System (CSS Custom Properties, Dark Mode)
 ├── js/
-│   ├── app.js           # Router, Navigation, View-Switching
-│   ├── topics.js        # Theorie-Renderer (rendert topics_data.js)
-│   ├── quiz.js          # Quickcheck-Modul (Multiple Choice, 20 Fragen/Thema)
-│   ├── tasks.js         # Aufgaben-Renderer (echte Abituraufgaben)
-│   ├── progress.js      # Fortschrittssystem (localStorage)
-│   ├── theme.js         # Dark/Light Mode Toggle
-│   ├── lightbox.js      # Bild-Zoom für Aufgaben-Scans
-│   └── mathjax-config.js  # MathJax Konfiguration
+│   ├── app.js           # Router & Navigation
+│   ├── topics.js        # Theorie-Renderer
+│   ├── quiz.js          # Quickcheck-Modul
+│   ├── tasks.js         # Aufgaben-Renderer
+│   ├── progress.js      # Fortschrittssystem
+│   ├── theme.js         # Dark/Light Mode
+│   ├── lightbox.js      # Bild-Zoom
+│   └── mathjax-config.js
 ├── data/
-│   ├── topics_data.js   # Alle Theorieinhalte, Formeln, Quickcheck-Fragen
-│   └── tasks_data.js    # Alle Abituraufgaben 2018-2025 mit Lösungen
-├── img/                 # PDF-Scans der echten Abiturprüfungen
-├── .github/             # CI/CD Workflows, Issue-Templates
-├── .claude/
-│   └── launch.json      # Lokaler Dev-Server: python -m http.server 8765
-├── manifest.json        # PWA Manifest (als App installierbar)
-├── robots.txt           # SEO
-└── favicon.svg          # App-Icon
+│   ├── topics_data.js   # Theorieinhalte, Formeln, Quickcheck-Fragen
+│   └── tasks_data.js    # Abituraufgaben 2018-2025
+├── img/                 # PDF-Scans der Abiturprüfungen
+└── .claude/launch.json  # Dev-Server: python -m http.server 8765
 ```
 
 ---
 
-## Die 7 Prüfungsthemen (mit Priorität)
+## Die 7 Prüfungsthemen
 
 | Priorität | Thema |
 |---|---|
@@ -72,65 +64,65 @@ physik-abitur/
 
 ---
 
-## Aktueller Projektstand (April 2026)
-
-- Alle 7 Themen haben Theorie-Inhalte
-- Quickchecks: 20 Fragen pro Thema
-- Aufgaben: Echte Abiturprüfungen 2018-2025 integriert
-- Favoriten-System funktioniert
-- 7-Tage-Lernplan vorhanden
-- PWA installierbar
-- **Bekannter Bug:** Dark Mode funktioniert nicht korrekt (Issue #6)
-
-**Offene Issues:** https://github.com/Linus-def/physik-abitur/issues
-
----
-
-## Regeln – Was du beachten MUSST
+## Technische Regeln
 
 ### DO
-- Vanilla JS – native DOM-APIs nutzen
-- CSS Custom Properties für Farben/Abstände (definiert in `style.css` unter `:root`)
+- Vanilla JS, native DOM-APIs
+- CSS Custom Properties für alle Farben/Abstände (in `style.css` unter `:root`)
 - `localStorage` für persistente Daten
 - Alle Texte auf **Deutsch**
-- Mobile-first entwickeln
-- Formeln mit MathJax-Syntax: `\(F = ma\)` für Inline, `\[..\]` für Block
+- Mobile-first
+- MathJax-Syntax: `\(F = ma\)` Inline, `\[..\]` Block
 
 ### DON'T
-- KEIN npm install, KEIN package.json anlegen
-- KEINE neuen externen Libraries ohne Rückfrage
-- KEINE Inline-Scripts in HTML (CSP-Policy!)
-- KEINE neuen HTML-Dateien anlegen (alles läuft über index.html)
-- Dateistruktur im Root NICHT verändern (GitHub Pages deployed direkt daraus)
+- KEIN npm, KEIN package.json
+- KEINE Inline-Scripts in HTML (CSP!)
+- KEINE neuen HTML-Dateien
+- Dateistruktur im Root NICHT verändern
 - `.nojekyll` NICHT löschen
 
 ---
 
-## Lokalen Dev-Server starten
+## Wie Claude arbeiten soll
+
+### Auf Linus hören
+- Linus entscheidet, was umgesetzt wird. Keine eigenen Features vorschlagen, die nicht gefragt wurden.
+- Wenn Linus eine Richtung vorgibt, diese umsetzen – auch wenn du es anders machen würdest.
+- Fragen stellen, bevor du große Änderungen machst.
+
+### Erklärungen in die Tiefe
+- Niemals nur eine Formel hinschreiben und fertig. Immer erklären: **Was bedeutet die Formel? Warum gilt sie? Was passiert physikalisch?**
+- Beispiel SCHLECHT: "Die Formel für die Schwingungsdauer ist T = 2π√(L/g)"
+- Beispiel GUT: "Die Schwingungsdauer T = 2π√(L/g) sagt aus, dass ein längeres Pendel langsamer schwingt – weil die rücktreibende Kraft relativ zur trägen Masse kleiner wird. Die Masse spielt keine Rolle, weil Trägheit und Schwerkraft sich exakt herauskürzen."
+- Zusammenhänge zwischen Themen herstellen, nicht isoliert erklären.
+- Anschauliche Analogien nutzen, wenn möglich.
+
+### Design & UI
+- Bei Design-Fragen: Erst verstehen, was Linus sich vorstellt – dann umsetzen.
+- Das Design soll **klar, modern und ablenkungsfrei** sein. Lernenden soll es helfen, nicht ablenken.
+- CSS Custom Properties nutzen, nie hardcodierte Farben.
+- Dark Mode immer mitdenken.
+
+### Code-Änderungen
+- Nur ändern, was gefragt ist. Kein "während ich schon dabei bin..."-Refactoring.
+- Vor größeren Änderungen kurz erklären, was du vorhast.
+- Kommentare im Code auf Deutsch.
+
+---
+
+## Lokaler Dev-Server
 
 ```bash
 python -m http.server 8765
-# Dann im Browser: http://localhost:8765
+# http://localhost:8765
 ```
 
-(Konfiguriert in `.claude/launch.json`)
-
 ---
 
-## Wie man Inhalte hinzufügt
+## Offene Issues & aktueller Stand
 
-**Neue Quickcheck-Fragen:** `data/topics_data.js` – Schema der bestehenden Fragen kopieren
+Immer zuerst die GitHub Issues checken:
+https://github.com/Linus-def/physik-abitur/issues
 
-**Neue Abituraufgabe:** `data/tasks_data.js` – Schema der bestehenden Aufgaben kopieren
-
-**Neues Feature:** Vanilla JS in passendes Modul in `js/` schreiben, dann in `index.html` als `<script src="js/...">` einbinden
-
----
-
-## Kontext zum Entwickler
-
-- Linus ist Abiturient (Gymnasium BW), Prüfung am **23. April 2026**
-- Das Projekt ist sein eigenes Lernwerkzeug
-- **Priorität liegt auf Inhalten & Bugfixes** – nicht auf neuen Features
-- Zeitdruck: wenige Wochen bis zur Prüfung
-- Kommunikation auf **Deutsch**
+> Den aktuellen Projektstand nicht in dieser Datei pflegen –
+> der ändert sich zu schnell. Issues und Commits sind die Quelle der Wahrheit.

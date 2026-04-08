@@ -69,7 +69,11 @@ const progress = (() => {
   function setQuiz(topicId, correct, total) {
     const s = load();
     if (!s[topicId]) s[topicId] = { theoryRead: false, tasksDone: {}, quizScore: null };
-    s[topicId].quizScore = { correct, total };
+        const prev = s[topicId].quizScore;
+    // Fix #25: Nur speichern wenn Ergebnis besser oder kein vorheriger Eintrag
+    if (!prev || correct / total > prev.correct / prev.total) {
+      s[topicId].quizScore = { correct, total };
+    }
     save(s); touchStreak(); fire();
   }
 

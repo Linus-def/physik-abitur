@@ -17,8 +17,15 @@ const quizModule = (() => {
   }
 
   function render(topicId) {
-      eventsBound = false; // Fix #23: Events nach Tab-Wechsel neu binden
-state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx: 0, score: 0, answered: false };
+    const questions = (TOPICS_DATA[topicId]?.quickcheck || [])
+      .map((q, index) => ({
+        ...q,
+        quizNumber: Number.isFinite(q.quizNumber) ? q.quizNumber : index + 1,
+        originalIndex: index
+      }))
+      .sort((a, b) => a.quizNumber - b.quizNumber || a.originalIndex - b.originalIndex);
+
+    state = { topicId, questions, idx: 0, score: 0, answered: false };
     showStart();
   }
 
@@ -59,7 +66,7 @@ state = { topicId, questions: [...(TOPICS_DATA[topicId]?.quickcheck || [])], idx
     container.innerHTML = `
       <div class="quiz-header">
         <button class="quiz-exit-btn" id="quiz-exit-btn">← Beenden</button>
-        <span class="quiz-step">Frage ${state.idx + 1} / ${total}</span>
+        <span class="quiz-step">Frage ${q.quizNumber} / ${total}</span>
         <div class="quiz-bar-wrap progress-track">
           <div class="progress-fill" style="width:${pct}%"></div>
         </div>

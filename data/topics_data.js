@@ -1053,6 +1053,24 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         ],
         correct: 0,
         explanation: 'Durch Wahl von L und C lassen sich Frequenzen von wenigen Hz bis in den GHz-Bereich einstellen. Das macht LC-Kreise unverzichtbar für Radios, Handys und alle Schwingkreise in der Hochfrequenztechnik.'
+      },
+      {
+        question: 'Ein LC-Kreis hat \\(L = 2\\,\\text{mH}\\) und \\(C = 8\\,\\mu\\text{F}\\). Wie groß ist die Periodendauer \\(T\\)?',
+        options: ['\\(T \\approx 0{,}79\\,\\text{ms}\\)', '\\(T \\approx 7{,}9\\,\\text{ms}\\)', '\\(T \\approx 0{,}079\\,\\text{ms}\\)', '\\(T \\approx 1{,}6\\,\\text{ms}\\)'],
+        correct: 0,
+        explanation: '\\(T = 2\\pi\\sqrt{LC} = 2\\pi\\sqrt{2\\cdot10^{-3} \\cdot 8\\cdot10^{-6}} \\approx 7{,}95\\cdot10^{-4}\\,\\text{s} = 0{,}79\\,\\text{ms}\\).'
+      },
+      {
+        question: 'Wenn im idealen LC-Kreis die Kondensatorspannung gerade \\(U = U_0/2\\) beträgt, welcher Anteil der Gesamtenergie liegt dann im Magnetfeld?',
+        options: ['75%', '50%', '25%', '100%'],
+        correct: 0,
+        explanation: 'Elektrische Energie: \\(E_{\\text{el}} = \\tfrac{1}{2} C (U_0/2)^2 = \\tfrac{1}{4} \\cdot \\tfrac{1}{2} C U_0^2 = 25\\%\\) der Gesamtenergie. Also liegen die restlichen 75% im Magnetfeld.'
+      },
+      {
+        question: 'Bei einem LC-Kreis bleibt \\(L\\) konstant, aber \\(C\\) wird auf ein Neuntel verkleinert. Wie ändert sich die Eigenfrequenz?',
+        options: ['Sie verdreifacht sich.', 'Sie wird dreimal kleiner.', 'Sie verneunfacht sich.', 'Sie bleibt gleich.'],
+        correct: 0,
+        explanation: '\\(f_0 \\propto 1/\\sqrt{C}\\). Wird \\(C\\) auf \\(C/9\\) verkleinert, so gilt \\(f_{\\text{neu}} = f_0 \\cdot \\sqrt{9} = 3f_0\\).'
       }
     ],
     resources: [
@@ -1280,6 +1298,29 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         ],
         correct: 0,
         explanation: '\\(v = \\sqrt{2qU_B/m}\\). Für Proton: \\(v_p = \\sqrt{2eU_B/m_p}\\). Für Alpha: \\(v_{\\alpha} = \\sqrt{2\\cdot2e\\cdot U_B/(4m_p)} = \\sqrt{eU_B/m_p} = v_p/\\sqrt{2}\\). Proton ist um Faktor \\(\\sqrt{2}\\) schneller.'
+      },
+      {
+        question: 'Ein Proton tritt senkrecht in ein homogenes Magnetfeld ein. Wie ist die Richtung der Lorentzkraft im Vergleich zur Geschwindigkeit?',
+        options: [
+          'Immer senkrecht zur Geschwindigkeit.',
+          'Immer parallel zur Geschwindigkeit.',
+          'Immer entgegengesetzt zur Geschwindigkeit.',
+          'Sie verschwindet grundsätzlich.'
+        ],
+        correct: 0,
+        explanation: 'Die Lorentzkraft ist \\(\\vec{F}_L = q\\,\\vec{v} \\times \\vec{B}\\). Das Kreuzprodukt steht immer senkrecht auf \\(\\vec{v}\\) und \\(\\vec{B}\\). Deshalb ändert sich die Richtung der Bewegung, aber nicht der Betrag der Geschwindigkeit.'
+      },
+      {
+        question: 'Im Geschwindigkeitsselektor gilt \\(E = 6{,}0\\cdot10^4\\,\\text{V/m}\\) und \\(B = 0{,}20\\,\\text{T}\\). Welche Geschwindigkeit passiert unabgelenkt?',
+        options: ['\\(v = 3{,}0\\cdot10^5\\,\\text{m/s}\\)', '\\(v = 1{,}2\\cdot10^4\\,\\text{m/s}\\)', '\\(v = 1{,}2\\cdot10^6\\,\\text{m/s}\\)', '\\(v = 8{,}3\\cdot10^{-6}\\,\\text{m/s}\\)'],
+        correct: 0,
+        explanation: 'Im Selektor gilt \\(qE = qvB\\), also \\(v = E/B = 6{,}0\\cdot10^4 / 0{,}20 = 3{,}0\\cdot10^5\\,\\text{m/s}\\).'
+      },
+      {
+        question: 'Ein Elektron bewegt sich parallel zu einem Magnetfeld. Welche magnetische Kraft wirkt dann auf es?',
+        options: ['Keine, weil \\(\\sin 0^\\circ = 0\\).', 'Eine maximale Kraft.', 'Eine Kraft entgegen der Flugrichtung.', 'Eine Kraft in Feldrichtung.'],
+        correct: 0,
+        explanation: 'Für die Lorentzkraft gilt \\(F_L = qvB\\sin\\alpha\\). Bei paralleler Bewegung ist \\(\\alpha = 0^\\circ\\), also \\(\\sin 0^\\circ = 0\\) und damit \\(F_L = 0\\).'
       }
     ],
     resources: [

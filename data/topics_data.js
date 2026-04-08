@@ -384,8 +384,8 @@ const TOPICS_DATA = {
           'In +x-Richtung (wie die Bewegung)',
           'In –z-Richtung (entgegen B)'
         ],
-        correct: 0,
-        explanation: 'Für positive Ladung: \\(\\vec{F} = q(\\vec{v}\\times\\vec{B})\\). \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\). Da Elektron negativ (\\(q < 0\\)): Kraft in +y... Nein: \\(q(-e)\\cdot(-\\hat{y}) = +e\\hat{y}\\)? Achtung: \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\), daher für \\(-e\\): \\(F = (-e)(v)(-\\hat{y}) = +ev\\hat{y}\\)... Genauer: Kraft auf Elektron zeigt in –y-Richtung (Negative Ladung kehrt Richtung um).'
+        correct: 1,
+        explanation: 'Für positive Ladung: \\(\\vec{F} = q(\\vec{v}\\times\\vec{B})\\). \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\). Da Elektron negativ (\\(q < 0\\)): Kraft in +y... Nein: \\(q(-e)\\cdot(-\\hat{y}) = +e\\hat{y}\\)? Achtung: \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\), daher für \\(-e\\): \\(F = (-e)(v)(-\\hat{y}) = +ev\\hat{y}\\)... Genauer: Kraft auf Elektron zeigt in +y-Richtung (nach oben), weil negative Ladung die Richtung umkehrt. '
       },
       {
         question: 'Wann induziert ein vollständig in ein homogenes B-Feld eingetauchter Rahmen KEINE Spannung?',

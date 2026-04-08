@@ -2,79 +2,100 @@
 
 > **Lies diese Datei vollständig durch, bevor du irgendetwas änderst.**
 
-> Diese Regeln gelten sowohl für lokale Coding-Agenten mit Git/Terminal als auch für browser- oder API-basierte Agenten.
+---
 
-## Git-Workflow (PFLICHT)
+## Das wichtigste Prinzip
 
-- **NIEMALS direkt auf `main` pushen oder committen**
-- Erstelle immer einen eigenen Branch:
-  ```
-  git checkout -b fix/<kurzer-name>      # z.B. fix/felder-quiz-antwort
-  git checkout -b feat/<kurzer-name>     # z.B. feat/neue-aufgaben-wellenoptik
-  git checkout -b content/<kurzer-name>  # z.B. content/detailed-explanations-wellenoptik
-  ```
-- Wenn du **lokal mit Git** arbeitest:
-  - Hole zuerst den aktuellen Stand von `main` (siehe "Bevor du anfängst")
-  - Erstelle danach deinen Branch
-- Wenn du **browser- oder API-basiert** arbeitest (z.B. GitHub Web-Editor, Comet, Copilot im Browser):
-  - Stelle sicher, dass du auf der aktuellen Version von `main` arbeitest
-  - Erstelle trotzdem einen separaten Branch – ändere **nicht direkt `main`**
-- Öffne nach deinen Änderungen immer einen **Pull Request** auf `main`
-- Verlinke den PR mit dem zugehörigen Issue (z.B. `Closes #12`)
-- Warte, bis der PR von einem Menschen gemergt wird – merge **NICHT** selbst
+**Deine Arbeit ist erst fertig, wenn der Code auf `main` ist.**
 
-## Warum das wichtig ist
+Dieses Projekt gehört einem einzelnen Entwickler (Linus). Es gibt kein Team, das PRs reviewed. Code, der nur auf einem Branch liegt, erscheint nie auf der Live-Seite (https://linus-def.github.io/physik-abitur/). Daher gilt:
 
-Mehrere Agenten oder Bearbeitungen können gleichzeitig an diesem Repo arbeiten.
-Direkte Commits auf `main` führen leicht zu überschriebenen oder unübersichtlichen Änderungen.
-Darum gilt immer: **separater Branch + Pull Request**, egal ob lokal per Git oder browser-/API-basiert gearbeitet wird.
+- Kleine Fixes und Inhaltsänderungen → **direkt auf `main`**
+- Größere Features → Branch erstellen, fertigstellen, **sofort selbst mergen**, Branch löschen
+
+---
+
+## Git-Workflow
+
+### Normalfall: Direkt auf main
+
+```bash
+git checkout main
+git pull origin main
+# Änderungen machen
+git add <dateien>
+git commit -m "fix: kurze Beschreibung"
+git push origin main
+```
+
+### Ausnahme: Branch (nur bei größeren Features)
+
+```bash
+git checkout -b feat/<kurzer-name>
+# Änderungen machen, commits
+git checkout main
+git pull origin main
+git merge feat/<kurzer-name>
+git push origin main
+git branch -d feat/<kurzer-name>
+git push origin --delete feat/<kurzer-name>
+```
+
+**Wichtig:** Branch IMMER sofort löschen nachdem er in main gemergt ist. Offene Branches ohne Merge sind wertlos.
+
+---
 
 ## Bevor du anfängst
 
-1. Hole den **aktuellen Stand von `main`**:
-   - Lokal mit Git: `git pull origin main`
-   - Browser/API-basiert: Stelle sicher, dass du die aktuelle Version von `main` geöffnet bzw. geladen hast
-2. Erstelle einen neuen Branch (siehe oben)
-3. Ändere nur die Dateien, die für deine Aufgabe nötig sind
-4. Keine unnötigen Formatierungs- oder Whitespace-Änderungen in anderen Bereichen
-5. Prüfe ob ein anderer offener PR dieselbe Datei bearbeitet – wenn ja, Bescheid geben
-6. Erstelle am Ende einen Pull Request auf `main`, nicht direkt einen Merge
+1. `git checkout main && git pull origin main` – immer aktuellen Stand holen
+2. Nur die Dateien ändern, die für die Aufgabe nötig sind
+3. Nach dem Push: prüfen ob `git log origin/main --oneline -1` den eigenen Commit zeigt
+
+---
+
+## Technische Regeln (Pflicht)
+
+- **Kein npm, kein Build-Step** – reines Vanilla JS/HTML/CSS
+- **Keine Inline-Scripts in HTML** – CSP-Policy blockiert sie
+- **Keine neuen HTML-Dateien** – alles läuft über `index.html`
+- **JavaScript-Syntax prüfen:** `node --check js/progress.js` etc. vor jedem Commit
+- **Alle Texte auf Deutsch**
+- CSS Custom Properties nutzen (`var(--farbe)`), nie hardcodierte Farben
+- MathJax-Syntax: `\(inline\)` und `\[block\]`
+
+---
 
 ## Projektstruktur
 
 ```
 physik-abitur/
 ├── data/
-│   ├── topics_data.js    ← Theorie-Inhalte, Quickcheck-Fragen, Erklärungen pro Thema
-│   └── tasks_data.js     ← Abituraufgaben (Bilder-Referenzen, Lösungen, Bewertung)
+│   ├── topics_data.js    ← Theorie-Inhalte, Quickcheck-Fragen, Erklärungen
+│   └── tasks_data.js     ← Abituraufgaben (Bilder, Lösungen, Bewertung)
 ├── js/
-│   ├── app.js            ← Haupt-App-Logik, Event-Handler, MathJax-Rendering
-│   ├── topics.js         ← Themen-Rendering, Karten-Logik
+│   ├── app.js            ← Router, Navigation, Event-Handler
+│   ├── topics.js         ← Themen-Rendering, Karten
 │   ├── tasks.js          ← Aufgaben-Ansicht, PDF-Handling
 │   ├── quiz.js           ← Quiz-Logik, Auswertung
-│   ├── theme.js          ← Dark/Light-Mode, Scroll-to-Top
-│   ├── lightbox.js       ← Bild-Lightbox für Aufgaben-PNGs
-│   ├── progress.js       ← Lernfortschritt-Tracking
-│   └── mathjax-config.js ← MathJax-Konfiguration (lädt vor app.js)
-├── css/                  ← Alle Styles, keine Logik
-├── img/                  ← PNG-Bilder der Abituraufgaben (generiert via scripts/)
-├── scripts/              ← Lokale Entwickler-Tools, NICHT Teil der Webapp
-│   └── extract_images.py ← Rendert PDF-Seiten als PNGs für img/
-├── index.html            ← Einstiegspunkt, CSP, Meta-Tags, MathJax-Einbindung
-└── AGENTS.md             ← Diese Datei
+│   ├── theme.js          ← Dark/Light-Mode
+│   ├── lightbox.js       ← Bild-Lightbox
+│   ├── progress.js       ← Lernfortschritt (localStorage)
+│   └── mathjax-config.js ← MathJax-Konfiguration
+├── css/style.css         ← Gesamtes Design, CSS Custom Properties
+├── img/                  ← PNG-Bilder der Abituraufgaben
+├── index.html            ← Einziger HTML-Einstiegspunkt
+└── scripts/
+    └── extract_images.py ← PDFs → PNGs (nur lokal, nicht Teil der Webapp)
 ```
 
-## Branch-Namenskonvention
+---
 
-| Typ | Schema | Beispiel |
+## Typische Fehlerquellen
+
+| Problem | Ursache | Lösung |
 |---|---|---|
-| Bugfix | `fix/<issue-nr>-<beschreibung>` | `fix/12-felder-quiz-antwort` |
-| Feature | `feat/<beschreibung>` | `feat/neue-quantenphysik-aufgaben` |
-| Inhalt | `content/<beschreibung>` | `content/detailed-explanations-wellenoptik` |
-
-## PR-Beschreibung
-
-Jeder PR soll enthalten:
-- Was wurde geändert und warum
-- Welches Issue wird damit geschlossen (`Closes #XX`)
-- Kurze Beschreibung der Änderungen in `topics_data.js` oder anderen Dateien
+| Seite lädt nicht | SyntaxError in JS | `node --check js/*.js` |
+| Themen erscheinen nicht | `progress.js` lädt nicht | Doppelte `const`-Deklarationen checken |
+| MathJax rendert nicht | Race condition beim Laden | `mathjaxTypeset()` aus `mathjax-config.js` nutzen |
+| Styles fehlen | Hardcodierte Farbe statt `var(--x)` | CSS Custom Properties nutzen |
+| Änderung nicht live | Code nur auf Branch, nicht auf main | Direkt auf main pushen |

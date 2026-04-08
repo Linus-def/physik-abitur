@@ -34,3 +34,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 });
+
+// Scroll-to-Top Button
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('scroll-top-btn');
+  if (!btn) return;
+
+  function onScroll() {
+    if (window.scrollY > 300) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Auch für den #main Scroll-Container
+  var main = document.getElementById('main');
+  if (main) {
+    main.addEventListener('scroll', function () {
+      if (main.scrollTop > 300) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    }, { passive: true });
+  }
+
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (main) main.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});

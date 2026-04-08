@@ -13,7 +13,7 @@ Schüler können damit Theorie lernen, Aufgaben üben und sich auf die Prüfung 
 - **Live-URL:** https://linus-def.github.io/physik-abitur/
 - **Prüfungsdatum:** 23. April 2026
 - **Zielgruppe:** Gymnasiasten in BW, die Physik-Abitur machen
-- **Entwickler:** Linus (Abiturient, Bad Wimpfen, BW)
+- **Entwickler:** Linus
 
 ---
 

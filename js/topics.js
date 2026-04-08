@@ -94,25 +94,46 @@ const topicsRenderer = (() => {
     const grid = document.getElementById('topic-cards-grid');
     if (!grid) return;
     grid.innerHTML = '';
+
+    // Themen nach Priorität gruppieren (höchste zuerst)
+    const groups = {};
     Object.values(TOPICS_DATA).forEach(topic => {
-      const pct = progress.topicPct(topic.id);
-      const div = document.createElement('div');
-      div.className = 'topic-card';
-            div.dataset.priority = topic.priority || 1;
-      div.onclick = () => app.navigateTopic(topic.id);
-      div.innerHTML = `
-        <div class="card-header">
-          <span class="card-title">${topic.title}</span>
-          <span class="card-stars">${starsHtml(topic.priority)}</span>
-        </div>
-        <div><span class="card-badge">${topic.badge}</span></div>
-        <div class="card-footer">
-          <span class="card-pct">${pct}%</span>
-          <div class="card-progress progress-track">
-            <div class="progress-fill${pct >= 80 ? ' green' : ''}" style="width:${pct}%"></div>
+      const p = topic.priority || 1;
+      if (!groups[p]) groups[p] = [];
+      groups[p].push(topic);
+    });
+
+    const priorityLabels = { 3: 'Hohe Priorität', 2: 'Mittlere Priorität', 1: 'Niedrige Priorität' };
+    const sortedPrios = Object.keys(groups).map(Number).sort((a, b) => b - a);
+
+    sortedPrios.forEach(prio => {
+      // Gruppen-Header
+      const header = document.createElement('div');
+      header.className = 'priority-group-header';
+      header.textContent = priorityLabels[prio] || `Priorität ${prio}`;
+      grid.appendChild(header);
+
+      // Karten der Gruppe
+      groups[prio].forEach(topic => {
+        const pct = progress.topicPct(topic.id);
+        const div = document.createElement('div');
+        div.className = 'topic-card';
+        div.dataset.priority = prio;
+        div.onclick = () => app.navigateTopic(topic.id);
+        div.innerHTML = `
+          <div class="card-header">
+            <span class="card-title">${topic.title}</span>
+            <span class="card-stars">${starsHtml(topic.priority)}</span>
           </div>
-        </div>`;
-      grid.appendChild(div);
+          <div><span class="card-badge">${topic.badge}</span></div>
+          <div class="card-footer">
+            <span class="card-pct">${pct}%</span>
+            <div class="card-progress progress-track">
+              <div class="progress-fill${pct >= 80 ? ' green' : ''}" style="width:${pct}%"></div>
+            </div>
+          </div>`;
+        grid.appendChild(div);
+      });
     });
   }
 

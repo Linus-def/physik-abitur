@@ -1,23 +1,52 @@
 // ══ QUIZ-MODUL ══
 const quizModule = (() => {
-  let state = { topicId: null, questions: [], idx: 0, score: 0, answered: false };
+  const MODE_META = {
+    basics: {
+      title: 'Basis',
+      icon: '🧠',
+      desc: 'Grundlagen, Definitionen und Standardrechnungen zum Warmwerden.'
+    },
+    advanced: {
+      title: 'Anspruchsvoll',
+      icon: '🔥',
+      desc: 'Vernetzte Aufgaben mit mehr Transfer und mehreren Rechenschritten.'
+    },
+    exam: {
+      title: 'Abi-Kontext',
+      icon: '🎯',
+      desc: 'Prüfungsnahe Fragen mit Kontext, Interpretation und Anwendung.'
+    }
+  };
+
+  let state = {
+    topicId: null,
+    questions: [],
+    orderedQuestions: [],
+    modes: [],
+    selectedMode: null,
+    idx: 0,
+    score: 0,
+    answered: false
+  };
   let eventsBound = false;
 
   function bindEvents(container) {
     if (eventsBound) return;
     eventsBound = true;
     container.addEventListener('click', e => {
-      if (e.target.closest('#quiz-start-btn')) { startQuiz(); return; }
+      const modeBtn = e.target.closest('.quiz-mode-btn');
+      if (modeBtn) { startQuiz(modeBtn.dataset.mode); return; }
       const opt = e.target.closest('.quiz-option');
       if (opt) { answer(parseInt(opt.dataset.i, 10)); return; }
       if (e.target.closest('#quiz-next')) { next(); return; }
-      if (e.target.closest('.quiz-restart-btn')) { render(state.topicId); return; }
+      if (e.target.closest('.quiz-restart-btn')) { startQuiz(state.selectedMode); return; }
+      if (e.target.closest('.quiz-change-mode-btn')) { showStart(); return; }
       if (e.target.closest('#quiz-exit-btn')) { showStart(); return; }
     });
   }
 
   function render(topicId) {
-    const questions = (TOPICS_DATA[topicId]?.quickcheck || [])
+    const orderedQuestions = (TOPICS_DATA[topicId]?.quickcheck || [])
       .map((q, index) => ({
         ...q,
         quizNumber: Number.isFinite(q.quizNumber) ? q.quizNumber : index + 1,
@@ -25,28 +54,96 @@ const quizModule = (() => {
       }))
       .sort((a, b) => a.quizNumber - b.quizNumber || a.originalIndex - b.originalIndex);
 
-    state = { topicId, questions, idx: 0, score: 0, answered: false };
+    state = {
+      topicId,
+      orderedQuestions,
+      questions: [],
+      modes: buildModes(orderedQuestions),
+      selectedMode: null,
+      idx: 0,
+      score: 0,
+      answered: false
+    };
     showStart();
+  }
+
+  function buildModes(questions) {
+    if (!questions.length) return [];
+
+    const explicitModes = Object.keys(MODE_META).map(modeId => {
+      const items = questions.filter(q => {
+        if (Array.isArray(q.quizModes)) return q.quizModes.includes(modeId);
+        return q.quizMode === modeId;
+      });
+      return {
+        id: modeId,
+        ...MODE_META[modeId],
+        questions: items
+      };
+    });
+
+    const hasExplicitModes = explicitModes.some(mode => mode.questions.length > 0);
+    if (hasExplicitModes) {
+      return explicitModes.filter(mode => mode.questions.length > 0);
+    }
+
+    const total = questions.length;
+    const basicsEnd = Math.max(6, Math.ceil(total * 0.4));
+    const advancedEnd = Math.max(basicsEnd + 5, Math.ceil(total * 0.75));
+
+    return [
+      { id: 'basics', ...MODE_META.basics, questions: questions.slice(0, basicsEnd) },
+      { id: 'advanced', ...MODE_META.advanced, questions: questions.slice(basicsEnd, advancedEnd) },
+      { id: 'exam', ...MODE_META.exam, questions: questions.slice(advancedEnd) }
+    ].filter(mode => mode.questions.length > 0);
+  }
+
+  function shuffleQuestions(questions) {
+    const shuffled = [...questions];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  function currentMode() {
+    return state.modes.find(mode => mode.id === state.selectedMode) || null;
   }
 
   function showStart() {
     const container = document.getElementById('tab-quiz');
     if (!container) return;
-    const total = state.questions.length;
     const topicTitle = TOPICS_DATA[state.topicId]?.title || '';
+    const modeCards = state.modes.map(mode => `
+      <button class="quiz-mode-btn" data-mode="${mode.id}">
+        <span class="quiz-mode-icon">${mode.icon}</span>
+        <span class="quiz-mode-copy">
+          <span class="quiz-mode-title">${mode.title}</span>
+          <span class="quiz-mode-desc">${mode.desc}</span>
+        </span>
+        <span class="quiz-mode-count">${mode.questions.length} Fragen</span>
+      </button>
+    `).join('');
+
     container.innerHTML = `
       <div class="quiz-intro">
         <div class="quiz-intro-icon">⚡</div>
         <h3 class="quiz-intro-title">Quickcheck</h3>
         <p class="quiz-intro-sub">${topicTitle}</p>
-        <div class="quiz-intro-meta">${total} Fragen · Multiple Choice</div>
-        <p class="quiz-intro-desc">Teste dein Wissen mit gezielten Fragen! Du erhältst nach jeder Antwort sofortiges Feedback mit ausführlichen Erklärungen.</p>
-        <button class="quiz-start-btn" id="quiz-start-btn">Quiz starten →</button>
+        <div class="quiz-intro-meta">${state.orderedQuestions.length} Fragen gesamt · jedes Mal neu gemischt</div>
+        <p class="quiz-intro-desc">Wähle einen Modus aus. Beim Neustart werden die Fragen in diesem Modus neu gemischt, damit sich das Quiz nicht jedes Mal gleich anfühlt.</p>
+        <div class="quiz-mode-list">${modeCards}</div>
       </div>`;
     bindEvents(container);
   }
 
-  function startQuiz() {
+  function startQuiz(modeId) {
+    const mode = state.modes.find(entry => entry.id === modeId) || state.modes[0];
+    if (!mode) return;
+
+    state.selectedMode = mode.id;
+    state.questions = shuffleQuestions(mode.questions);
     state.idx = 0;
     state.score = 0;
     state.answered = false;
@@ -60,13 +157,14 @@ const quizModule = (() => {
     if (state.idx >= state.questions.length) { showResult(container); return; }
 
     const q = state.questions[state.idx];
+    const mode = currentMode();
     state.answered = false;
     const total = state.questions.length;
     const pct = Math.round((state.idx / total) * 100);
     container.innerHTML = `
       <div class="quiz-header">
         <button class="quiz-exit-btn" id="quiz-exit-btn">← Beenden</button>
-        <span class="quiz-step">Frage ${q.quizNumber} / ${total}</span>
+        <span class="quiz-step">${mode ? `${mode.title} · ` : ''}Frage ${state.idx + 1} / ${total}</span>
         <div class="quiz-bar-wrap progress-track">
           <div class="progress-fill" style="width:${pct}%"></div>
         </div>
@@ -176,6 +274,7 @@ const quizModule = (() => {
 
   function showResult(container) {
     const { score, questions: qs } = state;
+    const mode = currentMode();
     const total = qs.length;
     const pct = Math.round(score / total * 100);
     const emoji = pct === 100 ? '🏆' : pct >= 80 ? '🎉' : pct >= 60 ? '👍' : pct >= 40 ? '📚' : '💪';
@@ -187,11 +286,13 @@ const quizModule = (() => {
     container.innerHTML = `
       <div class="quiz-result">
         <div class="quiz-result-emoji">${emoji}</div>
+        <div class="quiz-result-mode">${mode ? `${mode.icon} ${mode.title}` : 'Quickcheck'}</div>
         <div class="quiz-result-score">${score}/${total}</div>
         <div class="quiz-result-of">${pct}% richtig</div>
         <div class="quiz-result-msg">${msg}</div>
         <div class="quiz-result-actions">
           <button class="quiz-restart-btn">Nochmal starten</button>
+          <button class="quiz-change-mode-btn">Anderen Modus wählen</button>
         </div>
       </div>`;
     progress.setQuiz(state.topicId, score, total);

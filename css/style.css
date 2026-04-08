@@ -954,6 +954,67 @@ p + p { margin-top: 0.5em; }
   transition: opacity var(--transition), transform var(--transition);
 }
 .quiz-start-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+.quiz-mode-list {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+  margin-top: 4px;
+}
+.quiz-mode-btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  text-align: left;
+  background: linear-gradient(180deg, var(--surface), var(--bg-soft));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+}
+.quiz-mode-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+.quiz-mode-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: var(--accent-bg);
+}
+.quiz-mode-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.quiz-mode-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+.quiz-mode-desc {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+.quiz-mode-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-radius: 999px;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
 
 /* Quiz – question header */
 .quiz-header {
@@ -1010,6 +1071,32 @@ p + p { margin-top: 0.5em; }
 /* Quiz – result extras */
 .quiz-result-of { font-size: 15px; color: var(--text-2); margin-bottom: 4px; }
 .quiz-result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 4px; }
+.quiz-result-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+}
+.quiz-change-mode-btn {
+  padding: 12px 22px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .16s ease, border-color .16s ease;
+}
+.quiz-change-mode-btn:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent);
+}
 
 /* ══════════════════════════════════════════════
    LIGHTBOX
@@ -1471,6 +1558,13 @@ p + p { margin-top: 0.5em; }
   .resources-grid { grid-template-columns: 1fr; }
 
   .quiz-card { padding: 18px; }
+  .quiz-mode-btn {
+    grid-template-columns: auto 1fr;
+  }
+  .quiz-mode-count {
+    grid-column: 2;
+    justify-self: start;
+  }
 }
 
 

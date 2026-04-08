@@ -103,7 +103,7 @@ const TOPICS_DATA = {
         question: 'Wo ist bei harmonischer Schwingung die kinetische Energie maximal?',
         options: ['An den Umkehrpunkten', 'In der Gleichgewichtslage', 'Bei halber Amplitude', 'Immer gleich groß'],
         correct: 1,
-        explanation: 'In der Gleichgewichtslage: \\(s = 0\\) → \\(E_{\\text{pot}} = 0\\). Die gesamte Energie ist kinetisch.'
+        explanation: 'In der Gleichgewichtslage: \\(s = 0\\) → \\(E_{\\text{pot}} = 0\\). Die gesamte Energie ist kinetisch.',       detailedExplanation: 'Energie-Argumentation: Gesamtenergie = E_kin + E_pot. In der Gleichgewichtslage (s=0) ist E_pot = 0 (keine Federausdehnung, keine Fadenpendel-Höhe). Also muss E_kin = E_ges = maximal sein. An den Umkehrpunkten ist es genau umgekehrt: v=0, also E_kin=0, E_pot=E_ges.'
       },
       {
         question: 'Bei welcher Erregerfrequenz tritt Resonanz auf?',
@@ -114,7 +114,7 @@ const TOPICS_DATA = {
           'Resonanz ist unabhängig von der Frequenz'
         ],
         correct: 2,
-        explanation: 'Resonanz tritt auf, wenn \\(f_E = f_0\\). Dann wird die Amplitude maximal.'
+        explanation: 'Resonanz tritt auf, wenn \\(f_E = f_0\\). Dann wird die Amplitude maximal.',       detailedExplanation: 'Resonanz ist der kritischste Spezialfall erzwungener Schwingungen. Bei f_E = f_0 gibt das System bei jeder Schwingung maximal Energie an den Erreger ab und nimmt maximal Energie auf. Ohne Dämpfung würde die Amplitude theoretisch unendlich wachsen. Mit Dämpfung begrenzt der Energieverlust die Amplitude. Merke: Phasenverschiebung bei Resonanz = 90\u00b0.',       detailedExplanation: 'Resonanz ist der kritischste Spezialfall erzwungener Schwingungen. Bei f_E = f_0 gibt das System bei jeder Schwingung maximal Energie an den Erreger ab und nimmt maximal Energie auf. Ohne Dämpfung würde die Amplitude theoretisch unendlich wachsen. Mit Dämpfung begrenzt der Energieverlust die Amplitude. Merke: Phasenverschiebung bei Resonanz = 90\u00b0.'
       },
       {
         question: 'Ein Schwingungsystem hat \\(T = 1{,}0\\,\\text{s}\\) und Amplitude \\(\\hat{s} = 4\\,\\text{cm}\\). Wie groß ist \\(v_{\\max}\\)?',
@@ -300,7 +300,7 @@ const TOPICS_DATA = {
           'Die Kraft auf einen Leiter ist proportional zum Strom.'
         ],
         correct: 1,
-        explanation: 'Lenz\'sche Regel: Der induzierte Strom erzeugt ein Feld, das der Flussänderung entgegenwirkt. Das erklärt das Minuszeichen im Induktionsgesetz.'
+        explanation: 'Lenz\'sche Regel: Der induzierte Strom erzeugt ein Feld, das der Flussänderung entgegenwirkt. Das erklärt das Minuszeichen im Induktionsgesetz.',       detailedExplanation: 'Die Lenz\'sche Regel ist das "Trägheitsprinzip" für magnetische Felder. Wenn ein Magnet auf eine Spule zufährt, erzeugt der induzierte Strom ein Magnetfeld, das dem annähernden Magneten abstoBt. Das kostet Kraft (Energieerhaltung!). Das Minuszeichen in U_ind = -n\u00b7\u0394\u03a6/\u0394t drückt genau diese Gegenreaktion aus.'
       },
       {
         question: 'Ein Kondensator \\(C = 100\\,\\mu\\text{F}\\) wird auf \\(U = 400\\,\\text{V}\\) geladen. Gespeicherte Energie?',
@@ -384,8 +384,8 @@ const TOPICS_DATA = {
           'In +x-Richtung (wie die Bewegung)',
           'In –z-Richtung (entgegen B)'
         ],
-        correct: 0,
-        explanation: 'Für positive Ladung: \\(\\vec{F} = q(\\vec{v}\\times\\vec{B})\\). \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\). Da Elektron negativ (\\(q < 0\\)): Kraft in +y... Nein: \\(q(-e)\\cdot(-\\hat{y}) = +e\\hat{y}\\)? Achtung: \\(\\hat{x}\\times\\hat{z} = -\\hat{y}\\), daher für \\(-e\\): \\(F = (-e)(v)(-\\hat{y}) = +ev\\hat{y}\\)... Genauer: Kraft auf Elektron zeigt in –y-Richtung (Negative Ladung kehrt Richtung um).'
+              explanation: 'Schritt-für-Schritt: v in +x, B in +z. Für positive Ladung: \\(\\vec{F} = q(\\vec{v} \\times \\vec{B}) = q \\cdot v \\cdot B (\\hat{x} \\times \\hat{z}) = q \\cdot v \\cdot B \\cdot (-\\hat{y})\\). Das Elektron hat \\(q = -e\\) (negativ), daher: \\(\\vec{F} = (-e) \\cdot v \\cdot B \\cdot (-\\hat{y}) = +e \\cdot v \\cdot B \\cdot \\hat{y}\\). Die Kraft zeigt also in +y-Richtung (nach oben). Merke: Bei negativen Ladungen dreht sich die Kraftrichtung um!'
+        correct: 1,
       },
       {
         question: 'Wann induziert ein vollständig in ein homogenes B-Feld eingetauchter Rahmen KEINE Spannung?',

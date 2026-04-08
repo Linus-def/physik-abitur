@@ -56,7 +56,7 @@ const tasksRenderer = (() => {
       ${tasks.length ? tasks.map(t => taskCardHtml(topicId, t)).join('') : '<p style="color:var(--text-3);font-size:14px;padding:8px 0">Keine Aufgaben für dieses Jahr.</p>'}
     `;
     bindEvents(container);
-    if (window.MathJax) setTimeout(() => MathJax.typesetPromise([container]).catch(e => {}), 0);
+    setTimeout(() => mathjaxTypeset([container]).catch(() => {}), 0);
   }
 
   function bePtsClass(pts) {
@@ -151,7 +151,7 @@ const tasksRenderer = (() => {
     if (!box) return;
     const isOpen = box.classList.toggle('open');
     if (btn) btn.classList.toggle('revealed', isOpen);
-    if (isOpen && window.MathJax) MathJax.typesetPromise([box]);
+    if (isOpen) mathjaxTypeset([box]);
   }
 
   function toggleDeeper(domId) {
@@ -163,7 +163,7 @@ const tasksRenderer = (() => {
       btn.classList.toggle('revealed', isOpen);
       btn.textContent = isOpen ? '🧠 Weniger anzeigen' : '🧠 Tiefer verstehen';
     }
-    if (isOpen && window.MathJax) MathJax.typesetPromise([box]);
+    if (isOpen) mathjaxTypeset([box]);
   }
 
   function toggleSolution(domId, topicId, key) {
@@ -176,7 +176,7 @@ const tasksRenderer = (() => {
     if (btn) btn.classList.add('revealed');
     if (deeperBtn) deeperBtn.style.display = 'inline-flex';
     const els = [solBox].filter(Boolean);
-    if (window.MathJax) MathJax.typesetPromise(els);
+    mathjaxTypeset(els);
   }
 
   function rate(topicId, key, rating, domId) {

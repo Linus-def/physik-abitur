@@ -384,7 +384,7 @@ const TOPICS_DATA = {
           'In +x-Richtung (wie die Bewegung)',
           'In –z-Richtung (entgegen B)'
         ],
-              explanation: 'Schritt-für-Schritt: v in +x, B in +z. Für positive Ladung: \\(\\vec{F} = q(\\vec{v} \\times \\vec{B}) = q \\cdot v \\cdot B (\\hat{x} \\times \\hat{z}) = q \\cdot v \\cdot B \\cdot (-\\hat{y})\\). Das Elektron hat \\(q = -e\\) (negativ), daher: \\(\\vec{F} = (-e) \\cdot v \\cdot B \\cdot (-\\hat{y}) = +e \\cdot v \\cdot B \\cdot \\hat{y}\\). Die Kraft zeigt also in +y-Richtung (nach oben). Merke: Bei negativen Ladungen dreht sich die Kraftrichtung um!'
+        explanation: 'Schritt-für-Schritt: v in +x, B in +z. Für positive Ladung: \\(\\vec{F} = q(\\vec{v} \\times \\vec{B}) = q \\cdot v \\cdot B (\\hat{x} \\times \\hat{z}) = q \\cdot v \\cdot B \\cdot (-\\hat{y})\\). Das Elektron hat \\(q = -e\\) (negativ), daher: \\(\\vec{F} = (-e) \\cdot v \\cdot B \\cdot (-\\hat{y}) = +e \\cdot v \\cdot B \\cdot \\hat{y}\\). Die Kraft zeigt also in +y-Richtung (nach oben). Merke: Bei negativen Ladungen dreht sich die Kraftrichtung um!',
         correct: 1,
       },
       {
@@ -490,7 +490,7 @@ Die Wellen treffen gegenphasig aufeinander – Wellenberg trifft auf Wellental. 
 
 **Wichtig:** Interferenz funktioniert nur bei **kohärentem Licht** – Licht, dessen Wellen eine feste, konstante Phasenbeziehung haben (z.B. Laser). Gewöhnliches Licht (Glühbirne) ist inkohärent und erzeugt kein stabiles Muster.
 
-`
+`,
         formulas: [
           { label: 'Konstruktiv (Max.)', latex: '\\Delta s = m \\cdot \\lambda \\quad (m = 0,\\pm1,\\pm2,\\ldots)' },
           { label: 'Destruktiv (Min.)', latex: '\\Delta s = \\left(m + \\frac{1}{2}\\right) \\cdot \\lambda' },
@@ -534,7 +534,7 @@ Statt zwei Spalten hat ein Gitter Hunderte oder Tausende von Spalten pro Millime
 **Näherung für kleine Winkel:**
 Für \\(\\vartheta < 5\u00b0\\) gilt \\(\\sin\\vartheta \\approx \\tan\\vartheta = y/L\\). Damit ergibt sich direkt die Position der Maxima auf dem Schirm.
 
-`
+`,
         formulas: [
           { label: 'Gangunterschied', latex: '\\Delta s = g \\cdot \\sin\\vartheta', note: 'g = Gitterkonstante / Spaltabstand' },
           { label: 'Maxima (Gitter)', latex: 'g \\cdot \\sin\\vartheta_m = m \\cdot \\lambda' },
@@ -588,7 +588,7 @@ Achtung: Beim Einzelspalt bezeichnen diese Gleichungen **Minima** (dunkle Stelle
 **Anwendung: Haardicke messen mit Licht**
 Nach dem Babinet-Prinzip erzeugt ein dünner Draht (z.B. ein Haar) dasselbe Beugungsmuster wie ein Spalt gleicher Breite. Man misst b über \\(b = m \\lambda L / y_m\\).
 
-`
+`,
         formulas: [
           { label: 'Minima (Einzelspalt)', latex: 'b \\cdot \\sin\\vartheta = m \\cdot \\lambda \\quad (m = \\pm1, \\pm2, \\ldots)' },
           { label: 'Breite zentrales Max.', latex: '\\Delta y = \\frac{2 \\lambda L}{b}', note: 'nimmt zu wenn b kleiner wird' },
@@ -640,7 +640,7 @@ Jeder Punkt einer Wellenfront wird zur Quelle einer neuen Kugelwelle (Elementarw
 **5. Polarisation:**
 Licht als Transversalwelle kann polarisiert werden – die Schwingungsrichtung wird auf eine Richtung beschränkt. Bei Polarisationsfiltern: Intensität nach Filter folgt \\(I = I_0 \\cdot \\cos^2\\varphi\\) (Malus-Gesetz).
 
-`
+`,
         formulas: [
           { label: 'Snellius', latex: 'n_1 \\cdot \\sin\\alpha_1 = n_2 \\cdot \\sin\\alpha_2' },
         ],

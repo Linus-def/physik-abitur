@@ -5,6 +5,16 @@ const app = (() => {
   let currentTab = 'theory';
   let formulaBuilt = false;
 
+  function typesetMath(elements) {
+    if (window.mathjaxTypeset) {
+      return window.mathjaxTypeset(elements);
+    }
+    if (window.MathJax && MathJax.typesetPromise) {
+      return MathJax.typesetPromise(elements);
+    }
+    return Promise.resolve();
+  }
+
   // ── INIT ──
   function init() {
     buildSidebar();
@@ -135,7 +145,7 @@ const app = (() => {
 
     if (tab === 'theory') {
       panel.innerHTML = topicsRenderer.renderTheory(currentTopicId);
-      if (window.MathJax) MathJax.typesetPromise([panel]);
+      typesetMath([panel]);
     } else if (tab === 'tasks') {
       tasksRenderer.render(currentTopicId);
     } else if (tab === 'quiz') {
@@ -315,7 +325,6 @@ const app = (() => {
 
     const dayNames = ['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
     const today    = new Date().getDay(); // 0=So, 1=Mo ...
-        const offset  = today === 0 ? 1 : (8 - today) % 7; // Fix #26: Sonntag (0) → Offset 1 (naechster Montag)
     const offset   = today === 0 ? 1 : (8 - today) % 7; // nächster Montag
 
     let html = `

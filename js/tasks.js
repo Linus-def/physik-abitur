@@ -56,7 +56,7 @@ const tasksRenderer = (() => {
       ${tasks.length ? tasks.map(t => taskCardHtml(topicId, t)).join('') : '<p style="color:var(--text-3);font-size:14px;padding:8px 0">Keine Aufgaben für dieses Jahr.</p>'}
     `;
     bindEvents(container);
-    if (window.MathJax) MathJax.typesetPromise([container]);
+    if (window.MathJax) setTimeout(() => MathJax.typesetPromise([container]).catch(e => {}), 0);
   }
 
   function bePtsClass(pts) {

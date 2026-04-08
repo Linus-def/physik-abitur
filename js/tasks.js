@@ -26,6 +26,56 @@ const tasksRenderer = (() => {
     return summary;
   }
 
+  function defaultExpectationItems(operator, sub) {
+    const points = sub.points || 0;
+    const compact = points > 0 && points <= 2;
+    switch (operator.key) {
+      case 'calculate':
+        return compact
+          ? ['passenden Ansatz nennen', 'richtig einsetzen und Einheit angeben']
+          : ['passenden Ansatz oder die richtige Formel nennen', 'Zwischenschritte mit sinnvollen Einheiten zeigen', 'Endergebnis fachlich knapp einordnen oder plausibilisieren'];
+      case 'explain':
+        return compact
+          ? ['zentralen physikalischen Zusammenhang benennen', 'Fachbegriffe korrekt verwenden']
+          : ['Ursache und Wirkung physikalisch verknüpfen', 'passende Fachbegriffe sauber verwenden', 'nicht nur das Ergebnis nennen, sondern den Zusammenhang erklären'];
+      case 'justify':
+        return compact
+          ? ['klare Aussage treffen', 'mit passendem Gesetz oder Prinzip begründen']
+          : ['klare Aussage oder Entscheidung formulieren', 'mit Gesetz, Modell oder Formel begründen', 'die Begründung sichtbar auf die konkrete Situation beziehen'];
+      case 'compare':
+        return compact
+          ? ['mindestens einen klaren Vergleichspunkt nennen', 'Unterschied oder Gemeinsamkeit deutlich machen']
+          : ['einen sinnvollen Vergleichsmaßstab wählen', 'mindestens eine Gemeinsamkeit oder einen Unterschied sauber benennen', 'mit einem kurzen Fazit abschließen'];
+      default:
+        return compact
+          ? ['relevante Information korrekt ablesen oder auswählen', 'passenden Schluss ziehen']
+          : ['relevante Angaben aus Text, Diagramm oder Situation herausziehen', 'daraus einen physikalisch passenden Schluss ableiten', 'das Ergebnis knapp fachlich einordnen'];
+    }
+  }
+
+  function expectationIntro(operator, sub) {
+    const points = sub.points || 0;
+    if (points >= 5) return `Bei ${points} BE wird ein sauberer, nachvollziehbarer Lösungsweg erwartet und nicht nur das Endergebnis.`;
+    if (points >= 3) return `Bei ${points} BE solltest du den Kerngedanken klar zeigen und ihn sauber mit der Situation verknüpfen.`;
+    return points ? `Bei ${points} BE zählt vor allem der zentrale Gedanke in knapper, richtiger Form.` : 'Hier zählt vor allem, dass der physikalische Kern richtig getroffen wird.';
+  }
+
+  function renderExpectation(sub, operator) {
+    const items = Array.isArray(sub.expectation) && sub.expectation.length
+      ? sub.expectation
+      : defaultExpectationItems(operator, sub);
+
+    return `
+      <div class="expectation-box ${operator.key}">
+        <div class="expectation-label">Erwartungshorizont</div>
+        <div class="expectation-intro">${expectationIntro(operator, sub)}</div>
+        <div class="expectation-list">
+          ${items.map(item => `<span>${item}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   function bindEvents(container) {
     if (eventsBound) return;
     eventsBound = true;
@@ -192,6 +242,7 @@ const tasksRenderer = (() => {
         <div class="subtask-body${isOpen ? ' open' : ''}" id="body-${domId}">
           <div class="subtask-inner">
             <div class="theory-text">${sub.text}</div>
+            ${renderExpectation(sub, operator)}
             ${sub.hint ? `<button class="pdf-toggle-btn" data-action="hint" data-dom-id="${domId}" id="hint-btn-${domId}">💡 Hinweis</button>` : ''}
             <button class="pdf-toggle-btn" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}" id="sol-btn-${domId}">Lösung aufdecken</button>
             ${sub.hint ? `<div class="hint-box" id="hint-box-${domId}"><div class="hint-label">💡 Hinweis</div>${sub.hint}</div>` : ''}

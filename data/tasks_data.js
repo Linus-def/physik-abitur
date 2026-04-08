@@ -28,7 +28,12 @@ const TASKS_DATA = {
           text: 'Berechne die Eigenfrequenz \\(f_0\\) der Boje. (\\(\\rho = 1{,}0 \\cdot 10^3\\,\\text{kg/m}^3\\), \\(g = 9{,}81\\,\\text{m/s}^2\\))',
           hint: '\\(f_0 = \\frac{1}{2\\pi}\\sqrt{\\frac{A\\rho g}{m}}\\), berechne zuerst die Querschnittsfläche A.',
           solution: '\\[A = \\pi r^2 = \\pi \\cdot (1{,}275\\,\\text{m})^2 \\approx 5{,}11\\,\\text{m}^2\\] \\[f_0 = \\frac{1}{2\\pi}\\sqrt{\\frac{5{,}11 \\cdot 1000 \\cdot 9{,}81}{4900}} \\approx \\frac{1}{2\\pi}\\sqrt{10{,}22} \\approx 0{,}51\\,\\text{Hz}\\]',
-          deeperExplanation: null
+          expectation: [
+            'zuerst die Kreis- oder Querschnittsfläche korrekt aus dem Durchmesser bestimmen',
+            'die Frequenzformel mit den gegebenen Größen sauber ansetzen',
+            'das Ergebnis mit Einheit angeben und als Eigenfrequenz der Boje deuten'
+          ],
+          deeperExplanation: 'Typischer Fehler: Den Durchmesser direkt als Radius verwenden. Außerdem wird in solchen Aufgaben oft erwartet, dass du erst die Geometrie sauber klärst und erst danach einsetzt.'
         },
         {
           label: 'c)',
@@ -36,7 +41,12 @@ const TASKS_DATA = {
           text: 'Berechne die Erregerfrequenz der Meereswellen und beurteile, ob Resonanz auftritt. Welche Gefahr besteht?',
           hint: '\\(f_E = c/\\lambda\\). Vergleiche mit \\(f_0\\).',
           solution: '\\[f_E = \\frac{c}{\\lambda} = \\frac{6{,}11\\,\\text{m/s}}{12\\,\\text{m}} \\approx 0{,}51\\,\\text{Hz}\\] Da \\(f_E = f_0 \\approx 0{,}51\\,\\text{Hz}\\), liegt <strong>Resonanz</strong> vor. Selbst bei kleiner Wellenamplitude kann die Boje sehr große Amplituden entwickeln – gefährlich für Verankerung und Schiffsbetrieb.',
-          deeperExplanation: 'Dies ist das Problem der Resonanzkatastrophe. Je geringer die Dämpfung, desto größer die Resonanzamplitude. Im Extremfall kann die Boje kentern.'
+          expectation: [
+            'die Erregerfrequenz rechnerisch bestimmen und mit der Eigenfrequenz vergleichen',
+            'klar entscheiden, ob Resonanz vorliegt',
+            'die technische Gefahr physikalisch begründen und nicht nur benennen'
+          ],
+          deeperExplanation: 'Dies ist das Problem der Resonanzkatastrophe. Je geringer die Dämpfung, desto größer die Resonanzamplitude. Im Extremfall kann die Boje kentern. Für eine volle Begründung sollte die fast gleiche Frequenz als Ursache der starken Energieaufnahme ausdrücklich genannt werden.'
         }
       ]
     },
@@ -78,6 +88,10 @@ const TASKS_DATA = {
           text: 'Die Amplitude wird verdoppelt. Wie ändert sich die Periodendauer? Begründe.',
           hint: 'Denke an die Isochronie.',
           solution: 'Die Periodendauer ändert sich nicht. Bei der harmonischen Schwingung gilt Isochronie: \\(T = 2\\pi\\sqrt{L/g}\\) ist unabhängig von der Amplitude.',
+          expectation: [
+            'klar sagen, dass sich \\(T\\) idealisiert nicht ändert',
+            'die Begründung direkt mit der Formel oder dem Begriff Isochronie verknüpfen'
+          ],
           deeperExplanation: 'Die Isochronie gilt nur näherungsweise für kleine Winkel. Bei \\(\\hat{s} = 1\\,\\text{m}\\) und \\(L = 1\\,\\text{m}\\) wäre der Winkel 90° – hier versagt das Fadenpendel-Modell.'
         }
       ]
@@ -307,7 +321,12 @@ const TASKS_DATA = {
           text: 'Eine Messreihe liefert (Breite \\(a = 8\\,\\text{cm}\\)): \\(I = 5\\,\\text{A} \\to F = 12{,}5\\,\\text{mN}\\); \\(I = 10\\,\\text{A} \\to F = 25{,}1\\,\\text{mN}\\); \\(I = 20\\,\\text{A} \\to F = 49{,}8\\,\\text{mN}\\). Weise \\(F \\propto I\\) nach und bestimme \\(B\\).',
           hint: 'Bilde den Quotienten \\(F/I\\) für alle Messwerte.',
           solution: '\\(F/I\\): 2,50 / 2,51 / 2,49 mN/A – annähernd konstant → \\(F \\propto I\\). \\[B = \\frac{F}{I \\cdot a} = \\frac{2{,}5 \\cdot 10^{-3}}{0{,}08} \\approx 0{,}031\\,\\text{T}\\]',
-          deeperExplanation: 'Der Proportionalitätsfaktor \\(k = F/(I\\cdot a)\\) entspricht der magnetischen Flussdichte B.'
+          expectation: [
+            'den Proportionalitätsnachweis über nahezu konstante Quotienten führen',
+            'danach erst die Flussdichte aus dem Proportionalitätsfaktor bestimmen',
+            'bei der Rechnung sauber zwischen mN und N umrechnen'
+          ],
+          deeperExplanation: 'Der Proportionalitätsfaktor \\(k = F/(I\\cdot a)\\) entspricht der magnetischen Flussdichte B. Typisch im Abi ist, dass man den Nachweis nicht nur behauptet, sondern mit den Zahlenwerten sichtbar belegt.'
         },
         {
           label: 'c)',
@@ -315,7 +334,12 @@ const TASKS_DATA = {
           text: 'Der maximale Strom beträgt \\(I_{\\max} = 60\\,\\text{A}\\) bei \\(U = 230\\,\\text{V}\\). Berechne den Gesamtwiderstand des Kreises.',
           hint: '\\(R = U/I_{\\max}\\)',
           solution: '\\[R_{\\text{ges}} = \\frac{230\\,\\text{V}}{60\\,\\text{A}} \\approx 3{,}8\\,\\Omega\\]',
-          deeperExplanation: 'Die Induktivität der Spule verzögert den Stromanstieg und gibt dem Schalter Zeit zum Auslösen – ein wichtiges Sicherheitsprinzip.'
+          expectation: [
+            'das Ohmsche Gesetz korrekt auf den Gesamtkreis anwenden',
+            'den Zahlenwert mit Einheit angeben',
+            'das Ergebnis als Grenzwert verstehen, bei dem der Schalter auslösen soll'
+          ],
+          deeperExplanation: 'Die Induktivität der Spule verzögert den Stromanstieg und gibt dem Schalter Zeit zum Auslösen – ein wichtiges Sicherheitsprinzip. Inhaltlich lohnt sich hier der Gedanke, dass nicht nur gerechnet, sondern auch die Schutzfunktion des Systems verstanden werden soll.'
         }
       ]
     },
@@ -909,7 +933,12 @@ const TASKS_DATA = {
           text: 'Berechne die maximale kinetische Energie der emittierten Elektronen und die nötige Gegenspannung.',
           hint: '\\(E_{\\text{kin}} = E_{\\text{Ph}} - W_A\\), \\(eU_G = E_{\\text{kin}}\\)',
           solution: '\\[E_{\\text{kin}} = 5{,}0 - 3{,}2 = 1{,}8\\,\\text{eV} = 2{,}88 \\cdot 10^{-19}\\,\\text{J}\\] \\[U_G = E_{\\text{kin}}/e = 1{,}8\\,\\text{V}\\]',
-          deeperExplanation: 'Die Gegenspannung entspricht zahlenmäßig der kinetischen Energie in eV. Das ist die Definition des Elektronenvolts.'
+          expectation: [
+            'zuerst die Energiebilanz des Photoeffekts korrekt aufstellen',
+            'die kinetische Energie sauber aus Photonenergie minus Austrittsarbeit bestimmen',
+            'die Gegenspannung als Grenzspannung zum Abbremsen der schnellsten Elektronen deuten'
+          ],
+          deeperExplanation: 'Die Gegenspannung entspricht zahlenmäßig der kinetischen Energie in eV. Das ist die Definition des Elektronenvolts. Fachlich stark ist hier, wenn du zusätzlich erklärst, dass gerade die schnellsten Elektronen bei dieser Spannung nicht mehr die Anode erreichen.'
         }
       ]
     }
@@ -932,7 +961,12 @@ const TASKS_DATA = {
           text: 'Berechne den Abstand des Hindernisses.',
           hint: 'Das Signal legt die Strecke zum Hindernis zweimal zurück: \\(d = c \\cdot \\Delta t / 2\\).',
           solution: '\\[d = \\frac{c \\cdot \\Delta t}{2} = \\frac{3{,}0 \\cdot 10^8 \\cdot 1{,}5 \\cdot 10^{-7}}{2} = 22{,}5\\,\\text{m}\\]',
-          deeperExplanation: null
+          expectation: [
+            'die Hin- und Rückstrecke ausdrücklich berücksichtigen',
+            'die Formel mit den gegebenen Größen sauber einsetzen',
+            'das Ergebnis als realen Fahrzeugabstand interpretieren'
+          ],
+          deeperExplanation: 'Der Faktor \\(1/2\\) ist hier der entscheidende Punkt: Die gemessene Laufzeit gehört zum Hin- und Rückweg des Signals. Ohne diese Einordnung wäre das Ergebnis genau doppelt so groß.'
         },
         {
           label: 'b)',
@@ -981,7 +1015,12 @@ const TASKS_DATA = {
           text: 'Stelle das \\(y\\)-\\(t\\)-Diagramm des Punktes für \\(0 \\leq t \\leq 0{,}80\\,\\text{s}\\) dar.',
           hint: 'Start: \\(y = 0\\), Bewegung nach oben → Sinusfunktion mit \\(T = 0{,}40\\,\\text{s}\\).',
           solution: '\\(y(t) = 3{,}0\\,\\text{cm} \\cdot \\sin(2\\pi t / 0{,}40\\,\\text{s})\\). Zwei vollständige Perioden im Bereich 0 bis 0,80 s.',
-          deeperExplanation: null
+          expectation: [
+            'die richtige Startlage und Bewegungsrichtung aus dem Momentanbild übernehmen',
+            'Amplitude und Periodendauer korrekt ins Zeitdiagramm übertragen',
+            'nicht nur eine Formel hinschreiben, sondern den Verlauf als Sinus im Zeitfenster darstellen'
+          ],
+          deeperExplanation: 'Hier wird oft der Übergang vom Ortsbild zum Zeitbild verwechselt. Ein Punkt auf der Welle führt selbst eine Schwingung aus, während die Welle als Form räumlich weiterläuft.'
         }
       ]
     },

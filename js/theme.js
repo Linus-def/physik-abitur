@@ -1,6 +1,12 @@
 // Theme-Initialisierung (vor dem Render, im <head>)
 (function () {
+  var storedTheme = null;
+  try {
+    storedTheme = localStorage.getItem('theme');
+  } catch (e) {}
+
   var theme = window._theme ||
+    storedTheme ||
     (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
 })();
@@ -17,12 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
     theme = t;
     html.setAttribute('data-theme', t);
     window._theme = t;
+    try {
+      localStorage.setItem('theme', t);
+    } catch (e) {}
+
+    var themeColor = document.querySelector('meta[name="theme-color"]');
     if (t === 'dark') {
-      icon.textContent = '\u2600\uFE0F';
-      label.textContent = 'Light Mode';
+      icon.textContent = '\u2600';
+      label.textContent = 'Heller Modus';
+      if (themeColor) themeColor.setAttribute('content', '#131f24');
     } else {
-      icon.textContent = '\uD83C\uDF19';
-      label.textContent = 'Dark Mode';
+      icon.textContent = '\u263E';
+      label.textContent = 'Dunkler Modus';
+      if (themeColor) themeColor.setAttribute('content', '#58cc02');
     }
   }
 

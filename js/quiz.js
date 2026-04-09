@@ -85,23 +85,6 @@ const quizModule = (() => {
   function buildModes(questions) {
     if (!questions.length) return [];
 
-    const explicitModes = Object.keys(MODE_META).map(modeId => {
-      const items = questions.filter(q => {
-        if (Array.isArray(q.quizModes)) return q.quizModes.includes(modeId);
-        return q.quizMode === modeId;
-      });
-      return {
-        id: modeId,
-        ...MODE_META[modeId],
-        questions: items
-      };
-    });
-
-    const hasExplicitModes = explicitModes.some(mode => mode.questions.length > 0);
-    if (hasExplicitModes) {
-      return explicitModes.filter(mode => mode.questions.length > 0);
-    }
-
     const categorized = {
       basics: [],
       advanced: [],
@@ -109,6 +92,17 @@ const quizModule = (() => {
     };
 
     questions.forEach(question => {
+      const explicitModeIds = Array.isArray(question.quizModes)
+        ? question.quizModes
+        : question.quizMode ? [question.quizMode] : [];
+
+      if (explicitModeIds.length) {
+        explicitModeIds.forEach(modeId => {
+          if (categorized[modeId]) categorized[modeId].push(question);
+        });
+        return;
+      }
+
       categorized[classifyQuestionMode(question)].push(question);
     });
 

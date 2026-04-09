@@ -4008,9 +4008,10 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
 
   .back-btn {
     padding: 8px 10px;
-    border: 1px solid var(--border);
-    background: var(--surface);
+    border: none;
+    background: transparent;
     font-weight: 700;
+    box-shadow: none;
   }
 
   #topic-topbar-info {
@@ -4034,14 +4035,14 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
     padding: 11px 16px;
     border-radius: 999px;
     border-bottom: none;
-    border: 1px solid transparent;
+    border: none;
     background: var(--surface);
     box-shadow: var(--shadow-sm);
   }
 
   .tab.active {
     background: var(--accent-bg);
-    border-color: rgba(88, 204, 2, 0.22);
+    box-shadow: 0 8px 18px rgba(88, 204, 2, 0.14);
   }
 
   #topic-tabs {

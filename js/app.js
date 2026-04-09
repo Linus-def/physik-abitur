@@ -218,20 +218,45 @@ const app = (() => {
     const nav = document.getElementById('topic-nav');
     if (!nav) return;
     nav.innerHTML = '';
+
+    const navLabel = document.createElement('div');
+    navLabel.className = 'nav-section-label';
+    navLabel.textContent = 'Navigation';
+    nav.appendChild(navLabel);
+
+    const homeBtn = document.createElement('button');
+    homeBtn.className = `nav-item nav-item-home${!currentTopicId ? ' active' : ''}`;
+    homeBtn.type = 'button';
+    homeBtn.innerHTML = `
+      <div class="nav-item-content">
+        <div class="nav-item-name">Übersicht</div>
+        <div class="nav-item-meta">
+          <span class="nav-topic-kind">Startseite · Alle Themen · Countdown</span>
+        </div>
+      </div>`;
+    homeBtn.addEventListener('click', navigateHome);
+    nav.appendChild(homeBtn);
+
+    const topicLabel = document.createElement('div');
+    topicLabel.className = 'nav-section-label';
+    topicLabel.textContent = 'Themen';
+    nav.appendChild(topicLabel);
+
     Object.values(TOPICS_DATA).forEach(topic => {
-      const li = document.createElement('li');
-      li.innerHTML = `
-        <button class="nav-item${currentTopicId === topic.id ? ' active' : ''}" data-id="${topic.id}">
-          <div class="nav-item-content">
-            <div class="nav-item-name">${topic.title}</div>
-            <div class="nav-item-meta">
-              <span class="nav-stars">${topicsRenderer.starsHtml(topic.priority)}</span>
-              <span class="nav-topic-kind">Theorie · Aufgaben · Quiz</span>
-            </div>
+      const button = document.createElement('button');
+      button.className = `nav-item${currentTopicId === topic.id ? ' active' : ''}`;
+      button.type = 'button';
+      button.dataset.id = topic.id;
+      button.innerHTML = `
+        <div class="nav-item-content">
+          <div class="nav-item-name">${topic.title}</div>
+          <div class="nav-item-meta">
+            <span class="nav-stars">${topicsRenderer.starsHtml(topic.priority)}</span>
+            <span class="nav-topic-kind">Theorie · Aufgaben · Quiz</span>
           </div>
-        </button>`;
-      li.querySelector('button').addEventListener('click', () => navigateTopic(topic.id));
-      nav.appendChild(li);
+        </div>`;
+      button.addEventListener('click', () => navigateTopic(topic.id));
+      nav.appendChild(button);
     });
   }
 

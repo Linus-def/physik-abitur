@@ -124,27 +124,29 @@
 
   <!-- THEMA -->
   <div id="view-topic" class="view">
-    <div id="topic-topbar">
-      <button class="back-btn" id="btn-back">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Übersicht
-      </button>
-      <div id="topic-topbar-info">
-        <h2 id="topic-name"></h2>
-        <div id="topic-topbar-meta"></div>
+    <div class="topic-sticky-shell">
+      <div id="topic-topbar">
+        <button class="back-btn" id="btn-back">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Übersicht
+        </button>
+        <div id="topic-topbar-info">
+          <h2 id="topic-name"></h2>
+          <div id="topic-topbar-meta"></div>
+        </div>
       </div>
-    </div>
 
-    <div id="topic-tabs">
-      <button class="tab active" data-tab="theory">
-        <span class="tab-icon">📖</span> Theorie
-      </button>
-      <button class="tab" data-tab="tasks">
-        <span class="tab-icon">✏️</span> Abituraufgaben
-      </button>
-      <button class="tab" data-tab="quiz">
-        <span class="tab-icon">⚡</span> Quickcheck
-      </button>
+      <div id="topic-tabs">
+        <button class="tab active" data-tab="theory">
+          <span class="tab-icon">📖</span> Theorie
+        </button>
+        <button class="tab" data-tab="tasks">
+          <span class="tab-icon">✏️</span> Abituraufgaben
+        </button>
+        <button class="tab" data-tab="quiz">
+          <span class="tab-icon">⚡</span> Quickcheck
+        </button>
+      </div>
     </div>
 
     <div id="tab-theory" class="tab-panel active"></div>

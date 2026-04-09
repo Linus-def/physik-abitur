@@ -51,6 +51,49 @@ const tasksRenderer = (() => {
     return summary;
   }
 
+  function defaultExpectationItems(operator, sub) {
+    const points = sub.points || 0;
+    const compact = points > 0 && points <= 2;
+
+    switch (operator.key) {
+      case 'calculate':
+        return compact
+          ? ['passenden Ansatz nennen', 'korrekt einsetzen und Einheit angeben']
+          : ['passende Formel oder Grundgleichung wählen', 'Zwischenschritte sauber mit Einheit zeigen', 'Ergebnis fachlich kurz deuten'];
+      case 'explain':
+        return compact
+          ? ['zentralen Zusammenhang benennen', 'passende Fachbegriffe sauber verwenden']
+          : ['Ursache und Wirkung physikalisch verknüpfen', 'nicht nur das Ergebnis nennen, sondern den Zusammenhang erklären', 'die Aussage auf die konkrete Situation beziehen'];
+      case 'justify':
+        return compact
+          ? ['klare Aussage treffen', 'mit Gesetz, Modell oder Formel begründen']
+          : ['eine klare Entscheidung oder Aussage formulieren', 'mit einem physikalischen Prinzip begründen', 'die Begründung sichtbar auf die Aufgabe beziehen'];
+      case 'compare':
+        return compact
+          ? ['klaren Vergleichspunkt nennen', 'Gemeinsamkeit oder Unterschied deutlich machen']
+          : ['einen sinnvollen Vergleichsmaßstab wählen', 'mindestens einen wesentlichen Unterschied oder eine Gemeinsamkeit nennen', 'mit einem kurzen Fazit abschließen'];
+      default:
+        return compact
+          ? ['relevante Information richtig ablesen', 'passenden physikalischen Schluss ziehen']
+          : ['die relevanten Angaben sicher herausziehen', 'den passenden physikalischen Zusammenhang nutzen', 'das Ergebnis knapp einordnen'];
+    }
+  }
+
+  function renderExamFocus(sub, operator) {
+    const items = Array.isArray(sub.expectation) && sub.expectation.length
+      ? sub.expectation
+      : defaultExpectationItems(operator, sub);
+
+    return `
+      <div class="study-block study-block-focus">
+        <div class="study-block-label">Worauf in der Lösung geachtet wird</div>
+        <ul class="study-focus-list">
+          ${items.map(item => `<li>${item}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
   function bePtsClass(pts) {
     if (!pts) return '';
     const n = parseInt(pts, 10);
@@ -304,6 +347,8 @@ const tasksRenderer = (() => {
           <div class="study-block-label">Lösung direkt zur Aufgabe</div>
           <div class="study-block-content">${sub.solution}</div>
         </div>
+
+        ${renderExamFocus(sub, operator)}
 
         <div class="study-block study-block-ai">
           <div class="study-block-label">KI-Erklärung</div>

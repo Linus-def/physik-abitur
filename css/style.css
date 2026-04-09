@@ -2768,9 +2768,23 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   border-color: rgba(22,163,74,.22);
 }
 
+.study-block-focus {
+  background: var(--surface);
+}
+
 .study-block-ai {
   background: var(--accent-bg);
   border-color: rgba(37,99,235,.18);
+}
+
+.study-focus-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.study-focus-list li + li {
+  margin-top: 5px;
 }
 
 .study-theory-row {
@@ -2807,6 +2821,10 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
 
 [data-theme="dark"] .study-block-solution {
   border-color: rgba(74,222,128,.18);
+}
+
+[data-theme="dark"] .study-block-focus {
+  background: var(--surface);
 }
 
 [data-theme="dark"] .study-block-ai {

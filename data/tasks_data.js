@@ -108,8 +108,13 @@ const TASKS_DATA = {
           points: 4,
           text: 'Bestimme aus den Messdaten die Masse des Smartphones.',
           hint: '\\(T = 2\\pi\\sqrt{m/k}\\) nach m umformen.',
-          solution: '\\[m = k \\cdot \\left(\\frac{T}{2\\pi}\\right)^2 = 5{,}0 \\cdot \\left(\\frac{1{,}26}{2\\pi}\\right)^2 \\approx 0{,}201\\,\\text{kg} = 201\\,\\text{g}\\]',
-          deeperExplanation: null
+          solution: '\\[m = k \\cdot \\left(\\frac{T}{2\\pi}\\right)^2 = 5{,}0 \\cdot \\left(\\frac{1{,}26}{2\\pi}\\right)^2 \\approx 0{,}201\\,\\text{kg}\\] Das Smartphone hat also eine Masse von etwa \\(201\\,\\text{g}\\).',
+          expectation: [
+            'die Schwingungsformel zuerst korrekt nach der Masse umstellen',
+            'die Messwerte mit konsistenten SI-Einheiten einsetzen',
+            'das Ergebnis als realistische Smartphone-Masse deuten'
+          ],
+          deeperExplanation: 'Wichtig ist hier die Modellidee: Die Periodendauer hängt beim Federpendel nur von \\(m\\) und \\(k\\) ab. Deshalb kann man aus einer Zeitmessung direkt auf die Masse schließen.'
         },
         {
           label: 'b)',
@@ -149,8 +154,13 @@ const TASKS_DATA = {
           points: 4,
           text: 'Weise nach, dass \\(m = 300\\,\\text{g}\\) mit \\(T = 0{,}40\\,\\text{s}\\) und \\(k = 74{,}0\\,\\text{N/m}\\) verträglich ist.',
           hint: '\\(T = 2\\pi\\sqrt{m/k}\\) nach m auflösen.',
-          solution: '\\[m = k\\left(\\frac{T}{2\\pi}\\right)^2 = 74{,}0 \\cdot \\left(\\frac{0{,}40}{2\\pi}\\right)^2 \\approx 0{,}300\\,\\text{kg} \\checkmark\\]',
-          deeperExplanation: null
+          solution: '\\[m = k\\left(\\frac{T}{2\\pi}\\right)^2 = 74{,}0 \\cdot \\left(\\frac{0{,}40}{2\\pi}\\right)^2 \\approx 0{,}300\\,\\text{kg}\\] Das entspricht \\(300\\,\\text{g}\\) und bestätigt damit die Angabe aus dem Aufgabentext.',
+          expectation: [
+            'den Nachweis über die umgestellte Periodenformel führen',
+            'das berechnete Ergebnis explizit mit den angegebenen 300 g vergleichen',
+            'den Schluss klar formulieren, dass die Werte zueinander passen'
+          ],
+          deeperExplanation: '„Weise nach" bedeutet im Abi fast immer: rechnerisch zeigen und dann den Vergleich sprachlich sauber ausformulieren. Nur das Zahlenresultat allein reicht meist nicht.'
         },
         {
           label: 'c)',
@@ -312,8 +322,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Ein gerader Leiter (\\(\\ell = 8{,}0\\,\\text{cm}\\)) trägt \\(I = 20{,}0\\,\\text{A}\\) senkrecht in \\(B = 0{,}31\\,\\text{T}\\). Berechne die Lorentzkraft.',
           hint: '\\(F = B \\cdot I \\cdot \\ell\\)',
-          solution: '\\[F = 0{,}31 \\cdot 20{,}0 \\cdot 0{,}080 = 0{,}496\\,\\text{N} \\approx 0{,}50\\,\\text{N}\\]',
-          deeperExplanation: null
+          solution: '\\[F = B \\cdot I \\cdot \\ell = 0{,}31 \\cdot 20{,}0 \\cdot 0{,}080 = 0{,}496\\,\\text{N}\\] Damit wirkt auf das Leiterstück eine Lorentzkraft von rund \\(0{,}50\\,\\text{N}\\).',
+          expectation: [
+            'die Leiterlänge in Meter einsetzen',
+            'die Lorentzkraft mit der passenden Gleichung berechnen',
+            'das Ergebnis mit sinnvoll gerundetem Zahlenwert angeben'
+          ],
+          deeperExplanation: 'Die Beziehung \\(F = B I \\ell\\) gilt hier, weil Stromrichtung und Magnetfeld senkrecht zueinander stehen. Genau dieser rechte Winkel sorgt für die maximale magnetische Kraft.'
         },
         {
           label: 'b)',
@@ -365,7 +380,12 @@ const TASKS_DATA = {
           text: 'Erkläre, warum die induzierte Spannung ihr Vorzeichen wechselt.',
           hint: 'Lenz\'sche Regel, Richtung der Flussänderung.',
           solution: '\\(U_{\\text{ind}} = -n \\cdot d\\Phi/dt\\). Nach einer halben Umdrehung hat der Magnet Nord- und Südpol vertauscht – die Richtung der Flussänderung kehrt um → Vorzeichenwechsel.',
-          deeperExplanation: null
+          expectation: [
+            'die Flussänderung als Ursache der Induktionsspannung benennen',
+            'erklären, dass sich nach einer halben Drehung die Richtung der Flussänderung umkehrt',
+            'den Vorzeichenwechsel mit der Lenzschen Regel verknüpfen'
+          ],
+          deeperExplanation: 'In Generatoraufgaben ist das der Kern von Wechselspannung: Nicht der Fluss selbst, sondern seine Änderungsrichtung wechselt periodisch. Genau deshalb schwingt die Spannung zwischen positiv und negativ.'
         },
         {
           label: 'c)',
@@ -373,7 +393,12 @@ const TASKS_DATA = {
           text: 'Eine Induktionsschleife in der Straße erkennt Fahrzeuge. Erkläre das Messprinzip.',
           hint: 'Eisenmasse verändert den Fluss.',
           solution: 'Die Schleife ist Teil eines Schwingkreises. Das ferromagnetische Material des Fahrzeugs erhöht die Induktivität L → Resonanzfrequenz ändert sich → elektronisch detektierbar.',
-          deeperExplanation: null
+          expectation: [
+            'die Schleife als Teil eines elektrischen Schwingkreises beschreiben',
+            'erklären, dass das Fahrzeug die Induktivität verändert',
+            'den messbaren Effekt über die veränderte Resonanzfrequenz benennen'
+          ],
+          deeperExplanation: 'Die Aufgabe ist typisch für Abi-Transfer: Ein bekanntes Induktionsprinzip wird in einem Alltagskontext wiedererkannt. Stark ist eine Antwort dann, wenn sie nicht nur „Magnetfeld ändert sich" sagt, sondern den Weg bis zum elektronisch messbaren Signal erklärt.'
         }
       ]
     },
@@ -389,8 +414,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne die Sekundärspannung und den Sekundärstrom (idealer Transformator).',
           hint: '\\(U_2/U_1 = n_2/n_1\\), \\(I_2 = U_2/R\\)',
-          solution: '\\[U_2 = U_1 \\cdot \\frac{n_2}{n_1} = 230 \\cdot \\frac{50}{500} = 23{,}0\\,\\text{V}\\] \\[I_2 = \\frac{U_2}{R} = \\frac{23{,}0}{10} = 2{,}3\\,\\text{A}\\]',
-          deeperExplanation: null
+          solution: '\\[U_2 = U_1 \\cdot \\frac{n_2}{n_1} = 230 \\cdot \\frac{50}{500} = 23{,}0\\,\\text{V}\\] \\[I_2 = \\frac{U_2}{R} = \\frac{23{,}0}{10} = 2{,}3\\,\\text{A}\\] Auf der Sekundärseite liegen also \\(23{,}0\\,\\text{V}\\) und ein Strom von \\(2{,}3\\,\\text{A}\\) an.',
+          expectation: [
+            'zuerst das Übersetzungsverhältnis für die Spannung nutzen',
+            'danach den Strom mit dem Verbraucherwiderstand bestimmen',
+            'beide Ergebnisse sauber mit Einheit angeben'
+          ],
+          deeperExplanation: 'Hier steckt der typische Zweischritt des idealen Transformators drin: erst die Spannung über die Windungszahl, dann den Verbraucherstrom über das Ohmsche Gesetz.'
         },
         {
           label: 'b)',
@@ -528,15 +558,25 @@ const TASKS_DATA = {
           text: 'Erkläre, warum beim Einzelspalt (Breite b) das erste Minimum bei \\(b \\cdot \\sin\\vartheta = \\lambda\\) auftritt.',
           hint: 'Teile den Spalt gedanklich in zwei Hälften.',
           solution: 'Jedes Wellenpaar aus oberer und unterer Spalthälfte hat Gangunterschied \\(\\lambda/2\\) → destruktive Interferenz. Das tritt auf, wenn \\(b \\cdot \\sin\\vartheta = \\lambda\\).',
-          deeperExplanation: null
+          expectation: [
+            'den Spalt gedanklich in zwei passende Teilbereiche zerlegen',
+            'den Gangunterschied von \\(\\lambda/2\\) für je zwei Teilwellen benennen',
+            'die Bedingung für das erste Minimum sauber in die Formel überführen'
+          ],
+          deeperExplanation: 'Eine starke Abi-Erklärung beschreibt nicht nur die Formel, sondern die Idee dahinter: Zu jedem Beitrag aus der oberen Spalthälfte gibt es einen passenden Beitrag aus der unteren Hälfte, der genau gegenphasig ankommt.'
         },
         {
           label: 'b)',
           points: 4,
           text: 'Ein Menschenhaar (\\(D = 0{,}070\\,\\text{mm}\\)) wird vor den Laser gehalten. Berechne den Abstand \\(H\\) der ersten Minima.',
           hint: '\\(H = 2\\lambda L / D\\)',
-          solution: '\\[H = \\frac{2 \\cdot 635 \\cdot 10^{-9} \\cdot 1{,}0}{0{,}070 \\cdot 10^{-3}} \\approx 0{,}018\\,\\text{m} = 1{,}8\\,\\text{cm}\\]',
-          deeperExplanation: null
+          solution: '\\[H = \\frac{2 \\cdot 635 \\cdot 10^{-9} \\cdot 1{,}0}{0{,}070 \\cdot 10^{-3}} \\approx 1{,}8 \\cdot 10^{-2}\\,\\text{m}\\] Also liegen die ersten beiden Minima etwa \\(1{,}8\\,\\text{cm}\\) auseinander.',
+          expectation: [
+            'die Haardicke korrekt in Meter umrechnen',
+            'die Formel für den Abstand der ersten Minima richtig anwenden',
+            'das Ergebnis in einer anschaulichen Einheit wie cm angeben'
+          ],
+          deeperExplanation: 'Hier nutzt man das Babinet-Prinzip: Ein dünnes Haar erzeugt im Fernfeld dasselbe Beugungsbild wie ein Spalt derselben Breite. Genau deshalb darf hier mit der Einzelspaltformel gerechnet werden.'
         },
         {
           label: 'c)',
@@ -560,8 +600,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne die Wellenlänge und weise nach, dass eine stehende Welle entsteht.',
           hint: '\\(\\lambda = v/f\\). Prüfe, ob L ein ganzzahliges Vielfaches von \\(\\lambda/2\\) enthält.',
-          solution: '\\[\\lambda = 0{,}16/0{,}40 = 0{,}40\\,\\text{m} = 40\\,\\text{cm}\\] \\[L/(\\lambda/2) = 100/20 = 5 \\in \\mathbb{N} \\checkmark\\] → 5. Eigenfrequenz.',
-          deeperExplanation: null
+          solution: '\\[\\lambda = \\frac{v}{f} = \\frac{0{,}16}{0{,}40} = 0{,}40\\,\\text{m} = 40\\,\\text{cm}\\] Damit ist \\(\\lambda/2 = 20\\,\\text{cm}\\) und es gilt \\(L/(\\lambda/2) = 100/20 = 5\\). Die Länge enthält also genau fünf Halbwellen: Es kann sich eine stehende Welle ausbilden.',
+          expectation: [
+            'zuerst die Wellenlänge aus Geschwindigkeit und Frequenz bestimmen',
+            'danach mit \\(\\lambda/2\\) argumentieren',
+            'den Nachweis sprachlich als stehende Welle oder Eigenschwingung formulieren'
+          ],
+          deeperExplanation: 'Das Entscheidende ist hier nicht nur die Rechnung, sondern die Bedingung für stehende Wellen: Auf der Länge müssen ganze Halbwellen Platz finden. Genau das zeigt die ganzzahlige 5.'
         },
         {
           label: 'b)',
@@ -739,16 +784,26 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne die anfangs gespeicherte Energie und die Energie nach 2 Perioden. Wie viel wurde in Wärme umgewandelt?',
           hint: '\\(E = \\frac{1}{2}CU^2\\)',
-          solution: '\\[E_0 = \\tfrac{1}{2} \\cdot 40 \\cdot 10^{-6} \\cdot 25^2 = 12{,}5\\,\\text{mJ}\\] \\[E_2 = \\tfrac{1}{2} \\cdot 40 \\cdot 10^{-6} \\cdot 20^2 = 8{,}0\\,\\text{mJ}\\] \\[\\Delta E = 4{,}5\\,\\text{mJ}\\]',
-          deeperExplanation: null
+          solution: '\\[E_0 = \\tfrac{1}{2} \\cdot 40 \\cdot 10^{-6} \\cdot 25^2 = 12{,}5\\,\\text{mJ}\\] \\[E_2 = \\tfrac{1}{2} \\cdot 40 \\cdot 10^{-6} \\cdot 20^2 = 8{,}0\\,\\text{mJ}\\] \\[\\Delta E = E_0 - E_2 = 4{,}5\\,\\text{mJ}\\] Diese Energiedifferenz wurde durch ohmsche Verluste in Wärme umgewandelt.',
+          expectation: [
+            'beide Energien mit derselben Kondensatorformel berechnen',
+            'die Differenz explizit als Verlustenergie bestimmen',
+            'den Verlust physikalisch als Wärmeentwicklung deuten'
+          ],
+          deeperExplanation: 'In gedämpften LC-Kreisen verschwindet Energie nicht, sondern wird vor allem im Widerstand des Stromkreises in Wärme umgewandelt. Genau diese Interpretation bringt bei solchen Aufgaben meist den letzten Punkt.'
         },
         {
           label: 'c)',
           points: 3,
           text: 'Die Kapazität wird auf \\(C\' = 4C\\) erhöht. Wie ändert sich die Frequenz?',
           hint: '\\(f \\propto 1/\\sqrt{C}\\)',
-          solution: '\\[f\' = f \\cdot \\frac{1}{\\sqrt{4}} = \\frac{f}{2}\\] Die Frequenz halbiert sich.',
-          deeperExplanation: null
+          solution: '\\[f\' = \\frac{1}{2\\pi\\sqrt{L \\cdot 4C}} = \\frac{1}{2} \\cdot \\frac{1}{2\\pi\\sqrt{LC}} = \\frac{f}{2}\\] Die Frequenz halbiert sich also.',
+          expectation: [
+            'die Quadratwurzelabhängigkeit der Frequenz von der Kapazität nutzen',
+            'den Faktor 4 korrekt unter der Wurzel behandeln',
+            'das Ergebnis als Halbierung der Frequenz klar formulieren'
+          ],
+          deeperExplanation: 'Der typische Fehler ist hier, die Frequenz ebenfalls durch 4 zu teilen. Weil die Kapazität unter der Wurzel steht, wirkt der Faktor nur als \\(\\sqrt{4} = 2\\).'
         }
       ]
     },
@@ -764,8 +819,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne die Eigenfrequenz.',
           hint: '\\(f_0 = 1/(2\\pi\\sqrt{LC})\\)',
-          solution: '\\[f_0 = \\frac{1}{2\\pi\\sqrt{0{,}20 \\cdot 50 \\cdot 10^{-6}}} \\approx 50{,}3\\,\\text{Hz}\\]',
-          deeperExplanation: null
+          solution: '\\[f_0 = \\frac{1}{2\\pi\\sqrt{0{,}20 \\cdot 50 \\cdot 10^{-6}}} \\approx 50{,}3\\,\\text{Hz}\\] Der LC-Kreis schwingt also mit rund \\(50\\,\\text{Hz}\\).',
+          expectation: [
+            'die Thomson-Formel korrekt einsetzen',
+            'mit SI-Einheiten für L und C rechnen',
+            'die Eigenfrequenz in Hertz angeben'
+          ],
+          deeperExplanation: 'Die Formel zeigt schön die Analogie zur Mechanik: Große Induktivität oder große Kapazität machen die Schwingung träge und senken damit die Eigenfrequenz.'
         },
         {
           label: 'b)',
@@ -780,8 +840,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Erläutere den Energietransfer zwischen Kondensator und Spule. Vergleiche mit der mechanischen Schwingung.',
           hint: 'Wann ist welche Energieform maximal?',
-          solution: 'Start: alle Energie elektrisch im Kondensator (\\(E_{\\text{el}} = \\frac{1}{2}CU_0^2\\)). Beim Entladen nimmt \\(E_{\\text{el}}\\) ab, magnetische Energie \\(E_{\\text{mag}} = \\frac{1}{2}LI^2\\) nimmt zu. Bei \\(U_C = 0\\): \\(I = I_0\\) maximal. Dann Umladung – vollständige Analogie zum Federpendel (\\(E_{\\text{el}} \\leftrightarrow E_{\\text{pot}}\\), \\(E_{\\text{mag}} \\leftrightarrow E_{\\text{kin}}\\)).',
-          deeperExplanation: null
+          solution: 'Zu Beginn liegt die gesamte Energie elektrisch im Kondensator: \\(E_{\\text{el}} = \\frac{1}{2}CU_0^2\\). Beim Entladen wächst der Strom, dadurch nimmt die magnetische Energie der Spule \\(E_{\\text{mag}} = \\frac{1}{2}LI^2\\) zu. Bei \\(U_C = 0\\) ist der Strom maximal und die Energie vollständig in der Spule gespeichert. Danach lädt sich der Kondensator mit umgekehrter Polarität wieder auf. Das entspricht beim Federpendel dem Wechsel zwischen potenzieller und kinetischer Energie.',
+          expectation: [
+            'beide Energieformen des LC-Kreises benennen',
+            'den zeitlichen Wechsel zwischen Kondensator und Spule beschreiben',
+            'die Analogie zum Federpendel sauber zuordnen'
+          ],
+          deeperExplanation: 'Genau dieser Energieaustausch ist der Grund, warum man den LC-Kreis als elektrisches Analogon zur mechanischen Schwingung behandelt. Im Abi ist der Vergleich oft genauso wichtig wie die reine Formel.'
         }
       ]
     }
@@ -803,8 +868,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne die Feldstärke und die Ladung der Kugel.',
           hint: '\\(E = U/d\\), \\(F = q \\cdot E\\)',
-          solution: '\\[E = 9000/0{,}12 = 75{.}000\\,\\text{V/m}\\] \\[q = F/E = 1{,}7 \\cdot 10^{-3}/75{.}000 \\approx 22{,}7\\,\\text{nC}\\]',
-          deeperExplanation: null
+          solution: '\\[E = \\frac{U}{d} = \\frac{9000}{0{,}12} = 75{.}000\\,\\text{V/m}\\] \\[q = \\frac{F}{E} = \\frac{1{,}7 \\cdot 10^{-3}}{75{.}000} \\approx 2{,}27 \\cdot 10^{-8}\\,\\text{C} = 22{,}7\\,\\text{nC}\\]',
+          expectation: [
+            'zuerst die Feldstärke des Kondensators bestimmen',
+            'danach die Ladung aus Kraft und Feldstärke berechnen',
+            'die Ladung in einer passenden Einheit wie nC angeben'
+          ],
+          deeperExplanation: 'Die Aufgabe verbindet zwei Grundideen des elektrischen Feldes: Ein Kondensator liefert eine definierte Feldstärke, und eine geladene Kugel erfährt darin die Kraft \\(F = qE\\).'
         },
         {
           label: 'b)',
@@ -836,8 +906,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Weise nach, dass \\(B \\propto 1/d\\) gilt.',
           hint: 'Bilde das Produkt \\(B \\cdot d\\).',
-          solution: '\\(B \\cdot d\\): 6,4 / 6,2 / 6,4 / 6,25 – annähernd konstant ≈ 6,3 → \\(B \\propto 1/d \\checkmark\\)',
-          deeperExplanation: null
+          solution: '\\(B \\cdot d\\): 6,4 / 6,2 / 6,4 / 6,25 – die Produkte sind also annähernd konstant mit etwa 6,3. Damit gilt \\(B \\cdot d \\approx \\text{const}\\) und folglich \\(B \\propto 1/d\\).',
+          expectation: [
+            'die Messwerte nicht addieren, sondern das Produkt \\(B \\cdot d\\) bilden',
+            'die nahezu konstanten Werte als Nachweis verwenden',
+            'den Schluss korrekt als umgekehrte Proportionalität formulieren'
+          ],
+          deeperExplanation: 'Solche Nachweisaufgaben prüfen vor allem, ob du eine Beziehung aus Messdaten herauslesen kannst. Der saubere Schluss von „Produkt konstant" zu „umgekehrt proportional" ist hier der eigentliche Kern.'
         },
         {
           label: 'b)',
@@ -899,8 +974,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne die Energie eines Photons mit \\(\\lambda = 633\\,\\text{nm}\\) in eV.',
           hint: '\\(E = hc/\\lambda\\)',
-          solution: '\\[E = \\frac{6{,}63 \\cdot 10^{-34} \\cdot 3{,}0 \\cdot 10^8}{633 \\cdot 10^{-9}} \\approx 3{,}14 \\cdot 10^{-19}\\,\\text{J} \\approx 1{,}96\\,\\text{eV}\\]',
-          deeperExplanation: null
+          solution: '\\[E = \\frac{hc}{\\lambda} = \\frac{6{,}63 \\cdot 10^{-34} \\cdot 3{,}0 \\cdot 10^8}{633 \\cdot 10^{-9}} \\approx 3{,}14 \\cdot 10^{-19}\\,\\text{J}\\] Umgerechnet ergibt das \\(E \\approx 1{,}96\\,\\text{eV}\\).',
+          expectation: [
+            'die Photonenergie zuerst in Joule berechnen',
+            'anschließend korrekt in Elektronenvolt umrechnen',
+            'das Ergebnis mit sinnvoller Rundung angeben'
+          ],
+          deeperExplanation: 'Beim Photoeffekt ist diese Energie die entscheidende Größe, nicht die Lichtintensität. Deshalb ist die Umrechnung in eV hier besonders sinnvoll, weil auch die Austrittsarbeit in eV gegeben ist.'
         },
         {
           label: 'b)',
@@ -915,8 +995,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Welcher Filter ist für den Restlichtverstärker besser geeignet?',
           hint: '\\(\\lambda_{\\max} = hc/W_A\\)',
-          solution: '\\(\\lambda_{\\max} = hc/W_A \\approx 552\\,\\text{nm}\\). Nur Licht mit \\(\\lambda < 552\\,\\text{nm}\\) löst Photoeffekt aus. Filter A (sperrt 633-nm-Licht) ist besser, wenn er kurzwelliges Licht durchlässt.',
-          deeperExplanation: null
+          solution: '\\(\\lambda_{\\max} = hc/W_A \\approx 552\\,\\text{nm}\\). Nur Licht mit \\(\\lambda < 552\\,\\text{nm}\\) kann also Elektronen auslösen. Filter A ist deshalb günstiger, wenn er das langwellige 633-nm-Licht unterdrückt und den kurzwelligeren, wirksamen Anteil durchlässt.',
+          expectation: [
+            'zuerst die Grenzwellenlänge aus der Austrittsarbeit bestimmen',
+            'danach die gegebene Wellenlänge mit dieser Grenze vergleichen',
+            'die Filterentscheidung physikalisch begründen'
+          ],
+          deeperExplanation: 'Genau hier zeigt sich, dass ein Restlichtverstärker nicht jedes sichtbare Licht gleich gut nutzen kann. Entscheidend ist, ob die Photonenergie oberhalb der Austrittsarbeit liegt.'
         }
       ]
     },
@@ -998,8 +1083,13 @@ const TASKS_DATA = {
           points: 3,
           text: 'Berechne Frequenz und Periodendauer.',
           hint: '\\(c = \\lambda \\cdot f\\)',
-          solution: '\\[f = c/\\lambda = 0{,}50/0{,}20 = 2{,}5\\,\\text{Hz}\\] \\[T = 1/f = 0{,}40\\,\\text{s}\\]',
-          deeperExplanation: null
+          solution: '\\[f = \\frac{c}{\\lambda} = \\frac{0{,}50}{0{,}20} = 2{,}5\\,\\text{Hz}\\] \\[T = \\frac{1}{f} = 0{,}40\\,\\text{s}\\] Die Welle schwingt also 2,5-mal pro Sekunde, eine volle Schwingung dauert \\(0{,}40\\,\\text{s}\\).',
+          expectation: [
+            'die Wellengleichung sauber nach der Frequenz anwenden',
+            'anschließend die Periodendauer als Kehrwert bestimmen',
+            'beide Größen mit korrekten Einheiten angeben'
+          ],
+          deeperExplanation: 'Die drei Größen \\(c\\), \\(\\lambda\\) und \\(f\\) gehören bei Wellen immer zusammen. Im Abi ist diese Grundbeziehung oft der erste Schritt, bevor ein Diagramm oder ein Kontext interpretiert wird.'
         },
         {
           label: 'b)',
@@ -1045,7 +1135,12 @@ const TASKS_DATA = {
           text: 'Zeichne die Schwingungsmuster für \\(n = 1\\) und \\(n = 2\\). Markiere Knoten (K) und Bäuche (B).',
           hint: 'Grundton: 1 Bauch. 1. Oberton: 2 Bäuche.',
           solution: 'Grundton (n=1): Knoten bei \\(x = 0\\) und \\(1{,}5\\,\\text{m}\\). Bauch bei \\(x = 0{,}75\\,\\text{m}\\). \\\\ 1. Oberton (n=2): Knoten bei \\(x = 0;\\,0{,}75;\\,1{,}5\\,\\text{m}\\). Bäuche bei \\(0{,}375\\,\\text{m}\\) und \\(1{,}125\\,\\text{m}\\).',
-          deeperExplanation: null
+          expectation: [
+            'für beide Modi die festen Enden als Knoten markieren',
+            'die zusätzliche Knotenstelle für \\(n = 2\\) korrekt eintragen',
+            'Bäuche und Knoten räumlich sauber unterscheiden'
+          ],
+          deeperExplanation: 'Bei stehenden Wellen helfen zwei Leitfragen: Wie viele Halbwellen passen auf das Seil, und wo sind die festen Randbedingungen? Daraus ergeben sich Knoten und Bäuche fast automatisch.'
         }
       ]
     }

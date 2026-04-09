@@ -5,6 +5,7 @@ const app = (() => {
   let currentTab = 'theory';
   let formulaBuilt = false;
   let pendingTaskJump = null;
+  let pendingTheoryJump = null;
 
   function typesetMath(elements) {
     if (window.mathjaxTypeset) {
@@ -14,6 +15,14 @@ const app = (() => {
       return MathJax.typesetPromise(elements);
     }
     return Promise.resolve();
+  }
+
+  function highlightAndScroll(target, cls) {
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!cls) return;
+    target.classList.add(cls);
+    window.setTimeout(() => target.classList.remove(cls), 1800);
   }
 
   // ── INIT ──
@@ -48,6 +57,12 @@ const app = (() => {
     // Modals schließen (X-Button + Klick auf Overlay-Hintergrund)
     document.getElementById('btn-formula-close')?.addEventListener('click', closeFormulaSheet);
     document.getElementById('formula-modal')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeFormulaSheet(); });
+    document.getElementById('formula-modal-body')?.addEventListener('click', e => {
+      const formulaLink = e.target.closest('.formula-topic-nav-link');
+      if (!formulaLink) return;
+      const target = document.getElementById(formulaLink.dataset.targetId);
+      highlightAndScroll(target, 'modal-topic-section-highlight');
+    });
 
     document.getElementById('btn-favorites-close')?.addEventListener('click', closeFavorites);
 
@@ -62,13 +77,32 @@ const app = (() => {
       const jumpBtn = e.target.closest('.theory-jump-btn');
       if (jumpBtn) {
         const target = document.getElementById(jumpBtn.dataset.targetId);
-        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        highlightAndScroll(target, 'theory-section-highlight');
+        return;
+      }
+
+      const formulaChip = e.target.closest('.theory-formula-chip');
+      if (formulaChip) {
+        const target = document.getElementById(formulaChip.dataset.targetId);
+        highlightAndScroll(target, 'theory-section-highlight');
         return;
       }
 
       const taskLink = e.target.closest('.theory-task-link');
       if (taskLink) {
         openTaskReference(taskLink.dataset.topicId, taskLink.dataset.taskId);
+        return;
+      }
+
+      const patternLink = e.target.closest('.theory-task-pattern-link');
+      if (patternLink) {
+        openTaskReference(patternLink.dataset.topicId, patternLink.dataset.taskId);
+        return;
+      }
+
+      const relatedTopicLink = e.target.closest('.related-topic-link');
+      if (relatedTopicLink) {
+        openTopicReference(relatedTopicLink.dataset.topicId, relatedTopicLink.dataset.tab || 'theory');
       }
     });
 
@@ -154,6 +188,13 @@ const app = (() => {
     if (tab === 'theory') {
       panel.innerHTML = topicsRenderer.renderTheory(currentTopicId);
       typesetMath([panel]);
+      if (pendingTheoryJump && pendingTheoryJump.topicId === currentTopicId) {
+        window.setTimeout(() => {
+          const target = document.getElementById(pendingTheoryJump.targetId);
+          highlightAndScroll(target, 'theory-section-highlight');
+          pendingTheoryJump = null;
+        }, 60);
+      }
     } else if (tab === 'tasks') {
       tasksRenderer.render(currentTopicId);
       if (pendingTaskJump && pendingTaskJump.topicId === currentTopicId) {
@@ -213,6 +254,19 @@ const app = (() => {
       return;
     }
     switchTab('tasks');
+  }
+
+  function openTopicReference(topicId, tab, targetId) {
+    if (tab === 'theory' && targetId) {
+      pendingTheoryJump = { topicId, targetId };
+    } else {
+      pendingTheoryJump = null;
+    }
+    if (currentTopicId !== topicId) {
+      navigateTopic(topicId, tab || 'theory');
+      return;
+    }
+    switchTab(tab || 'theory');
   }
 
   // ── COUNTDOWN ──
@@ -302,7 +356,7 @@ const app = (() => {
 
   return {
     navigateHome, navigateTopic, refreshTopicProgress,
-    openTaskReference,
+    openTaskReference, openTopicReference,
     openSidebar, closeSidebar,
     openFormulaSheet, closeFormulaSheet,
     openFavorites, closeFavorites

@@ -1,5 +1,44 @@
 // ══ THEORIE-RENDERER ══
 const topicsRenderer = (() => {
+  const RELATED_TOPIC_MAP = {
+    schwingungen: [
+      { id: 'lc_kreis', copy: 'Zum LC-Kreis: gleiche Schwingungsstruktur elektrisch statt mechanisch.' },
+      { id: 'wellen', copy: 'Zu Wellen: Schwingungen werden dort räumlich weitergetragen.' },
+      { id: 'elektrodynamik', copy: 'Zur Elektrodynamik: Resonanz, Induktion und Generatoren bauen darauf auf.' }
+    ],
+    elektrodynamik: [
+      { id: 'felder', copy: 'Zu Feldern: dort liegen die Grundlagen für Lorentzkraft und Induktion.' },
+      { id: 'lc_kreis', copy: 'Zum LC-Kreis: dort siehst du elektromagnetische Schwingungen als Modell.' },
+      { id: 'wellen', copy: 'Zu Wellen: veränderliche E- und B-Felder führen weiter zu elektromagnetischen Wellen.' }
+    ],
+    wellenoptik: [
+      { id: 'wellen', copy: 'Zu Wellen: dort kommen Interferenz, Beugung und Huygens zuerst allgemein vor.' },
+      { id: 'quantenphysik', copy: 'Zur Quantenphysik: dort wird das Wellenbild später wieder grundlegend wichtig.' }
+    ],
+    lc_kreis: [
+      { id: 'schwingungen', copy: 'Zu Schwingungen: dieselbe Struktur noch einmal mechanisch gedacht.' },
+      { id: 'elektrodynamik', copy: 'Zur Elektrodynamik: Spule, Induktion und Generatoren knüpfen direkt daran an.' }
+    ],
+    felder: [
+      { id: 'elektrodynamik', copy: 'Zur Elektrodynamik: dort werden Felder in Bewegung und Induktion weitergeführt.' },
+      { id: 'quantenphysik', copy: 'Zur Quantenphysik: Felder und Teilchenmodelle treffen dort wieder zusammen.' }
+    ],
+    quantenphysik: [
+      { id: 'wellenoptik', copy: 'Zur Wellenoptik: Interferenz und Beugung liefern die Brücke zum Quantenbild.' },
+      { id: 'wellen', copy: 'Zu Wellen: viele Ideen der Quantenphysik bauen auf dem allgemeinen Wellenmodell auf.' }
+    ],
+    wellen: [
+      { id: 'schwingungen', copy: 'Zu Schwingungen: jede Welle basiert auf lokalen Schwingungen.' },
+      { id: 'wellenoptik', copy: 'Zur Wellenoptik: dort werden Interferenz und Beugung mit Licht angewendet.' },
+      { id: 'quantenphysik', copy: 'Zur Quantenphysik: dort taucht das Wellenbild auf ganz anderer Ebene wieder auf.' }
+    ]
+  };
+
+  function getRelatedTopics(topicId) {
+    return (RELATED_TOPIC_MAP[topicId] || [])
+      .map(item => ({ ...item, topic: TOPICS_DATA[item.id] }))
+      .filter(item => item.topic);
+  }
 
   function starsHtml(n, cls1 = 's-on', cls2 = 's-off') {
     return Array.from({length:3}, (_, i) =>
@@ -16,15 +55,21 @@ const topicsRenderer = (() => {
       num: i + 1,
       title: sec.title
     }));
-    const formulaList = topic.sections.flatMap(sec => sec.formulas || []);
+    const formulaList = topic.sections.flatMap((sec, i) =>
+      (sec.formulas || []).map(f => ({ ...f, targetId: `theory-sec-${topicId}-${i}` }))
+    );
     const noteList = topic.sections
       .filter(sec => sec.note)
       .map(sec => ({ title: sec.title, note: sec.note }));
     const mustKnow = sectionGoals.slice(0, 6);
     const taskExamples = (TASKS_DATA[topicId] || []).slice(0, 4);
     const taskPatterns = taskExamples.flatMap(task =>
-      task.subtasks.slice(0, 2).map(sub => `${task.year}: ${sub.text}`)
+      task.subtasks.slice(0, 2).map(sub => ({
+        taskId: task.id,
+        text: `${task.year}: ${sub.text}`
+      }))
     ).slice(0, 4);
+    const relatedTopics = getRelatedTopics(topicId);
 
     let html = '';
 
@@ -52,10 +97,10 @@ const topicsRenderer = (() => {
           <div class="theory-overview-title">Die wichtigsten Beziehungen auf einen Blick</div>
           <div class="theory-formula-list">
             ${formulaList.slice(0, 6).map(f => `
-              <div class="theory-formula-chip">
+              <button class="theory-formula-chip" data-target-id="${f.targetId}">
                 <div class="theory-formula-chip-label">${f.label}</div>
                 <div class="theory-formula-chip-math">\\(${f.latex}\\)</div>
-              </div>
+              </button>
             `).join('')}
           </div>
         </div>
@@ -88,13 +133,29 @@ const topicsRenderer = (() => {
             </div>
           </div>
         ` : ''}
+        ${relatedTopics.length ? `
+          <div class="theory-overview-card">
+            <div class="theory-overview-label">Verknüpfte Themen</div>
+            <div class="theory-overview-title">Von hier aus kommst du direkt zu passenden Anschlussideen</div>
+            <div class="related-topic-list">
+              ${relatedTopics.map(item => `
+                <button class="related-topic-link" data-topic-id="${item.id}" data-tab="theory">
+                  <span class="related-topic-link-title">${item.topic.title}</span>
+                  <span class="related-topic-link-copy">${item.copy}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
         ${taskPatterns.length ? `
           <div class="theory-overview-card">
             <div class="theory-overview-label">Typische Prüfungsaufträge</div>
             <div class="theory-overview-title">So werden Themen im Abi wirklich abgefragt</div>
             <div class="theory-note-list">
               ${taskPatterns.map(pattern => `
-                <div class="theory-note-item">${pattern}</div>
+                <button class="theory-task-pattern-link" data-topic-id="${topicId}" data-task-id="${pattern.taskId}">
+                  ${pattern.text}
+                </button>
               `).join('')}
             </div>
           </div>
@@ -229,7 +290,7 @@ const topicsRenderer = (() => {
         <div class="formula-sheet-intro-copy">Nicht alles auf einmal lesen: erst Thema wählen, dann nur die Kernformeln sichern, die du wirklich für Aufgaben brauchst. Innerhalb jedes Themas sind die Formeln jetzt nach Teilbereichen sortiert.</div>
       </div>
       <div class="formula-topic-nav">
-        ${topics.map(topic => `<a class="formula-topic-nav-link" href="#formula-topic-${topic.id}">${topic.title}</a>`).join('')}
+        ${topics.map(topic => `<button class="formula-topic-nav-link" data-target-id="formula-topic-${topic.id}">${topic.title}</button>`).join('')}
       </div>
     `;
     topics.forEach(topic => {

@@ -773,10 +773,19 @@ p + p { margin-top: 0.5em; }
   font-weight: 700;
 }
 .theory-formula-chip {
+  display: block;
+  width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.theory-formula-chip:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateY(-1px);
 }
 .theory-formula-chip-label {
   font-size: 11px;
@@ -828,6 +837,42 @@ p + p { margin-top: 0.5em; }
   font-weight: 700;
   color: var(--accent);
 }
+.theory-task-pattern-link,
+.related-topic-link {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  text-align: left;
+  line-height: 1.6;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+.theory-task-pattern-link:hover,
+.related-topic-link:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+.related-topic-list {
+  display: grid;
+  gap: 10px;
+}
+.related-topic-link-title {
+  display: block;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.related-topic-link-copy {
+  display: block;
+  font-size: 13px;
+}
+.theory-section-highlight {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent), var(--shadow);
+}
 
 /* ══════════════════════════════════════════════
    TASKS
@@ -851,10 +896,8 @@ p + p { margin-top: 0.5em; }
   padding: 16px 20px;
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  cursor: pointer;
-  transition: background var(--transition);
+  cursor: default;
 }
-.task-card-header:hover { background: var(--surface-2); }
 .task-year-badge {
   background: var(--accent-grad);
   color: white; font-size: 11px; font-weight: 700;
@@ -1503,10 +1546,12 @@ p + p { margin-top: 0.5em; }
   text-decoration: none;
   font-size: 12px;
   font-weight: 600;
+  transition: border-color var(--transition), color var(--transition), transform var(--transition);
 }
 .formula-topic-nav-link:hover {
   border-color: var(--accent);
   color: var(--accent);
+  transform: translateY(-1px);
 }
 .modal-topic-section {
   margin-bottom: 26px;
@@ -1514,6 +1559,11 @@ p + p { margin-top: 0.5em; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: linear-gradient(180deg, var(--bg), var(--surface));
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.modal-topic-section-highlight {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent), var(--shadow);
 }
 .modal-topic-title {
   font-size: 15px;

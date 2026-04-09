@@ -1496,15 +1496,17 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
       },
       {
         title: 'Energieniveaus und Spektren',
-        text: `<p>Elektronen in Atomen befinden sich auf diskreten Energieniveaus. Übergänge emittieren oder absorbieren Photonen mit genau der Energiedifferenz.</p>`,
+        text: `<p>Elektronen in Atomen können nicht beliebige Energien annehmen, sondern nur <strong>diskrete Energieniveaus</strong>. Deshalb entstehen auch nicht beliebige Photonenergien, sondern nur ganz bestimmte Übergänge zwischen erlaubten Zuständen.</p>
+<p>Fällt ein Elektron auf ein niedrigeres Energieniveau, wird ein Photon mit der Energiedifferenz emittiert. Für einen Übergang nach oben muss das Atom genau diese Energiedifferenz absorbieren. Genau daraus entstehen <strong>Emissions- und Absorptionsspektren</strong>.</p>
+<p>Im Abi ist wichtig, dass du nicht nur Linien im Spektrum erkennst, sondern daraus argumentierst: Scharfe Linien sind ein direkter Hinweis auf gequantelte Energieniveaus und damit auf ein nichtklassisches Atommodell.</p>`,
         formulas: [
           { label: 'Emittiertes Photon', latex: 'h f = E_m - E_n \\quad (E_m > E_n)' },
           { label: 'Absorbiertes Photon', latex: 'h f = E_n - E_m \\quad (E_n > E_m)' },
         ],
         note: 'Linienspektren sind der Fingerabdruck eines Elements. Nur Photonen mit genau der richtigen Energie werden absorbiert.',
-        deeper: `<p><strong>Emission und Absorption:</strong> Fällt ein Elektron auf ein niedrigeres Energieniveau, wird ein Photon mit \\(hf = \\Delta E\\) emittiert. Für einen Übergang nach oben muss ein Atom genau ein Photon dieser Energiedifferenz absorbieren.</p>
-<p><strong>Linienspektren als Beweis:</strong> Weil nur bestimmte Energiedifferenzen erlaubt sind, entstehen keine kontinuierlichen Farben, sondern scharfe Spektrallinien. Daraus schließt man direkt auf gequantelte Energieniveaus.</p>
-<p><strong>Anwendung: Spektralanalyse</strong> – Sterne werden durch ihr Lichtspektrum analysiert. Absorptionslinien im Sonnenspektrum verraten die chemische Zusammensetzung der Sonnenatmosphäre.</p>`
+        deeper: `<p><strong>Emission und Absorption unterscheiden:</strong> Bei der Emission gibt das Atom Energie ab, bei der Absorption nimmt es Energie auf. In beiden Fällen gilt aber dieselbe Grundidee: Nur die Differenz zweier erlaubter Niveaus zählt.</p>
+<p><strong>Linienspektren als Beweis:</strong> Wären beliebige Energien möglich, müsste auch ein kontinuierliches Spektrum entstehen. Die beobachteten scharfen Linien zeigen dagegen, dass nur bestimmte Übergänge erlaubt sind. Genau das ist die physikalische Aussage hinter dem Spektrum.</p>
+<p><strong>Anwendung: Spektralanalyse</strong> Sterne und Gasentladungen werden über ihre Spektrallinien untersucht. Aus den Linien kann man auf die chemische Zusammensetzung und teilweise sogar auf Bewegungen oder Temperaturen schließen. Das macht den Themenblock besonders abi-typisch, weil hier Theorie und Anwendung eng zusammenhängen.</p>`
       }
     ],
     quickcheck: [
@@ -1747,60 +1749,74 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     sections: [
       {
         title: 'Grundbegriffe der Wellenlehre',
-        text: `<p>Eine <strong>mechanische Welle</strong> transportiert Energie, aber keine Materie. Jeder Punkt des Mediums schwingt um seine Ruhelage. Im Abi sollst du dieses Grundmodell auch auf <strong>elektromagnetische Wellen</strong> übertragen können.</p>
-<p><strong>Transversalwellen:</strong> Schwingungsrichtung ⊥ Ausbreitungsrichtung (Seilwelle, Lichtwelle)</p>
-<p><strong>Longitudinalwellen:</strong> Schwingungsrichtung ∥ Ausbreitungsrichtung (Schallwelle)</p>`,
+        text: `<p>Eine <strong>Welle</strong> ist die räumliche Ausbreitung einer Schwingung. Dabei wird <strong>Energie</strong> übertragen, aber nicht dauerhaft Materie mitgenommen: Die Teilchen des Mediums schwingen nur um ihre Ruhelage. Genau diese Unterscheidung zwischen <em>Teilchenbewegung</em> und <em>Ausbreitung der Störung</em> wird im Abi oft abgefragt.</p>
+<p>Für das Rechnen sind drei Größen zentral: <strong>Frequenz</strong> \\(f\\), <strong>Periodendauer</strong> \\(T\\) und <strong>Wellenlänge</strong> \\(\\lambda\\). Die Frequenz wird von der Quelle vorgegeben, die Ausbreitungsgeschwindigkeit \\(c\\) hängt vom Medium ab, und daraus folgt die Wellenlänge über \\(c = \\lambda f\\).</p>
+<p><strong>Transversalwellen:</strong> Schwingungsrichtung senkrecht zur Ausbreitungsrichtung, zum Beispiel Seilwellen oder Licht. <strong>Longitudinalwellen:</strong> Schwingungsrichtung parallel zur Ausbreitungsrichtung, zum Beispiel Schall in Luft. Im Leistungsfach solltest du außerdem erklären können, warum elektromagnetische Wellen kein materielles Trägermedium brauchen.</p>`,
         formulas: [
           { label: 'Wellengeschwindigkeit', latex: 'c = \\lambda \\cdot f = \\frac{\\lambda}{T}' },
           { label: 'Wellenlänge', latex: '\\lambda = \\frac{c}{f}' },
           { label: 'Frequenz', latex: 'f = \\frac{1}{T} = \\frac{c}{\\lambda}' },
         ],
-        deeper: `<p><strong>Merkhilfe:</strong> \\(c = \\lambda \\cdot f\\) – die einzige Formel, die man sich wirklich merken muss. Alle anderen folgen daraus.</p>
-<p><strong>Zusätzlich wichtig:</strong> Zur Wellenbeschreibung gehören auch <strong>Wellenfront</strong> und <strong>Wellennormale</strong>. Eine Wellenfront verbindet Punkte gleicher Phase; die Wellennormale steht senkrecht darauf und zeigt die Ausbreitungsrichtung.</p>
-<p><strong>Licht in Materie:</strong> Die Lichtgeschwindigkeit sinkt beim Übergang in dichtere Medien (\\(c_n = c_0/n\\)), aber die Frequenz bleibt konstant. Die Wellenlänge ändert sich.</p>`
+        note: 'Die Quelle bestimmt die Frequenz, das Medium bestimmt die Ausbreitungsgeschwindigkeit.',
+        deeper: `<p><strong>Merkhilfe:</strong> \\(c = \\lambda \\cdot f\\) ist die Leitformel. Wenn sich das Medium ändert, bleibt bei einer vorgegebenen Quelle \\(f\\) gleich, also muss sich bei verändertem \\(c\\) die Wellenlänge \\(\\lambda\\) mit ändern.</p>
+<p><strong>Wellenfront und Wellennormale:</strong> Eine Wellenfront verbindet Punkte gleicher Phase. Die Wellennormale steht senkrecht auf dieser Front und zeigt die Ausbreitungsrichtung. Dieses Bild brauchst du später für Brechung, Beugung und das Huygens-Prinzip.</p>
+<p><strong>Typischer Denkfehler:</strong> Oft wird gesagt, „die Teilchen laufen mit der Welle mit". Das stimmt nicht. Bei mechanischen Wellen schwingen die Teilchen lokal hin und her, während sich nur die Störung durch das Medium fortpflanzt. Bei elektromagnetischen Wellen schwingt kein Stoff, sondern elektrische und magnetische Feldgrößen ändern sich periodisch.</p>`
       },
       {
         title: 'Momentanbild und Zeit-Ort-Diagramm',
-        text: `<p>Das <strong>Momentanbild</strong> zeigt die Auslenkung aller Punkte zu einem festen Zeitpunkt (x-Achse: Ort) → man liest λ ab.</p>
-<p>Das <strong>Zeit-Auslenkung-Diagramm</strong> zeigt die Schwingung eines Punktes über die Zeit (x-Achse: Zeit) → man liest T ab.</p>`,
+        text: `<p>Das <strong>Momentanbild</strong> zeigt die Auslenkung vieler Orte zu <em>einem festen Zeitpunkt</em>. Auf der horizontalen Achse steht also der Ort. Deshalb liest man dort typischerweise die <strong>Wellenlänge</strong> \\(\\lambda\\) und die räumliche Form der Welle ab.</p>
+<p>Das <strong>Zeit-Auslenkung-Diagramm</strong> zeigt dagegen die Bewegung <em>eines einzigen Ortes</em> im Laufe der Zeit. Auf der horizontalen Achse steht hier die Zeit. Deshalb liest man dort vor allem die <strong>Periodendauer</strong> \\(T\\) und daraus die Frequenz ab.</p>
+<p>Im Abi ist diese Unterscheidung wichtig, weil beide Diagramme oft gleich sinusförmig aussehen, aber völlig unterschiedliche Aussagen liefern. Wer nur auf die Form schaut und nicht auf die Achsen, verwechselt schnell \\(T\\) und \\(\\lambda\\).</p>`,
         formulas: [
           { label: 'Momentanbild', latex: 'y(x) = \\hat{y}\\sin\\!\\left(\\frac{2\\pi}{\\lambda}x\\right)' },
           { label: 'Zeit-Diagramm', latex: 'y(t) = \\hat{y}\\sin\\!\\left(\\frac{2\\pi}{T}t\\right)' },
         ],
         note: 'Vorsicht: Im Momentanbild liest man λ ab, im Zeit-Diagramm T. Die Achsenbezeichnung entscheidet!',
-        deeper: `<p><strong>Bewegungsrichtung aus Momentanbild:</strong> Läuft die Welle in +x-Richtung, dann bewegt sich ein Punkt als nächstes in die Richtung, aus der er „kommt" – also wie der Punkt links von ihm gerade steht.</p>`
+        deeper: `<p><strong>Bewegungsrichtung aus dem Momentanbild:</strong> Bei einer nach rechts laufenden Welle nimmt ein fester Punkt kurz danach die Auslenkung an, die sein linker Nachbar jetzt schon hat. Bei einer nach links laufenden Welle ist es entsprechend umgekehrt. Dieses qualitative Denken ist in Erklärfragen oft hilfreicher als bloßes Formelwissen.</p>
+<p><strong>Prüfungstypisch:</strong> In Diagrammaufgaben sollst du oft aus einem Zeitdiagramm \\(T\\) bestimmen, mit \\(c = \\lambda f\\) die Wellenlänge berechnen und anschließend diese Wellenlänge im Momentanbild wiederfinden. Genau diese Verbindung zwischen beiden Darstellungen solltest du sicher beherrschen.</p>`
       },
       {
         title: 'Stehende Wellen',
-        text: `<p>Überlagern sich zwei gleiche, gegenläufige Wellen (z.B. durch Reflexion), entsteht eine <strong>stehende Welle</strong>. Es gibt feste Schwingungsknoten (K) und -bäuche (B).</p>`,
+        text: `<p>Überlagern sich zwei gleichartige, gleich schnelle und gleichfrequente Wellen, die sich in entgegengesetzte Richtungen ausbreiten, entsteht eine <strong>stehende Welle</strong>. Typischerweise passiert das bei Reflexion an einem Rand.</p>
+<p>Dabei gibt es feste <strong>Schwingungsknoten</strong>, an denen die Auslenkung immer null bleibt, und <strong>Schwingungsbäuche</strong>, an denen die Amplitude maximal ist. Anders als bei einer laufenden Welle wird also kein Muster weitergetragen; das räumliche Muster bleibt stehen.</p>
+<p>Für Saiten, Luftsäulen und ähnliche Systeme ist entscheidend, welche <strong>Randbedingungen</strong> gelten. Genau daraus folgen die erlaubten Eigenfrequenzen. Im Abi ist das oft der eigentliche Kern der Aufgabe.</p>`,
         formulas: [
           { label: 'Wellenlängen (beidseitig fest)', latex: '\\lambda_n = \\frac{2L}{n} \\quad (n = 1, 2, 3, \\ldots)' },
           { label: 'Eigenfrequenzen', latex: 'f_n = \\frac{n \\cdot c}{2L}', note: 'harmonische Reihe' },
         ],
-        deeper: `<p><strong>Randbedingungen:</strong> An einem festen Ende: immer Knoten. An einem losen Ende: immer Bauch. Dadurch: geschlossene Pfeife (beidseitig Knoten) ↔ Saite (beidseitig Knoten).</p>
-<p><strong>Klang:</strong> Ein Instrument erzeugt alle Eigenfrequenzen \\(f_n = n \\cdot f_1\\) gleichzeitig. Die Mischung bestimmt den Klangcharakter (Timbre).</p>`
+        note: 'Knoten und Bäuche entstehen aus den Randbedingungen des Systems.',
+        deeper: `<p><strong>Randbedingungen:</strong> Am festen Ende liegt ein Knoten, am losen Ende ein Bauch. Bei einer beidseitig festen Saite gilt deshalb \\(\\lambda_1 = 2L\\). In offenen oder halboffenen Luftsäulen ändern sich diese Bedingungen, und damit auch die erlaubten Frequenzen.</p>
+<p><strong>Grundschwingung und Obertöne:</strong> Die Grundschwingung ist die tiefste mögliche Eigenschwingung. Höhere Moden besitzen zusätzliche Knoten und Bäuche. In Aufgaben sollst du oft aus einer Skizze die Ordnung \\(n\\) erkennen und daraus \\(\\lambda_n\\) oder \\(f_n\\) bestimmen.</p>
+<p><strong>Anwendungsbezug:</strong> Musikinstrumente funktionieren genau über diese Eigenmoden. Der Grundton legt die wahrgenommene Höhe fest, die Obertöne bestimmen den Klangcharakter.</p>`
       },
       {
         title: 'Interferenz zweier Quellen',
-        text: `<p>Zwei kohärente Punktquellen erzeugen ein <strong>Interferenzmuster</strong> mit Verstärkungs- und Auslöschungszonen.</p>`,
+        text: `<p>Treffen zwei Wellen zusammen, überlagern sich ihre Auslenkungen. Bei zwei <strong>kohärenten</strong> Quellen, also Quellen mit fester Phasenbeziehung und gleicher Frequenz, entsteht dadurch ein stabiles <strong>Interferenzmuster</strong> aus Verstärkungs- und Auslöschungszonen.</p>
+<p>Entscheidend ist der <strong>Gangunterschied</strong> \\(\\Delta s\\): Ist er ein ganzzahliges Vielfaches der Wellenlänge, verstärken sich die Wellen konstruktiv. Bei einem halbzahlig verschobenen Gangunterschied löschen sie sich destruktiv aus.</p>
+<p>Das ist nicht nur ein Rechenthema. In Begründungsaufgaben musst du oft erklären, warum an einem bestimmten Ort ein Maximum oder Minimum entsteht und wieso das Muster nur bei kohärenten Quellen stabil bleibt.</p>`,
         formulas: [
           { label: 'Verstärkung', latex: '\\Delta s = m \\cdot \\lambda \\quad (m = 0,\\pm1,\\pm2,\\ldots)' },
           { label: 'Auslöschung', latex: '\\Delta s = (m + \\tfrac{1}{2}) \\cdot \\lambda' },
           { label: 'Gangunterschied', latex: '\\Delta s = |r_1 - r_2|' },
         ],
-        deeper: `<p><strong>Huygens-Prinzip:</strong> Viele Wellenphänomene werden dadurch erklärt, dass jeder Punkt einer Wellenfront als Ausgangspunkt neuer Elementarwellen aufgefasst wird. So lassen sich Interferenz, Brechung und Beugung in einem gemeinsamen Modell verstehen.</p>
-<p><strong>Technischer Bezug:</strong> Gegenschall ist ein klassisches Beispiel für destruktive Interferenz. Das zeigt, dass Wellenphysik nicht nur Theorie ist, sondern direkt in Kopfhörern und Lärmschutz steckt.</p>`
+        note: 'Ohne Kohärenz kein stabiles Interferenzmuster.',
+        deeper: `<p><strong>Huygens-Prinzip:</strong> Jeder Punkt einer Wellenfront kann als Ausgangspunkt neuer Elementarwellen gedacht werden. Damit lassen sich Interferenz, Beugung und Brechung in einem gemeinsamen Bild verstehen.</p>
+<p><strong>Typischer Denkfehler:</strong> Ein Intensitätsminimum bedeutet nicht, dass dort keine Wellen ankommen. Beide Wellen kommen an, aber ihre Auslenkungen heben sich dort gegenseitig auf.</p>
+<p><strong>Technischer Bezug:</strong> Gegenschall in Kopfhörern nutzt destruktive Interferenz. So wird aus einem abstrakten Wellenprinzip direkt eine praktische Anwendung.</p>`
       },
       {
         title: 'Brechung, Beugung und elektromagnetische Wellen',
-        text: `<p>Bei der <strong>Brechung</strong> ändert eine Welle an der Grenzfläche ihre Richtung, weil sich ihre Ausbreitungsgeschwindigkeit ändert. Bei der <strong>Beugung</strong> dringt sie in den geometrischen Schattenraum ein. Beide Phänomene zeigen die Grenzen des reinen Strahlenbildes.</p>
-<p>Auf dieser Grundlage wird das Wellenmodell auch auf <strong>elektromagnetische Wellen</strong> übertragen. Licht ist also nicht nur ein Sonderfall, sondern eine Welle ohne materielles Trägermedium.</p>`,
+        text: `<p>Bei der <strong>Brechung</strong> ändert eine Welle an einer Grenzfläche ihre Richtung, weil sich ihre Ausbreitungsgeschwindigkeit im neuen Medium ändert. Dabei bleibt die <strong>Frequenz konstant</strong>, aber die Wellenlänge passt sich an. Genau deshalb folgt aus Brechung nicht nur ein Richtungswechsel, sondern auch eine veränderte Phasenlage im neuen Medium.</p>
+<p>Bei der <strong>Beugung</strong> breitet sich eine Welle auch in den geometrischen Schattenraum aus. Besonders deutlich wird das, wenn Öffnungen oder Hindernisse in der Größenordnung der Wellenlänge liegen. Das ist ein klares Zeichen dafür, dass das reine Strahlenmodell nicht ausreicht.</p>
+<p>Diese Gedanken lassen sich direkt auf <strong>elektromagnetische Wellen</strong> übertragen. Licht ist also keine Sondererscheinung, sondern ein Wellenphänomen, bei dem elektrische und magnetische Felder miteinander gekoppelt sind.</p>`,
         formulas: [
           { label: 'Brechungsindex', latex: 'n = \\frac{c_0}{c}' },
           { label: 'Snellius', latex: 'n_1 \\sin\\alpha_1 = n_2 \\sin\\alpha_2' },
         ],
-        deeper: `<p><strong>Grenze des Strahlenmodells:</strong> Sind Öffnungen und Hindernisse viel größer als die Wellenlänge, funktioniert das Strahlenmodell gut. In der Größenordnung von \\(\\lambda\\) wird Beugung wichtig und das Wellenmodell wird unverzichtbar.</p>
-<p><strong>Polarisation als Hinweis:</strong> Dass Licht polarisiert werden kann, zeigt seinen Transversalcharakter. Dieser Gedanke verbindet Wellen allgemein direkt mit der Wellenoptik.</p>`
+        note: 'Bei Brechung bleibt f gleich, bei kleinerem c wird auch λ kleiner.',
+        deeper: `<p><strong>Grenze des Strahlenmodells:</strong> Sind Öffnungen und Hindernisse viel größer als \\(\\lambda\\), kann man Licht oft gut mit Strahlen beschreiben. In der Größenordnung der Wellenlänge treten Beugung und Interferenz so deutlich auf, dass nur das Wellenmodell die Beobachtungen erklären kann.</p>
+<p><strong>Brechung sauber begründen:</strong> Beim Übergang in ein optisch dichteres Medium wird Licht langsamer. Dadurch dreht sich die Wellennormale zum Lot hin. Viele Aufgaben fragen genau diese qualitative Begründung und nicht nur das Einsetzen in das Snelliussche Gesetz.</p>
+<p><strong>Polarisation als Brücke zur Wellenoptik:</strong> Dass Licht polarisiert werden kann, zeigt seinen Transversalcharakter. Damit ist die Wellenlehre direkt mit der Wellenoptik verbunden.</p>`
       }
     ],
     quickcheck: [

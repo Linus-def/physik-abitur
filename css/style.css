@@ -3930,6 +3930,7 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+  display: grid;
 }
 
 #topic-topbar {
@@ -3957,7 +3958,7 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     padding-bottom: env(safe-area-inset-bottom);
-    box-shadow: 12px 0 40px rgba(0, 0, 0, 0.24);
+    box-shadow: 8px 0 24px rgba(0, 0, 0, 0.18);
   }
 
   #topic-nav {
@@ -3966,12 +3967,12 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   }
 
   .sidebar-bottom {
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
-    background: linear-gradient(180deg, rgba(18, 26, 19, 0.92), rgba(18, 26, 19, 0.98));
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    position: relative;
+    bottom: auto;
+    z-index: auto;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 
@@ -3991,11 +3992,18 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   .topic-sticky-shell {
     top: 0;
     z-index: 24;
+    gap: 10px;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
   }
 
   #topic-topbar {
-    padding: 10px 14px 8px;
+    padding: 12px 14px 0;
     align-items: flex-start;
+    background: transparent;
+    border-bottom: none;
   }
 
   .back-btn {
@@ -4015,17 +4023,20 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   }
 
   #topic-tabs {
-    padding: 0 14px 8px;
-    gap: 8px;
+    padding: 0 14px 12px;
+    gap: 10px;
+    background: transparent;
+    border-bottom: none;
   }
 
   .tab {
     min-height: 42px;
-    padding: 10px 14px;
+    padding: 11px 16px;
     border-radius: 999px;
     border-bottom: none;
     border: 1px solid transparent;
     background: var(--surface);
+    box-shadow: var(--shadow-sm);
   }
 
   .tab.active {
@@ -4050,6 +4061,10 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
 }
 
 @media (max-width: 420px) {
+  .topic-sticky-shell {
+    gap: 8px;
+  }
+
   .sidebar-brand {
     padding: 18px 14px 14px;
   }
@@ -4065,6 +4080,7 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
   .sidebar-bottom {
     padding-left: 10px;
     padding-right: 10px;
+    gap: 8px;
   }
 
   .back-btn span {

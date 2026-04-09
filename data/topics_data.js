@@ -310,6 +310,32 @@ const TOPICS_DATA = {
         ],
         correct: 0,
         explanation: 'Stärkere Dämpfung reduziert die maximale Resonanzamplitude und verbreitert die Resonanzkurve. Das System reagiert also weniger stark auf die Anregung.'
+      },
+      {
+        question: 'Warum ist die Beschleunigung bei einer harmonischen Schwingung in der Gleichgewichtslage null?',
+        options: [
+          'Weil dort keine rücktreibende Kraft wirkt und damit auch \\(a = 0\\) ist.',
+          'Weil dort die Geschwindigkeit null ist.',
+          'Weil die Masse in der Mitte kleiner wird.',
+          'Weil nur an den Umkehrpunkten überhaupt Kräfte wirken.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'In der Gleichgewichtslage ist die Auslenkung \\(s = 0\\). Für die harmonische Schwingung gilt \\(a = -\\omega^2 s\\), also folgt sofort \\(a = 0\\).',
+        detailedExplanation: 'Die rücktreibende Kraft hängt direkt von der Auslenkung ab. In der Mitte ist das System weder nach links noch nach rechts ausgelenkt, also gibt es dort keinen Grund für eine Beschleunigung. Genau deshalb ist dort die Geschwindigkeit maximal: Die Energie steckt in diesem Moment vollständig in der Bewegung und nicht in der Rückstellkraft.'
+      },
+      {
+        question: 'Zwei Schwingungen mit fast gleicher Frequenz überlagern sich. Was beobachtet man typischerweise?',
+        options: [
+          'Eine Schwebung mit langsam wechselnder Amplitude.',
+          'Eine dauerhaft konstante Amplitude.',
+          'Vollständige Auslöschung zu jeder Zeit.',
+          'Eine Verdopplung der Eigenfrequenz.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Fast gleiche Frequenzen führen zu einer Schwebung: Die schnelle Grundschwingung bleibt, aber ihre Amplitude wird periodisch größer und kleiner.',
+        detailedExplanation: 'Die beiden Schwingungen laufen zeitweise in Phase und verstärken sich, kurz darauf sind sie gegeneinander verschoben und schwächen sich ab. Daraus entsteht die langsame Hüllkurve. Genau das ist keine neue einzelne Schwingung, sondern eine Überlagerung zweier fast gleicher Frequenzen.'
       }
     ],
     resources: [
@@ -602,6 +628,32 @@ const TOPICS_DATA = {
         options: ['\\(U_2 = 57{,}5\\,\\text{V}\\)', '\\(U_2 = 920\\,\\text{V}\\)', '\\(U_2 = 115\\,\\text{V}\\)', '\\(U_2 = 230\\,\\text{V}\\)'],
         correct: 0,
         explanation: 'Für den idealen Trafo gilt \\(U_2/U_1 = n_2/n_1\\). Also \\(U_2 = 230\\cdot 50/200 = 57{,}5\\,\\text{V}\\).'
+      },
+      {
+        question: 'Warum erzeugt eine ruhende Leiterschleife in einem konstanten homogenen Magnetfeld keine Induktionsspannung?',
+        options: [
+          'Weil sich der magnetische Fluss durch die Schleife nicht ändert.',
+          'Weil Magnetfelder nur bei Strom wirken.',
+          'Weil die Schleife ungeladen ist.',
+          'Weil Induktion nur in Spulen mit Eisenkern möglich ist.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Induktion entsteht nur bei einer Flussänderung. Bleiben Feldstärke, Fläche und Orientierung konstant, dann ist auch \\(\\Delta\\Phi = 0\\) und damit \\(U_{\\text{ind}} = 0\\).',
+        detailedExplanation: 'Viele verwechseln „Magnetfeld vorhanden“ mit „Induktion vorhanden“. Entscheidend ist aber nicht das Feld selbst, sondern seine Änderung im Bezug auf die Schleife. Genau deshalb kann eine Schleife mitten im Magnetfeld liegen, ohne dass überhaupt eine Spannung induziert wird.'
+      },
+      {
+        question: 'Warum ist hohe Spannung im Stromnetz für den Energietransport günstig?',
+        options: [
+          'Bei gleicher Leistung ist der Strom kleiner, dadurch sinken die Leitungsverluste \\(I^2R\\).',
+          'Weil hohe Spannung die Energie im Kabel vermehrt.',
+          'Weil dann kein Transformator mehr nötig ist.',
+          'Weil hohe Spannung den Widerstand der Leitung auf null setzt.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Für dieselbe Leistung gilt \\(P = UI\\). Wird \\(U\\) größer, kann \\(I\\) kleiner werden. Dadurch werden die Wärmeverluste in der Leitung kleiner, denn sie wachsen mit \\(I^2R\\).',
+        detailedExplanation: 'Der entscheidende Zusammenhang ist: Nicht die Spannung macht die Verluste groß, sondern vor allem der Strom. Deshalb transformiert man elektrische Energie vor dem Ferntransport hoch und beim Verbraucher wieder herunter. Das ist ein klassischer Abi-Transfer von Trafo-Gleichung zu technischer Anwendung.'
       }
     ],
     resources: [
@@ -1894,6 +1946,32 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         ],
         correct: 0,
         explanation: 'Der Welle-Teilchen-Dualismus beschreibt genau dieses Verhalten: Einzelne Elektronen werden punktförmig nachgewiesen, aber ihre Wahrscheinlichkeitswelle interferiert mit sich selbst.'
+      },
+      {
+        question: 'Was ändert sich beim Photoeffekt, wenn die Frequenz unterhalb der Grenzfrequenz liegt, die Intensität aber stark erhöht wird?',
+        options: [
+          'Es tritt trotzdem kein Photoeffekt auf.',
+          'Es werden langsam Elektronen ausgelöst.',
+          'Der Fotostrom steigt stark an.',
+          'Die Austrittsarbeit wird kleiner.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Unterhalb der Grenzfrequenz hat jedes Photon zu wenig Energie. Mehr Intensität bedeutet nur mehr Photonen mit immer noch zu kleiner Einzelenergie.',
+        detailedExplanation: 'Genau hier scheitert die klassische Wellentheorie. Wenn Energie wirklich einfach kontinuierlich übertragen würde, müsste bei genügend Intensität irgendwann doch ein Elektron herauskommen. Beobachtet wird aber: Ohne ausreichend große Photonenenergie passiert gar nichts. Das ist eines der stärksten Argumente für das Photonenkonzept.'
+      },
+      {
+        question: 'Warum sind scharfe Emissionslinien ein Hinweis auf diskrete Energieniveaus?',
+        options: [
+          'Weil nur ganz bestimmte Energiedifferenzen zwischen erlaubten Zuständen Photonen liefern.',
+          'Weil Atome nur bei einer einzigen Temperatur leuchten.',
+          'Weil die Intensität des Lichts konstant bleiben muss.',
+          'Weil jedes Atom immer nur ein einziges Photon emittiert.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Jede Spektrallinie entspricht genau einer Energiedifferenz \\(\\Delta E = hf\\) zwischen zwei erlaubten Niveaus. Wären alle Energien erlaubt, gäbe es ein kontinuierliches Spektrum.',
+        detailedExplanation: 'Die Linie ist also nicht einfach ein hübsches Muster, sondern die eigentliche physikalische Aussage. Sie zeigt, dass das Atom nicht beliebig Energie aufnehmen oder abgeben kann. Genau diese Deutung ist im Abi wichtiger als das bloße Wiedererkennen eines Spektrums.'
       }
     ],
     resources: [
@@ -2201,6 +2279,32 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         options: ['\\(\\Delta s = 2\\lambda\\)', '\\(\\Delta s = 1{,}5\\lambda\\)', '\\(\\Delta s = 0{,}5\\lambda\\)', '\\(\\Delta s = 2{,}5\\lambda\\)'],
         correct: 0,
         explanation: 'Konstruktive Interferenz liegt vor, wenn \\(\\Delta s = m\\lambda\\) mit ganzzahligem \\(m\\). \\(2\\lambda\\) erfüllt diese Bedingung.'
+      },
+      {
+        question: 'Warum bleibt beim Übergang einer Welle in ein anderes Medium die Frequenz gleich?',
+        options: [
+          'Weil die Frequenz von der Quelle vorgegeben wird und an der Grenzfläche nicht sprunghaft wechseln kann.',
+          'Weil sich jede Welle automatisch an das neue Medium anpasst und nur f konstant bleibt.',
+          'Weil die Wellenlänge immer unverändert bleiben muss.',
+          'Weil Brechung nur bei gleicher Frequenz definiert ist.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Die Quelle bestimmt, wie oft pro Sekunde ein Schwingungszustand erzeugt wird. An der Grenzfläche muss dieser zeitliche Rhythmus erhalten bleiben; deshalb ändern sich stattdessen Ausbreitungsgeschwindigkeit und Wellenlänge.',
+        detailedExplanation: 'Wenn die Frequenz an der Grenze plötzlich anders wäre, müsste sich das Medium dort zeitlich widersprüchlich verhalten: Auf einer Seite kämen pro Sekunde mehr Wellenberge an als auf der anderen. Konsistent ist nur, dass derselbe Takt weiterläuft und sich die räumliche Struktur \\(\\lambda\\) an das neue \\(c\\) anpasst.'
+      },
+      {
+        question: 'Wann ist Beugung besonders stark ausgeprägt?',
+        options: [
+          'Wenn die Öffnung oder das Hindernis in der Größenordnung der Wellenlänge liegt.',
+          'Nur bei sehr großen Öffnungen.',
+          'Nur wenn gar keine Reflexion auftritt.',
+          'Immer gleich stark, unabhängig von \\(\\lambda\\).'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Beugung wird umso deutlicher, je weniger groß die Öffnung im Vergleich zur Wellenlänge ist. Bei sehr großen Öffnungen dominiert dagegen das Strahlenbild.',
+        detailedExplanation: 'Genau daran erkennt man die Grenze des Strahlenmodells: Solange Hindernisse riesig gegenüber \\(\\lambda\\) sind, wirkt die Welle fast geradlinig. Sobald die Geometrie in die Größenordnung der Wellenlänge kommt, breitet sich die Welle sichtbar in den Schattenraum aus. Das ist das eigentliche physikalische Kennzeichen starker Beugung.'
       }
     ],
     resources: [

@@ -2566,3 +2566,287 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
 [data-theme="dark"] .formula-section-card {
   background: var(--surface);
 }
+
+/* ══ Abi-Aufgaben – lineare Lernansicht ══ */
+.tasks-intro-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+
+.tasks-intro-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.tasks-intro-copy,
+.tasks-empty {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.tasks-empty {
+  padding: 8px 2px;
+}
+
+.task-card-header-simple {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.task-card-kicker {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}
+
+.task-card-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.task-card-layout-study {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.task-main {
+  flex: 1 1 560px;
+  min-width: 280px;
+}
+
+.task-context-card,
+.task-anchor-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.task-source-note {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin-bottom: 10px;
+}
+
+.task-source-note.subtle {
+  color: var(--text-3);
+}
+
+.task-anchor-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.task-anchor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 8px 12px;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.task-anchor-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateY(-1px);
+}
+
+.task-anchor-btn-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: var(--accent-grad);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.task-anchor-btn-copy {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.task-body-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.subtask-study-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 88px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.subtask-study-card-highlight {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(37,99,235,.14), var(--shadow);
+}
+
+.subtask-study-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.subtask-study-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.study-block {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+
+.study-block + .study-block,
+.study-theory-row {
+  margin-top: 10px;
+}
+
+.study-block-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+
+.study-block-content {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.study-block-task {
+  background: var(--surface);
+}
+
+.study-block-hint {
+  background: var(--amber-bg);
+  border-color: rgba(217,119,6,.22);
+}
+
+.study-block-solution {
+  background: var(--green-bg);
+  border-color: rgba(22,163,74,.22);
+}
+
+.study-block-ai {
+  background: var(--accent-bg);
+  border-color: rgba(37,99,235,.18);
+}
+
+.study-theory-row {
+  display: flex;
+}
+
+.task-theory-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 9px 13px;
+  font-size: 12.5px;
+  font-weight: 700;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+}
+
+.task-theory-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .task-context-card,
+[data-theme="dark"] .task-anchor-card,
+[data-theme="dark"] .tasks-intro-card,
+[data-theme="dark"] .study-block-task,
+[data-theme="dark"] .task-images-side {
+  background: var(--surface);
+}
+
+[data-theme="dark"] .study-block-solution {
+  border-color: rgba(74,222,128,.18);
+}
+
+[data-theme="dark"] .study-block-ai {
+  border-color: rgba(96,165,250,.2);
+}
+
+[data-theme="dark"] .study-block-hint {
+  border-color: rgba(251,191,36,.2);
+}
+
+[data-theme="dark"] .task-anchor-btn,
+[data-theme="dark"] .task-theory-link {
+  background: var(--surface);
+}
+
+@media (max-width: 680px) {
+  .task-card-header-simple {
+    flex-direction: column;
+  }
+
+  .task-card-pill-row {
+    justify-content: flex-start;
+  }
+
+  .task-card-layout-study {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .subtask-study-card {
+    padding: 14px;
+  }
+
+  .task-anchor-row {
+    gap: 6px;
+  }
+
+  .task-anchor-btn,
+  .task-theory-link {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

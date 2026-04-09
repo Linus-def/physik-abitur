@@ -4,12 +4,37 @@ const tasksRenderer = (() => {
   let currentFilter = 'all';
   let eventsBound = false;
 
+  const STOP_WORDS = new Set([
+    'aber', 'alle', 'allem', 'also', 'als', 'an', 'anhand', 'aus', 'bei', 'beim',
+    'berechne', 'begruende', 'begruende', 'bestimme', 'bestaetige', 'damit', 'dass',
+    'den', 'der', 'des', 'die', 'dieser', 'diese', 'diesem', 'dieses', 'ein', 'eine',
+    'einem', 'einen', 'einer', 'eines', 'erklaere', 'erklaere', 'erlaeutere', 'fuer',
+    'gibt', 'groesser', 'handelt', 'hat', 'hier', 'im', 'in', 'ist', 'kann', 'keine',
+    'liegt', 'mit', 'nach', 'nimm', 'ob', 'oder', 'sich', 'sie', 'sind', 'soll',
+    'stelle', 'um', 'und', 'von', 'warum', 'weise', 'welche', 'wie', 'wird', 'zeige',
+    'zur', 'zum'
+  ]);
+
+  function normalizeText(text = '') {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s]/g, ' ');
+  }
+
+  function tokenize(text = '') {
+    return normalizeText(text)
+      .split(/\s+/)
+      .filter(token => token.length > 3 && !STOP_WORDS.has(token));
+  }
+
   function detectOperator(text = '') {
-    const normalized = text.toLowerCase();
+    const normalized = normalizeText(text);
     if (/(vergleiche|vergleich)/.test(normalized)) return { key: 'compare', label: 'Vergleichen' };
-    if (/(begründe|warum|nimm stellung|beurteile)/.test(normalized)) return { key: 'justify', label: 'Begründen' };
-    if (/(erkläre|erläutere|deute|interpretiere|skizziere)/.test(normalized)) return { key: 'explain', label: 'Erklären' };
-    if (/(berechne|bestimme|weise nach|zeige|wie groß|wieviel)/.test(normalized)) return { key: 'calculate', label: 'Berechnen' };
+    if (/(begrunde|beurteile|nimm stellung|warum)/.test(normalized)) return { key: 'justify', label: 'Begründen' };
+    if (/(erklare|erlaeutere|deute|interpretiere|skizziere)/.test(normalized)) return { key: 'explain', label: 'Erklären' };
+    if (/(berechne|bestimme|weise nach|zeige|wie gross|wieviel|wie viel)/.test(normalized)) return { key: 'calculate', label: 'Berechnen' };
     return { key: 'analyze', label: 'Anwenden' };
   }
 
@@ -26,61 +51,75 @@ const tasksRenderer = (() => {
     return summary;
   }
 
-  function defaultExpectationItems(operator, sub) {
-    const points = sub.points || 0;
-    const compact = points > 0 && points <= 2;
+  function bePtsClass(pts) {
+    if (!pts) return '';
+    const n = parseInt(pts, 10);
+    if (n <= 2) return 'be-low';
+    if (n <= 4) return 'be-mid';
+    return 'be-high';
+  }
+
+  function fallbackAiExplanation(operator) {
     switch (operator.key) {
       case 'calculate':
-        return compact
-          ? ['passenden Ansatz nennen', 'richtig einsetzen und Einheit angeben']
-          : ['passenden Ansatz oder die richtige Formel nennen', 'Zwischenschritte mit sinnvollen Einheiten zeigen', 'Endergebnis fachlich knapp einordnen oder plausibilisieren'];
+        return 'Hier hilft es, zuerst sauber zwischen Gegebenem und Gesuchtem zu trennen, dann die passende Formel aus dem Thema zu wählen und das Ergebnis fachlich kurz zu deuten. Im Abi gibt es Punkte nicht nur für die Zahl, sondern auch für den nachvollziehbaren Ansatz.';
       case 'explain':
-        return compact
-          ? ['zentralen physikalischen Zusammenhang benennen', 'Fachbegriffe korrekt verwenden']
-          : ['Ursache und Wirkung physikalisch verknüpfen', 'passende Fachbegriffe sauber verwenden', 'nicht nur das Ergebnis nennen, sondern den Zusammenhang erklären'];
+        return 'Hier reicht das Ergebnis allein nicht. Entscheidend ist, dass du Ursache und Wirkung physikalisch verbindest und Fachbegriffe sichtbar passend einsetzt. Gute Antworten beschreiben also nicht nur, was passiert, sondern auch warum.';
       case 'justify':
-        return compact
-          ? ['klare Aussage treffen', 'mit passendem Gesetz oder Prinzip begründen']
-          : ['klare Aussage oder Entscheidung formulieren', 'mit Gesetz, Modell oder Formel begründen', 'die Begründung sichtbar auf die konkrete Situation beziehen'];
+        return 'Bei solchen Teilaufgaben brauchst du eine klare Aussage und danach eine physikalische Begründung mit Gesetz, Modell oder Formel. Eine gute Abi-Antwort klingt meist wie: Aussage, Begründung, kurzer Bezug zur konkreten Situation.';
       case 'compare':
-        return compact
-          ? ['mindestens einen klaren Vergleichspunkt nennen', 'Unterschied oder Gemeinsamkeit deutlich machen']
-          : ['einen sinnvollen Vergleichsmaßstab wählen', 'mindestens eine Gemeinsamkeit oder einen Unterschied sauber benennen', 'mit einem kurzen Fazit abschließen'];
+        return 'Beim Vergleichen solltest du einen klaren Maßstab wählen, zum Beispiel Amplitude, Energie, Phase oder Intensität. Danach benennst du mindestens einen wesentlichen Unterschied oder eine Gemeinsamkeit und schließt mit einem kurzen Fazit ab.';
       default:
-        return compact
-          ? ['relevante Information korrekt ablesen oder auswählen', 'passenden Schluss ziehen']
-          : ['relevante Angaben aus Text, Diagramm oder Situation herausziehen', 'daraus einen physikalisch passenden Schluss ableiten', 'das Ergebnis knapp fachlich einordnen'];
+        return 'Hier geht es darum, aus der Situation die relevanten Informationen herauszuziehen und daraus einen physikalisch passenden Schluss zu machen. Im Abi zählt vor allem, dass du den Kern der Aufgabe erkennst und sauber auf die gegebene Situation beziehst.';
     }
   }
 
-  function expectationIntro(operator, sub) {
-    const points = sub.points || 0;
-    if (points >= 5) return `Bei ${points} BE wird ein sauberer, nachvollziehbarer Lösungsweg erwartet und nicht nur das Endergebnis.`;
-    if (points >= 3) return `Bei ${points} BE solltest du den Kerngedanken klar zeigen und ihn sauber mit der Situation verknüpfen.`;
-    return points ? `Bei ${points} BE zählt vor allem der zentrale Gedanke in knapper, richtiger Form.` : 'Hier zählt vor allem, dass der physikalische Kern richtig getroffen wird.';
+  function getAiExplanation(sub, operator) {
+    return sub.deeperExplanation || fallbackAiExplanation(operator);
   }
 
-  function renderExpectation(sub, operator) {
-    const items = Array.isArray(sub.expectation) && sub.expectation.length
-      ? sub.expectation
-      : defaultExpectationItems(operator, sub);
+  function findRelevantTheorySection(topicId, task, sub) {
+    const topic = TOPICS_DATA[topicId];
+    if (!topic?.sections?.length) return null;
 
-    return `
-      <div class="expectation-box ${operator.key}">
-        <div class="expectation-label">Erwartungshorizont</div>
-        <div class="expectation-intro">${expectationIntro(operator, sub)}</div>
-        <div class="expectation-list">
-          ${items.map(item => `<span>${item}</span>`).join('')}
-        </div>
-      </div>
-    `;
+    const terms = new Set(tokenize(`${task.title} ${task.context || ''} ${sub.text || ''}`));
+    let bestMatch = null;
+
+    topic.sections.forEach((section, index) => {
+      const titleTokens = tokenize(section.title || '');
+      const haystack = normalizeText(`${section.title || ''} ${section.text || ''} ${section.note || ''}`);
+      let score = 0;
+
+      titleTokens.forEach(token => {
+        if (terms.has(token)) score += 4;
+      });
+
+      terms.forEach(token => {
+        if (haystack.includes(token)) score += 1;
+      });
+
+      if (!bestMatch || score > bestMatch.score) {
+        bestMatch = {
+          score,
+          title: section.title,
+          targetId: `theory-sec-${topicId}-${index}`
+        };
+      }
+    });
+
+    if (bestMatch && bestMatch.score > 0) return bestMatch;
+
+    return {
+      score: 0,
+      title: `${topic.title} im Überblick`,
+      targetId: null
+    };
   }
 
   function bindEvents(container) {
     if (eventsBound) return;
     eventsBound = true;
 
-    // Jahr-Filter Pills
     container.addEventListener('click', e => {
       const pill = e.target.closest('.year-pill');
       if (pill) {
@@ -89,208 +128,208 @@ const tasksRenderer = (() => {
       }
 
       const pdfImg = e.target.closest('.pdf-page-img');
-      if (pdfImg) { openLightbox(pdfImg.dataset.src); return; }
-
-      const stepBtn = e.target.closest('.task-step-btn');
-      if (stepBtn) {
-        jumpToSubtask(stepBtn.dataset.domId);
+      if (pdfImg) {
+        openLightbox(pdfImg.dataset.src);
         return;
       }
 
-      const subtaskToggle = e.target.closest('[data-action="toggle-subtask"]');
-      if (subtaskToggle) {
-        toggleSubtask(subtaskToggle.dataset.domId);
+      const anchorBtn = e.target.closest('.task-anchor-btn');
+      if (anchorBtn) {
+        jumpToSubtask(anchorBtn.dataset.targetId);
         return;
       }
 
-      const hintBtn = e.target.closest('[data-action="hint"]');
-      if (hintBtn) { toggleHint(hintBtn.dataset.domId); return; }
-
-      const deeperBtn = e.target.closest('[data-action="deeper"]');
-      if (deeperBtn) { toggleDeeper(deeperBtn.dataset.domId); return; }
-
-      const solBtn = e.target.closest('[data-action="solution"]');
-      if (solBtn) { toggleSolution(solBtn.dataset.domId, solBtn.dataset.topicId, solBtn.dataset.key); return; }
-
-      const ratingBtn = e.target.closest('[data-action="rate"]');
-      if (ratingBtn) { rate(ratingBtn.dataset.topicId, ratingBtn.dataset.key, ratingBtn.dataset.r, ratingBtn.dataset.domId); return; }
+      const theoryBtn = e.target.closest('.task-theory-link');
+      if (theoryBtn) {
+        app.openTopicReference(
+          theoryBtn.dataset.topicId,
+          'theory',
+          theoryBtn.dataset.targetId || undefined
+        );
+      }
     });
   }
 
   function render(topicId, filter) {
     currentTopic = topicId;
     currentFilter = filter || 'all';
+
     const container = document.getElementById('tab-tasks');
     if (!container) return;
+
     const all = TASKS_DATA[topicId] || [];
-    const years = [...new Set(all.map(t => t.year))].sort((a,b) => b-a);
-    const tasks = currentFilter === 'all' ? all : all.filter(t => String(t.year) === String(currentFilter));
+    const years = [...new Set(all.map(task => task.year))].sort((a, b) => b - a);
+    const tasks = currentFilter === 'all'
+      ? all
+      : all.filter(task => String(task.year) === String(currentFilter));
 
     const pillsHtml = `
       <div class="year-pills">
         <label>Jahr:</label>
         <button class="year-pill${currentFilter === 'all' ? ' active' : ''}" data-year="all">Alle</button>
-        ${years.map(y => `<button class="year-pill${String(currentFilter) === String(y) ? ' active' : ''}" data-year="${y}">${y}</button>`).join('')}
-        <span class="tasks-count" style="margin-left:auto;font-size:12px;color:var(--text-3);">${tasks.length} Aufgabe${tasks.length!==1?'n':''}</span>
+        ${years.map(year => `
+          <button class="year-pill${String(currentFilter) === String(year) ? ' active' : ''}" data-year="${year}">${year}</button>
+        `).join('')}
+        <span class="tasks-count" style="margin-left:auto;font-size:12px;color:var(--text-3);">
+          ${tasks.length} Aufgabe${tasks.length !== 1 ? 'n' : ''}
+        </span>
+      </div>
+    `;
+
+    const introHtml = `
+      <div class="tasks-intro-card">
+        <div class="tasks-intro-title">Abi-Aufgaben als Lernansicht</div>
+        <div class="tasks-intro-copy">
+          Jede Aufgabe zeigt jetzt zuerst die Originalseiten und darunter jede Teilaufgabe in klarer Reihenfolge mit Lösung, KI-Erklärung und direktem Sprung zur passenden Theorie.
+        </div>
       </div>
     `;
 
     container.innerHTML = `
       ${pillsHtml}
-      ${tasks.length ? tasks.map(t => taskCardHtml(topicId, t)).join('') : '<p style="color:var(--text-3);font-size:14px;padding:8px 0">Keine Aufgaben für dieses Jahr.</p>'}
+      ${introHtml}
+      ${tasks.length
+        ? tasks.map(task => taskCardHtml(topicId, task)).join('')
+        : '<p class="tasks-empty">Keine Aufgaben für dieses Jahr.</p>'}
     `;
+
     bindEvents(container);
-    setTimeout(() => mathjaxTypeset([container]).catch(() => {}), 0);
+    window.setTimeout(() => mathjaxTypeset([container]).catch(() => {}), 0);
   }
 
-  function bePtsClass(pts) {
-    if (!pts) return '';
-    const n = parseInt(pts);
-    if (n <= 2) return 'be-low';
-    if (n <= 4) return 'be-mid';
-    return 'be-high';
-  }
-
-  // PDF-Bilder direkt sichtbar (keine Toggle-Taste mehr)
   function pdfImagesHtml(task) {
-    if (!task.pdfImages || !task.pdfImages.length) return '';
-    const imgs = task.pdfImages.map((src, i) =>
-      `<img class="pdf-page-img" src="img/${src}" data-src="img/${src}" alt="Seite ${i+1}" loading="lazy" style="width:100%;border-radius:8px;margin-bottom:8px;border:1px solid var(--border);cursor:pointer;">`
-    ).join('');
+    if (!task.pdfImages?.length) return '';
+
     return `
-      <div class="task-images-side">
-        <div class="images-side-label"> 📄 Original-Abituraufgabe</div>
-        ${task.pdfHint ? `<div style="font-size:11px;color:var(--text-3);margin-bottom:6px;">${task.pdfHint}</div>` : ''}
-        ${imgs}
-      </div>
+      <aside class="task-images-side">
+        <div class="images-side-label">Original-Abituraufgabe</div>
+        <div class="task-source-note">
+          Die Originalseiten sind direkt eingeblendet. Ein Klick auf eine Seite öffnet sie größer.
+        </div>
+        ${task.pdfHint ? `<div class="task-source-note subtle">${task.pdfHint}</div>` : ''}
+        ${task.pdfImages.map((src, index) => `
+          <img
+            class="pdf-page-img"
+            src="img/${src}"
+            data-src="img/${src}"
+            alt="Originalseite ${index + 1}"
+            loading="lazy"
+          >
+        `).join('')}
+      </aside>
     `;
   }
 
   function taskCardHtml(topicId, task) {
-    const imgHtml = pdfImagesHtml(task);
-    const hasImages = task.pdfImages && task.pdfImages.length > 0;
     const operators = summarizeOperators(task.subtasks);
-    const stepsHtml = task.subtasks.map((sub, si) => {
-      const key = `${task.id}_${si}`;
-      const domId = `${topicId}_${key}`;
-      const saved = progress.getTaskRating(topicId, key);
-      const operator = detectOperator(sub.text);
-      const ratingLabels = { good: 'Verstanden', partial: 'Teilweise', bad: 'Nochmal' };
-      return `
-        <button class="task-step-btn" data-dom-id="${domId}">
-          <span class="task-step-label">${sub.label}</span>
-          <span class="task-step-operator ${operator.key}">${operator.label}</span>
-          <span class="task-step-title">${sub.text ? sub.text.substring(0, 70) + (sub.text.length > 70 ? '…' : '') : 'Teilaufgabe'}</span>
-          <span class="task-step-state ${saved || ''}">${saved ? ratingLabels[saved] : 'Offen'}</span>
-        </button>
-      `;
-    }).join('');
 
     return `
-      <div class="task-card" id="task-${topicId}-${task.id}" data-task-id="${task.id}">
-        <div class="task-learning-guide">
-          <div class="task-learning-guide-title">Abi-Fokus dieser Aufgabe</div>
-          <div class="task-operator-row">
-            ${operators.map(operator => `<span class="task-operator-pill ${operator.key}">${operator.label}</span>`).join('')}
+      <article class="task-card" id="task-${topicId}-${task.id}" data-task-id="${task.id}">
+        <div class="task-card-header task-card-header-simple">
+          <div>
+            <div class="task-card-kicker">Abitur ${task.year}</div>
+            <div class="task-card-title">${task.title}</div>
           </div>
-          <div class="task-learning-guide-steps">
-            <span>1. Operator erkennen</span>
-            <span>2. Gegebenes markieren</span>
-            <span>3. Rechnen oder begründen</span>
-            <span>4. Lösung mit Erwartungshorizont prüfen</span>
+          <div class="task-card-pill-row">
+            ${operators.map(operator => `
+              <span class="task-operator-pill ${operator.key}">${operator.label}</span>
+            `).join('')}
           </div>
         </div>
-        <div class="task-steps-overview">
-          ${stepsHtml}
-        </div>
-        <div class="task-card-layout" style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;">
-          <div style="flex:2;min-width:280px;">
-            <div class="task-card-header">
-              <span class="task-card-title">${task.title}</span>
-              <span class="task-year-tag">Abi ${task.year}</span>
+
+        <div class="task-card-layout task-card-layout-study">
+          <div class="task-main">
+            ${task.context ? `
+              <div class="task-context-card">
+                <div class="study-block-label">Ausgangssituation</div>
+                <div class="theory-text">${task.context}</div>
+              </div>
+            ` : ''}
+
+            <div class="task-anchor-card">
+              <div class="study-block-label">Direkt zu den Teilaufgaben</div>
+              <div class="task-anchor-row">
+                ${task.subtasks.map((sub, index) => {
+                  const domId = `${topicId}_${task.id}_${index}`;
+                  return `
+                    <button class="task-anchor-btn" data-target-id="${domId}">
+                      <span class="task-anchor-btn-label">${sub.label}</span>
+                      <span class="task-anchor-btn-copy">${detectOperator(sub.text).label}</span>
+                    </button>
+                  `;
+                }).join('')}
+              </div>
             </div>
-            ${task.context ? `<div class="task-context">${task.context}</div>` : ''}
-            ${task.subtasks.map((sub, si) => subtaskHtml(topicId, task.id, sub, si)).join('')}
+
+            <div class="task-body-stack">
+              ${task.subtasks.map((sub, index) => subtaskHtml(topicId, task, sub, index)).join('')}
+            </div>
           </div>
-          ${hasImages ? `<div style="flex:1;min-width:260px;max-width:400px;position:sticky;top:80px;">${imgHtml}</div>` : ''}
+          ${pdfImagesHtml(task)}
         </div>
-      </div>
+      </article>
     `;
   }
 
-  function subtaskHtml(topicId, taskId, sub, si) {
-    const key = `${taskId}_${si}`;
-    const domId = `${topicId}_${key}`;
-    const saved = progress.getTaskRating(topicId, key);
+  function subtaskHtml(topicId, task, sub, index) {
+    const domId = `${topicId}_${task.id}_${index}`;
     const operator = detectOperator(sub.text);
-    const ratingLabels = { good: '✓ Verstanden', partial: '~ Teilweise', bad: '✗ Nochmal' };
-    const beClass = bePtsClass(sub.points);
-    const hasDeeper = !!sub.deeperExplanation;
-    const isOpen = si === 0;
+    const theoryMatch = findRelevantTheorySection(topicId, task, sub);
+    const theoryLabel = theoryMatch?.title || `${TOPICS_DATA[topicId]?.title || 'Theorie'} öffnen`;
+    const theoryTargetId = theoryMatch?.targetId || '';
+
     return `
-      <div class="subtask" id="subtask-${domId}">
-        <div class="subtask-header">
-          <span class="subtask-label">${sub.label}</span>
-          <span class="subtask-operator ${operator.key}">${operator.label}</span>
-          ${sub.points ? `<span class="subtask-pts ${beClass}">${sub.points} BE</span>` : ''}
-          <span class="subtask-text-preview" style="flex:1;padding:0 8px">${sub.text ? sub.text.substring(0,80) + (sub.text.length > 80 ? '…' : '') : ''}</span>
-          <span id="done-badge-${domId}" class="subtask-done-badge ${saved || ''}">${saved ? ratingLabels[saved] : ''}</span>
-          <button class="subtask-toggle-btn" data-action="toggle-subtask" data-dom-id="${domId}" id="toggle-btn-${domId}">
-            ${isOpen ? 'Einklappen' : 'Öffnen'}
+      <section class="subtask-study-card" id="subtask-${domId}">
+        <div class="subtask-study-header">
+          <div class="subtask-study-meta">
+            <span class="subtask-label">${sub.label}</span>
+            <span class="subtask-operator ${operator.key}">${operator.label}</span>
+            ${sub.points ? `<span class="subtask-pts ${bePtsClass(sub.points)}">${sub.points} BE</span>` : ''}
+          </div>
+        </div>
+
+        <div class="study-block study-block-task">
+          <div class="study-block-label">Teilaufgabe</div>
+          <div class="study-block-content theory-text">${sub.text}</div>
+        </div>
+
+        ${sub.hint ? `
+          <div class="study-block study-block-hint">
+            <div class="study-block-label">Kurz-Hinweis</div>
+            <div class="study-block-content">${sub.hint}</div>
+          </div>
+        ` : ''}
+
+        <div class="study-block study-block-solution">
+          <div class="study-block-label">Lösung direkt zur Aufgabe</div>
+          <div class="study-block-content">${sub.solution}</div>
+        </div>
+
+        <div class="study-block study-block-ai">
+          <div class="study-block-label">KI-Erklärung</div>
+          <div class="study-block-content">${getAiExplanation(sub, operator)}</div>
+        </div>
+
+        <div class="study-theory-row">
+          <button
+            class="task-theory-link"
+            data-topic-id="${topicId}"
+            ${theoryTargetId ? `data-target-id="${theoryTargetId}"` : ''}
+          >
+            Passende Theorie: ${theoryLabel}
           </button>
         </div>
-        <div class="subtask-body${isOpen ? ' open' : ''}" id="body-${domId}">
-          <div class="subtask-inner">
-            <div class="theory-text">${sub.text}</div>
-            ${renderExpectation(sub, operator)}
-            ${sub.hint ? `<button class="pdf-toggle-btn" data-action="hint" data-dom-id="${domId}" id="hint-btn-${domId}">💡 Hinweis</button>` : ''}
-            <button class="pdf-toggle-btn" data-action="solution" data-dom-id="${domId}" data-topic-id="${topicId}" data-key="${key}" id="sol-btn-${domId}">Lösung aufdecken</button>
-            ${sub.hint ? `<div class="hint-box" id="hint-box-${domId}"><div class="hint-label">💡 Hinweis</div>${sub.hint}</div>` : ''}
-            <div class="solution-box" id="sol-box-${domId}"><div class="solution-label">✓ Lösung</div>${sub.solution}</div>
-            ${hasDeeper ? `
-              <div class="deeper-box" id="deeper-box-${domId}">
-                <div class="deeper-label">🔍 Tiefere Erklärung</div>
-                <div class="deeper-content">${sub.deeperExplanation}</div>
-              </div>
-              <button class="deeper-toggle-btn" data-action="deeper" data-dom-id="${domId}" id="deeper-btn-${domId}">
-                🧠 Tiefer verstehen
-              </button>
-            ` : ''}
-            <div class="rating-row" id="rating-${domId}">
-              <span class="rating-row-label">Wie lief's?</span>
-              ${['good','partial','bad'].map(r =>
-                `<button class="rating-btn ${r === 'good' ? 'easy' : r === 'partial' ? 'medium' : 'hard'}${saved === r ? ' active sel' : ''}" data-action="rate" data-topic-id="${topicId}" data-key="${key}" data-r="${r}" data-dom-id="${domId}">${r==='good'?'✓ Verstanden':r==='partial'?'~ Teilweise':'✗ Nochmal üben'}</button>`
-              ).join('')}
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
     `;
-  }
-
-  function toggleHint(domId) {
-    const box = document.getElementById(`hint-box-${domId}`);
-    const btn = document.getElementById(`hint-btn-${domId}`);
-    if (!box) return;
-    const isOpen = box.classList.toggle('open');
-    if (btn) btn.classList.toggle('revealed', isOpen);
-    if (isOpen) mathjaxTypeset([box]);
-  }
-
-  function toggleSubtask(domId, forceOpen) {
-    const body = document.getElementById(`body-${domId}`);
-    const btn = document.getElementById(`toggle-btn-${domId}`);
-    if (!body) return;
-    const open = typeof forceOpen === 'boolean'
-      ? forceOpen
-      : !body.classList.contains('open');
-    body.classList.toggle('open', open);
-    if (btn) btn.textContent = open ? 'Einklappen' : 'Öffnen';
   }
 
   function jumpToSubtask(domId) {
-    toggleSubtask(domId, true);
-    document.getElementById(`subtask-${domId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const target = document.getElementById(`subtask-${domId}`);
+    if (!target) return false;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    target.classList.add('subtask-study-card-highlight');
+    window.setTimeout(() => target.classList.remove('subtask-study-card-highlight'), 1800);
+    return true;
   }
 
   function jumpToTask(taskId) {
@@ -302,46 +341,9 @@ const tasksRenderer = (() => {
     return true;
   }
 
-  function toggleDeeper(domId) {
-    const box = document.getElementById(`deeper-box-${domId}`);
-    const btn = document.getElementById(`deeper-btn-${domId}`);
-    if (!box) return;
-    const isOpen = box.classList.toggle('open');
-    if (btn) {
-      btn.classList.toggle('revealed', isOpen);
-      btn.textContent = isOpen ? '🧠 Weniger anzeigen' : '🧠 Tiefer verstehen';
-    }
-    if (isOpen) mathjaxTypeset([box]);
+  function setFilter(value) {
+    if (currentTopic) render(currentTopic, value);
   }
 
-  function toggleSolution(domId, topicId, key) {
-    const solBox = document.getElementById(`sol-box-${domId}`);
-    if (solBox) solBox.classList.add('open');
-    const ratingRow = document.getElementById(`rating-${domId}`);
-    const btn = document.getElementById(`sol-btn-${domId}`);
-    const deeperBtn = document.getElementById(`deeper-btn-${domId}`);
-    if (ratingRow) ratingRow.classList.add('open');
-    if (btn) btn.classList.add('revealed');
-    if (deeperBtn) deeperBtn.style.display = 'inline-flex';
-    const els = [solBox].filter(Boolean);
-    mathjaxTypeset(els);
-  }
-
-  function rate(topicId, key, rating, domId) {
-    progress.setTaskRating(topicId, key, rating);
-    const badge = document.getElementById(`done-badge-${domId}`);
-    if (badge) {
-      badge.className = `subtask-done-badge ${rating}`;
-      badge.textContent = {good:'✓ Verstanden', partial:'~ Teilweise', bad:'✗ Nochmal üben'}[rating];
-    }
-    const row = document.getElementById(`rating-${domId}`);
-    if (row) row.querySelectorAll('.rating-btn').forEach(b => b.classList.toggle('sel', b.dataset.r === rating));
-    app.refreshTopicProgress(topicId);
-  }
-
-  function setFilter(val) {
-    if (currentTopic) render(currentTopic, val);
-  }
-
-  return { render, toggleHint, toggleDeeper, toggleSolution, rate, setFilter, jumpToTask };
+  return { render, setFilter, jumpToTask };
 })();

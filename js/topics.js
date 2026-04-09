@@ -78,9 +78,12 @@ const topicsRenderer = (() => {
             <div class="theory-overview-title">Damit musst du in Aufgaben rechnen und argumentieren</div>
             <div class="theory-note-list">
               ${taskExamples.map(task => `
-                <div class="theory-note-item">
-                  <strong>Abi ${task.year}:</strong> ${task.title}
-                </div>
+                <button class="theory-task-link" data-topic-id="${topicId}" data-task-id="${task.id}">
+                  <span class="theory-task-link-copy">
+                    <strong>Abi ${task.year}:</strong> ${task.title}
+                  </span>
+                  <span class="theory-task-link-arrow">Zur Aufgabe →</span>
+                </button>
               `).join('')}
             </div>
           </div>

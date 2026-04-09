@@ -798,6 +798,36 @@ p + p { margin-top: 0.5em; }
   color: var(--text-2);
   line-height: 1.6;
 }
+.theory-task-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  line-height: 1.6;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--transition), transform var(--transition), background var(--transition);
+}
+.theory-task-link:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+.theory-task-link-copy {
+  display: block;
+}
+.theory-task-link-arrow {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
 
 /* ══════════════════════════════════════════════
    TASKS
@@ -809,6 +839,12 @@ p + p { margin-top: 0.5em; }
   margin-bottom: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
+  scroll-margin-top: 88px;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+.task-card-highlight {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent), var(--shadow);
 }
 .task-card-header {
   display: flex; align-items: center; gap: 12px;

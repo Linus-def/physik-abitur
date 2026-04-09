@@ -187,7 +187,7 @@ const tasksRenderer = (() => {
     }).join('');
 
     return `
-      <div class="task-card">
+      <div class="task-card" id="task-${topicId}-${task.id}" data-task-id="${task.id}">
         <div class="task-learning-guide">
           <div class="task-learning-guide-title">Abi-Fokus dieser Aufgabe</div>
           <div class="task-operator-row">
@@ -293,6 +293,15 @@ const tasksRenderer = (() => {
     document.getElementById(`subtask-${domId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function jumpToTask(taskId) {
+    const taskCard = document.getElementById(`task-${currentTopic}-${taskId}`);
+    if (!taskCard) return false;
+    taskCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    taskCard.classList.add('task-card-highlight');
+    window.setTimeout(() => taskCard.classList.remove('task-card-highlight'), 1800);
+    return true;
+  }
+
   function toggleDeeper(domId) {
     const box = document.getElementById(`deeper-box-${domId}`);
     const btn = document.getElementById(`deeper-btn-${domId}`);
@@ -334,5 +343,5 @@ const tasksRenderer = (() => {
     if (currentTopic) render(currentTopic, val);
   }
 
-  return { render, toggleHint, toggleDeeper, toggleSolution, rate, setFilter };
+  return { render, toggleHint, toggleDeeper, toggleSolution, rate, setFilter, jumpToTask };
 })();

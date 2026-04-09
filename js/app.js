@@ -4,6 +4,7 @@ const app = (() => {
   let currentTopicId = null;
   let currentTab = 'theory';
   let formulaBuilt = false;
+  let pendingTaskJump = null;
 
   function typesetMath(elements) {
     if (window.mathjaxTypeset) {
@@ -53,12 +54,21 @@ const app = (() => {
     // Theorie-Akkordeon (Event-Delegation, einmalig)
     document.getElementById('tab-theory')?.addEventListener('click', e => {
       const trigger = e.target.closest('.accordion-trigger');
-      if (trigger) topicsRenderer.toggleAcc(trigger.dataset.accId);
+      if (trigger) {
+        topicsRenderer.toggleAcc(trigger.dataset.accId);
+        return;
+      }
 
       const jumpBtn = e.target.closest('.theory-jump-btn');
       if (jumpBtn) {
         const target = document.getElementById(jumpBtn.dataset.targetId);
         target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+
+      const taskLink = e.target.closest('.theory-task-link');
+      if (taskLink) {
+        openTaskReference(taskLink.dataset.topicId, taskLink.dataset.taskId);
       }
     });
 
@@ -146,6 +156,12 @@ const app = (() => {
       typesetMath([panel]);
     } else if (tab === 'tasks') {
       tasksRenderer.render(currentTopicId);
+      if (pendingTaskJump && pendingTaskJump.topicId === currentTopicId) {
+        window.setTimeout(() => {
+          tasksRenderer.jumpToTask(pendingTaskJump.taskId);
+          pendingTaskJump = null;
+        }, 60);
+      }
     } else if (tab === 'quiz') {
       quizModule.render(currentTopicId);
     }
@@ -188,6 +204,15 @@ const app = (() => {
 
   function refreshTopicProgress(topicId) {
     buildSidebar();
+  }
+
+  function openTaskReference(topicId, taskId) {
+    pendingTaskJump = { topicId, taskId };
+    if (currentTopicId !== topicId) {
+      navigateTopic(topicId, 'tasks');
+      return;
+    }
+    switchTab('tasks');
   }
 
   // ── COUNTDOWN ──
@@ -277,6 +302,7 @@ const app = (() => {
 
   return {
     navigateHome, navigateTopic, refreshTopicProgress,
+    openTaskReference,
     openSidebar, closeSidebar,
     openFormulaSheet, closeFormulaSheet,
     openFavorites, closeFavorites

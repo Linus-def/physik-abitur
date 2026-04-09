@@ -15,7 +15,7 @@ const TOPICS_DATA = {
     sections: [
       {
         title: 'Was ist eine harmonische Schwingung?',
-        text: `<p>Eine <strong>harmonische Schwingung</strong> liegt vor, wenn die rücktreibende Kraft proportional zur Auslenkung ist und ihr entgegenwirkt. Das <strong>Minuszeichen</strong> drückt aus: Die Kraft wirkt <em>stets entgegengesetzt</em> zur Auslenkung. Aus Newtons 2. Gesetz (F=ma) folgt direkt: \(m\ddot{s} = -D \cdot s\) bzw. \(\ddot{s} + \omega_0^2 s = 0\) mit \(\omega_0 = \sqrt{D/m}\). Die Lösung dieser DGL ist eine Sinusfunktion – deshalb heisst es harmonisch und warum Schwingungen mit sin/cos beschrieben werden.</p>
+        text: `<p>Eine <strong>harmonische Schwingung</strong> liegt vor, wenn die rücktreibende Kraft proportional zur Auslenkung ist und ihr entgegenwirkt. Das <strong>Minuszeichen</strong> drückt aus: Die Kraft wirkt <em>stets entgegengesetzt</em> zur Auslenkung. Aus Newtons 2. Gesetz (F=ma) folgt direkt: \\(m\\ddot{s} = -D \\cdot s\\) bzw. \\(\\ddot{s} + \\omega_0^2 s = 0\\) mit \\(\\omega_0 = \\sqrt{D/m}\\). Die Lösung dieser DGL ist eine Sinusfunktion – deshalb heisst es harmonisch und warum Schwingungen mit sin/cos beschrieben werden.</p>
 <p>\\(F_{\\text{rück}} = -D \\cdot s\\) &nbsp; (bei Federpendel, Fadenpendel im kleinen Winkel)</p>
 <p>Typische Beispiele: Federpendel, Fadenpendel (kleine Winkel ≲ 5°), schwimmende Boje, LC-Schwingkreis. Fürs Abi ist wichtig, dass du die gemeinsame Struktur hinter diesen Beispielen erkennst und nicht nur einzelne Sonderfälle auswendig lernst.</p>`,
         formulas: [
@@ -30,7 +30,7 @@ const TOPICS_DATA = {
       },
       {
         title: 'Beschreibung der Bewegung',
-        text: `<p>Die Auslenkung, Geschwindigkeit und Beschleunigung sind Sinusfunktionen der Zeit – das folgt direkt aus der Lösung der DGL \(\ddot{s} + \omega_0^2 s = 0\). <strong>Auslenkung:</strong> \(s(t) = \hat{s}\sin(\omega_0 t + \varphi_0)\). <strong>Geschwindigkeit:</strong> \(v(t) = \hat{s}\omega_0\cos(\omega_0 t + \varphi_0)\). <strong>Beschleunigung:</strong> \(a(t) = -\hat{s}\omega_0^2\sin(\omega_0 t + \varphi_0)\). Wichtig: Die Ableitung von s(t) ergibt v(t) (Kettenregel!), die Ableitung von v(t) ergibt a(t). Die Beschleunigung ist stets \(a = -\omega_0^2 s\) – das ist genau die Definitionseigenschaft der harmonischen Schwingung.</p>`,
+        text: `<p>Die Auslenkung, Geschwindigkeit und Beschleunigung sind Sinusfunktionen der Zeit – das folgt direkt aus der Lösung der DGL \\(\\ddot{s} + \\omega_0^2 s = 0\\). <strong>Auslenkung:</strong> \\(s(t) = \\hat{s}\\sin(\\omega_0 t + \\varphi_0)\\). <strong>Geschwindigkeit:</strong> \\(v(t) = \\hat{s}\\omega_0\\cos(\\omega_0 t + \\varphi_0)\\). <strong>Beschleunigung:</strong> \\(a(t) = -\\hat{s}\\omega_0^2\\sin(\\omega_0 t + \\varphi_0)\\). Wichtig: Die Ableitung von s(t) ergibt v(t) (Kettenregel!), die Ableitung von v(t) ergibt a(t). Die Beschleunigung ist stets \\(a = -\\omega_0^2 s\\) – das ist genau die Definitionseigenschaft der harmonischen Schwingung.</p>`,
         formulas: [
           { label: 'Auslenkung', latex: 's(t) = \\hat{s}\\cdot\\sin(\\omega_0 t + \\varphi_0)' },
           { label: 'Geschwindigkeit', latex: 'v(t) = \\hat{s}\\cdot\\omega_0\\cdot\\cos(\\omega_0 t + \\varphi_0)' },
@@ -42,7 +42,7 @@ const TOPICS_DATA = {
       },
       {
         title: 'Energie bei harmonischen Schwingungen',
-        text: `<p>Die Gesamtenergie bleibt bei ungedämpfter Schwingung konstant und pendelt zwischen kinetischer und potentieller Energie – das ist <strong>Energieerhaltung</strong> in Aktion. <strong>Warum?</strong> Die Gesamtenergie \(E_{\text{ges}} = \frac{1}{2}k\hat{s}^2\) ist konstant. An den <em>Umkehrpunkten</em> (s = ±ś): Alles ist Federenergie (\(E_{\text{pot}} = \frac{1}{2}ks^2\)), die kinetische Energie ist null (v = 0). In der <em>Gleichgewichtslage</em> (s = 0): Die Federenergie ist null, alles ist kinetische Energie (\(E_{\text{kin}} = \frac{1}{2}mv^2\)), v ist maximal. <strong>Merke:</strong> \(E_{\text{kin}} + E_{\text{pot}} = \text{const}\) gilt immer bei ungedämpfter Schwingung.</p>`,
+        text: `<p>Die Gesamtenergie bleibt bei ungedämpfter Schwingung konstant und pendelt zwischen kinetischer und potentieller Energie – das ist <strong>Energieerhaltung</strong> in Aktion. <strong>Warum?</strong> Die Gesamtenergie \\(E_{\\text{ges}} = \\frac{1}{2}k\\hat{s}^2\\) ist konstant. An den <em>Umkehrpunkten</em> (s = ±ś): Alles ist Federenergie (\\(E_{\\text{pot}} = \\frac{1}{2}ks^2\\)), die kinetische Energie ist null (v = 0). In der <em>Gleichgewichtslage</em> (s = 0): Die Federenergie ist null, alles ist kinetische Energie (\\(E_{\\text{kin}} = \\frac{1}{2}mv^2\\)), v ist maximal. <strong>Merke:</strong> \\(E_{\\text{kin}} + E_{\\text{pot}} = \\text{const}\\) gilt immer bei ungedämpfter Schwingung.</p>`,
         formulas: [
           { label: 'Kinetische Energie', latex: 'E_{\\text{kin}} = \\frac{1}{2}m v^2' },
           { label: 'Pot. Energie (Feder)', latex: 'E_{\\text{pot}} = \\frac{1}{2}k s^2' },
@@ -54,7 +54,7 @@ const TOPICS_DATA = {
       },
       {
         title: 'Erzwungene Schwingungen & Resonanz',
-        text: `<p>Wird ein Schwinger von außen mit der Erregerfrequenz \\(f_E\\) angetrieben, spricht man von einer <strong>erzwungenen Schwingung</strong>. <strong>Was passiert dabei?</strong> Das System nimmt die Erregerfrequenz an (nicht die Eigenfrequenz!) und die Amplitude hängt davon ab, wie nah \(f_E\) an \(f_0\) liegt. <strong>Resonanz</strong> (\(f_E = f_0\)) ist der Extremfall: Die Amplitude wird maximal, weil das System optimal mit dem Erreger zusammenarbeitet. Mit mehr Dämpfung bleibt die Resonanzamplitude kleiner und das Resonanzmaximum verbreitert sich. Ohne jede Dämpfung würde die Amplitude bei Resonanz theoretisch unbegrenzt anwachsen.</p></p>
+        text: `<p>Wird ein Schwinger von außen mit der Erregerfrequenz \\(f_E\\) angetrieben, spricht man von einer <strong>erzwungenen Schwingung</strong>. <strong>Was passiert dabei?</strong> Das System nimmt die Erregerfrequenz an (nicht die Eigenfrequenz!) und die Amplitude hängt davon ab, wie nah \\(f_E\\) an \\(f_0\\) liegt. <strong>Resonanz</strong> (\\(f_E = f_0\\)) ist der Extremfall: Die Amplitude wird maximal, weil das System optimal mit dem Erreger zusammenarbeitet. Mit mehr Dämpfung bleibt die Resonanzamplitude kleiner und das Resonanzmaximum verbreitert sich. Ohne jede Dämpfung würde die Amplitude bei Resonanz theoretisch unbegrenzt anwachsen.</p></p>
 <p>Bei <strong>Resonanz</strong> gilt \\(f_E = f_0\\): Die Amplitude wird maximal.</p>`,
         formulas: [
           { label: 'Resonanzbedingung', latex: 'f_E = f_0', note: 'Erreger = Eigenfrequenz' },

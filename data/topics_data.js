@@ -12,6 +12,13 @@ const TOPICS_DATA = {
     priority: 3,
     badge: 'Jedes Jahr seit 2018',
     funFact: '💡 Die Isochronie des Fadenpendels wurde von Galileo Galilei entdeckt – laut Legende beim Beobachten einer schwingenden Kirchenlampe.',
+    curriculumFocus: [
+      'Schwingungsgrößen sicher verwenden: Auslenkung, Amplitude, Periodendauer, Frequenz und Kreisfrequenz.',
+      'Harmonische Bewegung mathematisch mit \\(s(t)\\), \\(v(t)\\) und \\(a(t)\\) beschreiben und die Phasenlage deuten.',
+      'Lineare Rückstellkraft, Energieaustausch, Dämpfung und Resonanz erklären.',
+      'Mechanische und elektromagnetische Schwingungen vergleichen und den LC-Kreis als Transfermodell nutzen.',
+      'Überlagerungen unabhängiger Schwingungen qualitativ deuten, zum Beispiel Verstärkung, Auslöschung und Schwebung.'
+    ],
     sections: [
       {
         title: 'Was ist eine harmonische Schwingung?',
@@ -26,7 +33,19 @@ const TOPICS_DATA = {
         ],
         note: 'Bei der harmonischen Schwingung ist T unabhängig von der Amplitude (Isochronie)!',
         deeper: `<p><strong>Nachweis harmonische Schwingung:</strong> Im F-s-Diagramm liegt ein linearer Zusammenhang durch den Ursprung vor. Im a-s-Diagramm: Gerade mit negativer Steigung (da \\(a = -\\omega^2 s\\)). <strong>Warum ist das Nachweis für Harmonizität?</strong> Das lineare F-s-Diagramm zeigt, dass die Rückkraft proportional zur Auslenkung ist. Das a-s-Diagramm mit negativer Steigung bestätigt \\(a = -\\omega^2 s\\), was die DGL der harmonischen Schwingung erfüllt. <strong>Isochronie erklärt:</strong> Warum ist T unabhängig von der Amplitude? Weil mit größerer Amplitude auch größere Rückkraft und damit größere Geschwindigkeit auftreten – größerer Weg und höhere Geschwindigkeit heben sich exakt auf.</p>
-<p><strong>Wichtige Grenze:</strong> Das Fadenpendel ist nur für Auslenkungswinkel ≲ 5° harmonisch. Bei größeren Winkeln wächst T mit der Amplitude an.</p>`
+<p><strong>Wichtige Grenze:</strong> Das Fadenpendel ist nur für Auslenkungswinkel ≲ 5° harmonisch. Bei größeren Winkeln wächst T mit der Amplitude an.</p>`,
+        examples: [
+          {
+            title: 'Beispiel: Ist die Bewegung wirklich harmonisch?',
+            question: 'Vergleiche ein Federpendel mit einem stark ausgelenkten Fadenpendel.',
+            steps: [
+              'Beim Federpendel gilt näherungsweise immer \\(F_{\\text{rück}} = -D \\cdot s\\). Die Rückstellkraft ist also linear in der Auslenkung.',
+              'Beim Fadenpendel ist die Rückstellkraft nur für kleine Winkel proportional zur Auslenkung. Bei großen Winkeln wird die Beziehung nicht mehr linear.',
+              'Deshalb bleibt das Federpendel harmonisch, während das stark ausgelenkte Fadenpendel zwar periodisch, aber nicht mehr streng harmonisch ist.'
+            ],
+            result: 'Abi-Merksatz: Nicht jede periodische Bewegung ist automatisch harmonisch. Harmonisch wird sie erst durch die lineare Rückstellkraft.'
+          }
+        ]
       },
       {
         title: 'Beschreibung der Bewegung',
@@ -38,7 +57,25 @@ const TOPICS_DATA = {
           { label: 'Max. Geschwindigkeit', latex: 'v_{\\max} = \\hat{s}\\cdot\\omega_0 = \\hat{s}\\cdot 2\\pi f' },
         ],
         deeper: `<p><strong>Phasenlage:</strong> Auslenkung und Beschleunigung sind stets <em>gegenphasig</em> (180° Phasenverschiebung). Die Geschwindigkeit eilt der Auslenkung um 90° vor.</p> <p><strong>Warum sind Auslenkung und Beschleunigung genau 180° phasenverschoben?</strong> Weil \\(a = -\\omega^2 s\\): Ist s maximal positiv, so ist a maximal negativ – das ist genau die rücktreibende Kraft am Umkehrpunkt. Das Minuszeichen erzwingt die Gegenphasigkeit. <strong>Warum eilt v der Auslenkung 90° vor?</strong> \\(v(t) = \\dot{s}(t) = \\hat{s}\\omega_0\\cos(\\omega_0 t)\\): Kosinus und Sinus sind 90° verschoben. In der Gleichgewichtslage (s = 0, sin = 0) ist der Kosinus = 1 – also v maximal.</p>
-<p><strong>Merksatz:</strong> In der Gleichgewichtslage (s = 0): v maximal, a = 0. An den Umkehrpunkten (s = ±ŝ): v = 0, a maximal.</p>`
+<p><strong>Merksatz:</strong> In der Gleichgewichtslage (s = 0): v maximal, a = 0. An den Umkehrpunkten (s = ±ŝ): v = 0, a maximal.</p>`,
+        examples: [
+          {
+            title: 'Beispiel: Harmonische Beschreibung der Bewegung lesen',
+            question: 'Gegeben sei \\(s(t) = 4\\,\\text{cm}\\cdot\\sin(\\pi t)\\). Was kann man direkt ablesen?',
+            steps: [
+              'Die Amplitude ist \\(\\hat{s} = 4\\,\\text{cm}\\). Größer kann die Auslenkung nicht werden.',
+              'Aus \\(\\omega = \\pi\\,\\text{rad/s}\\) folgt \\(T = 2\\pi/\\omega = 2\\,\\text{s}\\).',
+              'Bei \\(t = 0{,}5\\,\\text{s}\\) gilt \\(s = 4\\,\\text{cm}\\cdot\\sin(\\pi/2) = 4\\,\\text{cm}\\): Das ist ein Umkehrpunkt.',
+              'Dort ist die Geschwindigkeit null und die Beschleunigung maximal zur Mitte gerichtet.'
+            ],
+            result: 'Typisch Abi: Nicht nur rechnen, sondern aus der Funktionsgleichung sofort Amplitude, Periodendauer und Bewegungszustand deuten.'
+          }
+        ],
+        interactive: {
+          type: 'oscillation-lab',
+          title: 'Schwingungs-Explorer',
+          description: 'Verändere Amplitude, Periodendauer und den Zeitpunkt im Zyklus. So siehst du sofort, wie sich Auslenkung, Geschwindigkeit und Beschleunigung gemeinsam ändern.'
+        }
       },
       {
         title: 'Energie bei harmonischen Schwingungen',
@@ -62,6 +99,29 @@ const TOPICS_DATA = {
         note: 'Resonanz kann gefährlich sein (Brücken, Gebäude, Bojen). Starke Dämpfung senkt die Resonanzamplitude.',
         deeper: `<p>Im Resonanzfall ist die Phasenverschiebung zwischen Erreger und Schwinger genau 90°. Das System nimmt dann maximal Energie auf. <strong>Warum gerade 90° Phasenverschiebung bei Resonanz?</strong> Die Energieübertragung vom Erreger auf den Schwinger ist maximal, wenn Erreger und Schwingungsgeschwindigkeit phasengleich sind – das tritt auf, wenn Auslenkung und Erreger 90° verschoben sind. <strong>Resonanz in der Praxis:</strong> Schaukeln (bei jeder Periode passend anschubsen), Radioempfang (LC-Kreis auf Senderfrequenz einstellen), MRT-Geräte (Kernspinresonanz). <strong>Gefahr:</strong> Tacoma-Narrows-Brücke (1940) kollabierte durch Windresonanz. Bei Gebäuden und Brücken müssen Dämpfer eingebaut werden.</p>
 <p><strong>Historisches Beispiel:</strong> Die Tacoma-Narrows-Brücke (1940) kollabierte durch Resonanz mit Windwirbeln – ein klassisches Resonanz-Desaster.</p>`
+      },
+      {
+        title: 'Überlagerung und Schwebung',
+        text: `<p>Der Bildungsplan verlangt im Leistungsfach auch die <strong>Überlagerung unabhängiger Schwingungen</strong>. Treffen zwei Schwingungen zusammen, addieren sich ihre momentanen Auslenkungen. Dadurch kann es zu <strong>Verstärkung</strong>, <strong>Abschwächung</strong> oder bei fast gleichen Frequenzen zu einer <strong>Schwebung</strong> kommen.</p>
+<p>Bei der Schwebung ändert sich nicht die schnelle Grundschwingung selbst, sondern ihre <strong>Amplitude</strong> wird langsam größer und kleiner. Genau das ist ein typischer Erklärpunkt im Abi, weil man dort die Idee der Superposition wirklich verstanden haben muss und nicht nur eine Einzelgleichung auswendig können darf.</p>`,
+        formulas: [
+          { label: 'Schwebungsfrequenz', latex: 'f_{\\text{Schwebung}} = |f_1 - f_2|', note: 'qualitativ besonders wichtig' }
+        ],
+        note: 'Fast gleiche Frequenzen erzeugen eine langsame Hüllkurve: Das ist die Schwebung.',
+        deeper: `<p><strong>Anschaulich:</strong> Zwei fast gleich schnell schwingende Systeme laufen erst in Phase, dann leicht gegeneinander und später wieder zusammen. Deshalb wird der Ton oder die sichtbare Auslenkung periodisch laut-leise beziehungsweise groß-klein.</p>
+<p><strong>Abi-Typ:</strong> Man soll häufig begründen, warum die Schwebung keine neue eigenständige Schwingung ist, sondern aus der Überlagerung zweier fast gleicher Frequenzen entsteht. Die schnelle Bewegung steckt innen, die langsame Änderung der Amplitude außen.</p>`,
+        examples: [
+          {
+            title: 'Beispiel: Warum hört man „wawawa“?',
+            question: 'Zwei Stimmgabeln schwingen mit 440 Hz und 444 Hz.',
+            steps: [
+              'Die einzelnen Töne sind fast gleich hoch, deshalb überlagern sich die Schwingungen fast phasengleich.',
+              'Mal verstärken sich die Auslenkungen, mal schwächen sie sich ab. Dadurch schwankt die Lautstärke hörbar.',
+              'Die Schwebungsfrequenz ist \\(|444 - 440| = 4\\,\\text{Hz}\\). Viermal pro Sekunde wird es also laut und leise.'
+            ],
+            result: 'So ein Beispiel hilft bei Erklärfragen, weil man daran Superposition, Phasenlage und Schwebung gemeinsam festmachen kann.'
+          }
+        ]
       },
       {
         title: 'Mechanische und elektromagnetische Schwingungen vergleichen',
@@ -269,6 +329,13 @@ const TOPICS_DATA = {
     priority: 3,
     badge: 'Jedes Jahr seit 2018',
     funFact: '💡 Michael Faraday entdeckte die elektromagnetische Induktion 1831 – ohne jede Mathematik. Er dachte in Feldlinien, nicht in Gleichungen.',
+    curriculumFocus: [
+      'Induktion mithilfe der Lorentzkraft und über die Änderung des magnetischen Flusses erklären.',
+      'Faraday-Gesetz und Lenz-Regel anwenden und in Diagrammen deuten.',
+      'Generator, Transformator und induktive Anwendungen qualitativ beschreiben.',
+      'Selbstinduktion, Induktivität und die Energie in der Spule sicher erklären.',
+      'Maxwell-Gleichungen im Überblick als Ursache elektromagnetischer Felder einordnen und Wirbelströme deuten.'
+    ],
     sections: [
       {
         title: 'Lorentzkraft',
@@ -554,6 +621,13 @@ const TOPICS_DATA = {
     priority: 3,
     badge: 'Jedes Jahr (Doppelspalt, Gitter, Einzelspalt)',
     funFact: '💡 Thomas Young bewies 1801 mit dem Doppelspaltexperiment, dass Licht eine Welle ist – und widerlegte damit Newtons Korpuskeltheorie für fast 100 Jahre.',
+    curriculumFocus: [
+      'Interferenz mit kohärentem Licht am Doppelspalt, Gitter und Einzelspalt erklären und berechnen.',
+      'Strahlenmodell und Wellenmodell vergleichen und begründen, warum das Wellenmodell nötig ist.',
+      'Polarisation und Malus-Gesetz deuten sowie das Michelson-Interferometer als Messanwendung einordnen.',
+      'Intensitätsverteilungen und Beugungsmuster qualitativ beschreiben, nicht nur Formeln einsetzen.',
+      'Historische Lichtmodelle und ihre Grenzen im Kontext typischer Abi-Erklärfragen einordnen.'
+    ],
     sections: [
       {
         title: 'Grundlagen: Wellen und Interferenz',
@@ -970,6 +1044,12 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     priority: 2,
     badge: 'Fast jedes Jahr',
     funFact: '💡 Das Prinzip des LC-Kreises steckt in jedem Radio: Der Empfänger ist ein LC-Schwingkreis, der auf die gewünschte Senderfrequenz abgestimmt wird.',
+    curriculumFocus: [
+      'Den LC-Kreis als elektromagnetische Schwingung mit Energieaustausch zwischen Kondensator und Spule verstehen.',
+      'Eigenfrequenz, Periodendauer und Parameterabhängigkeiten von \\(L\\) und \\(C\\) sicher berechnen.',
+      'Spannungs- und Stromverläufe phasenrichtig deuten und mit mechanischen Schwingern vergleichen.',
+      'Dämpfung, reale Verluste und technische Anwendungen wie Resonanz oder Frequenzabstimmung begründen.'
+    ],
     sections: [
       {
         title: 'Aufbau und Funktion des LC-Kreises',
@@ -1239,6 +1319,13 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     priority: 2,
     badge: 'Grundlage für Elektrodynamik',
     funFact: '💡 Im Massenspektrometer werden Isotope desselben Elements getrennt – Technik, die heute in der Medizin (z.B. C-14-Datierung), Materialforschung und Pharmakologie eingesetzt wird.',
+    curriculumFocus: [
+      'Coulomb-Gesetz, Feldstärke und die Kraft auf Probeladungen im elektrischen Feld erklären.',
+      'Punktladung, Dipol, Superposition, Influenz und Polarisation sicher deuten.',
+      'Magnetfelder von Leitern und Spulen sowie Teilchenbahnen im homogenen Magnetfeld beschreiben.',
+      'Gekreuzte elektrische und magnetische Felder, Wien-Filter und Massenspektrometer erklären.',
+      'Gemeinsamkeiten und Unterschiede von elektrischem, magnetischem und Gravitationsfeld vergleichen.'
+    ],
     sections: [
       {
         title: 'Elektrisches Feld: Struktur, Kraftwirkung und Superposition',
@@ -1539,6 +1626,13 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     priority: 2,
     badge: 'NEU im Abi 2026 – unbedingt lernen!',
     funFact: '💡 Einsteins Nobelpreis 1921 war nicht für die Relativitätstheorie – sondern für die Erklärung des Photoeffekts durch Lichtquanten!',
+    curriculumFocus: [
+      'Photoeffekt, Hallwachs-Versuch und die Einstein-Gleichung sicher erklären.',
+      'Zwischen Intensität, Grenzfrequenz, Fotostrom und maximaler Elektronenenergie unterscheiden.',
+      'Welle-Teilchen-Dualismus und de-Broglie-Idee an Licht und Materieteilchen erläutern.',
+      'Linienspektren, Emission, Absorption und diskrete Energieniveaus als Hinweis auf Quantelung deuten.',
+      'Aussagen zu Wahrscheinlichkeiten und Unschärfe qualitativ einordnen.'
+    ],
     sections: [
       {
         title: 'Der lichtelektrische Effekt (Photoeffekt)',
@@ -1819,6 +1913,13 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
     priority: 2,
     badge: 'Grundlage für Optik und Schwingungen',
     funFact: '💡 Das Universum ist von kosmischer Hintergrundstrahlung durchzogen – überall im All herrscht eine Temperatur von ca. 2,7 K, die als Mikrowellenstrahlung nachweisbar ist.',
+    curriculumFocus: [
+      'Grundgrößen wie \\(\\lambda\\), \\(f\\), \\(T\\), Ausbreitungsgeschwindigkeit, Wellenfront und Wellennormale sicher verwenden.',
+      'Transversal- und Longitudinalwellen unterscheiden und auf elektromagnetische Wellen übertragen.',
+      'Momentanbild, Zeitdiagramm und harmonische Wellenbeschreibung sicher lesen und verknüpfen.',
+      'Reflexion, Brechung, Beugung und Interferenz mit dem Huygens-Prinzip begründen.',
+      'Alltags- und Technikbeispiele nicht nur benennen, sondern physikalisch deuten.'
+    ],
     sections: [
       {
         title: 'Grundbegriffe der Wellenlehre',

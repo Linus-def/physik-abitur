@@ -187,6 +187,7 @@ const app = (() => {
 
     if (tab === 'theory') {
       panel.innerHTML = topicsRenderer.renderTheory(currentTopicId);
+      topicsRenderer.initTheory(panel);
       typesetMath([panel]);
       if (pendingTheoryJump && pendingTheoryJump.topicId === currentTopicId) {
         window.setTimeout(() => {

@@ -69,6 +69,7 @@ const topicsRenderer = (() => {
         text: `${task.year}: ${sub.text}`
       }))
     ).slice(0, 4);
+    const curriculumFocus = topic.curriculumFocus || [];
     const relatedTopics = getRelatedTopics(topicId);
 
     let html = '';
@@ -104,6 +105,20 @@ const topicsRenderer = (() => {
             `).join('')}
           </div>
         </div>
+        ${curriculumFocus.length ? `
+          <div class="theory-overview-card">
+            <div class="theory-overview-label">Bildungsplan</div>
+            <div class="theory-overview-title">Diese Kernpunkte solltest du im Leistungsfach sicher können</div>
+            <div class="curriculum-list">
+              ${curriculumFocus.map(item => `
+                <div class="curriculum-item">
+                  <span class="curriculum-dot"></span>
+                  <span>${item}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : ''}
         ${noteList.length ? `
           <div class="theory-overview-card">
             <div class="theory-overview-label">Typische Merksätze</div>
@@ -202,6 +217,14 @@ const topicsRenderer = (() => {
         </div>`;
       }
 
+      if (sec.examples?.length) {
+        html += renderExamples(sec.examples);
+      }
+
+      if (sec.interactive) {
+        html += renderInteractiveBlock(sec.interactive);
+      }
+
       html += `</div>`;
     });
 
@@ -227,12 +250,187 @@ const topicsRenderer = (() => {
     return html;
   }
 
+  function renderExamples(examples) {
+    return `
+      <div class="theory-example-block">
+        <div class="theory-subsection-label">Beispiele zum Langhangeln</div>
+        <div class="theory-example-grid">
+          ${examples.map(example => `
+            <article class="theory-example-card">
+              <div class="theory-example-title">${example.title}</div>
+              ${example.question ? `<div class="theory-example-question">${example.question}</div>` : ''}
+              ${example.steps?.length ? `
+                <div class="theory-example-steps">
+                  ${example.steps.map((step, index) => `
+                    <div class="theory-example-step">
+                      <span class="theory-example-step-num">${index + 1}</span>
+                      <span>${step}</span>
+                    </div>
+                  `).join('')}
+                </div>
+              ` : ''}
+              ${example.result ? `<div class="theory-example-result">${example.result}</div>` : ''}
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderInteractiveBlock(config) {
+    if (config.type !== 'oscillation-lab') return '';
+    return `
+      <div class="theory-lab oscillator-lab" data-widget="oscillation-lab">
+        <div class="theory-subsection-label">Interaktiv verstehen</div>
+        <div class="theory-lab-title">${config.title || 'Schwingungs-Explorer'}</div>
+        <div class="theory-lab-copy">${config.description || 'Verändere die Größen und beobachte, wie sich die harmonische Bewegung im Modell mitändert.'}</div>
+        <div class="theory-lab-controls">
+          <label class="theory-lab-control">
+            <span>Amplitude <strong data-role="ampValue">6,0 cm</strong></span>
+            <input type="range" min="1" max="12" step="0.5" value="6" data-role="amp">
+          </label>
+          <label class="theory-lab-control">
+            <span>Periodendauer <strong data-role="periodValue">2,0 s</strong></span>
+            <input type="range" min="0.5" max="4" step="0.1" value="2" data-role="period">
+          </label>
+          <label class="theory-lab-control">
+            <span>Zeitpunkt im Zyklus <strong data-role="phaseValue">25 %</strong></span>
+            <input type="range" min="0" max="100" step="1" value="25" data-role="phase">
+          </label>
+        </div>
+        <div class="theory-lab-visuals">
+          <div class="oscillator-track">
+            <span class="oscillator-track-end left">-A</span>
+            <div class="oscillator-track-line">
+              <span class="oscillator-track-center"></span>
+              <span class="oscillator-track-dot" data-role="dot"></span>
+            </div>
+            <span class="oscillator-track-end right">+A</span>
+          </div>
+          <svg class="oscillator-wave" viewBox="0 0 320 120" aria-hidden="true">
+            <path class="oscillator-wave-path" data-role="wavePath"></path>
+            <line class="oscillator-wave-axis" x1="0" y1="60" x2="320" y2="60"></line>
+            <circle class="oscillator-wave-marker" data-role="waveMarker" cx="0" cy="60" r="5"></circle>
+          </svg>
+        </div>
+        <div class="theory-lab-stats">
+          <div class="theory-lab-stat">
+            <div class="theory-lab-stat-label">Zeitpunkt</div>
+            <div class="theory-lab-stat-value" data-role="timeValue">0,50 s</div>
+          </div>
+          <div class="theory-lab-stat">
+            <div class="theory-lab-stat-label">Auslenkung s(t)</div>
+            <div class="theory-lab-stat-value" data-role="sValue">6,0 cm</div>
+          </div>
+          <div class="theory-lab-stat">
+            <div class="theory-lab-stat-label">Geschwindigkeit v(t)</div>
+            <div class="theory-lab-stat-value" data-role="vValue">0,0 cm/s</div>
+          </div>
+          <div class="theory-lab-stat">
+            <div class="theory-lab-stat-label">Beschleunigung a(t)</div>
+            <div class="theory-lab-stat-value" data-role="aValue">-59,2 cm/s²</div>
+          </div>
+        </div>
+        <div class="theory-lab-note" data-role="narrative"></div>
+      </div>
+    `;
+  }
+
   function toggleAcc(id) {
     const el = document.getElementById(id);
     if (!el) return;
     const wasOpen = el.classList.contains('open');
     el.classList.toggle('open');
     if (!wasOpen) mathjaxTypeset([el]);
+  }
+
+  function initTheory(panel) {
+    if (!panel) return;
+    panel.querySelectorAll('.oscillator-lab').forEach(initOscillatorLab);
+  }
+
+  function initOscillatorLab(root) {
+    const ampInput = root.querySelector('[data-role="amp"]');
+    const periodInput = root.querySelector('[data-role="period"]');
+    const phaseInput = root.querySelector('[data-role="phase"]');
+    if (!ampInput || !periodInput || !phaseInput) return;
+
+    const formatNumber = (value, digits = 1) =>
+      Number(value).toLocaleString('de-DE', {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      });
+
+    const buildWavePath = () => {
+      const width = 320;
+      const height = 120;
+      const midY = height / 2;
+      const amplitudePx = 36;
+      const points = [];
+      for (let x = 0; x <= width; x += 8) {
+        const angle = (x / width) * Math.PI * 2;
+        const y = midY - Math.sin(angle) * amplitudePx;
+        points.push(`${x === 0 ? 'M' : 'L'} ${x} ${y.toFixed(2)}`);
+      }
+      return points.join(' ');
+    };
+
+    const update = () => {
+      const amplitude = Number(ampInput.value);
+      const period = Number(periodInput.value);
+      const phasePercent = Number(phaseInput.value);
+      const time = period * phasePercent / 100;
+      const omega = (2 * Math.PI) / period;
+      const phase = (2 * Math.PI * phasePercent) / 100;
+      const displacement = amplitude * Math.sin(phase);
+      const velocity = amplitude * omega * Math.cos(phase);
+      const acceleration = -amplitude * omega * omega * Math.sin(phase);
+
+      root.querySelector('[data-role="ampValue"]').textContent = `${formatNumber(amplitude)} cm`;
+      root.querySelector('[data-role="periodValue"]').textContent = `${formatNumber(period)} s`;
+      root.querySelector('[data-role="phaseValue"]').textContent = `${Math.round(phasePercent)} %`;
+      root.querySelector('[data-role="timeValue"]').textContent = `${formatNumber(time, 2)} s`;
+      root.querySelector('[data-role="sValue"]').textContent = `${formatNumber(displacement)} cm`;
+      root.querySelector('[data-role="vValue"]').textContent = `${formatNumber(velocity)} cm/s`;
+      root.querySelector('[data-role="aValue"]').textContent = `${formatNumber(acceleration)} cm/s²`;
+
+      const dot = root.querySelector('[data-role="dot"]');
+      if (dot) {
+        const pos = 50 + (displacement / Math.max(amplitude, 0.001)) * 40;
+        dot.style.left = `${pos}%`;
+      }
+
+      const wavePath = root.querySelector('[data-role="wavePath"]');
+      if (wavePath) {
+        wavePath.setAttribute('d', buildWavePath());
+      }
+
+      const waveMarker = root.querySelector('[data-role="waveMarker"]');
+      if (waveMarker) {
+        const markerX = 320 * (phasePercent / 100);
+        const markerY = 60 - Math.sin(phase) * 36;
+        waveMarker.setAttribute('cx', markerX.toFixed(2));
+        waveMarker.setAttribute('cy', markerY.toFixed(2));
+      }
+
+      const narrative = root.querySelector('[data-role="narrative"]');
+      if (narrative) {
+        let positionText = 'nahe der Gleichgewichtslage';
+        if (Math.abs(displacement) > amplitude * 0.75) positionText = displacement > 0 ? 'nahe dem rechten Umkehrpunkt' : 'nahe dem linken Umkehrpunkt';
+        else if (displacement > 0) positionText = 'auf der positiven Auslenkungsseite';
+        else if (displacement < 0) positionText = 'auf der negativen Auslenkungsseite';
+
+        let velocityText = 'Die Geschwindigkeit ist gerade sehr klein.';
+        if (Math.abs(velocity) > Math.abs(amplitude * omega) * 0.7) velocityText = velocity > 0 ? 'Die Geschwindigkeit ist fast maximal in positiver Richtung.' : 'Die Geschwindigkeit ist fast maximal in negativer Richtung.';
+        else if (velocity > 0) velocityText = 'Die Geschwindigkeit zeigt gerade in positive Richtung.';
+        else if (velocity < 0) velocityText = 'Die Geschwindigkeit zeigt gerade in negative Richtung.';
+
+        narrative.textContent = `Bei ${Math.round(phasePercent)} % einer Periode befindet sich der Schwinger ${positionText}. ${velocityText} Die Beschleunigung zeigt immer zurück zur Gleichgewichtslage und macht sichtbar, warum harmonische Schwingungen durch eine rücktreibende Wirkung beschrieben werden.`;
+      }
+    };
+
+    [ampInput, periodInput, phaseInput].forEach(input => input.addEventListener('input', update));
+    update();
   }
 
   function renderCards() {
@@ -343,5 +541,5 @@ const topicsRenderer = (() => {
     mathjaxTypeset([body]);
   }
 
-  return { renderTheory, toggleAcc, renderCards, buildFormulaSheet, starsHtml };
+  return { renderTheory, toggleAcc, renderCards, buildFormulaSheet, starsHtml, initTheory };
 })();

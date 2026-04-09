@@ -3584,3 +3584,315 @@ FEATURE UPGRADE: Tiefere Erklärungen + Abi-Screenshots nebendran
     padding: 14px;
   }
 }
+
+/* ══════════════════════════════════════════════
+   THEORY UPGRADE: Bildungsplan, Beispiele, Interaktiv
+══════════════════════════════════════════════ */
+
+.curriculum-list {
+  display: grid;
+  gap: 10px;
+}
+
+.curriculum-item {
+  display: grid;
+  grid-template-columns: 10px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.curriculum-dot {
+  width: 10px;
+  height: 10px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 0 6px rgba(88, 204, 2, 0.12);
+}
+
+.theory-subsection-label {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.theory-example-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.theory-example-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(180deg, var(--bg), var(--surface));
+  box-shadow: var(--shadow-sm);
+}
+
+.theory-example-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.theory-example-question {
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.theory-example-steps {
+  display: grid;
+  gap: 10px;
+}
+
+.theory-example-step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.theory-example-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.theory-example-result {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(88, 204, 2, 0.08);
+  color: var(--text);
+  line-height: 1.6;
+  border: 1px solid rgba(88, 204, 2, 0.16);
+}
+
+.theory-lab {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(180deg, var(--bg), var(--surface));
+  box-shadow: var(--shadow-sm);
+}
+
+.theory-lab-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.theory-lab-copy {
+  color: var(--text-2);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.theory-lab-controls {
+  display: grid;
+  gap: 12px;
+}
+
+.theory-lab-control {
+  display: grid;
+  gap: 8px;
+  color: var(--text-2);
+  font-size: 14px;
+}
+
+.theory-lab-control strong {
+  color: var(--text);
+}
+
+.theory-lab-control input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.theory-lab-visuals {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.oscillator-track {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.oscillator-track-end {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.oscillator-track-line {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(88, 204, 2, 0.12), rgba(88, 204, 2, 0.22), rgba(88, 204, 2, 0.12));
+}
+
+.oscillator-track-center {
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 2px;
+  height: 20px;
+  background: var(--border-2);
+}
+
+.oscillator-track-dot {
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 10px 20px rgba(88, 204, 2, 0.24);
+}
+
+.oscillator-wave {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  background: rgba(88, 204, 2, 0.05);
+  border: 1px solid rgba(88, 204, 2, 0.12);
+}
+
+.oscillator-wave-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.oscillator-wave-axis {
+  stroke: var(--border-2);
+  stroke-width: 1.5;
+  stroke-dasharray: 5 6;
+}
+
+.oscillator-wave-marker {
+  fill: var(--text);
+  stroke: var(--bg);
+  stroke-width: 3;
+}
+
+.theory-lab-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.theory-lab-stat {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.theory-lab-stat-label {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  margin-bottom: 6px;
+}
+
+.theory-lab-stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.theory-lab-note {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(88, 204, 2, 0.08);
+  border: 1px solid rgba(88, 204, 2, 0.16);
+  color: var(--text);
+  line-height: 1.65;
+}
+
+[data-theme="dark"] .curriculum-dot {
+  box-shadow: 0 0 0 6px rgba(88, 204, 2, 0.18);
+}
+
+[data-theme="dark"] .theory-example-card,
+[data-theme="dark"] .theory-lab {
+  background: linear-gradient(180deg, rgba(31, 45, 51, 0.95), rgba(19, 31, 36, 0.98));
+}
+
+[data-theme="dark"] .theory-example-result,
+[data-theme="dark"] .theory-lab-note {
+  background: rgba(88, 204, 2, 0.12);
+  border-color: rgba(88, 204, 2, 0.22);
+}
+
+[data-theme="dark"] .oscillator-wave {
+  background: rgba(88, 204, 2, 0.07);
+  border-color: rgba(88, 204, 2, 0.16);
+}
+
+@media (max-width: 680px) {
+  .oscillator-track {
+    grid-template-columns: 1fr;
+  }
+
+  .oscillator-track-end {
+    display: none;
+  }
+
+  .theory-lab {
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  .theory-lab-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .theory-example-step {
+    grid-template-columns: 24px 1fr;
+  }
+
+  .theory-example-step-num {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .theory-lab-stats {
+    grid-template-columns: 1fr;
+  }
+}

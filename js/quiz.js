@@ -18,6 +18,16 @@ const quizModule = (() => {
     }
   };
 
+  const QUIZ_STOP_WORDS = new Set([
+    'aber', 'alle', 'auch', 'aus', 'bei', 'beim', 'dann', 'dass', 'dem', 'den', 'der', 'des', 'die', 'dies',
+    'diese', 'diesem', 'dieser', 'dieses', 'doch', 'dort', 'durch', 'eine', 'einem', 'einen', 'einer', 'eines',
+    'einfach', 'einerseits', 'einig', 'einen', 'einer', 'eines', 'euch', 'euer', 'für', 'gibt', 'hat', 'hier',
+    'hinter', 'ihr', 'ihre', 'ihren', 'ihres', 'immer', 'ist', 'jede', 'jeder', 'jedes', 'kein', 'keine',
+    'kleine', 'können', 'lässt', 'mehr', 'muss', 'nach', 'noch', 'oder', 'ohne', 'sehr', 'sein', 'seine',
+    'sich', 'sind', 'sobald', 'sowie', 'trotzdem', 'über', 'und', 'unter', 'vom', 'von', 'vor', 'warum',
+    'weil', 'welche', 'welcher', 'welches', 'wenn', 'wird', 'wirkt', 'wurde', 'zuerst', 'zum', 'zur'
+  ]);
+
   let state = {
     topicId: null,
     questions: [],
@@ -36,8 +46,13 @@ const quizModule = (() => {
     container.addEventListener('click', e => {
       const modeBtn = e.target.closest('.quiz-mode-btn');
       if (modeBtn) { startQuiz(modeBtn.dataset.mode); return; }
+
       const opt = e.target.closest('.quiz-option');
       if (opt) { answer(parseInt(opt.dataset.i, 10)); return; }
+
+      const theoryBtn = e.target.closest('.quiz-theory-btn');
+      if (theoryBtn) { openTheoryReference(theoryBtn.dataset.targetId); return; }
+
       if (e.target.closest('#quiz-next')) { next(); return; }
       if (e.target.closest('.quiz-restart-btn')) { startQuiz(state.selectedMode); return; }
       if (e.target.closest('.quiz-change-mode-btn')) { showStart(); return; }
@@ -158,7 +173,7 @@ const quizModule = (() => {
         <h3 class="quiz-intro-title">Quickcheck</h3>
         <p class="quiz-intro-sub">${topicTitle}</p>
         <div class="quiz-intro-meta">${state.orderedQuestions.length} Fragen gesamt · jedes Mal neu gemischt</div>
-        <p class="quiz-intro-desc">Wähle einen Modus aus. Beim Neustart werden die Fragen in diesem Modus neu gemischt. Die Modi sind stärker daran orientiert, ob du Grundlagen sichern, rechnen oder typische Abi-Begründungen trainieren willst.</p>
+        <p class="quiz-intro-desc">Wähle einen Modus aus. Beim Neustart werden die Fragen in diesem Modus neu gemischt. Nach jeder Antwort bekommst du direkt eine Erklärung und bei Bedarf einen passenden Sprung in die Theorie.</p>
         <div class="quiz-mode-list">${modeCards}</div>
       </div>`;
     bindEvents(container);
@@ -180,7 +195,10 @@ const quizModule = (() => {
     const container = document.getElementById('tab-quiz');
     if (!container) return;
 
-    if (state.idx >= state.questions.length) { showResult(container); return; }
+    if (state.idx >= state.questions.length) {
+      showResult(container);
+      return;
+    }
 
     const q = state.questions[state.idx];
     const mode = currentMode();
@@ -218,75 +236,38 @@ const quizModule = (() => {
   function answer(i) {
     if (state.answered) return;
     state.answered = true;
+
     const q = state.questions[state.idx];
     const correct = i === q.correct;
     if (correct) state.score++;
 
     const container = document.getElementById('tab-quiz');
+    if (!container) return;
+
     container.querySelectorAll('.quiz-option').forEach((btn, bi) => {
       btn.disabled = true;
       if (bi === q.correct) btn.classList.add('correct');
       else if (bi === i && !correct) btn.classList.add('wrong');
     });
 
-    if (q.explanation) {
-      const exp = document.getElementById('quiz-exp');
-      const expText = document.getElementById('quiz-exp-text');
-      const expLabel = document.getElementById('quiz-exp-label');
-      if (exp && expText) {
-        // Basis-Erklärung
-        let html = `<div class="quiz-exp-basic">${q.explanation}</div>`;
+    const exp = document.getElementById('quiz-exp');
+    const expText = document.getElementById('quiz-exp-text');
+    const expLabel = document.getElementById('quiz-exp-label');
 
-        // Bei falscher Antwort: detaillierte Erklärung + Links
-        if (!correct) {
-          if (expLabel) {
-            expLabel.textContent = '❌ Falsch – Ausführliche Erklärung';
-            expLabel.style.color = '#f87171';
-          }
+    if (exp && expText) {
+      const theoryRef = findTheoryReference(state.topicId, q);
+      const explanation = buildExplanationHtml(q, correct, theoryRef);
 
-          if (q.detailedExplanation) {
-            html += `
-              <div class="quiz-exp-detailed">
-                <div class="quiz-exp-detailed-title">🔍 Wo liegt der Denkfehler?</div>
-                <div class="quiz-exp-detailed-text">${q.detailedExplanation}</div>
-              </div>`;
-          }
+      exp.classList.add('open');
+      exp.classList.toggle('wrong-answer', !correct);
+      exp.classList.toggle('correct-answer', correct);
 
-          if (q.links && q.links.length > 0) {
-            html += `
-              <div class="quiz-exp-links">
-                <div class="quiz-exp-links-title">📚 Zum Nachlesen & Nachschauen</div>
-                <ul class="quiz-exp-links-list">
-                  ${q.links.map(l => {
-                    const isYT = l.url.includes('youtube') || l.url.includes('youtu.be') || l.url.includes('simpleclub');
-                    const icon = isYT ? '📺' : '📖';
-                    return `<li><a href="${l.url}" target="_blank" rel="noopener noreferrer" class="quiz-exp-link">${icon} ${l.title}</a></li>`;
-                  }).join('')}
-                </ul>
-              </div>`;
-          } else if (TOPICS_DATA[state.topicId]?.resources?.length) {
-            // Fallback: Ressourcen des Themas anzeigen
-            const res = TOPICS_DATA[state.topicId].resources.slice(0, 3);
-            html += `
-              <div class="quiz-exp-links">
-                <div class="quiz-exp-links-title">📚 Thema nochmal nachschlagen</div>
-                <ul class="quiz-exp-links-list">
-                  ${res.map(r => `<li><a href="${r.url}" target="_blank" rel="noopener noreferrer" class="quiz-exp-link">${r.icon} ${r.name}</a></li>`).join('')}
-                </ul>
-              </div>`;
-          }
-        } else {
-          if (expLabel) {
-            expLabel.textContent = '✅ Richtig!';
-            expLabel.style.color = '#4ade80';
-          }
-        }
-
-        expText.innerHTML = html;
-        exp.classList.add('open');
-        if (!correct) exp.classList.add('wrong-answer');
-        mathjaxTypeset([exp]);
+      if (expLabel) {
+        expLabel.textContent = correct ? '✅ Richtig – Warum das stimmt' : '❌ Falsch – Erklärung & Theorie';
       }
+
+      expText.innerHTML = explanation;
+      mathjaxTypeset([exp]);
     }
 
     const nextBtn = document.getElementById('quiz-next');
@@ -323,6 +304,162 @@ const quizModule = (() => {
       </div>`;
     progress.setQuiz(state.topicId, score, total);
     app.refreshTopicProgress(state.topicId);
+  }
+
+  function openTheoryReference(targetId) {
+    if (!state.topicId || !targetId || !app?.openTopicReference) return;
+    app.openTopicReference(state.topicId, 'theory', targetId);
+  }
+
+  function buildExplanationHtml(question, correct, theoryRef) {
+    const baseExplanation = question.explanation
+      || 'Hier zählt nicht nur das Ergebnis, sondern der physikalische Zusammenhang dahinter. Nutze die Theorie-Verknüpfung, um den Gedankengang sauber nachzuvollziehen.';
+    const conceptTitle = correct ? 'Warum das stimmt' : 'Wo der Denkfehler liegt';
+    const conceptExplanation = buildConceptExplanation(question, theoryRef);
+    const theoryPanel = buildTheoryPanel(theoryRef);
+    const resourcePanel = buildResourceLinks(question, !correct);
+
+    return `
+      <div class="quiz-exp-basic">${baseExplanation}</div>
+      <div class="quiz-exp-detailed quiz-exp-concept">
+        <div class="quiz-exp-detailed-title">${conceptTitle}</div>
+        <div class="quiz-exp-detailed-text">${conceptExplanation}</div>
+      </div>
+      ${theoryPanel}
+      ${resourcePanel}
+    `;
+  }
+
+  function buildConceptExplanation(question, theoryRef) {
+    if (question.detailedExplanation) return question.detailedExplanation;
+    if (theoryRef?.preview) return theoryRef.preview;
+    return 'Der entscheidende Schritt ist hier, Ursache und Wirkung auseinanderzuhalten: Welche Größe treibt den Vorgang an, welche Größe reagiert darauf, und welche Annahme steckt in der Formel? Öffne den Theorieblock, um den Zusammenhang noch einmal sauber in Worten zu sehen.';
+  }
+
+  function buildTheoryPanel(theoryRef) {
+    if (!theoryRef) return '';
+    return `
+      <div class="quiz-theory-panel">
+        <div class="quiz-theory-kicker">Passender Theorieblock</div>
+        <div class="quiz-theory-title">${theoryRef.title}</div>
+        <div class="quiz-theory-text">${theoryRef.preview}</div>
+        <div class="quiz-exp-actions">
+          <button class="quiz-theory-btn" type="button" data-target-id="${theoryRef.targetId}">
+            Theorie direkt öffnen
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  function buildResourceLinks(question, includeFallback) {
+    let links = Array.isArray(question.links) ? question.links : [];
+    if (!links.length && includeFallback) {
+      links = (TOPICS_DATA[state.topicId]?.resources || [])
+        .slice(0, 2)
+        .map(resource => ({
+          title: resource.name,
+          url: resource.url
+        }));
+    }
+    if (!links.length) return '';
+
+    return `
+      <div class="quiz-exp-links">
+        <div class="quiz-exp-links-title">Weiterlernen</div>
+        <ul class="quiz-exp-links-list">
+          ${links.map(link => {
+            const url = link.url || '';
+            const isYT = url.includes('youtube') || url.includes('youtu.be') || url.includes('simpleclub');
+            const icon = isYT ? '📺' : '📖';
+            return `<li><a href="${url}" target="_blank" rel="noopener noreferrer" class="quiz-exp-link">${icon} ${link.title}</a></li>`;
+          }).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  function findTheoryReference(topicId, question) {
+    const topic = TOPICS_DATA[topicId];
+    if (!topic?.sections?.length) return null;
+
+    const keywords = tokenize([
+      question.question,
+      question.explanation,
+      question.detailedExplanation,
+      (question.options || []).join(' ')
+    ].join(' '));
+
+    let best = null;
+
+    topic.sections.forEach((section, index) => {
+      const titleTokens = tokenize(section.title);
+      const contentTokens = tokenize([
+        section.text,
+        section.note,
+        section.deeper,
+        (section.formulas || []).map(formula => `${formula.label || ''} ${formula.note || ''} ${formula.latex || ''}`).join(' ')
+      ].join(' '));
+
+      let score = 0;
+      keywords.forEach(token => {
+        if (titleTokens.includes(token)) score += 5;
+        if (contentTokens.includes(token)) score += 2;
+      });
+
+      if (!best || score > best.score) {
+        best = { score, section, index };
+      }
+    });
+
+    const picked = best && best.score > 0 ? best : { section: topic.sections[0], index: 0 };
+    return {
+      title: picked.section.title,
+      targetId: `theory-sec-${topicId}-${picked.index}`,
+      preview: buildTheoryPreview(picked.section)
+    };
+  }
+
+  function buildTheoryPreview(section) {
+    const source = plainText(section.deeper || section.text || section.note || '');
+    if (!source) return 'Öffne diesen Theorieblock für die ausführliche Erklärung, den typischen Denkfehler und die dazugehörigen Zusammenhänge.';
+
+    const sentences = source
+      .split(/(?<=[.!?])\s+/)
+      .map(sentence => sentence.trim())
+      .filter(Boolean);
+    const preview = sentences.slice(0, 2).join(' ') || source;
+    return preview.length > 300 ? `${preview.slice(0, 297).trim()}...` : preview;
+  }
+
+  function tokenize(text) {
+    const cleaned = cleanText(text);
+    if (!cleaned) return [];
+    return [...new Set(
+      cleaned
+        .split(/[^a-z0-9äöüß]+/i)
+        .map(token => token.trim())
+        .filter(token => token.length > 2 && !QUIZ_STOP_WORDS.has(token))
+    )];
+  }
+
+  function cleanText(text) {
+    return plainText(text)
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function plainText(text) {
+    return String(text || '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\\\([\\s\\S]*?\\\)/g, ' ')
+      .replace(/\\\[[\\s\\S]*?\\\]/g, ' ')
+      .replace(/[{}_^=*]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
   return { render };

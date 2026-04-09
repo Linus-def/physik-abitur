@@ -1187,6 +1187,40 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         options: ['Sie verdreifacht sich.', 'Sie wird dreimal kleiner.', 'Sie verneunfacht sich.', 'Sie bleibt gleich.'],
         correct: 0,
         explanation: '\\(f_0 \\propto 1/\\sqrt{C}\\). Wird \\(C\\) auf \\(C/9\\) verkleinert, so gilt \\(f_{\\text{neu}} = f_0 \\cdot \\sqrt{9} = 3f_0\\).'
+      },
+      {
+        question: 'In einem LC-Kreis wird \\(L\\) vervierfacht und gleichzeitig \\(C\\) auf ein Viertel verkleinert. Was passiert mit der Eigenfrequenz \\(f_0\\)?',
+        options: ['Sie bleibt gleich.', 'Sie halbiert sich.', 'Sie verdoppelt sich.', 'Sie vervierfacht sich.'],
+        correct: 0,
+        quizMode: 'advanced',
+        explanation: 'Für den LC-Kreis gilt \\(f_0 = \\frac{1}{2\\pi\\sqrt{LC}}\\). Das Produkt \\(LC\\) bleibt hier gleich, weil \\(4L \\cdot C/4 = LC\\). Deshalb ändert sich die Eigenfrequenz nicht.',
+        detailedExplanation: 'Der Knackpunkt ist nicht L oder C einzeln, sondern immer ihr Produkt unter der Wurzel. Viele sehen nur „L größer“ und schließen sofort auf kleinere Frequenz. Das wäre nur dann richtig, wenn C gleich bliebe. Sobald sich beide Größen gleichzeitig ändern, musst du zuerst das neue Produkt \\(LC\\) betrachten.'
+      },
+      {
+        question: 'Warum kann die Stromstärke in einer Spule eines LC-Kreises nicht sprunghaft ansteigen?',
+        options: [
+          'Weil die Selbstinduktion schnelle Stromänderungen entgegenwirkt.',
+          'Weil der Kondensator Strom grundsätzlich verbietet.',
+          'Weil die Spannung immer null bleiben muss.',
+          'Weil elektrische Energie nicht in magnetische Energie umgewandelt werden kann.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Eine Spule erzeugt bei Stromänderung eine Induktionsspannung, die der Stromänderung entgegenwirkt. Genau diese träge Reaktion macht \\(L\\) im LC-Kreis zur Analogie der Masse beim Federpendel.',
+        detailedExplanation: 'Die Spule speichert Energie im Magnetfeld. Damit dieses Feld aufgebaut wird, muss der Strom erst wachsen. Eine sprunghafte Änderung würde eine unendlich große Induktionsspannung erfordern. Deshalb wirkt die Spule wie eine elektrische Trägheit: Sie bremst schnelle Stromänderungen und sorgt dafür, dass die Schwingung stetig verläuft.'
+      },
+      {
+        question: 'Ein idealer LC-Kreis startet mit maximal geladener Kondensatorplatte. Welche Aussage gilt nach einer Viertelperiode \\(T/4\\)?',
+        options: [
+          'Der Kondensator ist entladen und die Stromstärke ist maximal.',
+          'Spannung und Stromstärke sind beide null.',
+          'Der Kondensator ist wieder maximal geladen.',
+          'Die magnetische Energie ist null und die elektrische Energie maximal.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Nach dem Start mit maximaler Kondensatorspannung ist nach \\(T/4\\) die gesamte Energie ins Magnetfeld der Spule übergegangen. Dann gilt \\(U = 0\\) und \\(I = I_0\\).',
+        detailedExplanation: 'Das ist die direkte Analogie zum Federpendel: Startest du am Umkehrpunkt, dann ist nach einem Viertel der Periode die Auslenkung null und die Geschwindigkeit maximal. Im LC-Kreis entspricht das einer entladenen Kapazität und maximaler Stromstärke. Wer nur auf Formeln schaut, verpasst oft diesen Energieaustausch als eigentliche Grundidee.'
       }
     ],
     resources: [
@@ -1447,6 +1481,45 @@ Wenn Licht auf einen Spalt trifft, senden alle Punkte des Spalts neue Elementarw
         options: ['Keine, weil \\(\\sin 0^\\circ = 0\\).', 'Eine maximale Kraft.', 'Eine Kraft entgegen der Flugrichtung.', 'Eine Kraft in Feldrichtung.'],
         correct: 0,
         explanation: 'Für die Lorentzkraft gilt \\(F_L = qvB\\sin\\alpha\\). Bei paralleler Bewegung ist \\(\\alpha = 0^\\circ\\), also \\(\\sin 0^\\circ = 0\\) und damit \\(F_L = 0\\).'
+      },
+      {
+        question: 'Warum wird ein ungeladener Metallkörper in der Nähe einer positiven Ladung trotzdem angezogen?',
+        options: [
+          'Durch Influenz verschieben sich im Leiter die freien Ladungen, sodass die negative Seite näher an der positiven Ladung liegt.',
+          'Weil auch ungeladene Körper immer positiv geladen sind.',
+          'Weil Magnetfelder zwischen beiden Körpern entstehen.',
+          'Weil die Gewichtskraft im elektrischen Feld größer wird.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'In einem Leiter können sich freie Elektronen verschieben. Auf der der positiven Ladung zugewandten Seite sammelt sich dadurch mehr negative Ladung, auf der anderen Seite bleibt positive Überschussladung zurück. Die Anziehung der nahen negativen Seite überwiegt.',
+        detailedExplanation: 'Entscheidend ist der unterschiedliche Abstand: Die entgegengesetzte Ladung sitzt näher an der äußeren positiven Ladung als die gleichnamige Ladung auf der Rückseite. Nach dem Coulomb-Gesetz nimmt die Kraft mit \\(1/r^2\\) ab. Deshalb ist die Anziehung stärker als die Abstoßung, obwohl der Körper insgesamt neutral bleibt.'
+      },
+      {
+        question: 'Im Geschwindigkeitsselektor werden sowohl \\(E\\) als auch \\(B\\) verdoppelt. Welche Geschwindigkeit passiert dann unabgelenkt?',
+        options: [
+          'Dieselbe wie vorher.',
+          'Die doppelte Geschwindigkeit.',
+          'Die halbe Geschwindigkeit.',
+          'Es kann dann kein Teilchen mehr unabgelenkt passieren.'
+        ],
+        correct: 0,
+        quizMode: 'advanced',
+        explanation: 'Es gilt \\(v = E/B\\). Wenn Zähler und Nenner mit demselben Faktor verändert werden, bleibt das Verhältnis gleich. Deshalb bleibt auch die selektierte Geschwindigkeit unverändert.',
+        detailedExplanation: 'Im Selektor zählt nicht die absolute Größe der Kräfte, sondern ihr Gleichgewicht. Verdoppelst du beide Felder, verdoppeln sich elektrische Kraft \\(qE\\) und Lorentzkraft \\(qvB\\) gleichzeitig. Die Bedingung fürs Aufheben bleibt also für genau dieselbe Geschwindigkeit erfüllt.'
+      },
+      {
+        question: 'Warum verrichtet ein homogenes Magnetfeld an einem geladenen Teilchen auf Kreisbahn keine Arbeit?',
+        options: [
+          'Weil die Lorentzkraft immer senkrecht zur momentanen Geschwindigkeit steht.',
+          'Weil Magnetfelder grundsätzlich zu schwach für Arbeit sind.',
+          'Weil nur elektrische Felder Arbeit verrichten können, wenn ein Teilchen geladen ist.',
+          'Weil auf der Kreisbahn überhaupt keine Kraft wirkt.'
+        ],
+        correct: 0,
+        quizMode: 'exam',
+        explanation: 'Arbeit wird nur verrichtet, wenn eine Kraft eine Komponente in Bewegungsrichtung hat. Die Lorentzkraft steht aber stets senkrecht auf \\(\\vec{v}\\). Deshalb ändert sich nur die Richtung der Geschwindigkeit, nicht ihr Betrag.',
+        detailedExplanation: 'Genau deshalb bleiben kinetische Energie und Geschwindigkeit im homogenen B-Feld konstant, obwohl die Bahn gekrümmt wird. Das Magnetfeld lenkt um, es beschleunigt nicht entlang der Bahn. Dieser Unterschied ist im Abi wichtig, weil man Magnetfeld und elektrisches Feld sonst zu schnell durcheinanderwirft: Das E-Feld kann Energie übertragen, das reine B-Feld bei senkrechtem Eintritt nicht.'
       }
     ],
     resources: [
